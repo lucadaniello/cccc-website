@@ -1,0 +1,30 @@
+project:
+  type: website
+  output-dir: docs  
+
+website:
+  title: "cccc R package"
+  description: "Chronological Corpora Curve Clustering"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: vignette.qmd
+        text: Vignette
+      - href: reference.qmd
+        text: Reference
+      - href: articles.qmd
+        text: Articles
+      - href: about.qmd
+        text: About
+    right:
+      - icon: github
+        href: https://github.com/yourusername/cccc
+  page-footer:
+    center: " "
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
