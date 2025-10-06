@@ -1,0 +1,24 @@
+---
+title: ""
+format:
+  html:
+    toc: false
+page-layout: full
+---
+
+# curveCtuPlot()
+
+Plot of Temporal Curves for Frequency Zones and Example Keywords
+
+---
+
+## 🔹 Function Definition
+
+```r
+curveCtuPlot <- (data,
+                 ctu_noun = NULL,
+                 r = 1,
+                 themety = "light",
+                 size_class = NULL,
+                 x_lab = "year")
+```

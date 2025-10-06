@@ -35,20 +35,20 @@ Click on each function name to access its documentation.
       <td style="padding:8px;">Plot Temporal Dimensions of a Corpus.</td>
     </tr>
     <tr>
-      <td style="padding:8px;"><a href="runClusteringRange.html"><code>runClusteringRange()</code></a></td>
-      <td style="padding:8px;">Runs clustering repeatedly across a range of k values using k-means.</td>
+      <td style="padding:8px;"><a href="curvePlot.html"><code>curvePlot()</code></a></td>
+      <td style="padding:8px;">Plot Temporal Curves of Keyword Frequencies.</td>
     </tr>
     <tr>
-      <td style="padding:8px;"><a href="evaluateClusteringQuality.html"><code>evaluateClusteringQuality()</code></a></td>
-      <td style="padding:8px;">Evaluates clustering quality using internal and external validity indices.</td>
+      <td style="padding:8px;"><a href="curveCtuPlot.html"><code>curveCtuPlot()</code></a></td>
+      <td style="padding:8px;">Plot of Temporal Curves for Frequency Zones and Example Keywords.</td>
     </tr>
     <tr>
-      <td style="padding:8px;"><a href="selectBestKfromRand.html"><code>selectBestKfromRand()</code></a></td>
-      <td style="padding:8px;">Selects the best number of clusters based on the Adjusted Rand Index (ARI).</td>
+      <td style="padding:8px;"><a href="normalization.html"><code>normalization()</code></a></td>
+      <td style="padding:8px;">Normalize Term-Document Matrix (TDM).</td>
     </tr>
     <tr>
-      <td style="padding:8px;"><a href="plotClusterPanel.html"><code>plotClusterPanel()</code></a></td>
-      <td style="padding:8px;">Visualizes and compares cluster trajectories across multiple partitions.</td>
+      <td style="padding:8px;"><a href="facetPlot.html"><code>facetPlot()</code></a></td>
+      <td style="padding:8px;">Faceted Plot of Keyword Frequency Curves.</td>
     </tr>
   </tbody>
 </table>
