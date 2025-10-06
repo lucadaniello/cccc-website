@@ -1,0 +1,23 @@
+---
+title: ""
+format:
+  html:
+    toc: false
+page-layout: full
+---
+
+# normalization()
+
+Normalize Term-Document Matrix (TDM)
+
+---
+
+## 🔹 Function Definition
+
+```r
+normalization <- (data,
+                  normty = "nc",
+                  sc = 1000,
+                  nnlty = "V",
+                  p_asy = TRUE)
+```

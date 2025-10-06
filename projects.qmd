@@ -4,10 +4,44 @@ page-layout: full
 
 ---
 
-# The RIND Project
+## The RIND Project  
+### *Reading the Italian Novel at a Distance (1830–1930)*
 
 The **cccc** package has been developed within the **RIND Project – Research INtelligence Development**, coordinated by the University of Trieste.
 
-> RIND aims to design, implement, and validate innovative methods for analysing research dynamics, interdisciplinarity, and the evolution of scientific knowledge.
+The **RIND project** is an interdisciplinary research initiative that combines methods and perspectives from **computational and corpus linguistics**, **quantitative literary studies**, **data science**, **statistics**, and **translation studies**.  
+
+Building on Franco Moretti’s seminal approach to *distant reading*, the project aims to conduct large-scale quantitative analyses on a corpus of approximately **1,000 Italian novels and short story collections**, including Italian translations from other languages, published between **1830 and 1930**.  
+The corpus is carefully balanced to account for the distribution of authors and translators, gender, publication date, text length, and the distinction between canonical and non-canonical literature.
+
+---
+
+### Objectives
+
+RIND pursues two main research goals:
+
+1. **Analyzing how literary characters express thoughts and emotions**, through quantitative and automatic extraction methods that capture pragma-linguistic phenomena emerging beyond the boundaries of words and sentences.  
+2. **Tracing social change in Italian novels** by exploring lexical fields related to professions, military ranks, religious titles, buildings (residential, commercial, industrial, religious, rural, urban, etc.), and other domains that reflect transformations in society.
+
+Both objectives are innovative, as few studies have applied **quantitative and computational methods** to the analysis of reported discourse or to the **periodization of Italian literary prose** using criteria independent from traditional literary criticism.  
+The comparison between original Italian works and translations will also shed light on the influence of **foreign models** on Italian literary prose.
+
+---
+
+### Methodological Framework
+
+The project draws on three main disciplinary pillars:
+
+- **Linguistics**, to identify morphological and syntactic features leading to pragmatic patterns and lexical lists, and to map their diachronic evolution across semantic domains.  
+- **Statistics and Machine Learning**, to classify texts through topic modeling, content analysis, word embeddings, time series extraction, and advanced data visualization techniques.  
+- **Literary and Comparative Studies**, to interpret results within the historical and cultural contexts of Italian, European, and global literature from **Realism to Modernism**.
+
+---
+
+### Contribution
+
+By integrating linguistic, literary, and statistical expertise, the RIND project seeks to provide both a **theoretical and methodological contribution** to the study of literary language and cultural evolution.  
+Its results will enhance our understanding of how **language and society co-evolved** in Italian prose during a century of profound artistic and social transformation.
+
 
 Visit the project page: [https://rind.units.it/home/](https://rind.units.it/home/)
