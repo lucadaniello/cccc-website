@@ -1,0 +1,45 @@
+---
+title: ""
+format:
+  html:
+    toc: false
+page-layout: full
+---
+
+# rowMassPlot()
+
+Creates a bar plot of keywords ordered by their total frequency and colored by their assigned frequency zone, combining both the zone and its frequency interval label.
+
+---
+
+## 🔹 Function Definition
+
+```r
+rowMassPlot <- (data)
+```
+
+## 🎯 Aim
+
+The `rowMassPlot()` function generates a bar plot showing the total frequency of each keyword, colored according to its frequency zone and labeled by its interval.  
+It provides a visual summary of the distribution of term frequencies across zones, based on the output of `importData()`.
+
+---
+
+## ⚙️ Arguments
+
+| Argument | Type | Description |
+|-----------|------|-------------|
+| **data** | List | A list containing the output of `importData()`, including the processed term-document matrix (`tdm`) and related metadata. |
+
+---
+
+## 📦 Output
+
+Returns a **`ggplot2` object** representing a bar plot of total keyword frequencies grouped and colored by frequency zone.
+
+| Element | Description |
+|----------|-------------|
+| **x-axis** | Keywords ordered by total frequency. |
+| **y-axis** | Total frequency of each keyword. |
+| **Colors** | Represent frequency zones and intervals (e.g., “VH [50–100]”, “L [5–10]”). |
+| **Legend** | Displayed at the bottom, showing the zone–interval combinations. |

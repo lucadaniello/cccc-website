@@ -1,0 +1,13 @@
+---
+title: "Projects"
+page-layout: full
+
+---
+
+# The RIND Project
+
+The **cccc** package has been developed within the **RIND Project – Research INtelligence Development**, coordinated by the University of Trieste.
+
+> RIND aims to design, implement, and validate innovative methods for analysing research dynamics, interdisciplinarity, and the evolution of scientific knowledge.
+
+Visit the project page: [https://rind.units.it/home/](https://rind.units.it/home/)

@@ -1,0 +1,17 @@
+---
+title: "cccc R Package"
+page-layout: full
+---
+
+# About
+
+**cccc** (*Chronological Corpora Curve Clustering*) is an R package designed to model, smooth, and cluster term trajectories over time.  
+It supports the exploration of concept dynamics in scientific corpora through chronological curve analysis.
+
+### Objectives
+- Import and normalize temporal term-document matrices.
+- Model word life-cycles using smoothing splines.
+- Cluster temporal trajectories and visualize their evolution.
+- Quantify conceptual shifts and knowledge dynamics.
+
+The package is part of the [**RIND Project**](https://rind.units.it/home/), aimed at developing new methodological tools for research knowledge evolution analysis.

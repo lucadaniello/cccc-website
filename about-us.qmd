@@ -1,0 +1,17 @@
+---
+title: "About Us"
+page-layout: full
+---
+
+# Developers
+
+| ![](images/matilde.jpg){width=100px} | **Matilde Trevisani**  <br> University of Padova <br> [MATILDE.TREVISANI@deams.units.it](mailto:MATILDE.TREVISANI@deams.units.it) |
+|--------------------------------------|------------------------------------------------------------------------------------------------------------|
+| ![](images/arjuna.jpg){width=100px}  | **Arjuna Tuzzi** <br> University of Padova <br> [arjuna.tuzzi@unipd.it](mailto:arjuna.tuzzi@unipd.it) |
+| ![](images/luca.jpg){width=100px}    | **Luca D’Aniello** <br> University of Naples Federico II <br> [luca.daniello@unina.it](mailto:luca.daniello@unina.it) |
+
+---
+
+# Contact
+For questions or collaborations:
+📧 [MATILDE.TREVISANI@deams.units.it](mailto:MATILDE.TREVISANI@deams.units.it)
