@@ -1,0 +1,63 @@
+---
+title: ""
+format:
+  html:
+    toc: false
+page-layout: full
+---
+
+# colMassPlot()
+
+Plot Temporal Dimensions of a Corpus
+---
+
+## 🔹 Function Definition
+
+```r
+colMassPlot <- (data,
+                        sc = c(1, 10, 10, 1),
+                        r = 1,
+                        textty = "text",
+                        themety = "light",
+                        size_b = 2.5,
+                        x_lab = "years")
+```
+
+## 🎯 Aim
+
+The `colMassPlot()` function creates a **multi-line plot** displaying the temporal evolution of four corpus-level metrics:
+
+- Number of documents (`nDoc`)
+- Number of tokens (`dimCorpus`)
+- Sum of keyword frequencies (`Csum`)
+- Maximum keyword frequency (`Mcf`)
+
+All measures are **rescaled by user-defined factors** to improve visual comparability across different dimensions of the corpus.
+
+---
+
+## ⚙️ Arguments
+
+| Argument | Type | Description |
+|-----------|------|-------------|
+| **data** | List | A list containing the output of `importData()`. |
+| **sc** | Numeric vector (length = 4) | Scaling factors for `nDoc`, `dimCorpus`, `Csum`, and `Mcf`. Default: `c(1, 10, 10, 1)`. |
+| **r** | Integer | Interval for thinning x-axis labels. Default: `1` (shows all years). |
+| **textty** | Character | Unit of analysis for legend labels (e.g., `"text"`, `"place"`, `"paper"`). |
+| **themety** | Character | Plot theme type. Either `"light"` (default) or `"dark"`. |
+| **size_b** | Numeric | Base size for bar lines. Default: `2.5`. |
+| **x_lab** | Character | X-axis label. Default: `"year"`. |
+
+---
+
+## 📦 Output
+
+Returns a **`ggplot2` object** representing the temporal evolution of corpus structure.
+
+| Element | Description |
+|----------|-------------|
+| **x-axis** | Years. |
+| **y-axis** | Rescaled measures representing corpus size and term frequencies. |
+| **Lines** | Show the evolution of `nDoc`, `dimCorpus`, `Csum`, and `Mcf` over time. |
+| **Colors** | Distinguish between the four corpus metrics. |
+| **Legend** | Provides details about scaling factors and corresponding measures. |

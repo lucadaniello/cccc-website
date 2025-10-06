@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>index</title>
+<title>rowmassplot</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -130,76 +164,89 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
-    </div>
+    
 <!-- main -->
 <main class="content column-page" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
 
+<section id="rowmassplot" class="level1">
+<h1>rowMassPlot()</h1>
+<p>Creates a bar plot of keywords ordered by their total frequency and colored by their assigned frequency zone, combining both the zone and its frequency interval label.</p>
+<hr>
+<section id="function-definition" class="level2">
+<h2 class="anchored" data-anchor-id="function-definition">🔹 Function Definition</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>rowMassPlot <span class="ot">&lt;-</span> (data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="aim" class="level2">
+<h2 class="anchored" data-anchor-id="aim">🎯 Aim</h2>
+<p>The <code>rowMassPlot()</code> function generates a bar plot showing the total frequency of each keyword, colored according to its frequency zone and labeled by its interval.<br>
+It provides a visual summary of the distribution of term frequencies across zones, based on the output of <code>importData()</code>.</p>
+<hr>
+</section>
+<section id="arguments" class="level2">
+<h2 class="anchored" data-anchor-id="arguments">⚙️ Arguments</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 36%">
+<col style="width: 20%">
+<col style="width: 43%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>data</strong></td>
+<td>List</td>
+<td>A list containing the output of <code>importData()</code>, including the processed term-document matrix (<code>tdm</code>) and related metadata.</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="output" class="level2">
+<h2 class="anchored" data-anchor-id="output">📦 Output</h2>
+<p>Returns a <strong><code>ggplot2</code> object</strong> representing a bar plot of total keyword frequencies grouped and colored by frequency zone.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 43%">
+<col style="width: 56%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Element</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>x-axis</strong></td>
+<td>Keywords ordered by total frequency.</td>
+</tr>
+<tr class="even">
+<td><strong>y-axis</strong></td>
+<td>Total frequency of each keyword.</td>
+</tr>
+<tr class="odd">
+<td><strong>Colors</strong></td>
+<td>Represent frequency zones and intervals (e.g., “VH [50–100]”, “L [5–10]”).</td>
+</tr>
+<tr class="even">
+<td><strong>Legend</strong></td>
+<td>Displayed at the bottom, showing the zone–interval combinations.</td>
+</tr>
+</tbody>
+</table>
 
-<!-- Hero section -->
-<section style="
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 40px;
-  padding: 6rem 2rem;
-  background: linear-gradient(180deg, #f9fbfd 0%, #ffffff 100%);
-  border-bottom: 1px solid #eee;
-">
-
-  <!-- Logo -->
-  <img src="images/cccc_logo.png" alt="cccc logo" width="160" style="flex-shrink:0;">
-
-  <!-- Text block -->
-  <div style="max-width: 600px; text-align: right;">
-    <h2 style="font-weight:700; color:#002b5c; margin-bottom:0.1em;" class="anchored">cccc</h2>
-    <h3 style="font-style:italic; color:#002b5c; margin-top:0;" class="anchored">Chronological Corpora Curve Clustering</h3>
-    <p style="font-size:1.25em; color:#444; margin-top:1.2em;">
-      A toolkit for analyzing the temporal evolution of concepts and terms in scientific corpora.
-    </p>
-
-    <a href="cccc-package.html" class="btn btn-primary btn-lg" style="background-color:#002b5c; border:none; margin-top:1.8em;">
-       Explore the Package
-    </a>
-  </div>
 
 </section>
-
-<!-- Highlights -->
-<section style="padding:3rem 2rem; text-align:center;">
-  <h2 style="color:#002b5c; font-weight:600;" class="anchored">Discover what cccc can do</h2>
-
-  <div style="
-    display:flex;
-    justify-content:center;
-    gap:40px;
-    flex-wrap:wrap;
-    margin-top:2.5rem;
-  ">
-
-    <div style="max-width:260px;">
-      <h4 style="color:#002b5c;" class="anchored">📈 <b>Temporal Modeling</b></h4>
-      <p>Model the evolution of terms across time through smoothing spline trajectories.</p>
-    </div>
-
-    <div style="max-width:260px;">
-      <h4 style="color:#002b5c;" class="anchored">🧩 <b>Clustering</b></h4>
-      <p>Group terms with similar temporal patterns and explore knowledge dynamics.</p>
-    </div>
-
-    <div style="max-width:260px;">
-      <h4 style="color:#002b5c;" class="anchored">🔍 <b>Visualization</b></h4>
-      <p>Visualize trajectories and clusters interactively for deeper understanding.</p>
-    </div>
-
-  </div>
 </section>
-
-
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

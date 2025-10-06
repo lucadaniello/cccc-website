@@ -1,1 +1,36 @@
 /* css styles */
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #333;
+  background-color: #fafafa;
+}
+
+.navbar {
+  background-color: #f8f9fa !important;
+  border-bottom: 1px solid #ddd;
+}
+
+h1, h2, h3 {
+color: #002b5c;
+  
+}
+
+.btn-primary {
+  background-color: #003366;
+  border: none;
+}
+
+a {
+  color: #003366;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.navbar-logo img {
+  height: 120px !important;
+  width: auto !important;
+  margin-right: 1rem !important;
+}

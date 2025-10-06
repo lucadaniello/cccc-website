@@ -1,0 +1,54 @@
+---
+title: ""
+page-layout: full
+
+---
+
+# Function Reference
+
+Below is the list of available functions in the **cccc** package.  
+Click on each function name to access its documentation.
+
+<br>
+
+```{=html}
+<table style="width:100%; border-collapse:collapse; border:none;">
+  <thead>
+    <tr style="border-bottom:1px solid #ddd;">
+      <th style="text-align:left; padding:8px; width:30%;">Function</th>
+      <th style="text-align:left; padding:8px;">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="padding:8px;"><a href="importData.html"><code>importData()</code></a></td>
+      <td style="padding:8px;">Imports and validates corpus data and metadata into a standardized structure.</td>
+    </tr>
+    <tr>
+      <td style="padding:8px;"><a href="rowMassPlot.html"><code>rowMassPlot()</code></a></td>
+      <td style="padding:8px;">Creates a bar plot of keywords ordered by their total frequency
+#' and colored by their assigned frequency zone, combining both the zone
+#' and its frequency interval label.</td>
+    </tr>
+    <tr>
+      <td style="padding:8px;"><a href="colMassPlot.html"><code>colMassPlot()</code></a></td>
+      <td style="padding:8px;">Plot Temporal Dimensions of a Corpus.</td>
+    </tr>
+    <tr>
+      <td style="padding:8px;"><a href="runClusteringRange.html"><code>runClusteringRange()</code></a></td>
+      <td style="padding:8px;">Runs clustering repeatedly across a range of k values using k-means.</td>
+    </tr>
+    <tr>
+      <td style="padding:8px;"><a href="evaluateClusteringQuality.html"><code>evaluateClusteringQuality()</code></a></td>
+      <td style="padding:8px;">Evaluates clustering quality using internal and external validity indices.</td>
+    </tr>
+    <tr>
+      <td style="padding:8px;"><a href="selectBestKfromRand.html"><code>selectBestKfromRand()</code></a></td>
+      <td style="padding:8px;">Selects the best number of clusters based on the Adjusted Rand Index (ARI).</td>
+    </tr>
+    <tr>
+      <td style="padding:8px;"><a href="plotClusterPanel.html"><code>plotClusterPanel()</code></a></td>
+      <td style="padding:8px;">Visualizes and compares cluster trajectories across multiple partitions.</td>
+    </tr>
+  </tbody>
+</table>

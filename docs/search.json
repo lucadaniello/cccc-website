@@ -1,9 +1,163 @@
 [
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
+    "objectID": "use-cases.html",
+    "href": "use-cases.html",
+    "title": "Use Cases",
     "section": "",
-    "text": "About this site"
+    "text": "Example Analyses\nHere you can find examples of how to use cccc to analyze temporal corpora:\n\nExample 1: Place Corpus\nExample 2: Temporal Clustering of Research Topics"
+  },
+  {
+    "objectID": "references.html",
+    "href": "references.html",
+    "title": "References",
+    "section": "",
+    "text": "References\n\nTrevisani, M., & Tuzzi, A. (2018). Chronological corpora curve clustering: From scientific corpora construction to knowledge dynamics discovery through word life-cycles clustering. MethodsX, 5, 1576-1587."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "",
+    "section": "",
+    "text": "cccc\n    Chronological Corpora Curve Clustering\n    \n      A toolkit for analyzing the temporal evolution of concepts and terms in scientific corpora.\n    \n\n    \n       Explore the Package\n    \n  \n\n\n\n\n\n  Discover what cccc can do\n\n  \n\n    \n      📈 Temporal Modeling\n      Model the evolution of terms across time through smoothing spline trajectories.\n    \n\n    \n      🧩 Clustering\n      Group terms with similar temporal patterns and explore knowledge dynamics.\n    \n\n    \n      🔍 Visualization\n      Visualize trajectories and clusters interactively for deeper understanding."
+  },
+  {
+    "objectID": "functions/functions:index.html",
+    "href": "functions/functions:index.html",
+    "title": "Functions",
+    "section": "",
+    "text": "Function Reference\nBelow is the list of available functions in the cccc package.\nClick on each function name to access its documentation.\n\nimportData()\ncolmass_plot()\nnormalize()\nrunClusteringRange()\nevaluateClusteringQuality()\nselectBestKfromRand()\nplotClusterPanel()"
+  },
+  {
+    "objectID": "colMassPlot.html",
+    "href": "colMassPlot.html",
+    "title": "colMassPlot()",
+    "section": "",
+    "text": "Plot Temporal Dimensions of a Corpus\n\n\n\ncolMassPlot &lt;- (data,\n                        sc = c(1, 10, 10, 1),\n                        r = 1,\n                        textty = \"text\",\n                        themety = \"light\",\n                        size_b = 2.5,\n                        x_lab = \"years\")\n\n\n\nThe colMassPlot() function creates a multi-line plot displaying the temporal evolution of four corpus-level metrics:\n\nNumber of documents (nDoc)\nNumber of tokens (dimCorpus)\nSum of keyword frequencies (Csum)\nMaximum keyword frequency (Mcf)\n\nAll measures are rescaled by user-defined factors to improve visual comparability across different dimensions of the corpus.\n\n\n\n\n\n\n\n\n\n\n\n\nArgument\nType\nDescription\n\n\n\n\ndata\nList\nA list containing the output of importData().\n\n\nsc\nNumeric vector (length = 4)\nScaling factors for nDoc, dimCorpus, Csum, and Mcf. Default: c(1, 10, 10, 1).\n\n\nr\nInteger\nInterval for thinning x-axis labels. Default: 1 (shows all years).\n\n\ntextty\nCharacter\nUnit of analysis for legend labels (e.g., \"text\", \"place\", \"paper\").\n\n\nthemety\nCharacter\nPlot theme type. Either \"light\" (default) or \"dark\".\n\n\nsize_b\nNumeric\nBase size for bar lines. Default: 2.5.\n\n\nx_lab\nCharacter\nX-axis label. Default: \"year\".\n\n\n\n\n\n\n\nReturns a ggplot2 object representing the temporal evolution of corpus structure.\n\n\n\n\n\n\n\nElement\nDescription\n\n\n\n\nx-axis\nYears.\n\n\ny-axis\nRescaled measures representing corpus size and term frequencies.\n\n\nLines\nShow the evolution of nDoc, dimCorpus, Csum, and Mcf over time.\n\n\nColors\nDistinguish between the four corpus metrics.\n\n\nLegend\nProvides details about scaling factors and corresponding measures."
+  },
+  {
+    "objectID": "colMassPlot.html#function-definition",
+    "href": "colMassPlot.html#function-definition",
+    "title": "colMassPlot()",
+    "section": "",
+    "text": "colMassPlot &lt;- (data,\n                        sc = c(1, 10, 10, 1),\n                        r = 1,\n                        textty = \"text\",\n                        themety = \"light\",\n                        size_b = 2.5,\n                        x_lab = \"years\")"
+  },
+  {
+    "objectID": "colMassPlot.html#aim",
+    "href": "colMassPlot.html#aim",
+    "title": "colMassPlot()",
+    "section": "",
+    "text": "The colMassPlot() function creates a multi-line plot displaying the temporal evolution of four corpus-level metrics:\n\nNumber of documents (nDoc)\nNumber of tokens (dimCorpus)\nSum of keyword frequencies (Csum)\nMaximum keyword frequency (Mcf)\n\nAll measures are rescaled by user-defined factors to improve visual comparability across different dimensions of the corpus."
+  },
+  {
+    "objectID": "colMassPlot.html#arguments",
+    "href": "colMassPlot.html#arguments",
+    "title": "colMassPlot()",
+    "section": "",
+    "text": "Argument\nType\nDescription\n\n\n\n\ndata\nList\nA list containing the output of importData().\n\n\nsc\nNumeric vector (length = 4)\nScaling factors for nDoc, dimCorpus, Csum, and Mcf. Default: c(1, 10, 10, 1).\n\n\nr\nInteger\nInterval for thinning x-axis labels. Default: 1 (shows all years).\n\n\ntextty\nCharacter\nUnit of analysis for legend labels (e.g., \"text\", \"place\", \"paper\").\n\n\nthemety\nCharacter\nPlot theme type. Either \"light\" (default) or \"dark\".\n\n\nsize_b\nNumeric\nBase size for bar lines. Default: 2.5.\n\n\nx_lab\nCharacter\nX-axis label. Default: \"year\"."
+  },
+  {
+    "objectID": "colMassPlot.html#output",
+    "href": "colMassPlot.html#output",
+    "title": "colMassPlot()",
+    "section": "",
+    "text": "Returns a ggplot2 object representing the temporal evolution of corpus structure.\n\n\n\n\n\n\n\nElement\nDescription\n\n\n\n\nx-axis\nYears.\n\n\ny-axis\nRescaled measures representing corpus size and term frequencies.\n\n\nLines\nShow the evolution of nDoc, dimCorpus, Csum, and Mcf over time.\n\n\nColors\nDistinguish between the four corpus metrics.\n\n\nLegend\nProvides details about scaling factors and corresponding measures."
+  },
+  {
+    "objectID": "about-us.html",
+    "href": "about-us.html",
+    "title": "About Us",
+    "section": "",
+    "text": "Developers\n\n\n\n\nMatilde Trevisani  University of Padova  MATILDE.TREVISANI@deams.units.it\n\n\n\n\n\nArjuna Tuzzi  University of Padova  arjuna.tuzzi@unipd.it\n\n\n\nLuca D’Aniello  University of Naples Federico II  luca.daniello@unina.it\n\n\n\n\n\n\nContact\nFor questions or collaborations: 📧 MATILDE.TREVISANI@deams.units.it"
+  },
+  {
+    "objectID": "cccc-package.html",
+    "href": "cccc-package.html",
+    "title": "cccc R Package",
+    "section": "",
+    "text": "About\ncccc (Chronological Corpora Curve Clustering) is an R package designed to model, smooth, and cluster term trajectories over time.\nIt supports the exploration of concept dynamics in scientific corpora through chronological curve analysis.\n\nObjectives\n\nImport and normalize temporal term-document matrices.\nModel word life-cycles using smoothing splines.\nCluster temporal trajectories and visualize their evolution.\nQuantify conceptual shifts and knowledge dynamics.\n\nThe package is part of the RIND Project, aimed at developing new methodological tools for research knowledge evolution analysis."
+  },
+  {
+    "objectID": "functions.html",
+    "href": "functions.html",
+    "title": "Function Reference",
+    "section": "",
+    "text": "Function Reference\nBelow is the list of available functions in the cccc package.\nClick on each function name to access its documentation.\n\n\n\n\n\nFunction\n\n\nDescription\n\n\n\n\n\n\nimportData()\n\n\nImports and validates corpus data and metadata into a standardized structure.\n\n\n\n\nrowMassPlot()\n\n\nCreates a bar plot of keywords ordered by their total frequency #’ and colored by their assigned frequency zone, combining both the zone #’ and its frequency interval label.\n\n\n\n\ncolMassPlot()\n\n\nPlot Temporal Dimensions of a Corpus.\n\n\n\n\nrunClusteringRange()\n\n\nRuns clustering repeatedly across a range of k values using k-means.\n\n\n\n\nevaluateClusteringQuality()\n\n\nEvaluates clustering quality using internal and external validity indices.\n\n\n\n\nselectBestKfromRand()\n\n\nSelects the best number of clusters based on the Adjusted Rand Index (ARI).\n\n\n\n\nplotClusterPanel()\n\n\nVisualizes and compares cluster trajectories across multiple partitions."
+  },
+  {
+    "objectID": "importData.html",
+    "href": "importData.html",
+    "title": "importData()",
+    "section": "",
+    "text": "Imports and validates corpus data and metadata into a standardized structure.\n\n\n\nimportData &lt;- (\n  tdm_file,\n  corpus_file,\n  sep_tdm = \";\",\n  sep_corpus_info = \";\",\n  zone = \"stat\",\n  verbose = TRUE\n)\n\n\n\nThe importData() function reads and processes a Term Document Matrix (TDM) and corpus information from CSV or Excel files.\nIt standardizes formats, renames columns, cleans keywords, computes total frequency per term, and classifies each term into frequency zones.\n\n\n\n\n\n\n\n\n\n\n\n\nArgument\nType\nDescription\n\n\n\n\ntdm_file\nCharacter\nPath to the term-document matrix file (CSV or Excel). The first column must contain the list of terms, while all other columns represent years.\n\n\ncorpus_file\nCharacter\nPath to the corpus information file (CSV or Excel). Must include columns for years, tokens, and documents per year.\n\n\nsep_tdm\nCharacter / NULL\nSeparator for the TDM CSV file (ignored if Excel). Default: \";\".\n\n\nsep_corpus_info\nCharacter / NULL\nSeparator for the corpus information CSV file (ignored if Excel). Default: \";\".\n\n\nzone\nCharacter\nZone classification strategy: \"stat\" (statistical quartiles) or \"ling\" (linguistic frequency-based). Default: \"stat\".\n\n\nverbose\nLogical\nIf TRUE, prints progress messages. Default: TRUE.\n\n\n\n\n\n\n\nReturns a list with the following elements:\n\n\n\n\n\n\n\nElement\nDescription\n\n\n\n\ntdm\nA tibble representing the cleaned and processed term-document matrix, including keyword, tot_freq, int_freq, zone, and yearly frequency columns.\n\n\ncorpus_info\nA tibble containing corpus-level yearly metadata (years, dimCorpus, nDoc, and optional metadata).\n\n\nnorm\nLogical. Indicates whether the TDM has been normalized (default: FALSE).\n\n\nyear_cols\nNumeric vector indicating which columns in the TDM correspond to yearly frequencies.\n\n\nzone\nCharacter vector of unique frequency zones.\n\n\ncolors\nCharacter vector of default colors associated with zones."
+  },
+  {
+    "objectID": "importData.html#function-definition",
+    "href": "importData.html#function-definition",
+    "title": "importData()",
+    "section": "",
+    "text": "importData &lt;- (\n  tdm_file,\n  corpus_file,\n  sep_tdm = \";\",\n  sep_corpus_info = \";\",\n  zone = \"stat\",\n  verbose = TRUE\n)"
+  },
+  {
+    "objectID": "importData.html#aim",
+    "href": "importData.html#aim",
+    "title": "importData()",
+    "section": "",
+    "text": "The importData() function reads and processes a Term Document Matrix (TDM) and corpus information from CSV or Excel files.\nIt standardizes formats, renames columns, cleans keywords, computes total frequency per term, and classifies each term into frequency zones."
+  },
+  {
+    "objectID": "importData.html#arguments",
+    "href": "importData.html#arguments",
+    "title": "importData()",
+    "section": "",
+    "text": "Argument\nType\nDescription\n\n\n\n\ntdm_file\nCharacter\nPath to the term-document matrix file (CSV or Excel). The first column must contain the list of terms, while all other columns represent years.\n\n\ncorpus_file\nCharacter\nPath to the corpus information file (CSV or Excel). Must include columns for years, tokens, and documents per year.\n\n\nsep_tdm\nCharacter / NULL\nSeparator for the TDM CSV file (ignored if Excel). Default: \";\".\n\n\nsep_corpus_info\nCharacter / NULL\nSeparator for the corpus information CSV file (ignored if Excel). Default: \";\".\n\n\nzone\nCharacter\nZone classification strategy: \"stat\" (statistical quartiles) or \"ling\" (linguistic frequency-based). Default: \"stat\".\n\n\nverbose\nLogical\nIf TRUE, prints progress messages. Default: TRUE."
+  },
+  {
+    "objectID": "importData.html#output",
+    "href": "importData.html#output",
+    "title": "importData()",
+    "section": "",
+    "text": "Returns a list with the following elements:\n\n\n\n\n\n\n\nElement\nDescription\n\n\n\n\ntdm\nA tibble representing the cleaned and processed term-document matrix, including keyword, tot_freq, int_freq, zone, and yearly frequency columns.\n\n\ncorpus_info\nA tibble containing corpus-level yearly metadata (years, dimCorpus, nDoc, and optional metadata).\n\n\nnorm\nLogical. Indicates whether the TDM has been normalized (default: FALSE).\n\n\nyear_cols\nNumeric vector indicating which columns in the TDM correspond to yearly frequencies.\n\n\nzone\nCharacter vector of unique frequency zones.\n\n\ncolors\nCharacter vector of default colors associated with zones."
+  },
+  {
+    "objectID": "projects.html",
+    "href": "projects.html",
+    "title": "Projects",
+    "section": "",
+    "text": "The RIND Project\nThe cccc package has been developed within the RIND Project – Research INtelligence Development, coordinated by the University of Trieste.\n\nRIND aims to design, implement, and validate innovative methods for analysing research dynamics, interdisciplinarity, and the evolution of scientific knowledge.\n\nVisit the project page: https://rind.units.it/home/"
+  },
+  {
+    "objectID": "rowMassPlot.html",
+    "href": "rowMassPlot.html",
+    "title": "rowMassPlot()",
+    "section": "",
+    "text": "Creates a bar plot of keywords ordered by their total frequency and colored by their assigned frequency zone, combining both the zone and its frequency interval label.\n\n\n\nrowMassPlot &lt;- (data)\n\n\n\nThe rowMassPlot() function generates a bar plot showing the total frequency of each keyword, colored according to its frequency zone and labeled by its interval.\nIt provides a visual summary of the distribution of term frequencies across zones, based on the output of importData().\n\n\n\n\n\n\n\n\n\n\n\n\nArgument\nType\nDescription\n\n\n\n\ndata\nList\nA list containing the output of importData(), including the processed term-document matrix (tdm) and related metadata.\n\n\n\n\n\n\n\nReturns a ggplot2 object representing a bar plot of total keyword frequencies grouped and colored by frequency zone.\n\n\n\n\n\n\n\nElement\nDescription\n\n\n\n\nx-axis\nKeywords ordered by total frequency.\n\n\ny-axis\nTotal frequency of each keyword.\n\n\nColors\nRepresent frequency zones and intervals (e.g., “VH [50–100]”, “L [5–10]”).\n\n\nLegend\nDisplayed at the bottom, showing the zone–interval combinations."
+  },
+  {
+    "objectID": "rowMassPlot.html#function-definition",
+    "href": "rowMassPlot.html#function-definition",
+    "title": "rowMassPlot()",
+    "section": "",
+    "text": "rowMassPlot &lt;- (data)"
+  },
+  {
+    "objectID": "rowMassPlot.html#aim",
+    "href": "rowMassPlot.html#aim",
+    "title": "rowMassPlot()",
+    "section": "",
+    "text": "The rowMassPlot() function generates a bar plot showing the total frequency of each keyword, colored according to its frequency zone and labeled by its interval.\nIt provides a visual summary of the distribution of term frequencies across zones, based on the output of importData()."
+  },
+  {
+    "objectID": "rowMassPlot.html#arguments",
+    "href": "rowMassPlot.html#arguments",
+    "title": "rowMassPlot()",
+    "section": "",
+    "text": "Argument\nType\nDescription\n\n\n\n\ndata\nList\nA list containing the output of importData(), including the processed term-document matrix (tdm) and related metadata."
+  },
+  {
+    "objectID": "rowMassPlot.html#output",
+    "href": "rowMassPlot.html#output",
+    "title": "rowMassPlot()",
+    "section": "",
+    "text": "Returns a ggplot2 object representing a bar plot of total keyword frequencies grouped and colored by frequency zone.\n\n\n\n\n\n\n\nElement\nDescription\n\n\n\n\nx-axis\nKeywords ordered by total frequency.\n\n\ny-axis\nTotal frequency of each keyword.\n\n\nColors\nRepresent frequency zones and intervals (e.g., “VH [50–100]”, “L [5–10]”).\n\n\nLegend\nDisplayed at the bottom, showing the zone–interval combinations."
   }
 ]

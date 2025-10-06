@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>index</title>
+<title>importdata</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -130,76 +164,129 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
-    </div>
+    
 <!-- main -->
 <main class="content column-page" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
 
+<section id="importdata" class="level1">
+<h1>importData()</h1>
+<p>Imports and validates corpus data and metadata into a standardized structure.</p>
+<hr>
+<section id="function-definition" class="level2">
+<h2 class="anchored" data-anchor-id="function-definition">🔹 Function Definition</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>importData <span class="ot">&lt;-</span> (</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  tdm_file,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  corpus_file,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">sep_tdm =</span> <span class="st">";"</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">sep_corpus_info =</span> <span class="st">";"</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">zone =</span> <span class="st">"stat"</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="cn">TRUE</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="aim" class="level2">
+<h2 class="anchored" data-anchor-id="aim">🎯 Aim</h2>
+<p>The <code>importData()</code> function reads and processes a Term Document Matrix (TDM) and corpus information from CSV or Excel files.<br>
+It standardizes formats, renames columns, cleans keywords, computes total frequency per term, and classifies each term into frequency zones.</p>
+<hr>
+</section>
+<section id="arguments" class="level2">
+<h2 class="anchored" data-anchor-id="arguments">⚙️ Arguments</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 36%">
+<col style="width: 20%">
+<col style="width: 43%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>tdm_file</strong></td>
+<td>Character</td>
+<td>Path to the term-document matrix file (CSV or Excel). The first column must contain the list of terms, while all other columns represent years.</td>
+</tr>
+<tr class="even">
+<td><strong>corpus_file</strong></td>
+<td>Character</td>
+<td>Path to the corpus information file (CSV or Excel). Must include columns for years, tokens, and documents per year.</td>
+</tr>
+<tr class="odd">
+<td><strong>sep_tdm</strong></td>
+<td>Character / NULL</td>
+<td>Separator for the TDM CSV file (ignored if Excel). Default: <code>";"</code>.</td>
+</tr>
+<tr class="even">
+<td><strong>sep_corpus_info</strong></td>
+<td>Character / NULL</td>
+<td>Separator for the corpus information CSV file (ignored if Excel). Default: <code>";"</code>.</td>
+</tr>
+<tr class="odd">
+<td><strong>zone</strong></td>
+<td>Character</td>
+<td>Zone classification strategy: <code>"stat"</code> (statistical quartiles) or <code>"ling"</code> (linguistic frequency-based). Default: <code>"stat"</code>.</td>
+</tr>
+<tr class="even">
+<td><strong>verbose</strong></td>
+<td>Logical</td>
+<td>If <code>TRUE</code>, prints progress messages. Default: <code>TRUE</code>.</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="output" class="level2">
+<h2 class="anchored" data-anchor-id="output">📦 Output</h2>
+<p>Returns a <strong>list</strong> with the following elements:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 43%">
+<col style="width: 56%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Element</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>tdm</strong></td>
+<td>A tibble representing the cleaned and processed term-document matrix, including <code>keyword</code>, <code>tot_freq</code>, <code>int_freq</code>, <code>zone</code>, and yearly frequency columns.</td>
+</tr>
+<tr class="even">
+<td><strong>corpus_info</strong></td>
+<td>A tibble containing corpus-level yearly metadata (<code>years</code>, <code>dimCorpus</code>, <code>nDoc</code>, and optional <code>metadata</code>).</td>
+</tr>
+<tr class="odd">
+<td><strong>norm</strong></td>
+<td>Logical. Indicates whether the TDM has been normalized (default: <code>FALSE</code>).</td>
+</tr>
+<tr class="even">
+<td><strong>year_cols</strong></td>
+<td>Numeric vector indicating which columns in the TDM correspond to yearly frequencies.</td>
+</tr>
+<tr class="odd">
+<td><strong>zone</strong></td>
+<td>Character vector of unique frequency zones.</td>
+</tr>
+<tr class="even">
+<td><strong>colors</strong></td>
+<td>Character vector of default colors associated with zones.</td>
+</tr>
+</tbody>
+</table>
 
-<!-- Hero section -->
-<section style="
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 40px;
-  padding: 6rem 2rem;
-  background: linear-gradient(180deg, #f9fbfd 0%, #ffffff 100%);
-  border-bottom: 1px solid #eee;
-">
-
-  <!-- Logo -->
-  <img src="images/cccc_logo.png" alt="cccc logo" width="160" style="flex-shrink:0;">
-
-  <!-- Text block -->
-  <div style="max-width: 600px; text-align: right;">
-    <h2 style="font-weight:700; color:#002b5c; margin-bottom:0.1em;" class="anchored">cccc</h2>
-    <h3 style="font-style:italic; color:#002b5c; margin-top:0;" class="anchored">Chronological Corpora Curve Clustering</h3>
-    <p style="font-size:1.25em; color:#444; margin-top:1.2em;">
-      A toolkit for analyzing the temporal evolution of concepts and terms in scientific corpora.
-    </p>
-
-    <a href="cccc-package.html" class="btn btn-primary btn-lg" style="background-color:#002b5c; border:none; margin-top:1.8em;">
-       Explore the Package
-    </a>
-  </div>
 
 </section>
-
-<!-- Highlights -->
-<section style="padding:3rem 2rem; text-align:center;">
-  <h2 style="color:#002b5c; font-weight:600;" class="anchored">Discover what cccc can do</h2>
-
-  <div style="
-    display:flex;
-    justify-content:center;
-    gap:40px;
-    flex-wrap:wrap;
-    margin-top:2.5rem;
-  ">
-
-    <div style="max-width:260px;">
-      <h4 style="color:#002b5c;" class="anchored">📈 <b>Temporal Modeling</b></h4>
-      <p>Model the evolution of terms across time through smoothing spline trajectories.</p>
-    </div>
-
-    <div style="max-width:260px;">
-      <h4 style="color:#002b5c;" class="anchored">🧩 <b>Clustering</b></h4>
-      <p>Group terms with similar temporal patterns and explore knowledge dynamics.</p>
-    </div>
-
-    <div style="max-width:260px;">
-      <h4 style="color:#002b5c;" class="anchored">🔍 <b>Visualization</b></h4>
-      <p>Visualize trajectories and clusters interactively for deeper understanding.</p>
-    </div>
-
-  </div>
 </section>
-
-
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
