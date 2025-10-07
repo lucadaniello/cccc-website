@@ -3,14 +3,39 @@ title: "About Us"
 page-layout: full
 ---
 
-# Developers
+# 👥 Developers
+```{=html}
+<div style="display: flex; flex-direction: column; gap: 2rem; padding-top: 1rem;">
 
-| ![](images/matilde.jpg){width=100px} | **Matilde Trevisani**  <br> University of Padova <br> [MATILDE.TREVISANI@deams.units.it](mailto:MATILDE.TREVISANI@deams.units.it) |
-|--------------------------------------|------------------------------------------------------------------------------------------------------------|
-| ![](images/arjuna.jpg){width=100px}  | **Arjuna Tuzzi** <br> University of Padova <br> [arjuna.tuzzi@unipd.it](mailto:arjuna.tuzzi@unipd.it) |
-| ![](images/luca.jpg){width=100px}    | **Luca D’Aniello** <br> University of Naples Federico II <br> [luca.daniello@unina.it](mailto:luca.daniello@unina.it) |
+<div style="display: flex; align-items: center; gap: 1.5rem;">
+  <img src="images/team/trevisani.jpg" alt="Matilde Trevisani" width="120" style="border-radius: 50%; box-shadow: 0 2px 6px rgba(0,0,0,0.2);">
+  <div>
+    <h3 style="margin-bottom: 0.2em;">Matilde Trevisani</h3>
+    <p style="margin: 0; font-style: italic;">University of Trieste</p>
+    <p style="margin: 0;"><a href="mailto:MATILDE.TREVISANI@deams.units.it">MATILDE.TREVISANI@deams.units.it</a></p>
+  </div>
+</div>
 
----
+<div style="display: flex; align-items: center; gap: 1.5rem;">
+  <img src="images/team/tuzzi.png" alt="Arjuna Tuzzi" width="120" style="border-radius: 50%; box-shadow: 0 2px 6px rgba(0,0,0,0.2);">
+  <div>
+    <h3 style="margin-bottom: 0.2em;">Arjuna Tuzzi</h3>
+    <p style="margin: 0; font-style: italic;">University of Padova</p>
+    <p style="margin: 0;"><a href="mailto:arjuna.tuzzi@unipd.it">arjuna.tuzzi@unipd.it</a></p>
+  </div>
+</div>
+
+<div style="display: flex; align-items: center; gap: 1.5rem;">
+  <img src="images/team/daniello.png" alt="Luca D’Aniello" width="120" style="border-radius: 50%; box-shadow: 0 2px 6px rgba(0,0,0,0.2);">
+  <div>
+    <h3 style="margin-bottom: 0.2em;">Luca D’Aniello</h3>
+    <p style="margin: 0; font-style: italic;">University of Naples Federico II</p>
+    <p style="margin: 0;"><a href="mailto:luca.daniello@unina.it">luca.daniello@unina.it</a></p>
+  </div>
+</div>
+
+</div>
+```
 
 # Contact
 For questions or collaborations:

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>importdata</title>
+<title>curvectuplot</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -57,22 +57,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-09537c9ecba8558085948e1b802a414a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-09537c9ecba8558085948e1b802a414a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -102,7 +102,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed">
@@ -112,8 +112,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./images/cccc_logo.png" alt="" class="navbar-logo">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../images/cccc_logo.png" alt="Alt text" class="navbar-logo">
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -123,27 +123,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./cccc-package.html"> 
+    <a class="nav-link" href="../cccc-package.html"> 
 <span class="menu-text">cccc R Package</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./functions.html"> 
+    <a class="nav-link" href="../functions.html"> 
 <span class="menu-text">Functions</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./use-cases.html"> 
+    <a class="nav-link" href="../use-cases.html"> 
 <span class="menu-text">Use Cases</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./projects.html"> 
+    <a class="nav-link" href="../projects.html"> 
 <span class="menu-text">Projects</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./references.html"> 
+    <a class="nav-link" href="../references.html"> 
 <span class="menu-text">References</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about-us.html"> 
+    <a class="nav-link" href="../about-us.html"> 
 <span class="menu-text">About Us</span></a>
   </li>  
 </ul>
@@ -171,25 +171,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="importdata" class="level1">
-<h1>importData()</h1>
-<p>Imports and validates corpus data and metadata into a standardized structure.</p>
+<section id="curvectuplot" class="level1">
+<h1>curveCtuPlot()</h1>
+<p>Plot of Temporal Curves for Frequency Zones and Example Keywords</p>
 <hr>
 <section id="function-definition" class="level2">
 <h2 class="anchored" data-anchor-id="function-definition">🔹 Function Definition</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>importData <span class="ot">&lt;-</span> (</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  tdm_file,</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  corpus_file,</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">sep_tdm =</span> <span class="st">";"</span>,</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">sep_corpus_info =</span> <span class="st">";"</span>,</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">zone =</span> <span class="st">"stat"</span>,</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="cn">TRUE</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>curveCtuPlot <span class="ot">&lt;-</span> (data,</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">ctu_noun =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">r =</span> <span class="dv">1</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">themety =</span> <span class="st">"light"</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">size_class =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">x_lab =</span> <span class="st">"year"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="aim" class="level2">
 <h2 class="anchored" data-anchor-id="aim">🎯 Aim</h2>
-<p>The <code>importData()</code> function reads and processes a Term Document Matrix (TDM) and corpus information from CSV or Excel files.<br>
-It standardizes formats, renames columns, cleans keywords, computes total frequency per term, and classifies each term into frequency zones.</p>
+<p>The <code>curveCtuPlot()</code> function generates a <strong>temporal line plot of keyword frequencies</strong>, distinguishing between <strong>predefined frequency zones</strong> (e.g., <em>high</em>, <em>medium</em>, <em>low</em>) and highlighting <strong>three example keywords</strong>, each belonging to a different zone.<br>
+It supports both normalized and raw frequencies, with separate color scales for zones and example keywords.<br>
+Each zone is labeled with its frequency interval, and the selected example keywords are displayed with distinct colors and a dedicated legend.</p>
 <hr>
 </section>
 <section id="arguments" class="level2">
@@ -209,34 +208,34 @@ It standardizes formats, renames columns, cleans keywords, computes total freque
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>tdm_file</strong></td>
-<td>Character</td>
-<td>Path to the term-document matrix file (CSV or Excel). The first column must contain the list of terms, while all other columns represent years.</td>
+<td><strong>data</strong></td>
+<td>List</td>
+<td>A list containing the output of <code>importData()</code>.</td>
 </tr>
 <tr class="even">
-<td><strong>corpus_file</strong></td>
-<td>Character</td>
-<td>Path to the corpus information file (CSV or Excel). Must include columns for years, tokens, and documents per year.</td>
+<td><strong>ctu_noun</strong></td>
+<td>Character vector (length = 3)</td>
+<td>Specifies three example keywords to highlight in the plot. Each must belong to a different frequency zone (<em>high</em>, <em>medium</em>, <em>low</em>).</td>
 </tr>
 <tr class="odd">
-<td><strong>sep_tdm</strong></td>
-<td>Character / NULL</td>
-<td>Separator for the TDM CSV file (ignored if Excel). Default: <code>";"</code>.</td>
+<td><strong>r</strong></td>
+<td>Integer</td>
+<td>Thinning rate for x-axis labels; displays one label every <code>r</code> years. Default: <code>1</code>.</td>
 </tr>
 <tr class="even">
-<td><strong>sep_corpus_info</strong></td>
-<td>Character / NULL</td>
-<td>Separator for the corpus information CSV file (ignored if Excel). Default: <code>";"</code>.</td>
+<td><strong>themety</strong></td>
+<td>Character</td>
+<td>Theme type: <code>"light"</code> (default) or <code>"dark"</code>. Affects plot colors and background.</td>
 </tr>
 <tr class="odd">
-<td><strong>zone</strong></td>
-<td>Character</td>
-<td>Zone classification strategy: <code>"stat"</code> (statistical quartiles) or <code>"ling"</code> (linguistic frequency-based). Default: <code>"stat"</code>.</td>
+<td><strong>size_class</strong></td>
+<td>Numeric vector (length = 3)</td>
+<td>Defines line widths for the three zones. If <code>NULL</code>, default values are assigned depending on the theme.</td>
 </tr>
 <tr class="even">
-<td><strong>verbose</strong></td>
-<td>Logical</td>
-<td>If <code>TRUE</code>, prints progress messages. Default: <code>TRUE</code>.</td>
+<td><strong>x_lab</strong></td>
+<td>Character</td>
+<td>Label for the x-axis. Default: <code>"year"</code>.</td>
 </tr>
 </tbody>
 </table>
@@ -244,7 +243,7 @@ It standardizes formats, renames columns, cleans keywords, computes total freque
 </section>
 <section id="output" class="level2">
 <h2 class="anchored" data-anchor-id="output">📦 Output</h2>
-<p>Returns a <strong>list</strong> with the following elements:</p>
+<p>Returns a <strong><code>ggplot2</code> object</strong> displaying keyword frequency trajectories over time.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 43%">
@@ -258,28 +257,28 @@ It standardizes formats, renames columns, cleans keywords, computes total freque
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>tdm</strong></td>
-<td>A tibble representing the cleaned and processed term-document matrix, including <code>keyword</code>, <code>tot_freq</code>, <code>int_freq</code>, <code>zone</code>, and yearly frequency columns.</td>
+<td><strong>x-axis</strong></td>
+<td>Represents time (years).</td>
 </tr>
 <tr class="even">
-<td><strong>corpus_info</strong></td>
-<td>A tibble containing corpus-level yearly metadata (<code>years</code>, <code>dimCorpus</code>, <code>nDoc</code>, and optional <code>metadata</code>).</td>
+<td><strong>y-axis</strong></td>
+<td>Represents keyword frequency (raw or normalized).</td>
 </tr>
 <tr class="odd">
-<td><strong>norm</strong></td>
-<td>Logical. Indicates whether the TDM has been normalized (default: <code>FALSE</code>).</td>
+<td><strong>Colors</strong></td>
+<td>Two scales: one for frequency zones, one for the example keywords.</td>
 </tr>
 <tr class="even">
-<td><strong>year_cols</strong></td>
-<td>Numeric vector indicating which columns in the TDM correspond to yearly frequencies.</td>
+<td><strong>Line width</strong></td>
+<td>Reflects the relative frequency zone (high, medium, low).</td>
 </tr>
 <tr class="odd">
-<td><strong>zone</strong></td>
-<td>Character vector of unique frequency zones.</td>
+<td><strong>Legends</strong></td>
+<td>Two legends: one for frequency zones with intervals, one for highlighted example keywords.</td>
 </tr>
 <tr class="even">
-<td><strong>colors</strong></td>
-<td>Character vector of default colors associated with zones.</td>
+<td><strong>Theme</strong></td>
+<td>Adjustable (“light” or “dark”) for improved readability.</td>
 </tr>
 </tbody>
 </table>

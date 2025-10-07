@@ -4,6 +4,4 @@ page-layout: full
 
 ---
 
-# References
-
 - Trevisani, M., & Tuzzi, A. (2018). *Chronological corpora curve clustering: From scientific corpora construction to knowledge dynamics discovery through word life-cycles clustering*. MethodsX, 5, 1576-1587.

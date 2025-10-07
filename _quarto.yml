@@ -8,6 +8,7 @@ project:
 website:
   navbar:
     logo: images/cccc_logo.png
+    logo-alt: "Alt text"
     
     left:
       #- href: index.qmd

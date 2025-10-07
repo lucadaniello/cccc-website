@@ -1,0 +1,65 @@
+---
+title: ""
+format:
+  html:
+    toc: false
+page-layout: full
+---
+
+# plotSuboptimalFits()
+
+Plot Suboptimal Smoothed Curves for Selected Keywords
+---
+
+## 🔹 Function Definition
+
+```r
+plotSuboptimalFits <- (data,
+                       opt_res,
+                       n_curves = 9,
+                       show_zone = FALSE,
+                       graph = FALSE)
+```
+
+## 🎯 Aim
+
+The `plotSuboptimalFits()` function visualizes **raw and smoothed temporal curves** of keyword frequencies obtained from spline smoothing.  
+It selects a subset of keywords based on the **Root Mean Square (RMS)** residuals of the smoothed fits and displays both individual and combined plots to assess the variability of smoothing performance across terms.
+
+Each plot compares the **raw frequency trend** (dashed line) and its **smoothed version** (solid line), highlighting how well the smoothing captures the temporal dynamics of the keyword.
+
+---
+
+## ⚙️ Arguments
+
+| Argument | Type | Description |
+|-----------|------|-------------|
+| **data** | List | A list returned by `importData()`, containing the term-document matrix and metadata. |
+| **opt_res** | List | The optimal smoothing configuration returned by `optimalSmoothing()`, including spline degree and penalization type. |
+| **n_curves** | Integer | Number of keywords to visualize, sampled across the RMS residual distribution. Default: `9`. |
+| **show_zone** | Logical | If `TRUE`, adds the keyword’s frequency zone (if available) to the plot labels. Default: `FALSE`. |
+| **graph** | Logical | If `TRUE`, prints all individual and combined plots directly to the active R graphics device. Default: `FALSE`. |
+
+---
+
+## 📦 Output
+
+Returns (invisibly) a **list** containing all generated plots.
+
+| Element | Description |
+|----------|-------------|
+| **singleKeywordPlot** | A list of `ggplot2` objects, one for each selected keyword, including raw and smoothed curves with full titles. |
+| **combinedKeywordPlot** | A combined `patchwork` layout displaying all selected keyword fits in a grid (default: 3 columns). |
+
+---
+
+### 🧩 Details
+
+- The function extracts the smoothed spline fits using the optimal configuration from `optimalSmoothing()`.  
+- For each keyword, it computes the **residual RMS** error and selects representative terms distributed across the RMS range.  
+- Both **individual** and **aggregated** visualizations are produced, showing:
+  - The raw term frequency curve (grey dashed line);
+  - The smoothed spline fit (red solid line);
+  - Optional zone information (if `show_zone = TRUE`).
+
+These plots allow users to evaluate suboptimal smoothing behavior and identify potential inconsistencies or overfitting in the temporal modeling process.

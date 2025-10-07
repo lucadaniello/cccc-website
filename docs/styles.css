@@ -29,8 +29,16 @@ a:hover {
   text-decoration: underline;
 }
 
-.navbar-logo img {
-  height: 120px !important;
+
+/* Logo nella navbar - versione più aggressiva */
+.navbar img {
+  max-height: 30px !important;
+  height: 30px !important;
   width: auto !important;
-  margin-right: 1rem !important;
+}
+
+img[src*="cccc_logoSidebar"] {
+  max-height: 30px !important;
+  height: 30px !important;
+  width: auto !important;
 }

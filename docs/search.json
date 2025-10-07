@@ -4,161 +4,196 @@
     "href": "use-cases.html",
     "title": "Use Cases",
     "section": "",
-    "text": "Example Analyses\nHere you can find examples of how to use cccc to analyze temporal corpora:\n\nExample 1: Place Corpus\nExample 2: Temporal Clustering of Research Topics"
+    "text": "Example Analyses\nHere you will find examples of how to use cccc to analyze temporal corpora (page under construction!)."
   },
   {
-    "objectID": "references.html",
-    "href": "references.html",
-    "title": "References",
+    "objectID": "singleFunctions/rowMassPlot.html",
+    "href": "singleFunctions/rowMassPlot.html",
+    "title": "rowMassPlot()",
     "section": "",
-    "text": "References\n\nTrevisani, M., & Tuzzi, A. (2018). Chronological corpora curve clustering: From scientific corpora construction to knowledge dynamics discovery through word life-cycles clustering. MethodsX, 5, 1576-1587."
+    "text": "Creates a bar plot of keywords ordered by their total frequency and colored by their assigned frequency zone, combining both the zone and its frequency interval label.\n\n\n\nrowMassPlot &lt;- (data)\n\n\n\nThe rowMassPlot() function generates a bar plot showing the total frequency of each keyword, colored according to its frequency zone and labeled by its interval.\nIt provides a visual summary of the distribution of term frequencies across zones, based on the output of importData().\n\n\n\n\n\n\n\n\n\n\n\n\nArgument\nType\nDescription\n\n\n\n\ndata\nList\nA list containing the output of importData(), including the processed term-document matrix (tdm) and related metadata.\n\n\n\n\n\n\n\nReturns a ggplot2 object representing a bar plot of total keyword frequencies grouped and colored by frequency zone.\n\n\n\n\n\n\n\nElement\nDescription\n\n\n\n\nx-axis\nKeywords ordered by total frequency.\n\n\ny-axis\nTotal frequency of each keyword.\n\n\nColors\nRepresent frequency zones and intervals (e.g., “VH [50–100]”, “L [5–10]”).\n\n\nLegend\nDisplayed at the bottom, showing the zone–interval combinations."
   },
   {
-    "objectID": "normalization.html",
-    "href": "normalization.html",
-    "title": "normalization()",
+    "objectID": "singleFunctions/rowMassPlot.html#function-definition",
+    "href": "singleFunctions/rowMassPlot.html#function-definition",
+    "title": "rowMassPlot()",
     "section": "",
-    "text": "Normalize Term-Document Matrix (TDM)\n\n\n\nnormalization &lt;- (data,\n                  normty = \"nc\",\n                  sc = 1000,\n                  nnlty = \"V\",\n                  p_asy = TRUE)"
+    "text": "rowMassPlot &lt;- (data)"
   },
   {
-    "objectID": "normalization.html#function-definition",
-    "href": "normalization.html#function-definition",
-    "title": "normalization()",
+    "objectID": "singleFunctions/rowMassPlot.html#aim",
+    "href": "singleFunctions/rowMassPlot.html#aim",
+    "title": "rowMassPlot()",
     "section": "",
-    "text": "normalization &lt;- (data,\n                  normty = \"nc\",\n                  sc = 1000,\n                  nnlty = \"V\",\n                  p_asy = TRUE)"
+    "text": "The rowMassPlot() function generates a bar plot showing the total frequency of each keyword, colored according to its frequency zone and labeled by its interval.\nIt provides a visual summary of the distribution of term frequencies across zones, based on the output of importData()."
   },
   {
-    "objectID": "importData.html",
-    "href": "importData.html",
+    "objectID": "singleFunctions/rowMassPlot.html#arguments",
+    "href": "singleFunctions/rowMassPlot.html#arguments",
+    "title": "rowMassPlot()",
+    "section": "",
+    "text": "Argument\nType\nDescription\n\n\n\n\ndata\nList\nA list containing the output of importData(), including the processed term-document matrix (tdm) and related metadata."
+  },
+  {
+    "objectID": "singleFunctions/rowMassPlot.html#output",
+    "href": "singleFunctions/rowMassPlot.html#output",
+    "title": "rowMassPlot()",
+    "section": "",
+    "text": "Returns a ggplot2 object representing a bar plot of total keyword frequencies grouped and colored by frequency zone.\n\n\n\n\n\n\n\nElement\nDescription\n\n\n\n\nx-axis\nKeywords ordered by total frequency.\n\n\ny-axis\nTotal frequency of each keyword.\n\n\nColors\nRepresent frequency zones and intervals (e.g., “VH [50–100]”, “L [5–10]”).\n\n\nLegend\nDisplayed at the bottom, showing the zone–interval combinations."
+  },
+  {
+    "objectID": "singleFunctions/optimalSmoothing.html",
+    "href": "singleFunctions/optimalSmoothing.html",
+    "title": "optimalSmoothing()",
+    "section": "",
+    "text": "Selection of Optimal Spline Degree and Penalization Strategy\n\n\n\noptimalSmoothing &lt;- (smoothing_results, plot = TRUE)\n\n\n\nThe optimalSmoothing() function compares multiple smoothing strategies—each defined by a specific penalization type—to identify the optimal combination of spline degree (m) and penalty that minimizes the Generalized Cross-Validation (GCV) criterion.\nIt takes as input the results produced by multiple calls to smoothingSelection() (one per penalty type) and constructs a comparison matrix of GCV values across all spline degrees and penalties.\nOptionally, it can also generate diagnostic plots showing how GCV, OCV, df, and SSE vary across spline degrees and penalty types, supporting a visual evaluation of the optimal smoothing configuration.\n\n\n\n\n\n\n\n\n\n\n\n\nArgument\nType\nDescription\n\n\n\n\nsmoothing_results\nList\nA named list of results from smoothingSelection(), with each entry corresponding to a penalty type (\"m-2\", \"2\", \"1\", \"0\").\n\n\nplot\nLogical\nIf TRUE (default), returns comparative ggplot2-based visualizations of smoothing diagnostics across penalty types and spline degrees.\n\n\n\n\n\n\n\nReturns a list containing the optimal smoothing configuration, diagnostic matrices, and (optionally) comparative plots.\n\n\n\n\n\n\n\nElement\nDescription\n\n\n\n\noptSmoothing\nFull set of results from the optimal penalization strategy, as returned by smoothingSelection().\n\n\nm_opt\nInteger. Optimal spline degree that minimizes the GCV across all penalty types.\n\n\npenalty_opt\nCharacter. Optimal penalty type (\"m-2\", \"2\", \"1\", or \"0\").\n\n\nlambda_opt\nNumeric. Optimal log10(λ) value corresponding to the selected degree and penalty.\n\n\ngcv_matrix\nNumeric matrix of GCV values, where rows correspond to penalties and columns to spline degrees.\n\n\nplots\n(Optional) List of ggplot2 objects for GCV, OCV, df, and SSE comparisons across penalties and degrees.\n\n\ncall\nThe matched function call, useful for reproducibility."
+  },
+  {
+    "objectID": "singleFunctions/optimalSmoothing.html#function-definition",
+    "href": "singleFunctions/optimalSmoothing.html#function-definition",
+    "title": "optimalSmoothing()",
+    "section": "",
+    "text": "optimalSmoothing &lt;- (smoothing_results, plot = TRUE)"
+  },
+  {
+    "objectID": "singleFunctions/optimalSmoothing.html#aim",
+    "href": "singleFunctions/optimalSmoothing.html#aim",
+    "title": "optimalSmoothing()",
+    "section": "",
+    "text": "The optimalSmoothing() function compares multiple smoothing strategies—each defined by a specific penalization type—to identify the optimal combination of spline degree (m) and penalty that minimizes the Generalized Cross-Validation (GCV) criterion.\nIt takes as input the results produced by multiple calls to smoothingSelection() (one per penalty type) and constructs a comparison matrix of GCV values across all spline degrees and penalties.\nOptionally, it can also generate diagnostic plots showing how GCV, OCV, df, and SSE vary across spline degrees and penalty types, supporting a visual evaluation of the optimal smoothing configuration."
+  },
+  {
+    "objectID": "singleFunctions/optimalSmoothing.html#arguments",
+    "href": "singleFunctions/optimalSmoothing.html#arguments",
+    "title": "optimalSmoothing()",
+    "section": "",
+    "text": "Argument\nType\nDescription\n\n\n\n\nsmoothing_results\nList\nA named list of results from smoothingSelection(), with each entry corresponding to a penalty type (\"m-2\", \"2\", \"1\", \"0\").\n\n\nplot\nLogical\nIf TRUE (default), returns comparative ggplot2-based visualizations of smoothing diagnostics across penalty types and spline degrees."
+  },
+  {
+    "objectID": "singleFunctions/optimalSmoothing.html#output",
+    "href": "singleFunctions/optimalSmoothing.html#output",
+    "title": "optimalSmoothing()",
+    "section": "",
+    "text": "Returns a list containing the optimal smoothing configuration, diagnostic matrices, and (optionally) comparative plots.\n\n\n\n\n\n\n\nElement\nDescription\n\n\n\n\noptSmoothing\nFull set of results from the optimal penalization strategy, as returned by smoothingSelection().\n\n\nm_opt\nInteger. Optimal spline degree that minimizes the GCV across all penalty types.\n\n\npenalty_opt\nCharacter. Optimal penalty type (\"m-2\", \"2\", \"1\", or \"0\").\n\n\nlambda_opt\nNumeric. Optimal log10(λ) value corresponding to the selected degree and penalty.\n\n\ngcv_matrix\nNumeric matrix of GCV values, where rows correspond to penalties and columns to spline degrees.\n\n\nplots\n(Optional) List of ggplot2 objects for GCV, OCV, df, and SSE comparisons across penalties and degrees.\n\n\ncall\nThe matched function call, useful for reproducibility."
+  },
+  {
+    "objectID": "singleFunctions/importData.html",
+    "href": "singleFunctions/importData.html",
     "title": "importData()",
     "section": "",
     "text": "Imports and validates corpus data and metadata into a standardized structure.\n\n\n\nimportData &lt;- (\n  tdm_file,\n  corpus_file,\n  sep_tdm = \";\",\n  sep_corpus_info = \";\",\n  zone = \"stat\",\n  verbose = TRUE\n)\n\n\n\nThe importData() function reads and processes a Term Document Matrix (TDM) and corpus information from CSV or Excel files.\nIt standardizes formats, renames columns, cleans keywords, computes total frequency per term, and classifies each term into frequency zones.\n\n\n\n\n\n\n\n\n\n\n\n\nArgument\nType\nDescription\n\n\n\n\ntdm_file\nCharacter\nPath to the term-document matrix file (CSV or Excel). The first column must contain the list of terms, while all other columns represent years.\n\n\ncorpus_file\nCharacter\nPath to the corpus information file (CSV or Excel). Must include columns for years, tokens, and documents per year.\n\n\nsep_tdm\nCharacter / NULL\nSeparator for the TDM CSV file (ignored if Excel). Default: \";\".\n\n\nsep_corpus_info\nCharacter / NULL\nSeparator for the corpus information CSV file (ignored if Excel). Default: \";\".\n\n\nzone\nCharacter\nZone classification strategy: \"stat\" (statistical quartiles) or \"ling\" (linguistic frequency-based). Default: \"stat\".\n\n\nverbose\nLogical\nIf TRUE, prints progress messages. Default: TRUE.\n\n\n\n\n\n\n\nReturns a list with the following elements:\n\n\n\n\n\n\n\nElement\nDescription\n\n\n\n\ntdm\nA tibble representing the cleaned and processed term-document matrix, including keyword, tot_freq, int_freq, zone, and yearly frequency columns.\n\n\ncorpus_info\nA tibble containing corpus-level yearly metadata (years, dimCorpus, nDoc, and optional metadata).\n\n\nnorm\nLogical. Indicates whether the TDM has been normalized (default: FALSE).\n\n\nyear_cols\nNumeric vector indicating which columns in the TDM correspond to yearly frequencies.\n\n\nzone\nCharacter vector of unique frequency zones.\n\n\ncolors\nCharacter vector of default colors associated with zones."
   },
   {
-    "objectID": "importData.html#function-definition",
-    "href": "importData.html#function-definition",
+    "objectID": "singleFunctions/importData.html#function-definition",
+    "href": "singleFunctions/importData.html#function-definition",
     "title": "importData()",
     "section": "",
     "text": "importData &lt;- (\n  tdm_file,\n  corpus_file,\n  sep_tdm = \";\",\n  sep_corpus_info = \";\",\n  zone = \"stat\",\n  verbose = TRUE\n)"
   },
   {
-    "objectID": "importData.html#aim",
-    "href": "importData.html#aim",
+    "objectID": "singleFunctions/importData.html#aim",
+    "href": "singleFunctions/importData.html#aim",
     "title": "importData()",
     "section": "",
     "text": "The importData() function reads and processes a Term Document Matrix (TDM) and corpus information from CSV or Excel files.\nIt standardizes formats, renames columns, cleans keywords, computes total frequency per term, and classifies each term into frequency zones."
   },
   {
-    "objectID": "importData.html#arguments",
-    "href": "importData.html#arguments",
+    "objectID": "singleFunctions/importData.html#arguments",
+    "href": "singleFunctions/importData.html#arguments",
     "title": "importData()",
     "section": "",
     "text": "Argument\nType\nDescription\n\n\n\n\ntdm_file\nCharacter\nPath to the term-document matrix file (CSV or Excel). The first column must contain the list of terms, while all other columns represent years.\n\n\ncorpus_file\nCharacter\nPath to the corpus information file (CSV or Excel). Must include columns for years, tokens, and documents per year.\n\n\nsep_tdm\nCharacter / NULL\nSeparator for the TDM CSV file (ignored if Excel). Default: \";\".\n\n\nsep_corpus_info\nCharacter / NULL\nSeparator for the corpus information CSV file (ignored if Excel). Default: \";\".\n\n\nzone\nCharacter\nZone classification strategy: \"stat\" (statistical quartiles) or \"ling\" (linguistic frequency-based). Default: \"stat\".\n\n\nverbose\nLogical\nIf TRUE, prints progress messages. Default: TRUE."
   },
   {
-    "objectID": "importData.html#output",
-    "href": "importData.html#output",
+    "objectID": "singleFunctions/importData.html#output",
+    "href": "singleFunctions/importData.html#output",
     "title": "importData()",
     "section": "",
     "text": "Returns a list with the following elements:\n\n\n\n\n\n\n\nElement\nDescription\n\n\n\n\ntdm\nA tibble representing the cleaned and processed term-document matrix, including keyword, tot_freq, int_freq, zone, and yearly frequency columns.\n\n\ncorpus_info\nA tibble containing corpus-level yearly metadata (years, dimCorpus, nDoc, and optional metadata).\n\n\nnorm\nLogical. Indicates whether the TDM has been normalized (default: FALSE).\n\n\nyear_cols\nNumeric vector indicating which columns in the TDM correspond to yearly frequencies.\n\n\nzone\nCharacter vector of unique frequency zones.\n\n\ncolors\nCharacter vector of default colors associated with zones."
   },
   {
-    "objectID": "functions.html",
-    "href": "functions.html",
-    "title": "Function Reference",
-    "section": "",
-    "text": "Function Reference\nBelow is the list of available functions in the cccc package.\nClick on each function name to access its documentation.\n\n\n\n\n\nFunction\n\n\nDescription\n\n\n\n\n\n\nimportData()\n\n\nImports and validates corpus data and metadata into a standardized structure.\n\n\n\n\nrowMassPlot()\n\n\nCreates a bar plot of keywords ordered by their total frequency #’ and colored by their assigned frequency zone, combining both the zone #’ and its frequency interval label.\n\n\n\n\ncolMassPlot()\n\n\nPlot Temporal Dimensions of a Corpus.\n\n\n\n\ncurvePlot()\n\n\nPlot Temporal Curves of Keyword Frequencies.\n\n\n\n\ncurveCtuPlot()\n\n\nPlot of Temporal Curves for Frequency Zones and Example Keywords.\n\n\n\n\nnormalization()\n\n\nNormalize Term-Document Matrix (TDM).\n\n\n\n\nfacetPlot()\n\n\nFaceted Plot of Keyword Frequency Curves."
-  },
-  {
-    "objectID": "curvePlot.html",
-    "href": "curvePlot.html",
+    "objectID": "singleFunctions/curvePlot.html",
+    "href": "singleFunctions/curvePlot.html",
     "title": "curvePlot()",
     "section": "",
-    "text": "Plot Temporal Curves of Keyword Frequencies\n\n\n\ncurvePlot &lt;- (data,\n              r = 1,\n              themety = \"light\",\n              size_class = NULL,\n              x_leg = 0.85,\n              x_lab = \"years\")"
+    "text": "Plot Temporal Curves of Keyword Frequencies\n\n\n\ncurvePlot &lt;- (data,\n              r = 1,\n              themety = \"light\",\n              size_class = NULL,\n              x_leg = 0.85,\n              x_lab = \"years\")\n\n\n\nThe curvePlot() function visualizes the temporal evolution of keyword frequencies within a corpus.\nIt uses the term-document matrix (TDM) in long format to generate curves grouped by frequency zones, allowing users to analyze how terms evolve over time.\nThe plot supports both light and dark themes, customizable line thickness, and adjustable x-axis labels for improved readability.\n\n\n\n\n\n\n\n\n\n\n\n\nArgument\nType\nDescription\n\n\n\n\ndata\nList\nA list containing the output of importData().\n\n\nr\nNumeric (scalar)\nInterval for thinning x-axis year labels. Default: 1.\n\n\nthemety\nCharacter\nTheme type. Either \"light\" (default) or \"dark\".\n\n\nsize_class\nNumeric vector\nLine sizes by frequency zone. If NULL, default values are assigned based on the selected theme.\n\n\nx_leg\nNumeric\nHorizontal position of the legend. Default: 0.85.\n\n\nx_lab\nCharacter\nX-axis label. Default: \"years\".\n\n\n\n\n\n\n\nReturns a ggplot2 object displaying temporal curves of keyword frequencies.\n\n\n\n\n\n\n\nElement\nDescription\n\n\n\n\nx-axis\nRepresents time (years).\n\n\ny-axis\nRepresents keyword frequency (normalized or raw).\n\n\nColors\nCorrespond to frequency zones (e.g., “VH”, “H”, “L”, “VL”).\n\n\nLine size\nReflects the relative importance of frequency zones.\n\n\nTheme\nCan be switched between light and dark for readability.\n\n\nLegend\nShown at the bottom, indicating frequency zones and line styles."
   },
   {
-    "objectID": "curvePlot.html#function-definition",
-    "href": "curvePlot.html#function-definition",
+    "objectID": "singleFunctions/curvePlot.html#function-definition",
+    "href": "singleFunctions/curvePlot.html#function-definition",
     "title": "curvePlot()",
     "section": "",
     "text": "curvePlot &lt;- (data,\n              r = 1,\n              themety = \"light\",\n              size_class = NULL,\n              x_leg = 0.85,\n              x_lab = \"years\")"
   },
   {
-    "objectID": "colMassPlot.html",
-    "href": "colMassPlot.html",
+    "objectID": "singleFunctions/curvePlot.html#aim",
+    "href": "singleFunctions/curvePlot.html#aim",
+    "title": "curvePlot()",
+    "section": "",
+    "text": "The curvePlot() function visualizes the temporal evolution of keyword frequencies within a corpus.\nIt uses the term-document matrix (TDM) in long format to generate curves grouped by frequency zones, allowing users to analyze how terms evolve over time.\nThe plot supports both light and dark themes, customizable line thickness, and adjustable x-axis labels for improved readability."
+  },
+  {
+    "objectID": "singleFunctions/curvePlot.html#arguments",
+    "href": "singleFunctions/curvePlot.html#arguments",
+    "title": "curvePlot()",
+    "section": "",
+    "text": "Argument\nType\nDescription\n\n\n\n\ndata\nList\nA list containing the output of importData().\n\n\nr\nNumeric (scalar)\nInterval for thinning x-axis year labels. Default: 1.\n\n\nthemety\nCharacter\nTheme type. Either \"light\" (default) or \"dark\".\n\n\nsize_class\nNumeric vector\nLine sizes by frequency zone. If NULL, default values are assigned based on the selected theme.\n\n\nx_leg\nNumeric\nHorizontal position of the legend. Default: 0.85.\n\n\nx_lab\nCharacter\nX-axis label. Default: \"years\"."
+  },
+  {
+    "objectID": "singleFunctions/curvePlot.html#output",
+    "href": "singleFunctions/curvePlot.html#output",
+    "title": "curvePlot()",
+    "section": "",
+    "text": "Returns a ggplot2 object displaying temporal curves of keyword frequencies.\n\n\n\n\n\n\n\nElement\nDescription\n\n\n\n\nx-axis\nRepresents time (years).\n\n\ny-axis\nRepresents keyword frequency (normalized or raw).\n\n\nColors\nCorrespond to frequency zones (e.g., “VH”, “H”, “L”, “VL”).\n\n\nLine size\nReflects the relative importance of frequency zones.\n\n\nTheme\nCan be switched between light and dark for readability.\n\n\nLegend\nShown at the bottom, indicating frequency zones and line styles."
+  },
+  {
+    "objectID": "singleFunctions/colMassPlot.html",
+    "href": "singleFunctions/colMassPlot.html",
     "title": "colMassPlot()",
     "section": "",
     "text": "Plot Temporal Dimensions of a Corpus\n\n\n\ncolMassPlot &lt;- (data,\n                        sc = c(1, 10, 10, 1),\n                        r = 1,\n                        textty = \"text\",\n                        themety = \"light\",\n                        size_b = 2.5,\n                        x_lab = \"years\")\n\n\n\nThe colMassPlot() function creates a multi-line plot displaying the temporal evolution of four corpus-level metrics:\n\nNumber of documents (nDoc)\nNumber of tokens (dimCorpus)\nSum of keyword frequencies (Csum)\nMaximum keyword frequency (Mcf)\n\nAll measures are rescaled by user-defined factors to improve visual comparability across different dimensions of the corpus.\n\n\n\n\n\n\n\n\n\n\n\n\nArgument\nType\nDescription\n\n\n\n\ndata\nList\nA list containing the output of importData().\n\n\nsc\nNumeric vector (length = 4)\nScaling factors for nDoc, dimCorpus, Csum, and Mcf. Default: c(1, 10, 10, 1).\n\n\nr\nInteger\nInterval for thinning x-axis labels. Default: 1 (shows all years).\n\n\ntextty\nCharacter\nUnit of analysis for legend labels (e.g., \"text\", \"place\", \"paper\").\n\n\nthemety\nCharacter\nPlot theme type. Either \"light\" (default) or \"dark\".\n\n\nsize_b\nNumeric\nBase size for bar lines. Default: 2.5.\n\n\nx_lab\nCharacter\nX-axis label. Default: \"year\".\n\n\n\n\n\n\n\nReturns a ggplot2 object representing the temporal evolution of corpus structure.\n\n\n\n\n\n\n\nElement\nDescription\n\n\n\n\nx-axis\nYears.\n\n\ny-axis\nRescaled measures representing corpus size and term frequencies.\n\n\nLines\nShow the evolution of nDoc, dimCorpus, Csum, and Mcf over time.\n\n\nColors\nDistinguish between the four corpus metrics.\n\n\nLegend\nProvides details about scaling factors and corresponding measures."
   },
   {
-    "objectID": "colMassPlot.html#function-definition",
-    "href": "colMassPlot.html#function-definition",
+    "objectID": "singleFunctions/colMassPlot.html#function-definition",
+    "href": "singleFunctions/colMassPlot.html#function-definition",
     "title": "colMassPlot()",
     "section": "",
     "text": "colMassPlot &lt;- (data,\n                        sc = c(1, 10, 10, 1),\n                        r = 1,\n                        textty = \"text\",\n                        themety = \"light\",\n                        size_b = 2.5,\n                        x_lab = \"years\")"
   },
   {
-    "objectID": "colMassPlot.html#aim",
-    "href": "colMassPlot.html#aim",
+    "objectID": "singleFunctions/colMassPlot.html#aim",
+    "href": "singleFunctions/colMassPlot.html#aim",
     "title": "colMassPlot()",
     "section": "",
     "text": "The colMassPlot() function creates a multi-line plot displaying the temporal evolution of four corpus-level metrics:\n\nNumber of documents (nDoc)\nNumber of tokens (dimCorpus)\nSum of keyword frequencies (Csum)\nMaximum keyword frequency (Mcf)\n\nAll measures are rescaled by user-defined factors to improve visual comparability across different dimensions of the corpus."
   },
   {
-    "objectID": "colMassPlot.html#arguments",
-    "href": "colMassPlot.html#arguments",
+    "objectID": "singleFunctions/colMassPlot.html#arguments",
+    "href": "singleFunctions/colMassPlot.html#arguments",
     "title": "colMassPlot()",
     "section": "",
     "text": "Argument\nType\nDescription\n\n\n\n\ndata\nList\nA list containing the output of importData().\n\n\nsc\nNumeric vector (length = 4)\nScaling factors for nDoc, dimCorpus, Csum, and Mcf. Default: c(1, 10, 10, 1).\n\n\nr\nInteger\nInterval for thinning x-axis labels. Default: 1 (shows all years).\n\n\ntextty\nCharacter\nUnit of analysis for legend labels (e.g., \"text\", \"place\", \"paper\").\n\n\nthemety\nCharacter\nPlot theme type. Either \"light\" (default) or \"dark\".\n\n\nsize_b\nNumeric\nBase size for bar lines. Default: 2.5.\n\n\nx_lab\nCharacter\nX-axis label. Default: \"year\"."
   },
   {
-    "objectID": "colMassPlot.html#output",
-    "href": "colMassPlot.html#output",
+    "objectID": "singleFunctions/colMassPlot.html#output",
+    "href": "singleFunctions/colMassPlot.html#output",
     "title": "colMassPlot()",
     "section": "",
     "text": "Returns a ggplot2 object representing the temporal evolution of corpus structure.\n\n\n\n\n\n\n\nElement\nDescription\n\n\n\n\nx-axis\nYears.\n\n\ny-axis\nRescaled measures representing corpus size and term frequencies.\n\n\nLines\nShow the evolution of nDoc, dimCorpus, Csum, and Mcf over time.\n\n\nColors\nDistinguish between the four corpus metrics.\n\n\nLegend\nProvides details about scaling factors and corresponding measures."
   },
   {
-    "objectID": "about-us.html",
-    "href": "about-us.html",
-    "title": "About Us",
+    "objectID": "projects.html",
+    "href": "projects.html",
+    "title": "Projects",
     "section": "",
-    "text": "Developers\n\n\n\n\nMatilde Trevisani  University of Padova  MATILDE.TREVISANI@deams.units.it\n\n\n\n\n\nArjuna Tuzzi  University of Padova  arjuna.tuzzi@unipd.it\n\n\n\nLuca D’Aniello  University of Naples Federico II  luca.daniello@unina.it\n\n\n\n\n\n\nContact\nFor questions or collaborations: 📧 MATILDE.TREVISANI@deams.units.it"
+    "text": "The cccc package has been developed within the RIND Project - Research INtelligence Development, coordinated by the University of Trieste.\nThe RIND project is an interdisciplinary research initiative that combines methods and perspectives from computational and corpus linguistics, quantitative literary studies, data science, statistics, and translation studies.\nBuilding on Franco Moretti’s seminal approach to distant reading, the project aims to conduct large-scale quantitative analyses on a corpus of approximately 1.000 Italian novels and short story collections, including Italian translations from other languages, published between 1830 and 1930.\nThe corpus is carefully balanced to account for the distribution of authors and translators, gender, publication date, text length, and the distinction between canonical and non-canonical literature.\n\n\n\n\nRIND pursues two main research goals:\n\nAnalyzing how literary characters express thoughts and emotions, through quantitative and automatic extraction methods that capture pragma-linguistic phenomena emerging beyond the boundaries of words and sentences.\n\nTracing social change in Italian novels by exploring lexical fields related to professions, military ranks, religious titles, buildings (residential, commercial, industrial, religious, rural, urban, etc.), and other domains that reflect transformations in society.\n\nBoth objectives are innovative, as few studies have applied quantitative and computational methods to the analysis of reported discourse or to the periodization of Italian literary prose using criteria independent from traditional literary criticism.\nThe comparison between original Italian works and translations will also shed light on the influence of foreign models on Italian literary prose.\n\n\n\n\nThe project draws on three main disciplinary pillars:\n\nLinguistics, to identify morphological and syntactic features leading to pragmatic patterns and lexical lists, and to map their diachronic evolution across semantic domains.\n\nStatistics and Machine Learning, to classify texts through topic modeling, content analysis, word embeddings, time series extraction, and advanced data visualization techniques.\n\nLiterary and Comparative Studies, to interpret results within the historical and cultural contexts of Italian, European, and global literature from Realism to Modernism.\n\n\n\n\n\nBy integrating linguistic, literary, and statistical expertise, the RIND project seeks to provide both a theoretical and methodological contribution to the study of literary language and cultural evolution.\nIts results will enhance our understanding of how language and society co-evolved in Italian prose during a century of profound artistic and social transformation.\nVisit the project page: https://rind.units.it/home/"
   },
   {
-    "objectID": "cccc-package.html",
-    "href": "cccc-package.html",
-    "title": "cccc R Package",
+    "objectID": "projects.html#the-rind-project",
+    "href": "projects.html#the-rind-project",
+    "title": "Projects",
     "section": "",
-    "text": "About\ncccc (Chronological Corpora Curve Clustering) is an R package designed to model, smooth, and cluster term trajectories over time.\nIt supports the exploration of concept dynamics in scientific corpora through chronological curve analysis.\n\nObjectives\n\nImport and normalize temporal term-document matrices.\nModel word life-cycles using smoothing splines.\nCluster temporal trajectories and visualize their evolution.\nQuantify conceptual shifts and knowledge dynamics.\n\nThe package is part of the RIND Project, aimed at developing new methodological tools for research knowledge evolution analysis."
-  },
-  {
-    "objectID": "curveCtuPlot.html",
-    "href": "curveCtuPlot.html",
-    "title": "curveCtuPlot()",
-    "section": "",
-    "text": "Plot of Temporal Curves for Frequency Zones and Example Keywords\n\n\n\ncurveCtuPlot &lt;- (data,\n                 ctu_noun = NULL,\n                 r = 1,\n                 themety = \"light\",\n                 size_class = NULL,\n                 x_lab = \"year\")"
-  },
-  {
-    "objectID": "curveCtuPlot.html#function-definition",
-    "href": "curveCtuPlot.html#function-definition",
-    "title": "curveCtuPlot()",
-    "section": "",
-    "text": "curveCtuPlot &lt;- (data,\n                 ctu_noun = NULL,\n                 r = 1,\n                 themety = \"light\",\n                 size_class = NULL,\n                 x_lab = \"year\")"
-  },
-  {
-    "objectID": "facetPlot.html",
-    "href": "facetPlot.html",
-    "title": "facetPlot()",
-    "section": "",
-    "text": "Faceted Plot of Keyword Frequency Curves\n\n\n\nfacetPlot &lt;- (data, keyword_selection = list(type=\"frequency\", \n              n=3, kw.list=NULL),\n              r = 4, scales = \"fixed\", \n              leg = TRUE, \n              themety = \"light\",\n              size_class = NULL, \n              x_lab = \"year\")"
-  },
-  {
-    "objectID": "facetPlot.html#function-definition",
-    "href": "facetPlot.html#function-definition",
-    "title": "facetPlot()",
-    "section": "",
-    "text": "facetPlot &lt;- (data, keyword_selection = list(type=\"frequency\", \n              n=3, kw.list=NULL),\n              r = 4, scales = \"fixed\", \n              leg = TRUE, \n              themety = \"light\",\n              size_class = NULL, \n              x_lab = \"year\")"
+    "text": "The cccc package has been developed within the RIND Project - Research INtelligence Development, coordinated by the University of Trieste.\nThe RIND project is an interdisciplinary research initiative that combines methods and perspectives from computational and corpus linguistics, quantitative literary studies, data science, statistics, and translation studies.\nBuilding on Franco Moretti’s seminal approach to distant reading, the project aims to conduct large-scale quantitative analyses on a corpus of approximately 1.000 Italian novels and short story collections, including Italian translations from other languages, published between 1830 and 1930.\nThe corpus is carefully balanced to account for the distribution of authors and translators, gender, publication date, text length, and the distinction between canonical and non-canonical literature.\n\n\n\n\nRIND pursues two main research goals:\n\nAnalyzing how literary characters express thoughts and emotions, through quantitative and automatic extraction methods that capture pragma-linguistic phenomena emerging beyond the boundaries of words and sentences.\n\nTracing social change in Italian novels by exploring lexical fields related to professions, military ranks, religious titles, buildings (residential, commercial, industrial, religious, rural, urban, etc.), and other domains that reflect transformations in society.\n\nBoth objectives are innovative, as few studies have applied quantitative and computational methods to the analysis of reported discourse or to the periodization of Italian literary prose using criteria independent from traditional literary criticism.\nThe comparison between original Italian works and translations will also shed light on the influence of foreign models on Italian literary prose.\n\n\n\n\nThe project draws on three main disciplinary pillars:\n\nLinguistics, to identify morphological and syntactic features leading to pragmatic patterns and lexical lists, and to map their diachronic evolution across semantic domains.\n\nStatistics and Machine Learning, to classify texts through topic modeling, content analysis, word embeddings, time series extraction, and advanced data visualization techniques.\n\nLiterary and Comparative Studies, to interpret results within the historical and cultural contexts of Italian, European, and global literature from Realism to Modernism.\n\n\n\n\n\nBy integrating linguistic, literary, and statistical expertise, the RIND project seeks to provide both a theoretical and methodological contribution to the study of literary language and cultural evolution.\nIts results will enhance our understanding of how language and society co-evolved in Italian prose during a century of profound artistic and social transformation.\nVisit the project page: https://rind.units.it/home/"
   },
   {
     "objectID": "functions/functions:index.html",
@@ -168,6 +203,55 @@
     "text": "Function Reference\nBelow is the list of available functions in the cccc package.\nClick on each function name to access its documentation.\n\nimportData()\ncolmass_plot()\nnormalize()\nrunClusteringRange()\nevaluateClusteringQuality()\nselectBestKfromRand()\nplotClusterPanel()"
   },
   {
+    "objectID": "cccc-package.html",
+    "href": "cccc-package.html",
+    "title": "cccc R Package",
+    "section": "",
+    "text": "cccc (Chronological Corpora Curve Clustering) is an R package developed to analyze the temporal evolution of concepts and semantic trajectories within scientific corpora.\nIt provides a comprehensive workflow to import, normalize, model, and cluster keyword frequency curves across time, revealing how terms emerge, evolve, and decline within a knowledge domain.\nRooted in the paradigm of temporal scientometrics and textual dynamics modeling, cccc offers a data-driven framework to study conceptual change, topic diffusion, and knowledge transformation across years or decades.\nIt bridges quantitative linguistics, statistical modeling, and corpus-based research, providing interpretable tools for mapping how science evolves through its language."
+  },
+  {
+    "objectID": "cccc-package.html#about",
+    "href": "cccc-package.html#about",
+    "title": "cccc R Package",
+    "section": "",
+    "text": "cccc (Chronological Corpora Curve Clustering) is an R package developed to analyze the temporal evolution of concepts and semantic trajectories within scientific corpora.\nIt provides a comprehensive workflow to import, normalize, model, and cluster keyword frequency curves across time, revealing how terms emerge, evolve, and decline within a knowledge domain.\nRooted in the paradigm of temporal scientometrics and textual dynamics modeling, cccc offers a data-driven framework to study conceptual change, topic diffusion, and knowledge transformation across years or decades.\nIt bridges quantitative linguistics, statistical modeling, and corpus-based research, providing interpretable tools for mapping how science evolves through its language."
+  },
+  {
+    "objectID": "cccc-package.html#objectives",
+    "href": "cccc-package.html#objectives",
+    "title": "cccc R Package",
+    "section": "🎯 Objectives",
+    "text": "🎯 Objectives\nThe package implements a full analytical pipeline structured around four key objectives:\n\nData Import and Preprocessing\n\nImport term–document matrices and corpus metadata from CSV or Excel files.\n\nClean and harmonize lexical units.\n\nAutomatically compute total frequencies and assign terms to frequency zones (linguistic or statistical).\n\nTemporal Modeling and Smoothing\n\nModel word life-cycles using B-spline smoothing and penalized regression splines.\n\nSelect optimal smoothing parameters through cross-validation and generalized cross-validation (GCV).\n\nVisualize raw and smoothed trajectories to assess temporal stability or volatility of terms.\n\nClustering and Knowledge Dynamics\n\nCluster term trajectories according to their temporal profiles.\n\nIdentify groups of words sharing similar growth, stability, or decline patterns.\n\nQuantify conceptual convergence/divergence across periods and topics.\n\nVisualization and Interpretation\n\nGenerate detailed graphical representations of term dynamics, zones, and clusters.\n\nHighlight representative keywords and temporal peaks.\n\nProvide interactive and faceted visual summaries for interpretability and dissemination."
+  },
+  {
+    "objectID": "cccc-package.html#research-context",
+    "href": "cccc-package.html#research-context",
+    "title": "cccc R Package",
+    "section": "🔍 Research Context",
+    "text": "🔍 Research Context\nThe cccc R package is part of the RIND Project, aimed at developing new methodological tools for research knowledge evolution analysis. RIND is a multidisciplinary research initiative combining computational linguistics, statistical modeling, and digital humanities.\nThe methodological framework developed in cccc extends beyond literary studies:\nit is designed for scientometric, sociolinguistic, and bibliometric analyses,\nenabling researchers to detect emerging themes, shifting paradigms, and the evolution of scientific discourse over time."
+  },
+  {
+    "objectID": "cccc-package.html#key-features",
+    "href": "cccc-package.html#key-features",
+    "title": "cccc R Package",
+    "section": "⚙️ Key Features",
+    "text": "⚙️ Key Features\n\nUnified interface for importing and managing temporal corpora.\n\nFlexible normalization schemes (nc, nchi, nM, nmM, nnl).\n\nAutomated smoothing parameter optimization and visualization tools.\n\nClustering of term trajectories with multiple quality indices.\n\nPublication-ready visualizations of conceptual dynamics.\n\n\n\ncccc turns chronological corpora into living systems of evolving meanings,\ncapturing how knowledge takes shape, spreads, and transforms over time."
+  },
+  {
+    "objectID": "about-us.html",
+    "href": "about-us.html",
+    "title": "About Us",
+    "section": "",
+    "text": "👥 Developers\n\n\n\n  \n  \n    Matilde Trevisani\n    University of Trieste\n    MATILDE.TREVISANI@deams.units.it\n  \n\n\n\n  \n  \n    Arjuna Tuzzi\n    University of Padova\n    arjuna.tuzzi@unipd.it\n  \n\n\n\n  \n  \n    Luca D’Aniello\n    University of Naples Federico II\n    luca.daniello@unina.it\n  \n\n\n\n\n\nContact\nFor questions or collaborations: 📧 MATILDE.TREVISANI@deams.units.it"
+  },
+  {
+    "objectID": "functions.html",
+    "href": "functions.html",
+    "title": "Function Reference",
+    "section": "",
+    "text": "Below is the list of available functions in the cccc package.\nClick on each function name to access its documentation.\n\n\n\n\nFunction\n\n\nDescription\n\n\n\n\n\n\nimportData()\n\n\nImports and validates corpus data and metadata into a standardized structure.\n\n\n\n\nrowMassPlot()\n\n\nCreates a bar plot of keywords ordered by their total frequency #’ and colored by their assigned frequency zone, combining both the zone #’ and its frequency interval label.\n\n\n\n\ncolMassPlot()\n\n\nPlot Temporal Dimensions of a Corpus.\n\n\n\n\ncurvePlot()\n\n\nPlot Temporal Curves of Keyword Frequencies.\n\n\n\n\ncurveCtuPlot()\n\n\nPlot of Temporal Curves for Frequency Zones and Example Keywords.\n\n\n\n\nnormalization()\n\n\nNormalize Term-Document Matrix (TDM).\n\n\n\n\nfacetPlot()\n\n\nFaceted Plot of Keyword Frequency Curves.\n\n\n\n\nsmoothingSelection()\n\n\nSelection of Optimal Smoothing Parameters for Chronological Keyword Curves.\n\n\n\n\noptimalSmoothing()\n\n\nSelection of Optimal Spline Degree and Penalization Strategy.\n\n\n\n\nplotSuboptimalFits()\n\n\nPlot Suboptimal Smoothed Curves for Selected Keywords."
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "",
@@ -175,52 +259,185 @@
     "text": "cccc\n    Chronological Corpora Curve Clustering\n    \n      An R package for analyzing the temporal evolution of concepts and terms in scientific corpora.\n    \n\n    \n       Explore the Package\n    \n  \n\n\n\n\n\n  Discover what cccc can do\n\n  \n\n    \n      📈 Temporal Modeling\n      Model the evolution of terms across time through smoothing spline trajectories.\n    \n\n    \n      🧩 Clustering\n      Group terms with similar temporal patterns and explore knowledge dynamics.\n    \n\n    \n      🔍 Visualization\n      Visualize trajectories and clusters interactively for deeper understanding."
   },
   {
-    "objectID": "projects.html",
-    "href": "projects.html",
-    "title": "Projects",
+    "objectID": "references.html",
+    "href": "references.html",
+    "title": "References",
     "section": "",
-    "text": "The cccc package has been developed within the RIND Project – Research INtelligence Development, coordinated by the University of Trieste.\nThe RIND project is an interdisciplinary research initiative that combines methods and perspectives from computational and corpus linguistics, quantitative literary studies, data science, statistics, and translation studies.\nBuilding on Franco Moretti’s seminal approach to distant reading, the project aims to conduct large-scale quantitative analyses on a corpus of approximately 1,000 Italian novels and short story collections, including Italian translations from other languages, published between 1830 and 1930.\nThe corpus is carefully balanced to account for the distribution of authors and translators, gender, publication date, text length, and the distinction between canonical and non-canonical literature.\n\n\n\n\nRIND pursues two main research goals:\n\nAnalyzing how literary characters express thoughts and emotions, through quantitative and automatic extraction methods that capture pragma-linguistic phenomena emerging beyond the boundaries of words and sentences.\n\nTracing social change in Italian novels by exploring lexical fields related to professions, military ranks, religious titles, buildings (residential, commercial, industrial, religious, rural, urban, etc.), and other domains that reflect transformations in society.\n\nBoth objectives are innovative, as few studies have applied quantitative and computational methods to the analysis of reported discourse or to the periodization of Italian literary prose using criteria independent from traditional literary criticism.\nThe comparison between original Italian works and translations will also shed light on the influence of foreign models on Italian literary prose.\n\n\n\n\nThe project draws on three main disciplinary pillars:\n\nLinguistics, to identify morphological and syntactic features leading to pragmatic patterns and lexical lists, and to map their diachronic evolution across semantic domains.\n\nStatistics and Machine Learning, to classify texts through topic modeling, content analysis, word embeddings, time series extraction, and advanced data visualization techniques.\n\nLiterary and Comparative Studies, to interpret results within the historical and cultural contexts of Italian, European, and global literature from Realism to Modernism.\n\n\n\n\n\nBy integrating linguistic, literary, and statistical expertise, the RIND project seeks to provide both a theoretical and methodological contribution to the study of literary language and cultural evolution.\nIts results will enhance our understanding of how language and society co-evolved in Italian prose during a century of profound artistic and social transformation.\nVisit the project page: https://rind.units.it/home/"
+    "text": "Trevisani, M., & Tuzzi, A. (2018). Chronological corpora curve clustering: From scientific corpora construction to knowledge dynamics discovery through word life-cycles clustering. MethodsX, 5, 1576-1587."
   },
   {
-    "objectID": "projects.html#the-rind-project",
-    "href": "projects.html#the-rind-project",
-    "title": "Projects",
+    "objectID": "singleFunctions/curveCtuPlot.html",
+    "href": "singleFunctions/curveCtuPlot.html",
+    "title": "curveCtuPlot()",
     "section": "",
-    "text": "The cccc package has been developed within the RIND Project – Research INtelligence Development, coordinated by the University of Trieste.\nThe RIND project is an interdisciplinary research initiative that combines methods and perspectives from computational and corpus linguistics, quantitative literary studies, data science, statistics, and translation studies.\nBuilding on Franco Moretti’s seminal approach to distant reading, the project aims to conduct large-scale quantitative analyses on a corpus of approximately 1,000 Italian novels and short story collections, including Italian translations from other languages, published between 1830 and 1930.\nThe corpus is carefully balanced to account for the distribution of authors and translators, gender, publication date, text length, and the distinction between canonical and non-canonical literature.\n\n\n\n\nRIND pursues two main research goals:\n\nAnalyzing how literary characters express thoughts and emotions, through quantitative and automatic extraction methods that capture pragma-linguistic phenomena emerging beyond the boundaries of words and sentences.\n\nTracing social change in Italian novels by exploring lexical fields related to professions, military ranks, religious titles, buildings (residential, commercial, industrial, religious, rural, urban, etc.), and other domains that reflect transformations in society.\n\nBoth objectives are innovative, as few studies have applied quantitative and computational methods to the analysis of reported discourse or to the periodization of Italian literary prose using criteria independent from traditional literary criticism.\nThe comparison between original Italian works and translations will also shed light on the influence of foreign models on Italian literary prose.\n\n\n\n\nThe project draws on three main disciplinary pillars:\n\nLinguistics, to identify morphological and syntactic features leading to pragmatic patterns and lexical lists, and to map their diachronic evolution across semantic domains.\n\nStatistics and Machine Learning, to classify texts through topic modeling, content analysis, word embeddings, time series extraction, and advanced data visualization techniques.\n\nLiterary and Comparative Studies, to interpret results within the historical and cultural contexts of Italian, European, and global literature from Realism to Modernism.\n\n\n\n\n\nBy integrating linguistic, literary, and statistical expertise, the RIND project seeks to provide both a theoretical and methodological contribution to the study of literary language and cultural evolution.\nIts results will enhance our understanding of how language and society co-evolved in Italian prose during a century of profound artistic and social transformation.\nVisit the project page: https://rind.units.it/home/"
+    "text": "Plot of Temporal Curves for Frequency Zones and Example Keywords\n\n\n\ncurveCtuPlot &lt;- (data,\n                 ctu_noun = NULL,\n                 r = 1,\n                 themety = \"light\",\n                 size_class = NULL,\n                 x_lab = \"year\")\n\n\n\nThe curveCtuPlot() function generates a temporal line plot of keyword frequencies, distinguishing between predefined frequency zones (e.g., high, medium, low) and highlighting three example keywords, each belonging to a different zone.\nIt supports both normalized and raw frequencies, with separate color scales for zones and example keywords.\nEach zone is labeled with its frequency interval, and the selected example keywords are displayed with distinct colors and a dedicated legend.\n\n\n\n\n\n\n\n\n\n\n\n\nArgument\nType\nDescription\n\n\n\n\ndata\nList\nA list containing the output of importData().\n\n\nctu_noun\nCharacter vector (length = 3)\nSpecifies three example keywords to highlight in the plot. Each must belong to a different frequency zone (high, medium, low).\n\n\nr\nInteger\nThinning rate for x-axis labels; displays one label every r years. Default: 1.\n\n\nthemety\nCharacter\nTheme type: \"light\" (default) or \"dark\". Affects plot colors and background.\n\n\nsize_class\nNumeric vector (length = 3)\nDefines line widths for the three zones. If NULL, default values are assigned depending on the theme.\n\n\nx_lab\nCharacter\nLabel for the x-axis. Default: \"year\".\n\n\n\n\n\n\n\nReturns a ggplot2 object displaying keyword frequency trajectories over time.\n\n\n\n\n\n\n\nElement\nDescription\n\n\n\n\nx-axis\nRepresents time (years).\n\n\ny-axis\nRepresents keyword frequency (raw or normalized).\n\n\nColors\nTwo scales: one for frequency zones, one for the example keywords.\n\n\nLine width\nReflects the relative frequency zone (high, medium, low).\n\n\nLegends\nTwo legends: one for frequency zones with intervals, one for highlighted example keywords.\n\n\nTheme\nAdjustable (“light” or “dark”) for improved readability."
   },
   {
-    "objectID": "rowMassPlot.html",
-    "href": "rowMassPlot.html",
-    "title": "rowMassPlot()",
+    "objectID": "singleFunctions/curveCtuPlot.html#function-definition",
+    "href": "singleFunctions/curveCtuPlot.html#function-definition",
+    "title": "curveCtuPlot()",
     "section": "",
-    "text": "Creates a bar plot of keywords ordered by their total frequency and colored by their assigned frequency zone, combining both the zone and its frequency interval label.\n\n\n\nrowMassPlot &lt;- (data)\n\n\n\nThe rowMassPlot() function generates a bar plot showing the total frequency of each keyword, colored according to its frequency zone and labeled by its interval.\nIt provides a visual summary of the distribution of term frequencies across zones, based on the output of importData().\n\n\n\n\n\n\n\n\n\n\n\n\nArgument\nType\nDescription\n\n\n\n\ndata\nList\nA list containing the output of importData(), including the processed term-document matrix (tdm) and related metadata.\n\n\n\n\n\n\n\nReturns a ggplot2 object representing a bar plot of total keyword frequencies grouped and colored by frequency zone.\n\n\n\n\n\n\n\nElement\nDescription\n\n\n\n\nx-axis\nKeywords ordered by total frequency.\n\n\ny-axis\nTotal frequency of each keyword.\n\n\nColors\nRepresent frequency zones and intervals (e.g., “VH [50–100]”, “L [5–10]”).\n\n\nLegend\nDisplayed at the bottom, showing the zone–interval combinations."
+    "text": "curveCtuPlot &lt;- (data,\n                 ctu_noun = NULL,\n                 r = 1,\n                 themety = \"light\",\n                 size_class = NULL,\n                 x_lab = \"year\")"
   },
   {
-    "objectID": "rowMassPlot.html#function-definition",
-    "href": "rowMassPlot.html#function-definition",
-    "title": "rowMassPlot()",
+    "objectID": "singleFunctions/curveCtuPlot.html#aim",
+    "href": "singleFunctions/curveCtuPlot.html#aim",
+    "title": "curveCtuPlot()",
     "section": "",
-    "text": "rowMassPlot &lt;- (data)"
+    "text": "The curveCtuPlot() function generates a temporal line plot of keyword frequencies, distinguishing between predefined frequency zones (e.g., high, medium, low) and highlighting three example keywords, each belonging to a different zone.\nIt supports both normalized and raw frequencies, with separate color scales for zones and example keywords.\nEach zone is labeled with its frequency interval, and the selected example keywords are displayed with distinct colors and a dedicated legend."
   },
   {
-    "objectID": "rowMassPlot.html#aim",
-    "href": "rowMassPlot.html#aim",
-    "title": "rowMassPlot()",
+    "objectID": "singleFunctions/curveCtuPlot.html#arguments",
+    "href": "singleFunctions/curveCtuPlot.html#arguments",
+    "title": "curveCtuPlot()",
     "section": "",
-    "text": "The rowMassPlot() function generates a bar plot showing the total frequency of each keyword, colored according to its frequency zone and labeled by its interval.\nIt provides a visual summary of the distribution of term frequencies across zones, based on the output of importData()."
+    "text": "Argument\nType\nDescription\n\n\n\n\ndata\nList\nA list containing the output of importData().\n\n\nctu_noun\nCharacter vector (length = 3)\nSpecifies three example keywords to highlight in the plot. Each must belong to a different frequency zone (high, medium, low).\n\n\nr\nInteger\nThinning rate for x-axis labels; displays one label every r years. Default: 1.\n\n\nthemety\nCharacter\nTheme type: \"light\" (default) or \"dark\". Affects plot colors and background.\n\n\nsize_class\nNumeric vector (length = 3)\nDefines line widths for the three zones. If NULL, default values are assigned depending on the theme.\n\n\nx_lab\nCharacter\nLabel for the x-axis. Default: \"year\"."
   },
   {
-    "objectID": "rowMassPlot.html#arguments",
-    "href": "rowMassPlot.html#arguments",
-    "title": "rowMassPlot()",
+    "objectID": "singleFunctions/curveCtuPlot.html#output",
+    "href": "singleFunctions/curveCtuPlot.html#output",
+    "title": "curveCtuPlot()",
     "section": "",
-    "text": "Argument\nType\nDescription\n\n\n\n\ndata\nList\nA list containing the output of importData(), including the processed term-document matrix (tdm) and related metadata."
+    "text": "Returns a ggplot2 object displaying keyword frequency trajectories over time.\n\n\n\n\n\n\n\nElement\nDescription\n\n\n\n\nx-axis\nRepresents time (years).\n\n\ny-axis\nRepresents keyword frequency (raw or normalized).\n\n\nColors\nTwo scales: one for frequency zones, one for the example keywords.\n\n\nLine width\nReflects the relative frequency zone (high, medium, low).\n\n\nLegends\nTwo legends: one for frequency zones with intervals, one for highlighted example keywords.\n\n\nTheme\nAdjustable (“light” or “dark”) for improved readability."
   },
   {
-    "objectID": "rowMassPlot.html#output",
-    "href": "rowMassPlot.html#output",
-    "title": "rowMassPlot()",
+    "objectID": "singleFunctions/facetPlot.html",
+    "href": "singleFunctions/facetPlot.html",
+    "title": "facetPlot()",
     "section": "",
-    "text": "Returns a ggplot2 object representing a bar plot of total keyword frequencies grouped and colored by frequency zone.\n\n\n\n\n\n\n\nElement\nDescription\n\n\n\n\nx-axis\nKeywords ordered by total frequency.\n\n\ny-axis\nTotal frequency of each keyword.\n\n\nColors\nRepresent frequency zones and intervals (e.g., “VH [50–100]”, “L [5–10]”).\n\n\nLegend\nDisplayed at the bottom, showing the zone–interval combinations."
+    "text": "Faceted Plot of Keyword Frequency Curves\n\n\n\nfacetPlot &lt;- (data, keyword_selection = list(type=\"frequency\", \n              n=3, kw.list=NULL),\n              r = 4, scales = \"fixed\", \n              leg = TRUE, \n              themety = \"light\",\n              size_class = NULL, \n              x_lab = \"year\")\n\n\n\nThe facetPlot() function produces a faceted visualization of keyword frequency trajectories over time, grouped by frequency zones (e.g., high, medium, low).\nIt allows users to highlight a subset of keywords either by highest frequency, random sampling, or custom selection, displaying them in distinct colors within each zone.\nEach facet corresponds to a frequency zone, enabling a clear comparative view of the temporal behavior of keywords across different frequency ranges.\n\n\n\n\n\n\n\n\n\n\n\n\nArgument\nType\nDescription\n\n\n\n\ndata\nList\nA list returned by importData(), containing the term-document matrix in long format and corpus metadata.\n\n\nkeyword_selection\nList\nSpecifies how keywords are selected for highlighting. Must include: • type — \"frequency\", \"random\", or \"list\" • n — Number of keywords per zone (for \"frequency\" or \"random\") • kw.list — Character vector of custom keywords (for \"list\").\n\n\nr\nInteger\nInterval for thinning x-axis year labels (e.g., show one label every r years). Default: 4.\n\n\nscales\nCharacter\nWhether y-axis scales are \"fixed\" (default) or \"free\" across facets.\n\n\nleg\nLogical\nWhether to display the legend. Default: TRUE.\n\n\nthemety\nCharacter\nTheme type. Either \"light\" (default) or \"dark\".\n\n\nsize_class\nNumeric vector\nOptional vector defining relative line thickness by zone. Defaults depend on the selected theme.\n\n\nx_lab\nCharacter\nLabel for the x-axis. Default: \"year\".\n\n\n\n\n\n\n\nReturns a ggplot2 object with faceted panels showing the temporal evolution of keyword frequencies.\n\n\n\n\n\n\n\nElement\nDescription\n\n\n\n\nFacets\nEach panel corresponds to a frequency zone (e.g., high, medium, low).\n\n\nHighlighted keywords\nSelected keywords are shown in distinct colors for easy identification.\n\n\nx-axis\nRepresents time (years). Labels can be thinned using r.\n\n\ny-axis\nRepresents keyword frequency (raw or normalized).\n\n\nLegend\nOptional; displays both zone and keyword colors.\n\n\nTheme\nAdjustable between light and dark modes."
+  },
+  {
+    "objectID": "singleFunctions/facetPlot.html#function-definition",
+    "href": "singleFunctions/facetPlot.html#function-definition",
+    "title": "facetPlot()",
+    "section": "",
+    "text": "facetPlot &lt;- (data, keyword_selection = list(type=\"frequency\", \n              n=3, kw.list=NULL),\n              r = 4, scales = \"fixed\", \n              leg = TRUE, \n              themety = \"light\",\n              size_class = NULL, \n              x_lab = \"year\")"
+  },
+  {
+    "objectID": "singleFunctions/facetPlot.html#aim",
+    "href": "singleFunctions/facetPlot.html#aim",
+    "title": "facetPlot()",
+    "section": "",
+    "text": "The facetPlot() function produces a faceted visualization of keyword frequency trajectories over time, grouped by frequency zones (e.g., high, medium, low).\nIt allows users to highlight a subset of keywords either by highest frequency, random sampling, or custom selection, displaying them in distinct colors within each zone.\nEach facet corresponds to a frequency zone, enabling a clear comparative view of the temporal behavior of keywords across different frequency ranges."
+  },
+  {
+    "objectID": "singleFunctions/facetPlot.html#arguments",
+    "href": "singleFunctions/facetPlot.html#arguments",
+    "title": "facetPlot()",
+    "section": "",
+    "text": "Argument\nType\nDescription\n\n\n\n\ndata\nList\nA list returned by importData(), containing the term-document matrix in long format and corpus metadata.\n\n\nkeyword_selection\nList\nSpecifies how keywords are selected for highlighting. Must include: • type — \"frequency\", \"random\", or \"list\" • n — Number of keywords per zone (for \"frequency\" or \"random\") • kw.list — Character vector of custom keywords (for \"list\").\n\n\nr\nInteger\nInterval for thinning x-axis year labels (e.g., show one label every r years). Default: 4.\n\n\nscales\nCharacter\nWhether y-axis scales are \"fixed\" (default) or \"free\" across facets.\n\n\nleg\nLogical\nWhether to display the legend. Default: TRUE.\n\n\nthemety\nCharacter\nTheme type. Either \"light\" (default) or \"dark\".\n\n\nsize_class\nNumeric vector\nOptional vector defining relative line thickness by zone. Defaults depend on the selected theme.\n\n\nx_lab\nCharacter\nLabel for the x-axis. Default: \"year\"."
+  },
+  {
+    "objectID": "singleFunctions/facetPlot.html#output",
+    "href": "singleFunctions/facetPlot.html#output",
+    "title": "facetPlot()",
+    "section": "",
+    "text": "Returns a ggplot2 object with faceted panels showing the temporal evolution of keyword frequencies.\n\n\n\n\n\n\n\nElement\nDescription\n\n\n\n\nFacets\nEach panel corresponds to a frequency zone (e.g., high, medium, low).\n\n\nHighlighted keywords\nSelected keywords are shown in distinct colors for easy identification.\n\n\nx-axis\nRepresents time (years). Labels can be thinned using r.\n\n\ny-axis\nRepresents keyword frequency (raw or normalized).\n\n\nLegend\nOptional; displays both zone and keyword colors.\n\n\nTheme\nAdjustable between light and dark modes."
+  },
+  {
+    "objectID": "singleFunctions/normalization.html",
+    "href": "singleFunctions/normalization.html",
+    "title": "normalization()",
+    "section": "",
+    "text": "Normalize Term-Document Matrix (TDM)\n\n\n\nnormalization &lt;- (data,\n                  normty = \"nc\",\n                  sc = 1000,\n                  nnlty = \"V\",\n                  p_asy = TRUE)\n\n\n\nThe normalization() function standardizes the term-document matrix (TDM) contained within the object returned by importData(), applying one of several normalization strategies.\nThese methods transform raw keyword frequencies to allow for more meaningful comparison across documents or time periods.\nDepending on the chosen method, normalization can be performed column-wise, row-wise, or using non-linear transformations that account for asymmetry and variance.\nAvailable normalization types:\n\n\"nc\" – column-wise normalization by corpus size (tokens per year).\n\n\"nchi\" – chi-square-like normalization based on row masses and expected frequencies.\n\n\"nM\" – normalization by maximum frequency per row.\n\n\"nmM\" – row-wise min–max normalization.\n\n\"nnl\" – non-linear normalization using asymmetry factors (variance- or mean-median–based).\n\n\n\n\n\n\n\n\n\n\n\n\n\nArgument\nType\nDescription\n\n\n\n\ndata\nList\nA list returned by importData(), containing the term-document matrix (tdm) and corpus information.\n\n\nnormty\nCharacter\nType of normalization to apply. One of \"nc\", \"nchi\", \"nM\", \"nmM\", or \"nnl\".\n\n\nsc\nNumeric\nScaling factor applied after normalization. Default: 1000 for \"nc\" and \"nM\", otherwise 1.\n\n\nnnlty\nCharacter\nIf normty = \"nnl\", defines the asymmetry measure: \"V\" (variance-based) or \"M\" (mean–median–based). Default: \"V\".\n\n\np_asy\nLogical\nIf TRUE (default) and normty = \"nnl\", includes the numeric vector p_asy with the asymmetry coefficients used for the transformation.\n\n\n\n\n\n\n\nReturns a list identical in structure to the input data, with the following updates:\n\n\n\n\n\n\n\nElement\nDescription\n\n\n\n\ntdm\nNormalized term-document matrix.\n\n\nnorm\nLogical flag set to TRUE to indicate that normalization has been applied.\n\n\nnormty\nCharacter. The normalization type used.\n\n\np_asy\n(Optional) Numeric vector of asymmetry parameters, included only when normty = \"nnl\" and p_asy = TRUE."
+  },
+  {
+    "objectID": "singleFunctions/normalization.html#function-definition",
+    "href": "singleFunctions/normalization.html#function-definition",
+    "title": "normalization()",
+    "section": "",
+    "text": "normalization &lt;- (data,\n                  normty = \"nc\",\n                  sc = 1000,\n                  nnlty = \"V\",\n                  p_asy = TRUE)"
+  },
+  {
+    "objectID": "singleFunctions/normalization.html#aim",
+    "href": "singleFunctions/normalization.html#aim",
+    "title": "normalization()",
+    "section": "",
+    "text": "The normalization() function standardizes the term-document matrix (TDM) contained within the object returned by importData(), applying one of several normalization strategies.\nThese methods transform raw keyword frequencies to allow for more meaningful comparison across documents or time periods.\nDepending on the chosen method, normalization can be performed column-wise, row-wise, or using non-linear transformations that account for asymmetry and variance.\nAvailable normalization types:\n\n\"nc\" – column-wise normalization by corpus size (tokens per year).\n\n\"nchi\" – chi-square-like normalization based on row masses and expected frequencies.\n\n\"nM\" – normalization by maximum frequency per row.\n\n\"nmM\" – row-wise min–max normalization.\n\n\"nnl\" – non-linear normalization using asymmetry factors (variance- or mean-median–based)."
+  },
+  {
+    "objectID": "singleFunctions/normalization.html#arguments",
+    "href": "singleFunctions/normalization.html#arguments",
+    "title": "normalization()",
+    "section": "",
+    "text": "Argument\nType\nDescription\n\n\n\n\ndata\nList\nA list returned by importData(), containing the term-document matrix (tdm) and corpus information.\n\n\nnormty\nCharacter\nType of normalization to apply. One of \"nc\", \"nchi\", \"nM\", \"nmM\", or \"nnl\".\n\n\nsc\nNumeric\nScaling factor applied after normalization. Default: 1000 for \"nc\" and \"nM\", otherwise 1.\n\n\nnnlty\nCharacter\nIf normty = \"nnl\", defines the asymmetry measure: \"V\" (variance-based) or \"M\" (mean–median–based). Default: \"V\".\n\n\np_asy\nLogical\nIf TRUE (default) and normty = \"nnl\", includes the numeric vector p_asy with the asymmetry coefficients used for the transformation."
+  },
+  {
+    "objectID": "singleFunctions/normalization.html#output",
+    "href": "singleFunctions/normalization.html#output",
+    "title": "normalization()",
+    "section": "",
+    "text": "Returns a list identical in structure to the input data, with the following updates:\n\n\n\n\n\n\n\nElement\nDescription\n\n\n\n\ntdm\nNormalized term-document matrix.\n\n\nnorm\nLogical flag set to TRUE to indicate that normalization has been applied.\n\n\nnormty\nCharacter. The normalization type used.\n\n\np_asy\n(Optional) Numeric vector of asymmetry parameters, included only when normty = \"nnl\" and p_asy = TRUE."
+  },
+  {
+    "objectID": "singleFunctions/plotSuboptimalFits.html",
+    "href": "singleFunctions/plotSuboptimalFits.html",
+    "title": "plotSuboptimalFits()",
+    "section": "",
+    "text": "Plot Suboptimal Smoothed Curves for Selected Keywords\n\n\n\nplotSuboptimalFits &lt;- (data,\n                       opt_res,\n                       n_curves = 9,\n                       show_zone = FALSE,\n                       graph = FALSE)\n\n\n\nThe plotSuboptimalFits() function visualizes raw and smoothed temporal curves of keyword frequencies obtained from spline smoothing.\nIt selects a subset of keywords based on the Root Mean Square (RMS) residuals of the smoothed fits and displays both individual and combined plots to assess the variability of smoothing performance across terms.\nEach plot compares the raw frequency trend (dashed line) and its smoothed version (solid line), highlighting how well the smoothing captures the temporal dynamics of the keyword.\n\n\n\n\n\n\n\n\n\n\n\n\nArgument\nType\nDescription\n\n\n\n\ndata\nList\nA list returned by importData(), containing the term-document matrix and metadata.\n\n\nopt_res\nList\nThe optimal smoothing configuration returned by optimalSmoothing(), including spline degree and penalization type.\n\n\nn_curves\nInteger\nNumber of keywords to visualize, sampled across the RMS residual distribution. Default: 9.\n\n\nshow_zone\nLogical\nIf TRUE, adds the keyword’s frequency zone (if available) to the plot labels. Default: FALSE.\n\n\ngraph\nLogical\nIf TRUE, prints all individual and combined plots directly to the active R graphics device. Default: FALSE.\n\n\n\n\n\n\n\nReturns (invisibly) a list containing all generated plots.\n\n\n\n\n\n\n\nElement\nDescription\n\n\n\n\nsingleKeywordPlot\nA list of ggplot2 objects, one for each selected keyword, including raw and smoothed curves with full titles.\n\n\ncombinedKeywordPlot\nA combined patchwork layout displaying all selected keyword fits in a grid (default: 3 columns).\n\n\n\n\n\n\n\nThe function extracts the smoothed spline fits using the optimal configuration from optimalSmoothing().\n\nFor each keyword, it computes the residual RMS error and selects representative terms distributed across the RMS range.\n\nBoth individual and aggregated visualizations are produced, showing:\n\nThe raw term frequency curve (grey dashed line);\nThe smoothed spline fit (red solid line);\nOptional zone information (if show_zone = TRUE).\n\n\nThese plots allow users to evaluate suboptimal smoothing behavior and identify potential inconsistencies or overfitting in the temporal modeling process."
+  },
+  {
+    "objectID": "singleFunctions/plotSuboptimalFits.html#function-definition",
+    "href": "singleFunctions/plotSuboptimalFits.html#function-definition",
+    "title": "plotSuboptimalFits()",
+    "section": "",
+    "text": "plotSuboptimalFits &lt;- (data,\n                       opt_res,\n                       n_curves = 9,\n                       show_zone = FALSE,\n                       graph = FALSE)"
+  },
+  {
+    "objectID": "singleFunctions/plotSuboptimalFits.html#aim",
+    "href": "singleFunctions/plotSuboptimalFits.html#aim",
+    "title": "plotSuboptimalFits()",
+    "section": "",
+    "text": "The plotSuboptimalFits() function visualizes raw and smoothed temporal curves of keyword frequencies obtained from spline smoothing.\nIt selects a subset of keywords based on the Root Mean Square (RMS) residuals of the smoothed fits and displays both individual and combined plots to assess the variability of smoothing performance across terms.\nEach plot compares the raw frequency trend (dashed line) and its smoothed version (solid line), highlighting how well the smoothing captures the temporal dynamics of the keyword."
+  },
+  {
+    "objectID": "singleFunctions/plotSuboptimalFits.html#arguments",
+    "href": "singleFunctions/plotSuboptimalFits.html#arguments",
+    "title": "plotSuboptimalFits()",
+    "section": "",
+    "text": "Argument\nType\nDescription\n\n\n\n\ndata\nList\nA list returned by importData(), containing the term-document matrix and metadata.\n\n\nopt_res\nList\nThe optimal smoothing configuration returned by optimalSmoothing(), including spline degree and penalization type.\n\n\nn_curves\nInteger\nNumber of keywords to visualize, sampled across the RMS residual distribution. Default: 9.\n\n\nshow_zone\nLogical\nIf TRUE, adds the keyword’s frequency zone (if available) to the plot labels. Default: FALSE.\n\n\ngraph\nLogical\nIf TRUE, prints all individual and combined plots directly to the active R graphics device. Default: FALSE."
+  },
+  {
+    "objectID": "singleFunctions/plotSuboptimalFits.html#output",
+    "href": "singleFunctions/plotSuboptimalFits.html#output",
+    "title": "plotSuboptimalFits()",
+    "section": "",
+    "text": "Returns (invisibly) a list containing all generated plots.\n\n\n\n\n\n\n\nElement\nDescription\n\n\n\n\nsingleKeywordPlot\nA list of ggplot2 objects, one for each selected keyword, including raw and smoothed curves with full titles.\n\n\ncombinedKeywordPlot\nA combined patchwork layout displaying all selected keyword fits in a grid (default: 3 columns).\n\n\n\n\n\n\n\nThe function extracts the smoothed spline fits using the optimal configuration from optimalSmoothing().\n\nFor each keyword, it computes the residual RMS error and selects representative terms distributed across the RMS range.\n\nBoth individual and aggregated visualizations are produced, showing:\n\nThe raw term frequency curve (grey dashed line);\nThe smoothed spline fit (red solid line);\nOptional zone information (if show_zone = TRUE).\n\n\nThese plots allow users to evaluate suboptimal smoothing behavior and identify potential inconsistencies or overfitting in the temporal modeling process."
+  },
+  {
+    "objectID": "singleFunctions/smoothingSelection.html",
+    "href": "singleFunctions/smoothingSelection.html",
+    "title": "smoothingSelection()",
+    "section": "",
+    "text": "Selection of Optimal Smoothing Parameters for Chronological Keyword Curves\n\n\n\nsmoothingSelection &lt;- (data,\n                       lambda_seq = NULL,\n                       degrees = NULL,\n                       penalty_type = \"m-2\",\n                       normty = NULL,\n                       plot = TRUE,\n                       verbose = TRUE)\n\n\n\nThe smoothingSelection() function identifies optimal smoothing parameters for chronological keyword frequency curves by fitting penalized B-spline smoothing splines.\nIt systematically evaluates combinations of spline degrees (m) and smoothing parameters (λ), under different penalty types, to find the configuration that best balances smoothness and fidelity to the data.\nFor each configuration, the function computes diagnostic criteria including:\n\ndf – Degrees of Freedom\n\nsse – Sum of Squared Errors\n\ngcv – Generalized Cross-Validation\n\nocv – Ordinary Cross-Validation\n\nIt returns full diagnostic results, the best parameter combinations for each degree, and optional visual plots for interpretation.\n\n\n\n\n\n\n\n\n\n\n\n\nArgument\nType\nDescription\n\n\n\n\ndata\nList\nA list returned by importData(), containing the term-document matrix, corpus information, and year columns.\n\n\nlambda_seq\nNumeric vector\nSequence of log10(λ) values to evaluate. Default: seq(-6, 9, 0.25).\n\n\ndegrees\nInteger vector\nRange of B-spline degrees (m) to test. Default: 1:8.\n\n\npenalty_type\nCharacter\nType of penalization applied: • \"m-2\" – penalize the (m−2)-th derivative (default) • \"2\" – penalize the second derivative (if m &gt; 3) • \"1\" – penalize the first derivative (if m &gt; 2) • \"0\" – no penalization.\n\n\nnormty\nCharacter (optional)\nLabel for the normalization method applied to the TDM (used for reporting).\n\n\nplot\nLogical\nIf TRUE (default), produces diagnostic plots for df, sse, gcv, and ocv.\n\n\nverbose\nLogical\nIf TRUE (default), prints progress messages for each spline degree.\n\n\n\n\n\n\n\nReturns a list containing detailed smoothing diagnostics, optimal parameter selections, and optional plots.\n\n\n\n\n\n\n\nElement\nDescription\n\n\n\n\nresults\nFull grid of evaluated (m, λ) combinations with diagnostics (df, sse, gcv, ocv).\n\n\nsummary_optimal\nSummary table of optimal GCV and OCV values for each spline degree.\n\n\noptimal_gcv\nSubset of results containing λ values that minimize GCV for each degree.\n\n\noptimal_ocv\nSubset of results containing λ values that minimize OCV for each degree.\n\n\nplots\n(Optional) A list of ggplot2 objects showing the evolution of df, sse, gcv, and ocv across λ.\n\n\nsummary_panel\nGraphical summary (grob) combining optimal smoothing information.\n\n\ndegree\nNumeric value of the current spline degree m.\n\n\npenalty_type\nCharacter string specifying the penalization type used.\n\n\ncall\nThe matched function call for reproducibility."
+  },
+  {
+    "objectID": "singleFunctions/smoothingSelection.html#function-definition",
+    "href": "singleFunctions/smoothingSelection.html#function-definition",
+    "title": "smoothingSelection()",
+    "section": "",
+    "text": "smoothingSelection &lt;- (data,\n                       lambda_seq = NULL,\n                       degrees = NULL,\n                       penalty_type = \"m-2\",\n                       normty = NULL,\n                       plot = TRUE,\n                       verbose = TRUE)"
+  },
+  {
+    "objectID": "singleFunctions/smoothingSelection.html#aim",
+    "href": "singleFunctions/smoothingSelection.html#aim",
+    "title": "smoothingSelection()",
+    "section": "",
+    "text": "The smoothingSelection() function identifies optimal smoothing parameters for chronological keyword frequency curves by fitting penalized B-spline smoothing splines.\nIt systematically evaluates combinations of spline degrees (m) and smoothing parameters (λ), under different penalty types, to find the configuration that best balances smoothness and fidelity to the data.\nFor each configuration, the function computes diagnostic criteria including:\n\ndf – Degrees of Freedom\n\nsse – Sum of Squared Errors\n\ngcv – Generalized Cross-Validation\n\nocv – Ordinary Cross-Validation\n\nIt returns full diagnostic results, the best parameter combinations for each degree, and optional visual plots for interpretation."
+  },
+  {
+    "objectID": "singleFunctions/smoothingSelection.html#arguments",
+    "href": "singleFunctions/smoothingSelection.html#arguments",
+    "title": "smoothingSelection()",
+    "section": "",
+    "text": "Argument\nType\nDescription\n\n\n\n\ndata\nList\nA list returned by importData(), containing the term-document matrix, corpus information, and year columns.\n\n\nlambda_seq\nNumeric vector\nSequence of log10(λ) values to evaluate. Default: seq(-6, 9, 0.25).\n\n\ndegrees\nInteger vector\nRange of B-spline degrees (m) to test. Default: 1:8.\n\n\npenalty_type\nCharacter\nType of penalization applied: • \"m-2\" – penalize the (m−2)-th derivative (default) • \"2\" – penalize the second derivative (if m &gt; 3) • \"1\" – penalize the first derivative (if m &gt; 2) • \"0\" – no penalization.\n\n\nnormty\nCharacter (optional)\nLabel for the normalization method applied to the TDM (used for reporting).\n\n\nplot\nLogical\nIf TRUE (default), produces diagnostic plots for df, sse, gcv, and ocv.\n\n\nverbose\nLogical\nIf TRUE (default), prints progress messages for each spline degree."
+  },
+  {
+    "objectID": "singleFunctions/smoothingSelection.html#output",
+    "href": "singleFunctions/smoothingSelection.html#output",
+    "title": "smoothingSelection()",
+    "section": "",
+    "text": "Returns a list containing detailed smoothing diagnostics, optimal parameter selections, and optional plots.\n\n\n\n\n\n\n\nElement\nDescription\n\n\n\n\nresults\nFull grid of evaluated (m, λ) combinations with diagnostics (df, sse, gcv, ocv).\n\n\nsummary_optimal\nSummary table of optimal GCV and OCV values for each spline degree.\n\n\noptimal_gcv\nSubset of results containing λ values that minimize GCV for each degree.\n\n\noptimal_ocv\nSubset of results containing λ values that minimize OCV for each degree.\n\n\nplots\n(Optional) A list of ggplot2 objects showing the evolution of df, sse, gcv, and ocv across λ.\n\n\nsummary_panel\nGraphical summary (grob) combining optimal smoothing information.\n\n\ndegree\nNumeric value of the current spline degree m.\n\n\npenalty_type\nCharacter string specifying the penalization type used.\n\n\ncall\nThe matched function call for reproducibility."
   }
 ]

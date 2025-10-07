@@ -1,15 +1,11 @@
 ---
-title: ""
+title: "Function Reference"
 page-layout: full
 
 ---
 
-# Function Reference
-
 Below is the list of available functions in the **cccc** package.  
 Click on each function name to access its documentation.
-
-<br>
 
 ```{=html}
 <table style="width:100%; border-collapse:collapse; border:none;">
@@ -21,34 +17,46 @@ Click on each function name to access its documentation.
   </thead>
   <tbody>
     <tr>
-      <td style="padding:8px;"><a href="importData.html"><code>importData()</code></a></td>
+      <td style="padding:8px;"><a href="singleFunctions/importData.html"><code>importData()</code></a></td>
       <td style="padding:8px;">Imports and validates corpus data and metadata into a standardized structure.</td>
     </tr>
     <tr>
-      <td style="padding:8px;"><a href="rowMassPlot.html"><code>rowMassPlot()</code></a></td>
+      <td style="padding:8px;"><a href="singleFunctions/rowMassPlot.html"><code>rowMassPlot()</code></a></td>
       <td style="padding:8px;">Creates a bar plot of keywords ordered by their total frequency
 #' and colored by their assigned frequency zone, combining both the zone
 #' and its frequency interval label.</td>
     </tr>
     <tr>
-      <td style="padding:8px;"><a href="colMassPlot.html"><code>colMassPlot()</code></a></td>
+      <td style="padding:8px;"><a href="singleFunctions/colMassPlot.html"><code>colMassPlot()</code></a></td>
       <td style="padding:8px;">Plot Temporal Dimensions of a Corpus.</td>
     </tr>
     <tr>
-      <td style="padding:8px;"><a href="curvePlot.html"><code>curvePlot()</code></a></td>
+      <td style="padding:8px;"><a href="singleFunctions/curvePlot.html"><code>curvePlot()</code></a></td>
       <td style="padding:8px;">Plot Temporal Curves of Keyword Frequencies.</td>
     </tr>
     <tr>
-      <td style="padding:8px;"><a href="curveCtuPlot.html"><code>curveCtuPlot()</code></a></td>
+      <td style="padding:8px;"><a href="singleFunctions/curveCtuPlot.html"><code>curveCtuPlot()</code></a></td>
       <td style="padding:8px;">Plot of Temporal Curves for Frequency Zones and Example Keywords.</td>
     </tr>
     <tr>
-      <td style="padding:8px;"><a href="normalization.html"><code>normalization()</code></a></td>
+      <td style="padding:8px;"><a href="singleFunctions/normalization.html"><code>normalization()</code></a></td>
       <td style="padding:8px;">Normalize Term-Document Matrix (TDM).</td>
     </tr>
     <tr>
-      <td style="padding:8px;"><a href="facetPlot.html"><code>facetPlot()</code></a></td>
+      <td style="padding:8px;"><a href="singleFunctions/facetPlot.html"><code>facetPlot()</code></a></td>
       <td style="padding:8px;">Faceted Plot of Keyword Frequency Curves.</td>
+    </tr>
+    <tr>
+      <td style="padding:8px;"><a href="singleFunctions/smoothingSelection.html"><code>smoothingSelection()</code></a></td>
+      <td style="padding:8px;">Selection of Optimal Smoothing Parameters for Chronological Keyword Curves.</td>
+    </tr>
+    <tr>
+      <td style="padding:8px;"><a href="singleFunctions/optimalSmoothing.html"><code>optimalSmoothing()</code></a></td>
+      <td style="padding:8px;">Selection of Optimal Spline Degree and Penalization Strategy.</td>
+    </tr>
+    <tr>
+      <td style="padding:8px;"><a href="singleFunctions/plotSuboptimalFits.html"><code>plotSuboptimalFits()</code></a></td>
+      <td style="padding:8px;">Plot Suboptimal Smoothed Curves for Selected Keywords.</td>
     </tr>
   </tbody>
 </table>
