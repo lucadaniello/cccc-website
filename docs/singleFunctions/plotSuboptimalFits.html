@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>plotsuboptimalfits</title>
+<title>plotSuboptimalFits()</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -131,6 +131,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Functions</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="../download.html"> 
+<span class="menu-text">Download</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="../use-cases.html"> 
 <span class="menu-text">Use Cases</span></a>
   </li>  
@@ -164,44 +168,125 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#function-definition" id="toc-function-definition" class="nav-link active" data-scroll-target="#function-definition">🔹 Function Definition</a></li>
+  <li><a href="#purpose" id="toc-purpose" class="nav-link" data-scroll-target="#purpose">🎯 Purpose</a></li>
+  <li><a href="#how-it-works" id="toc-how-it-works" class="nav-link" data-scroll-target="#how-it-works">🧮 How It Works</a>
+  <ul class="collapse">
+  <li><a href="#rms-residual-sampling" id="toc-rms-residual-sampling" class="nav-link" data-scroll-target="#rms-residual-sampling">RMS Residual Sampling</a></li>
+  </ul></li>
+  <li><a href="#arguments" id="toc-arguments" class="nav-link" data-scroll-target="#arguments">⚙️ Arguments</a></li>
+  <li><a href="#output" id="toc-output" class="nav-link" data-scroll-target="#output">📦 Output</a></li>
+  <li><a href="#usage-examples" id="toc-usage-examples" class="nav-link" data-scroll-target="#usage-examples">💡 Usage Examples</a>
+  <ul class="collapse">
+  <li><a href="#basic-usage" id="toc-basic-usage" class="nav-link" data-scroll-target="#basic-usage">Basic Usage</a></li>
+  <li><a href="#show-individual-plots" id="toc-show-individual-plots" class="nav-link" data-scroll-target="#show-individual-plots">Show Individual Plots</a></li>
+  <li><a href="#include-zone-information" id="toc-include-zone-information" class="nav-link" data-scroll-target="#include-zone-information">Include Zone Information</a></li>
+  <li><a href="#morefewer-keywords" id="toc-morefewer-keywords" class="nav-link" data-scroll-target="#morefewer-keywords">More/Fewer Keywords</a></li>
+  </ul></li>
+  <li><a href="#interpreting-the-plots" id="toc-interpreting-the-plots" class="nav-link" data-scroll-target="#interpreting-the-plots">🔍 Interpreting the Plots</a>
+  <ul class="collapse">
+  <li><a href="#what-to-look-for" id="toc-what-to-look-for" class="nav-link" data-scroll-target="#what-to-look-for">What to Look For</a></li>
+  </ul></li>
+  <li><a href="#understanding-the-selection" id="toc-understanding-the-selection" class="nav-link" data-scroll-target="#understanding-the-selection">📊 Understanding the Selection</a>
+  <ul class="collapse">
+  <li><a href="#rms-distribution-sampling" id="toc-rms-distribution-sampling" class="nav-link" data-scroll-target="#rms-distribution-sampling">RMS Distribution Sampling</a></li>
+  <li><a href="#why-this-matters" id="toc-why-this-matters" class="nav-link" data-scroll-target="#why-this-matters">Why This Matters</a></li>
+  </ul></li>
+  <li><a href="#use-cases" id="toc-use-cases" class="nav-link" data-scroll-target="#use-cases">📈 Use Cases</a>
+  <ul class="collapse">
+  <li><a href="#quality-assurance" id="toc-quality-assurance" class="nav-link" data-scroll-target="#quality-assurance">1. <strong>Quality Assurance</strong></a></li>
+  <li><a href="#parameter-validation" id="toc-parameter-validation" class="nav-link" data-scroll-target="#parameter-validation">2. <strong>Parameter Validation</strong></a></li>
+  <li><a href="#method-comparison" id="toc-method-comparison" class="nav-link" data-scroll-target="#method-comparison">3. <strong>Method Comparison</strong></a></li>
+  <li><a href="#publication-figures" id="toc-publication-figures" class="nav-link" data-scroll-target="#publication-figures">4. <strong>Publication Figures</strong></a></li>
+  <li><a href="#identifying-outliers" id="toc-identifying-outliers" class="nav-link" data-scroll-target="#identifying-outliers">5. <strong>Identifying Outliers</strong></a></li>
+  <li><a href="#training-examples" id="toc-training-examples" class="nav-link" data-scroll-target="#training-examples">6. <strong>Training Examples</strong></a></li>
+  </ul></li>
+  <li><a href="#tips-best-practices" id="toc-tips-best-practices" class="nav-link" data-scroll-target="#tips-best-practices">💡 Tips &amp; Best Practices</a></li>
+  <li><a href="#see-also" id="toc-see-also" class="nav-link" data-scroll-target="#see-also">📚 See Also</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content column-page" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content column-page-left" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">plotSuboptimalFits()</h1>
+</div>
 
 
 
+<div class="quarto-title-meta column-page-left">
 
-<section id="plotsuboptimalfits" class="level1">
-<h1>plotSuboptimalFits()</h1>
-<p>Plot Suboptimal Smoothed Curves for Selected Keywords</p>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><strong>Visualize Smoothed Curves for Quality Assessment</strong></p>
+<p>The <code>plotSuboptimalFits()</code> function creates visual comparisons of raw and smoothed keyword frequency trajectories. It helps you assess how well your chosen smoothing parameters perform across different types of keywords in your corpus.</p>
 <hr>
 <section id="function-definition" class="level2">
 <h2 class="anchored" data-anchor-id="function-definition">🔹 Function Definition</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>plotSuboptimalFits <span class="ot">&lt;-</span> (data,</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>                       opt_res,</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">n_curves =</span> <span class="dv">9</span>,</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">show_zone =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>                       <span class="at">graph =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="aim" class="level2">
-<h2 class="anchored" data-anchor-id="aim">🎯 Aim</h2>
-<p>The <code>plotSuboptimalFits()</code> function visualizes <strong>raw and smoothed temporal curves</strong> of keyword frequencies obtained from spline smoothing.<br>
-It selects a subset of keywords based on the <strong>Root Mean Square (RMS)</strong> residuals of the smoothed fits and displays both individual and combined plots to assess the variability of smoothing performance across terms.</p>
-<p>Each plot compares the <strong>raw frequency trend</strong> (dashed line) and its <strong>smoothed version</strong> (solid line), highlighting how well the smoothing captures the temporal dynamics of the keyword.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotSuboptimalFits</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  data,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  opt_res,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_curves =</span> <span class="dv">9</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">show_zone =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">graph =</span> <span class="cn">FALSE</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <hr>
+</section>
+<section id="purpose" class="level2">
+<h2 class="anchored" data-anchor-id="purpose">🎯 Purpose</h2>
+<p>After selecting optimal smoothing parameters with <code>optimalSmoothing()</code>, it’s crucial to <strong>visually validate</strong> that the smoothing works well across your entire corpus. This function helps you:</p>
+<ol type="1">
+<li><strong>Assess smoothing quality</strong> — See how well smoothed curves capture underlying trends</li>
+<li><strong>Detect overfitting/undersmoothing</strong> — Identify cases where smoothing is too aggressive or too weak</li>
+<li><strong>Evaluate representativeness</strong> — Check performance across different keyword types</li>
+<li><strong>Compare raw vs.&nbsp;smoothed</strong> — Understand what information is retained vs.&nbsp;filtered</li>
+<li><strong>Identify problematic cases</strong> — Find keywords that may need special treatment</li>
+<li><strong>Build confidence</strong> — Validate that parameters work well before applying to full corpus</li>
+<li><strong>Create publication figures</strong> — Generate high-quality visualizations of smoothing results</li>
+</ol>
+<p>The function intelligently samples keywords across the <strong>residual distribution</strong> to show a representative range of smoothing performance.</p>
+<hr>
+</section>
+<section id="how-it-works" class="level2">
+<h2 class="anchored" data-anchor-id="how-it-works">🧮 How It Works</h2>
+<section id="rms-residual-sampling" class="level3">
+<h3 class="anchored" data-anchor-id="rms-residual-sampling">RMS Residual Sampling</h3>
+<p>The function computes <strong>Root Mean Square (RMS)</strong> residuals for all keywords:</p>
+<pre><code>RMS = √(Σ(observed - smoothed)² / n)</code></pre>
+<p>Then selects <code>n_curves</code> keywords distributed across the RMS range: - <strong>Low RMS</strong>: Keywords where smoothing fits very well - <strong>Medium RMS</strong>: Typical smoothing performance - <strong>High RMS</strong>: Keywords with more complex patterns or poor fits</p>
+<p>This ensures you see the <strong>full spectrum</strong> of smoothing behavior, not just the best cases.</p>
+<hr>
+</section>
 </section>
 <section id="arguments" class="level2">
 <h2 class="anchored" data-anchor-id="arguments">⚙️ Arguments</h2>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 36%">
-<col style="width: 20%">
-<col style="width: 43%">
+<col style="width: 26%">
+<col style="width: 15%">
+<col style="width: 23%">
+<col style="width: 34%">
 </colgroup>
 <thead>
 <tr class="header">
 <th>Argument</th>
 <th>Type</th>
+<th>Default</th>
 <th>Description</th>
 </tr>
 </thead>
@@ -209,27 +294,32 @@ It selects a subset of keywords based on the <strong>Root Mean Square (RMS)</str
 <tr class="odd">
 <td><strong>data</strong></td>
 <td>List</td>
-<td>A list returned by <code>importData()</code>, containing the term-document matrix and metadata.</td>
+<td><em>required</em></td>
+<td>A list object returned by <code>importData()</code> or <code>normalization()</code>, containing the TDM and corpus metadata.</td>
 </tr>
 <tr class="even">
 <td><strong>opt_res</strong></td>
 <td>List</td>
-<td>The optimal smoothing configuration returned by <code>optimalSmoothing()</code>, including spline degree and penalization type.</td>
+<td><em>required</em></td>
+<td>The optimal smoothing configuration returned by <code>optimalSmoothing()</code>, including spline degree (<code>m_opt</code>), penalty type (<code>penalty_opt</code>), and lambda (<code>lambda_opt</code>).</td>
 </tr>
 <tr class="odd">
 <td><strong>n_curves</strong></td>
 <td>Integer</td>
-<td>Number of keywords to visualize, sampled across the RMS residual distribution. Default: <code>9</code>.</td>
+<td><code>9</code></td>
+<td>Number of keywords to visualize. Must be a perfect square for optimal grid layout (e.g., 4, 9, 16, 25).</td>
 </tr>
 <tr class="even">
 <td><strong>show_zone</strong></td>
 <td>Logical</td>
-<td>If <code>TRUE</code>, adds the keyword’s frequency zone (if available) to the plot labels. Default: <code>FALSE</code>.</td>
+<td><code>FALSE</code></td>
+<td>If <code>TRUE</code>, includes the keyword’s frequency zone in plot titles (e.g., “algorithm [Zone 4]”).</td>
 </tr>
 <tr class="odd">
 <td><strong>graph</strong></td>
 <td>Logical</td>
-<td>If <code>TRUE</code>, prints all individual and combined plots directly to the active R graphics device. Default: <code>FALSE</code>.</td>
+<td><code>FALSE</code></td>
+<td>If <code>TRUE</code>, displays plots immediately in the R graphics device. If <code>FALSE</code> (default), plots are returned invisibly and can be accessed from the output list.</td>
 </tr>
 </tbody>
 </table>
@@ -237,49 +327,222 @@ It selects a subset of keywords based on the <strong>Root Mean Square (RMS)</str
 </section>
 <section id="output" class="level2">
 <h2 class="anchored" data-anchor-id="output">📦 Output</h2>
-<p>Returns (invisibly) a <strong>list</strong> containing all generated plots.</p>
+<p>Returns (invisibly) a <strong>list</strong> containing visualization objects:</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 43%">
-<col style="width: 56%">
+<col style="width: 32%">
+<col style="width: 21%">
+<col style="width: 46%">
 </colgroup>
 <thead>
 <tr class="header">
 <th>Element</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td><strong>singleKeywordPlot</strong></td>
-<td>A list of <code>ggplot2</code> objects, one for each selected keyword, including raw and smoothed curves with full titles.</td>
+<td>list</td>
+<td>A list of individual <code>ggplot2</code> objects, one for each selected keyword. Each plot shows raw (dashed) and smoothed (solid) curves with keyword name in title.</td>
 </tr>
 <tr class="even">
 <td><strong>combinedKeywordPlot</strong></td>
-<td>A combined <code>patchwork</code> layout displaying all selected keyword fits in a grid (default: 3 columns).</td>
+<td>patchwork</td>
+<td>A combined grid layout displaying all selected keyword plots together. Uses <code>patchwork</code> package for arrangement.</td>
 </tr>
 </tbody>
 </table>
+<p><strong>Plot characteristics:</strong> - <strong>Grey dashed line</strong>: Raw frequency trajectory - <strong>Red solid line</strong>: Smoothed spline fit - <strong>X-axis</strong>: Time periods (years) - <strong>Y-axis</strong>: Frequency (raw or normalized, depending on input data) - <strong>Title</strong>: Keyword name (and zone if <code>show_zone = TRUE</code>)</p>
 <hr>
-<section id="details" class="level3">
-<h3 class="anchored" data-anchor-id="details">🧩 Details</h3>
+</section>
+<section id="usage-examples" class="level2">
+<h2 class="anchored" data-anchor-id="usage-examples">💡 Usage Examples</h2>
+<section id="basic-usage" class="level3">
+<h3 class="anchored" data-anchor-id="basic-usage">Basic Usage</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cccc)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Complete workflow</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>corpus <span class="ot">&lt;-</span> <span class="fu">importData</span>(<span class="st">"tdm.csv"</span>, <span class="st">"corpus_info.csv"</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>corpus_norm <span class="ot">&lt;-</span> <span class="fu">normalization</span>(corpus, <span class="at">normty =</span> <span class="st">"nc"</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Find optimal parameters</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>smooth_m2 <span class="ot">&lt;-</span> <span class="fu">smoothingSelection</span>(corpus_norm, <span class="at">penalty_type =</span> <span class="st">"m-2"</span>, <span class="at">plot =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>smooth_2 <span class="ot">&lt;-</span> <span class="fu">smoothingSelection</span>(corpus_norm, <span class="at">penalty_type =</span> <span class="st">"2"</span>, <span class="at">plot =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>optimal <span class="ot">&lt;-</span> <span class="fu">optimalSmoothing</span>(<span class="fu">list</span>(<span class="st">"m-2"</span> <span class="ot">=</span> smooth_m2, <span class="st">"2"</span> <span class="ot">=</span> smooth_2))</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize smoothing quality</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>fits <span class="ot">&lt;-</span> <span class="fu">plotSuboptimalFits</span>(corpus_norm, optimal)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Display combined plot</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>fits<span class="sc">$</span>combinedKeywordPlot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="show-individual-plots" class="level3">
+<h3 class="anchored" data-anchor-id="show-individual-plots">Show Individual Plots</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create plots</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>fits <span class="ot">&lt;-</span> <span class="fu">plotSuboptimalFits</span>(corpus_norm, optimal, <span class="at">n_curves =</span> <span class="dv">9</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># View first individual plot</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>fits<span class="sc">$</span>singleKeywordPlot[[<span class="dv">1</span>]]</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># View specific keyword plot</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>fits<span class="sc">$</span>singleKeywordPlot[[<span class="dv">5</span>]]</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Save individual plots</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"keyword1_fit.png"</span>, fits<span class="sc">$</span>singleKeywordPlot[[<span class="dv">1</span>]], <span class="at">width =</span> <span class="dv">8</span>, <span class="at">height =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="include-zone-information" class="level3">
+<h3 class="anchored" data-anchor-id="include-zone-information">Include Zone Information</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add frequency zone to titles</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>fits <span class="ot">&lt;-</span> <span class="fu">plotSuboptimalFits</span>(</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  corpus_norm, </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  optimal, </span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_curves =</span> <span class="dv">9</span>,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">show_zone =</span> <span class="cn">TRUE</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Now titles show: "algorithm [Zone 4]"</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>fits<span class="sc">$</span>combinedKeywordPlot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="morefewer-keywords" class="level3">
+<h3 class="anchored" data-anchor-id="morefewer-keywords">More/Fewer Keywords</h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show 4 keywords (2×2 grid)</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>fits_small <span class="ot">&lt;-</span> <span class="fu">plotSuboptimalFits</span>(corpus_norm, optimal, <span class="at">n_curves =</span> <span class="dv">4</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Show 16 keywords (4×4 grid)</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>fits_large <span class="ot">&lt;-</span> <span class="fu">plotSuboptimalFits</span>(corpus_norm, optimal, <span class="at">n_curves =</span> <span class="dv">16</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Show 25 keywords (5×5 grid)</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>fits_xlarge <span class="ot">&lt;-</span> <span class="fu">plotSuboptimalFits</span>(corpus_norm, optimal, <span class="at">n_curves =</span> <span class="dv">25</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<hr>
+</section>
+</section>
+<section id="interpreting-the-plots" class="level2">
+<h2 class="anchored" data-anchor-id="interpreting-the-plots">🔍 Interpreting the Plots</h2>
+<section id="what-to-look-for" class="level3">
+<h3 class="anchored" data-anchor-id="what-to-look-for">What to Look For</h3>
+<section id="good-smoothing" class="level4">
+<h4 class="anchored" data-anchor-id="good-smoothing">✅ <strong>Good Smoothing</strong></h4>
+<pre><code>Raw:     • • •  •  •
+           ╱╲  ╱╲
+Smooth: ─────────────  (captures trend, reduces noise)</code></pre>
 <ul>
-<li>The function extracts the smoothed spline fits using the optimal configuration from <code>optimalSmoothing()</code>.<br>
-</li>
-<li>For each keyword, it computes the <strong>residual RMS</strong> error and selects representative terms distributed across the RMS range.<br>
-</li>
-<li>Both <strong>individual</strong> and <strong>aggregated</strong> visualizations are produced, showing:
-<ul>
-<li>The raw term frequency curve (grey dashed line);</li>
-<li>The smoothed spline fit (red solid line);</li>
-<li>Optional zone information (if <code>show_zone = TRUE</code>).</li>
-</ul></li>
+<li>Smoothed curve follows general trend</li>
+<li>Reduces noise without losing important features</li>
+<li>No systematic bias (doesn’t consistently over/underestimate)</li>
 </ul>
-<p>These plots allow users to evaluate suboptimal smoothing behavior and identify potential inconsistencies or overfitting in the temporal modeling process.</p>
-
-
+</section>
+<section id="oversmoothing" class="level4">
+<h4 class="anchored" data-anchor-id="oversmoothing">⚠️ <strong>Oversmoothing</strong></h4>
+<pre><code>Raw:     • • •  •  •
+           ╱╲╱╲╱╲
+Smooth: ───────────── (too flat)</code></pre>
+<ul>
+<li>Smoothed curve misses important peaks or valleys</li>
+<li>Trajectory appears unnaturally flat</li>
+<li>Real patterns are suppressed</li>
+</ul>
+</section>
+<section id="undersmoothing" class="level4">
+<h4 class="anchored" data-anchor-id="undersmoothing">⚠️ <strong>Undersmoothing</strong></h4>
+<pre><code>Raw:     • • •  •  •
+           ╱╲╱╲╱╲
+Smooth:   ╱╲╱╲╱╲  (too wiggly)</code></pre>
+<ul>
+<li>Smoothed curve follows noise too closely</li>
+<li>Trajectory has spurious fluctuations</li>
+<li>Fails to reveal underlying trend</li>
+</ul>
+</section>
+<section id="systematic-bias" class="level4">
+<h4 class="anchored" data-anchor-id="systematic-bias">⚠️ <strong>Systematic Bias</strong></h4>
+<pre><code>Raw:     • • •  •  •
+         ╱╲╱╲╱╲
+Smooth: ─────────── (consistently below/above)</code></pre>
+<ul>
+<li>Smoothed curve consistently over- or underestimates</li>
+<li>May indicate inappropriate penalty or normalization</li>
+</ul>
+<hr>
 </section>
 </section>
+</section>
+<section id="understanding-the-selection" class="level2">
+<h2 class="anchored" data-anchor-id="understanding-the-selection">📊 Understanding the Selection</h2>
+<section id="rms-distribution-sampling" class="level3">
+<h3 class="anchored" data-anchor-id="rms-distribution-sampling">RMS Distribution Sampling</h3>
+<p>If you have 1000 keywords and request <code>n_curves = 9</code>, the function:</p>
+<ol type="1">
+<li><strong>Computes RMS</strong> for all 1000 keywords</li>
+<li><strong>Sorts</strong> keywords by RMS (low to high)</li>
+<li><strong>Samples</strong> 9 keywords evenly across the distribution:
+<ul>
+<li>Keywords ~1, 125, 250, 375, 500, 625, 750, 875, 1000</li>
+</ul></li>
+</ol>
+<p>This gives you: - <strong>Low RMS keywords</strong>: Best-fit cases (smooth, predictable) - <strong>Medium RMS keywords</strong>: Typical cases (moderate complexity) - <strong>High RMS keywords</strong>: Challenging cases (noisy, volatile)</p>
+</section>
+<section id="why-this-matters" class="level3">
+<h3 class="anchored" data-anchor-id="why-this-matters">Why This Matters</h3>
+<p>Seeing only low-RMS keywords would give false confidence. Seeing only high-RMS keywords would be unnecessarily discouraging. The representative sample shows you the <strong>realistic range</strong> of smoothing performance.</p>
+<hr>
+</section>
+</section>
+<section id="use-cases" class="level2">
+<h2 class="anchored" data-anchor-id="use-cases">📈 Use Cases</h2>
+<section id="quality-assurance" class="level3">
+<h3 class="anchored" data-anchor-id="quality-assurance">1. <strong>Quality Assurance</strong></h3>
+<p>Before applying smoothing to full corpus, verify it works well.</p>
+</section>
+<section id="parameter-validation" class="level3">
+<h3 class="anchored" data-anchor-id="parameter-validation">2. <strong>Parameter Validation</strong></h3>
+<p>Confirm that <code>optimalSmoothing()</code> choices are actually optimal visually.</p>
+</section>
+<section id="method-comparison" class="level3">
+<h3 class="anchored" data-anchor-id="method-comparison">3. <strong>Method Comparison</strong></h3>
+<p>Compare smoothing with different parameters side-by-side.</p>
+</section>
+<section id="publication-figures" class="level3">
+<h3 class="anchored" data-anchor-id="publication-figures">4. <strong>Publication Figures</strong></h3>
+<p>Create figures showing smoothing effectiveness for methods sections.</p>
+</section>
+<section id="identifying-outliers" class="level3">
+<h3 class="anchored" data-anchor-id="identifying-outliers">5. <strong>Identifying Outliers</strong></h3>
+<p>Find keywords with unusual temporal patterns that need special attention.</p>
+</section>
+<section id="training-examples" class="level3">
+<h3 class="anchored" data-anchor-id="training-examples">6. <strong>Training Examples</strong></h3>
+<p>Show collaborators/reviewers how smoothing works on your data.</p>
+<hr>
+</section>
+</section>
+<section id="tips-best-practices" class="level2">
+<h2 class="anchored" data-anchor-id="tips-best-practices">💡 Tips &amp; Best Practices</h2>
+<ol type="1">
+<li><strong>Always run this function</strong> — Don’t skip visual validation</li>
+<li><strong>Use perfect squares</strong> for n_curves (4, 9, 16, 25) for clean grid layouts</li>
+<li><strong>Start with 9</strong> — Good balance between coverage and readability</li>
+<li><strong>Check high-RMS cases</strong> — If they look terrible, reconsider parameters</li>
+<li><strong>Save the plots</strong> — Include in supplementary materials or methods sections</li>
+<li><strong>Show to colleagues</strong> — Get feedback on whether smoothing looks reasonable</li>
+<li><strong>Don’t expect perfection</strong> — Some keywords will always be noisy</li>
+<li><strong>Compare normalizations</strong> — Try different normalization methods if smoothing looks poor</li>
+</ol>
+<hr>
+</section>
+<section id="see-also" class="level2">
+<h2 class="anchored" data-anchor-id="see-also">📚 See Also</h2>
+<ul>
+<li><a href="optimalSmoothing.html"><code>optimalSmoothing()</code></a> — Select parameters (prerequisite for this function)</li>
+<li><a href="smoothingSelection.html"><code>smoothingSelection()</code></a> — Find optimal λ for penalties</li>
+<li><a href="curvePlot.html"><code>curvePlot()</code></a> — Visualize specific keyword trajectories</li>
+<li><a href="facetPlot.html"><code>facetPlot()</code></a> — Create faceted visualizations by zone</li>
+</ul>
+<hr>
+
+
 </section>
 
 </main> <!-- /main -->

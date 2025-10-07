@@ -1,58 +1,257 @@
 ---
-title: ""
+title: "curveCtuPlot()"
 format:
   html:
-    toc: false
+    toc: true
+    toc-depth: 3
 page-layout: full
 ---
+**Plot Temporal Curves with Highlighted Example Keywords by Zone**
 
-# curveCtuPlot()
-
-Plot of Temporal Curves for Frequency Zones and Example Keywords
+The `curveCtuPlot()` function creates a temporal visualization that combines zone-based frequency curves with highlighted example keywords. This allows you to show both the overall zone structure and specific representative terms simultaneously, making it ideal for presentations and publications.
 
 ---
 
 ## 🔹 Function Definition
 
 ```r
-curveCtuPlot <- (data,
-                 ctu_noun = NULL,
-                 r = 1,
-                 themety = "light",
-                 size_class = NULL,
-                 x_lab = "year")
+curveCtuPlot(
+  data,
+  ctu_noun = NULL,
+  r = 1,
+  themety = "light",
+  size_class = NULL,
+  x_lab = "years"
+)
 ```
 
-## 🎯 Aim
+---
 
-The `curveCtuPlot()` function generates a **temporal line plot of keyword frequencies**, distinguishing between **predefined frequency zones** (e.g., *high*, *medium*, *low*) and highlighting **three example keywords**, each belonging to a different zone.  
-It supports both normalized and raw frequencies, with separate color scales for zones and example keywords.  
-Each zone is labeled with its frequency interval, and the selected example keywords are displayed with distinct colors and a dedicated legend.
+## 🎯 Purpose
+
+While `curvePlot()` shows all keywords together, `curveCtuPlot()` provides a more structured visualization by combining zone-level patterns with specific example keywords. This function helps you:
+
+1. **Show zone structure** — Display aggregate patterns for each frequency zone
+2. **Highlight representatives** — Emphasize specific keywords as examples
+3. **Create clear narratives** — Tell a story through selected exemplar terms
+4. **Combine overview and detail** — Balance big picture with specific cases
+5. **Improve readability** — Reduce clutter while maintaining informativeness
+6. **Support presentations** — Create clear, focused visualizations for talks
+7. **Guide interpretation** — Direct attention to key terms within zones
+8. **Demonstrate methodology** — Show how zone classification works with concrete examples
+
+This function is particularly useful when you want to demonstrate temporal patterns without overwhelming your audience with hundreds of trajectories.
+
+---
+
+## 🧮 Understanding CTU (Characteristic Terms by Usage)
+
+**CTU** refers to selecting **representative keywords** from different frequency zones:
+- **High-frequency zone**: Core vocabulary terms
+- **Medium-frequency zone**: Specialized but common terms  
+- **Low-frequency zone**: Rare or emerging terms
+
+By highlighting one keyword from each zone, you show the **spectrum of vocabulary** in your corpus.
 
 ---
 
 ## ⚙️ Arguments
 
-| Argument | Type | Description |
-|-----------|------|-------------|
-| **data** | List | A list containing the output of `importData()`. |
-| **ctu_noun** | Character vector (length = 3) | Specifies three example keywords to highlight in the plot. Each must belong to a different frequency zone (*high*, *medium*, *low*). |
-| **r** | Integer | Thinning rate for x-axis labels; displays one label every `r` years. Default: `1`. |
-| **themety** | Character | Theme type: `"light"` (default) or `"dark"`. Affects plot colors and background. |
-| **size_class** | Numeric vector (length = 3) | Defines line widths for the three zones. If `NULL`, default values are assigned depending on the theme. |
-| **x_lab** | Character | Label for the x-axis. Default: `"year"`. |
+| Argument | Type | Default | Description |
+|----------|------|---------|-------------|
+| **data** | List | *required* | A list object returned by `importData()` or `normalization()`, containing the TDM and corpus metadata. |
+| **ctu_noun** | Character vector | `NULL` | Vector of exactly 3 keywords to highlight, one from each frequency zone (typically high, medium, low). Order doesn't matter; function assigns them to zones automatically. If `NULL`, function may auto-select representative terms. |
+| **r** | Integer | `1` | Interval for x-axis label thinning. `r = 1` shows all years, `r = 2` shows every 2nd year, etc. |
+| **themety** | Character | `"light"` | Visual theme:<br>• `"light"`: Light background (default)<br>• `"dark"`: Dark background (presentations) |
+| **size_class** | Numeric vector | `NULL` | Custom line thickness for the three main zones (typically high, medium, low). If `NULL`, uses theme-appropriate defaults. Vector length should match number of main zones. |
+| **x_lab** | Character | `"years"` | Label for x-axis (e.g., `"Years"`, `"Time Period"`, `"Publication Year"`). |
 
 ---
 
-## 📦 Output
+## 📊 Plot Components
 
-Returns a **`ggplot2` object** displaying keyword frequency trajectories over time.
+### Visual Structure
 
-| Element | Description |
-|----------|-------------|
-| **x-axis** | Represents time (years). |
-| **y-axis** | Represents keyword frequency (raw or normalized). |
-| **Colors** | Two scales: one for frequency zones, one for the example keywords. |
-| **Line width** | Reflects the relative frequency zone (high, medium, low). |
-| **Legends** | Two legends: one for frequency zones with intervals, one for highlighted example keywords. |
-| **Theme** | Adjustable (“light” or “dark”) for improved readability. |
+The plot contains **two layers**:
+
+#### Layer 1: Zone Curves (Background)
+- Lines representing aggregated trajectories for each frequency zone
+- Colors indicate zones (using corpus color palette)
+- Line thickness varies by zone importance
+- Shows overall zone behavior
+
+#### Layer 2: Example Keywords (Foreground)
+- 3 highlighted keywords from different zones
+- Distinct colors separate from zone colors
+- Emphasized line thickness for visibility
+- Labels in legend identify specific terms
+
+### Dual Legend System
+
+**Zone Legend:**
+- Shows frequency zones with interval ranges
+- Example: "Zone 4 [500-1000]", "Zone 2 [50-100]"
+
+**Keyword Legend:**
+- Shows the 3 highlighted example keywords
+- Example: "algorithm", "preprocessing", "noise"
+
+---
+
+## 💡 Usage Examples
+
+### Basic Usage with Selected Keywords
+
+```r
+library(cccc)
+
+# Import and normalize data
+corpus <- importData("tdm.csv", "corpus_info.csv")
+corpus_norm <- normalization(corpus, normty = "nc")
+
+# Plot with 3 representative keywords from different zones
+curveCtuPlot(
+  corpus_norm,
+  ctu_noun = c("algorithm", "preprocessing", "noise")
+)
+```
+
+### Automatic Keyword Selection
+
+```r
+# Let function auto-select representative keywords
+curveCtuPlot(corpus_norm)
+```
+
+### Long Time Series
+
+```r
+# Show every 5th year on x-axis
+curveCtuPlot(
+  corpus_norm,
+  ctu_noun = c("data", "network", "cloud"),
+  r = 5
+)
+```
+
+### Dark Theme for Presentations
+
+```r
+# Use dark theme
+curveCtuPlot(
+  corpus_norm,
+  ctu_noun = c("machine", "learning", "neural"),
+  themety = "dark"
+)
+```
+
+---
+
+## 🎯 Selecting Good Example Keywords
+
+### Criteria for CTU Selection
+
+**1. Zone Distribution**
+- Choose one keyword from high-frequency zone
+- Choose one from medium-frequency zone
+- Choose one from low-frequency zone
+
+**2. Clear Trajectories**
+- Select keywords with distinct, interpretable patterns
+- Avoid keywords with flat or noisy trajectories
+- Choose terms that tell a story
+
+**3. Relevance**
+- Select keywords meaningful to your research question
+- Choose terms your audience will recognize
+- Pick examples that illustrate interesting phenomena
+
+**4. Representativeness**
+- Keywords should be typical of their zone
+- Avoid extreme outliers within zones
+- Select terms that generalize well
+
+
+---
+
+## 🔍 Interpreting the Plot
+
+### Understanding Zone Curves
+
+**High-frequency zone (typically darkest):**
+- Shows behavior of core vocabulary
+- Usually more stable trajectories
+- Changes indicate major conceptual shifts
+
+**Medium-frequency zone:**
+- Shows specialized vocabulary
+- May show more dynamic patterns
+- Often contains emerging important terms
+
+**Low-frequency zone (typically lightest):**
+- Shows rare or specialized terms
+- More volatile, less stable
+- May contain emerging or declining concepts
+
+### Understanding Highlighted Keywords
+
+The 3 highlighted keywords provide **concrete examples** of the abstract zone patterns:
+
+- **High-freq example**: Demonstrates core vocabulary evolution
+- **Medium-freq example**: Shows specialized term dynamics
+- **Low-freq example**: Illustrates niche or emerging concepts
+
+**Look for:**
+- Do example keywords follow their zone's pattern?
+- Are there divergences that tell a story?
+- Do trajectories align with domain knowledge?
+
+---
+
+## 📈 Use Cases
+
+### 1. **Conference Presentations**
+Create clear, focused visualizations showing zone structure with examples.
+
+### 2. **Publication Figures**
+Generate figures demonstrating temporal patterns across frequency strata.
+
+### 3. **Teaching/Demonstrations**
+Show students or colleagues how frequency zones behave differently.
+
+### 4. **Methodology Validation**
+Demonstrate that zone classification captures meaningful distinctions.
+
+### 5. **Narrative Building**
+Tell a story through carefully selected representative keywords.
+
+### 6. **Comparative Analysis**
+Compare zone patterns across different corpora or time periods.
+
+### 7. **Hypothesis Illustration**
+Show specific keywords that exemplify theoretical predictions.
+
+---
+
+## 💡 Tips & Best Practices
+
+1. **Choose meaningful examples** — Select keywords that resonate with your audience
+2. **Tell a story** — Pick keywords that illustrate your main argument
+3. **Check zone membership** — Verify keywords are in different zones
+4. **Test readability** — Ensure highlighted keywords stand out
+5. **Match theme to context** — Light for papers, dark for presentations
+6. **Use consistent examples** — Keep same keywords across related plots
+7. **Document selection** — Explain why you chose specific keywords
+8. **Validate patterns** — Ensure examples are representative of their zones
+9. **Save high resolution** — Use dpi = 300+ for publications
+10. **Combine with other plots** — Use alongside `rowMassPlot()` and `colMassPlot()`
+
+---
+
+## 📚 See Also
+
+- [`curvePlot()`](curvePlot.html) — Plot all keyword trajectories without zone emphasis
+- [`facetPlot()`](facetPlot.html) — Create faceted visualizations by zone
+- [`rowMassPlot()`](rowMassPlot.html) — Visualize keyword frequency distribution
+- [`colMassPlot()`](colMassPlot.html) — Visualize temporal corpus structure
+- [`normalization()`](normalization.html) — Normalize frequencies before plotting

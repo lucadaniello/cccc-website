@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>curveplot</title>
+<title>curvePlot()</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -131,6 +131,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Functions</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="../download.html"> 
+<span class="menu-text">Download</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="../use-cases.html"> 
 <span class="menu-text">Use Cases</span></a>
   </li>  
@@ -164,45 +168,117 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#function-definition" id="toc-function-definition" class="nav-link active" data-scroll-target="#function-definition">🔹 Function Definition</a></li>
+  <li><a href="#purpose" id="toc-purpose" class="nav-link" data-scroll-target="#purpose">🎯 Purpose</a></li>
+  <li><a href="#arguments" id="toc-arguments" class="nav-link" data-scroll-target="#arguments">⚙️ Arguments</a></li>
+  <li><a href="#plot-components" id="toc-plot-components" class="nav-link" data-scroll-target="#plot-components">📊 Plot Components</a>
+  <ul class="collapse">
+  <li><a href="#visual-elements" id="toc-visual-elements" class="nav-link" data-scroll-target="#visual-elements">Visual Elements</a></li>
+  </ul></li>
+  <li><a href="#usage-examples" id="toc-usage-examples" class="nav-link" data-scroll-target="#usage-examples">💡 Usage Examples</a>
+  <ul class="collapse">
+  <li><a href="#basic-usage---all-keywords" id="toc-basic-usage---all-keywords" class="nav-link" data-scroll-target="#basic-usage---all-keywords">Basic Usage - All Keywords</a></li>
+  <li><a href="#plot-specific-keywords" id="toc-plot-specific-keywords" class="nav-link" data-scroll-target="#plot-specific-keywords">Plot Specific Keywords</a></li>
+  <li><a href="#long-time-series" id="toc-long-time-series" class="nav-link" data-scroll-target="#long-time-series">Long Time Series</a></li>
+  </ul></li>
+  <li><a href="#interpreting-temporal-patterns" id="toc-interpreting-temporal-patterns" class="nav-link" data-scroll-target="#interpreting-temporal-patterns">🔍 Interpreting Temporal Patterns</a>
+  <ul class="collapse">
+  <li><a href="#common-trajectory-types" id="toc-common-trajectory-types" class="nav-link" data-scroll-target="#common-trajectory-types">Common Trajectory Types</a></li>
+  </ul></li>
+  <li><a href="#visual-interpretation" id="toc-visual-interpretation" class="nav-link" data-scroll-target="#visual-interpretation">🎨 Visual Interpretation</a>
+  <ul class="collapse">
+  <li><a href="#zone-based-patterns" id="toc-zone-based-patterns" class="nav-link" data-scroll-target="#zone-based-patterns">Zone-Based Patterns</a></li>
+  <li><a href="#density-and-overlap" id="toc-density-and-overlap" class="nav-link" data-scroll-target="#density-and-overlap">Density and Overlap</a></li>
+  </ul></li>
+  <li><a href="#use-cases" id="toc-use-cases" class="nav-link" data-scroll-target="#use-cases">📈 Use Cases</a>
+  <ul class="collapse">
+  <li><a href="#initial-exploration" id="toc-initial-exploration" class="nav-link" data-scroll-target="#initial-exploration">1. <strong>Initial Exploration</strong></a></li>
+  <li><a href="#hypothesis-generation" id="toc-hypothesis-generation" class="nav-link" data-scroll-target="#hypothesis-generation">2. <strong>Hypothesis Generation</strong></a></li>
+  <li><a href="#trend-validation" id="toc-trend-validation" class="nav-link" data-scroll-target="#trend-validation">3. <strong>Trend Validation</strong></a></li>
+  <li><a href="#comparative-analysis" id="toc-comparative-analysis" class="nav-link" data-scroll-target="#comparative-analysis">4. <strong>Comparative Analysis</strong></a></li>
+  <li><a href="#event-detection" id="toc-event-detection" class="nav-link" data-scroll-target="#event-detection">5. <strong>Event Detection</strong></a></li>
+  <li><a href="#normalization-assessment" id="toc-normalization-assessment" class="nav-link" data-scroll-target="#normalization-assessment">6. <strong>Normalization Assessment</strong></a></li>
+  <li><a href="#publication-figures" id="toc-publication-figures" class="nav-link" data-scroll-target="#publication-figures">7. <strong>Publication Figures</strong></a></li>
+  <li><a href="#teachingcommunication" id="toc-teachingcommunication" class="nav-link" data-scroll-target="#teachingcommunication">8. <strong>Teaching/Communication</strong></a></li>
+  </ul></li>
+  <li><a href="#tips-best-practices" id="toc-tips-best-practices" class="nav-link" data-scroll-target="#tips-best-practices">💡 Tips &amp; Best Practices</a></li>
+  <li><a href="#see-also" id="toc-see-also" class="nav-link" data-scroll-target="#see-also">📚 See Also</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content column-page" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content column-page-left" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">curvePlot()</h1>
+</div>
 
 
 
+<div class="quarto-title-meta column-page-left">
 
-<section id="curveplot" class="level1">
-<h1>curvePlot()</h1>
-<p>Plot Temporal Curves of Keyword Frequencies</p>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><strong>Visualize Temporal Evolution of Keyword Frequencies</strong></p>
+<p>The <code>curvePlot()</code> function creates multi-line plots showing how keyword frequencies change over time. It displays all keywords in your corpus simultaneously, with colors and line weights indicating frequency zones, providing a comprehensive view of temporal dynamics.</p>
 <hr>
 <section id="function-definition" class="level2">
 <h2 class="anchored" data-anchor-id="function-definition">🔹 Function Definition</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>curvePlot <span class="ot">&lt;-</span> (data,</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">r =</span> <span class="dv">1</span>,</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">themety =</span> <span class="st">"light"</span>,</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">size_class =</span> <span class="cn">NULL</span>,</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">x_leg =</span> <span class="fl">0.85</span>,</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">x_lab =</span> <span class="st">"years"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">curvePlot</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  data,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">keywords =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">r =</span> <span class="dv">1</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">themety =</span> <span class="st">"light"</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">size_class =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">x_leg =</span> <span class="fl">0.85</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">x_lab =</span> <span class="st">"years"</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<hr>
 </section>
-<section id="aim" class="level2">
-<h2 class="anchored" data-anchor-id="aim">🎯 Aim</h2>
-<p>The <code>curvePlot()</code> function visualizes the <strong>temporal evolution of keyword frequencies</strong> within a corpus.<br>
-It uses the term-document matrix (TDM) in long format to generate <strong>curves grouped by frequency zones</strong>, allowing users to analyze how terms evolve over time.<br>
-The plot supports both <strong>light</strong> and <strong>dark themes</strong>, customizable line thickness, and adjustable x-axis labels for improved readability.</p>
+<section id="purpose" class="level2">
+<h2 class="anchored" data-anchor-id="purpose">🎯 Purpose</h2>
+<p>Understanding how terms evolve over time is fundamental to temporal corpus analysis. The <code>curvePlot()</code> function helps you:</p>
+<ol type="1">
+<li><strong>Explore temporal patterns</strong> — See how keywords rise, fall, or remain stable over time</li>
+<li><strong>Identify trends</strong> — Spot emerging, declining, or persistent concepts</li>
+<li><strong>Compare trajectories</strong> — Observe relationships between different keywords</li>
+<li><strong>Detect events</strong> — Find spikes or drops that correspond to historical events</li>
+<li><strong>Visualize zones</strong> — See how different frequency zones behave temporally</li>
+<li><strong>Assess data quality</strong> — Identify anomalies or irregularities in the data</li>
+<li><strong>Generate insights</strong> — Discover unexpected patterns for further investigation</li>
+<li><strong>Create publication figures</strong> — Produce high-quality visualizations for papers</li>
+</ol>
+<p>This function can display either <strong>all keywords</strong> (comprehensive overview) or <strong>selected keywords</strong> (focused analysis), making it versatile for both exploration and presentation.</p>
 <hr>
 </section>
 <section id="arguments" class="level2">
 <h2 class="anchored" data-anchor-id="arguments">⚙️ Arguments</h2>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 36%">
-<col style="width: 20%">
-<col style="width: 43%">
+<col style="width: 26%">
+<col style="width: 15%">
+<col style="width: 23%">
+<col style="width: 34%">
 </colgroup>
 <thead>
 <tr class="header">
 <th>Argument</th>
 <th>Type</th>
+<th>Default</th>
 <th>Description</th>
 </tr>
 </thead>
@@ -210,81 +286,255 @@ The plot supports both <strong>light</strong> and <strong>dark themes</strong>, 
 <tr class="odd">
 <td><strong>data</strong></td>
 <td>List</td>
-<td>A list containing the output of <code>importData()</code>.</td>
+<td><em>required</em></td>
+<td>A list object returned by <code>importData()</code> or <code>normalization()</code>, containing the TDM and corpus metadata.</td>
 </tr>
 <tr class="even">
-<td><strong>r</strong></td>
-<td>Numeric (scalar)</td>
-<td>Interval for thinning x-axis year labels. Default: <code>1</code>.</td>
+<td><strong>keywords</strong></td>
+<td>Character vector</td>
+<td><code>NULL</code></td>
+<td>Specific keywords to plot. If <code>NULL</code>, plots all keywords in the corpus. Use this to focus on specific terms of interest.</td>
 </tr>
 <tr class="odd">
+<td><strong>r</strong></td>
+<td>Integer</td>
+<td><code>1</code></td>
+<td>Interval for x-axis label thinning. <code>r = 1</code> shows all years, <code>r = 2</code> shows every 2nd year, etc. Useful for long time series.</td>
+</tr>
+<tr class="even">
 <td><strong>themety</strong></td>
 <td>Character</td>
-<td>Theme type. Either <code>"light"</code> (default) or <code>"dark"</code>.</td>
-</tr>
-<tr class="even">
-<td><strong>size_class</strong></td>
-<td>Numeric vector</td>
-<td>Line sizes by frequency zone. If <code>NULL</code>, default values are assigned based on the selected theme.</td>
+<td><code>"light"</code></td>
+<td>Visual theme:<br>• <code>"light"</code>: Light background (default)<br>• <code>"dark"</code>: Dark background (better for presentations)</td>
 </tr>
 <tr class="odd">
-<td><strong>x_leg</strong></td>
-<td>Numeric</td>
-<td>Horizontal position of the legend. Default: <code>0.85</code>.</td>
+<td><strong>size_class</strong></td>
+<td>Numeric vector</td>
+<td><code>NULL</code></td>
+<td>Custom line thickness for each frequency zone. If <code>NULL</code>, uses theme-appropriate defaults. Vector length must match number of zones.</td>
 </tr>
 <tr class="even">
+<td><strong>x_leg</strong></td>
+<td>Numeric</td>
+<td><code>0.85</code></td>
+<td>Horizontal legend position (0 = left, 1 = right). Adjust if legend overlaps with curves.</td>
+</tr>
+<tr class="odd">
 <td><strong>x_lab</strong></td>
 <td>Character</td>
-<td>X-axis label. Default: <code>"years"</code>.</td>
+<td><code>"years"</code></td>
+<td>Label for x-axis (e.g., <code>"Years"</code>, <code>"Time Period"</code>, <code>"Publication Year"</code>).</td>
 </tr>
 </tbody>
 </table>
 <hr>
 </section>
-<section id="output" class="level2">
-<h2 class="anchored" data-anchor-id="output">📦 Output</h2>
-<p>Returns a <strong><code>ggplot2</code> object</strong> displaying temporal curves of keyword frequencies.</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 43%">
-<col style="width: 56%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Element</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>x-axis</strong></td>
-<td>Represents time (years).</td>
-</tr>
-<tr class="even">
-<td><strong>y-axis</strong></td>
-<td>Represents keyword frequency (normalized or raw).</td>
-</tr>
-<tr class="odd">
-<td><strong>Colors</strong></td>
-<td>Correspond to frequency zones (e.g., “VH”, “H”, “L”, “VL”).</td>
-</tr>
-<tr class="even">
-<td><strong>Line size</strong></td>
-<td>Reflects the relative importance of frequency zones.</td>
-</tr>
-<tr class="odd">
-<td><strong>Theme</strong></td>
-<td>Can be switched between light and dark for readability.</td>
-</tr>
-<tr class="even">
-<td><strong>Legend</strong></td>
-<td>Shown at the bottom, indicating frequency zones and line styles.</td>
-</tr>
-</tbody>
-</table>
-
-
+<section id="plot-components" class="level2">
+<h2 class="anchored" data-anchor-id="plot-components">📊 Plot Components</h2>
+<section id="visual-elements" class="level3">
+<h3 class="anchored" data-anchor-id="visual-elements">Visual Elements</h3>
+<p><strong>Lines:</strong> - Each keyword is represented by one line - Line color indicates frequency zone - Line thickness can vary by zone importance</p>
+<p><strong>X-axis:</strong> - Time periods (years) from corpus metadata - Labels can be thinned for long time series</p>
+<p><strong>Y-axis:</strong> - Frequency values (raw or normalized) - Scale depends on normalization applied</p>
+<p><strong>Legend:</strong> - Shows frequency zones with corresponding colors - Position adjustable via <code>x_leg</code> parameter</p>
+<p><strong>Theme:</strong> - Light: White background, dark text (publications) - Dark: Dark background, light text (presentations)</p>
+<hr>
 </section>
+</section>
+<section id="usage-examples" class="level2">
+<h2 class="anchored" data-anchor-id="usage-examples">💡 Usage Examples</h2>
+<section id="basic-usage---all-keywords" class="level3">
+<h3 class="anchored" data-anchor-id="basic-usage---all-keywords">Basic Usage - All Keywords</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cccc)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Import data</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>corpus <span class="ot">&lt;-</span> <span class="fu">importData</span>(<span class="st">"tdm.csv"</span>, <span class="st">"corpus_info.csv"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot all keyword trajectories</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">curvePlot</span>(corpus)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="plot-specific-keywords" class="level3">
+<h3 class="anchored" data-anchor-id="plot-specific-keywords">Plot Specific Keywords</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import and normalize</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>corpus <span class="ot">&lt;-</span> <span class="fu">importData</span>(<span class="st">"tdm.csv"</span>, <span class="st">"corpus_info.csv"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>corpus_norm <span class="ot">&lt;-</span> <span class="fu">normalization</span>(corpus, <span class="at">normty =</span> <span class="st">"nc"</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot specific keywords of interest</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">curvePlot</span>(</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  corpus_norm, </span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">keywords =</span> <span class="fu">c</span>(<span class="st">"algorithm"</span>, <span class="st">"network"</span>, <span class="st">"data"</span>, <span class="st">"cloud"</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="long-time-series" class="level3">
+<h3 class="anchored" data-anchor-id="long-time-series">Long Time Series</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show every 5th year on x-axis</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">curvePlot</span>(corpus_norm, <span class="at">r =</span> <span class="dv">5</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Show every 10th year</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">curvePlot</span>(corpus_norm, <span class="at">r =</span> <span class="dv">10</span>, <span class="at">x_lab =</span> <span class="st">"Decade"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<hr>
+</section>
+</section>
+<section id="interpreting-temporal-patterns" class="level2">
+<h2 class="anchored" data-anchor-id="interpreting-temporal-patterns">🔍 Interpreting Temporal Patterns</h2>
+<section id="common-trajectory-types" class="level3">
+<h3 class="anchored" data-anchor-id="common-trajectory-types">Common Trajectory Types</h3>
+<section id="emerging-terms" class="level4">
+<h4 class="anchored" data-anchor-id="emerging-terms">1. <strong>Emerging Terms</strong> 📈</h4>
+<pre><code>Frequency
+    |           ╱───
+    |         ╱
+    |       ╱
+    |_____╱________Time</code></pre>
+<ul>
+<li>Start low, increase over time</li>
+<li>Indicate new concepts or growing importance</li>
+<li>Examples: “cloud computing”, “deep learning”</li>
+</ul>
+</section>
+<section id="declining-terms" class="level4">
+<h4 class="anchored" data-anchor-id="declining-terms">2. <strong>Declining Terms</strong> 📉</h4>
+<pre><code>Frequency
+    |───╲
+    |     ╲
+    |       ╲
+    |         ╲___Time</code></pre>
+<ul>
+<li>Start high, decrease over time</li>
+<li>Indicate obsolescence or reduced relevance</li>
+<li>Examples: “floppy disk”, “mainframe”</li>
+</ul>
+</section>
+<section id="stable-terms" class="level4">
+<h4 class="anchored" data-anchor-id="stable-terms">3. <strong>Stable Terms</strong> ➡️</h4>
+<pre><code>Frequency
+    |─────────────
+    |
+    |
+    |______________Time</code></pre>
+<ul>
+<li>Consistent frequency over time</li>
+<li>Indicate core, persistent concepts</li>
+<li>Examples: “computer”, “data”, “system”</li>
+</ul>
+</section>
+<section id="peaked-terms" class="level4">
+<h4 class="anchored" data-anchor-id="peaked-terms">4. <strong>Peaked Terms</strong> 🏔️</h4>
+<pre><code>Frequency
+    |      ╱╲
+    |    ╱    ╲
+    |  ╱        ╲
+    |╱____________╲_Time</code></pre>
+<ul>
+<li>Rise and fall within time period</li>
+<li>May indicate temporary trends or events</li>
+<li>Examples: “Y2K”, specific technology buzzwords</li>
+</ul>
+</section>
+<section id="cyclical-terms" class="level4">
+<h4 class="anchored" data-anchor-id="cyclical-terms">5. <strong>Cyclical Terms</strong> 🔄</h4>
+<pre><code>Frequency
+    |  ╱╲    ╱╲
+    | ╱  ╲  ╱  ╲
+    |╱    ╲╱    ╲_Time</code></pre>
+<ul>
+<li>Periodic fluctuations</li>
+<li>May indicate recurring themes or seasonal patterns</li>
+<li>Examples: Conference-related terms, annual events</li>
+</ul>
+</section>
+<section id="volatile-terms" class="level4">
+<h4 class="anchored" data-anchor-id="volatile-terms">6. <strong>Volatile Terms</strong> 📊</h4>
+<pre><code>Frequency
+    | ╱╲╱╲╱╲╱╲
+    |╱        ╲Time</code></pre>
+<ul>
+<li>Highly irregular patterns</li>
+<li>May indicate noise or inconsistent usage</li>
+<li>Consider smoothing or filtering</li>
+</ul>
+<hr>
+</section>
+</section>
+</section>
+<section id="visual-interpretation" class="level2">
+<h2 class="anchored" data-anchor-id="visual-interpretation">🎨 Visual Interpretation</h2>
+<section id="zone-based-patterns" class="level3">
+<h3 class="anchored" data-anchor-id="zone-based-patterns">Zone-Based Patterns</h3>
+<p><strong>High-frequency zones (typically darker colors):</strong> - Represent core vocabulary of the corpus - Trajectories often more stable - Changes indicate major conceptual shifts</p>
+<p><strong>Low-frequency zones (typically lighter colors):</strong> - Represent specialized or emerging terms - More volatile trajectories - May show sharper rises/falls</p>
+</section>
+<section id="density-and-overlap" class="level3">
+<h3 class="anchored" data-anchor-id="density-and-overlap">Density and Overlap</h3>
+<p><strong>Dense clustering:</strong> - Many terms with similar temporal patterns - May indicate coherent topical evolution</p>
+<p><strong>Spread trajectories:</strong> - Diverse temporal behaviors - Suggests heterogeneous corpus or multiple themes</p>
+<hr>
+</section>
+</section>
+<section id="use-cases" class="level2">
+<h2 class="anchored" data-anchor-id="use-cases">📈 Use Cases</h2>
+<section id="initial-exploration" class="level3">
+<h3 class="anchored" data-anchor-id="initial-exploration">1. <strong>Initial Exploration</strong></h3>
+<p>Get a first look at temporal dynamics before detailed analysis.</p>
+</section>
+<section id="hypothesis-generation" class="level3">
+<h3 class="anchored" data-anchor-id="hypothesis-generation">2. <strong>Hypothesis Generation</strong></h3>
+<p>Identify unexpected patterns that merit further investigation.</p>
+</section>
+<section id="trend-validation" class="level3">
+<h3 class="anchored" data-anchor-id="trend-validation">3. <strong>Trend Validation</strong></h3>
+<p>Verify expected temporal patterns (e.g., “internet” should rise after 1990s).</p>
+</section>
+<section id="comparative-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="comparative-analysis">4. <strong>Comparative Analysis</strong></h3>
+<p>Compare trajectories of related terms (e.g., “analog” vs “digital”).</p>
+</section>
+<section id="event-detection" class="level3">
+<h3 class="anchored" data-anchor-id="event-detection">5. <strong>Event Detection</strong></h3>
+<p>Find spikes or drops corresponding to historical events.</p>
+</section>
+<section id="normalization-assessment" class="level3">
+<h3 class="anchored" data-anchor-id="normalization-assessment">6. <strong>Normalization Assessment</strong></h3>
+<p>Compare raw vs.&nbsp;normalized frequencies to see normalization effects.</p>
+</section>
+<section id="publication-figures" class="level3">
+<h3 class="anchored" data-anchor-id="publication-figures">7. <strong>Publication Figures</strong></h3>
+<p>Create visualizations for papers, presentations, or reports.</p>
+</section>
+<section id="teachingcommunication" class="level3">
+<h3 class="anchored" data-anchor-id="teachingcommunication">8. <strong>Teaching/Communication</strong></h3>
+<p>Show collaborators or students how terms evolve in your corpus.</p>
+<hr>
+</section>
+</section>
+<section id="tips-best-practices" class="level2">
+<h2 class="anchored" data-anchor-id="tips-best-practices">💡 Tips &amp; Best Practices</h2>
+<ol type="1">
+<li><strong>Start with all keywords</strong> — Get overview before focusing</li>
+<li><strong>Use normalization</strong> — Compare normalized trajectories for fair comparison</li>
+<li><strong>Focus selectively</strong> — After overview, plot specific keywords of interest</li>
+<li><strong>Match theme to context</strong> — Light for publications, dark for presentations</li>
+<li><strong>Thin x-axis for long series</strong> — Prevent label overlap (use <code>r</code> parameter)</li>
+<li><strong>Save high resolution</strong> — Use <code>dpi = 300</code> or higher for publications</li>
+<li><strong>Compare before/after normalization</strong> — Understand normalization effects</li>
+<li><strong>Document patterns</strong> — Keep notes on interesting trajectories for later analysis</li>
+<li><strong>Cross-reference with history</strong> — Match patterns to known events/developments</li>
+<li><strong>Use with other plots</strong> — Combine with <code>rowMassPlot()</code> and <code>colMassPlot()</code> for full picture</li>
+</ol>
+<hr>
+</section>
+<section id="see-also" class="level2">
+<h2 class="anchored" data-anchor-id="see-also">📚 See Also</h2>
+<ul>
+<li><a href="importData.html"><code>importData()</code></a> — Import corpus data</li>
+<li><a href="normalization.html"><code>normalization()</code></a> — Normalize frequencies for fair comparison</li>
+<li><a href="rowMassPlot.html"><code>rowMassPlot()</code></a> — Visualize keyword frequency distribution</li>
+<li><a href="colMassPlot.html"><code>colMassPlot()</code></a> — Visualize temporal corpus structure</li>
+<li><a href="curveCtuPlot.html"><code>curveCtuPlot()</code></a> — Plot curves with example keywords by zone</li>
+<li><a href="facetPlot.html"><code>facetPlot()</code></a> — Create faceted visualizations by zone</li>
+</ul>
+
+
 </section>
 
 </main> <!-- /main -->

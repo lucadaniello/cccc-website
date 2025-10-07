@@ -2,8 +2,8 @@
 title: "About Us"
 page-layout: full
 ---
+The cccc package is developed and maintained by a team of researchers specializing in statistics, linguistics, and computational methods:
 
-# 👥 Developers
 ```{=html}
 <div style="display: flex; flex-direction: column; gap: 2rem; padding-top: 1rem;">
 
@@ -12,6 +12,7 @@ page-layout: full
   <div>
     <h3 style="margin-bottom: 0.2em;">Matilde Trevisani</h3>
     <p style="margin: 0; font-style: italic;">University of Trieste</p>
+    <p style="margin: 0; font-size: 0.9em; color: #666;">Principal Investigator & Lead Developer</p>
     <p style="margin: 0;"><a href="mailto:MATILDE.TREVISANI@deams.units.it">MATILDE.TREVISANI@deams.units.it</a></p>
   </div>
 </div>
@@ -21,15 +22,17 @@ page-layout: full
   <div>
     <h3 style="margin-bottom: 0.2em;">Arjuna Tuzzi</h3>
     <p style="margin: 0; font-style: italic;">University of Padova</p>
+    <p style="margin: 0; font-size: 0.9em; color: #666;">Computational Linguistics & Methodology</p>
     <p style="margin: 0;"><a href="mailto:arjuna.tuzzi@unipd.it">arjuna.tuzzi@unipd.it</a></p>
   </div>
 </div>
 
 <div style="display: flex; align-items: center; gap: 1.5rem;">
-  <img src="images/team/daniello.png" alt="Luca D’Aniello" width="120" style="border-radius: 50%; box-shadow: 0 2px 6px rgba(0,0,0,0.2);">
+  <img src="images/team/daniello.png" alt="Luca D'Aniello" width="120" style="border-radius: 50%; box-shadow: 0 2px 6px rgba(0,0,0,0.2);">
   <div>
-    <h3 style="margin-bottom: 0.2em;">Luca D’Aniello</h3>
+    <h3 style="margin-bottom: 0.2em;">Luca D'Aniello</h3>
     <p style="margin: 0; font-style: italic;">University of Naples Federico II</p>
+    <p style="margin: 0; font-size: 0.9em; color: #666;">Statistical Modeling & Data Analysis</p>
     <p style="margin: 0;"><a href="mailto:luca.daniello@unina.it">luca.daniello@unina.it</a></p>
   </div>
 </div>
@@ -37,6 +40,23 @@ page-layout: full
 </div>
 ```
 
-# Contact
-For questions or collaborations:
+---
+
+# 📬 Contact & Collaboration
+
+We welcome collaborations, questions, and feedback from the research community!
+
+**For general inquiries:**  
 📧 [MATILDE.TREVISANI@deams.units.it](mailto:MATILDE.TREVISANI@deams.units.it)
+
+**For technical support:**  
+🐛 [Open an issue on GitHub](https://github.com/matildet/cccc/issues)
+
+**For collaborations:**  
+🤝 Contact any member of the development team directly
+
+---
+
+## Acknowledgments
+
+This work is supported by the **RIND Project** and affiliated research institutions. We are grateful to the broader R community and the developers of key dependencies that make cccc possible.

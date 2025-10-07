@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>colmassplot</title>
+<title>colMassPlot()</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -131,6 +131,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Functions</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="../download.html"> 
+<span class="menu-text">Download</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="../use-cases.html"> 
 <span class="menu-text">Use Cases</span></a>
   </li>  
@@ -164,51 +168,117 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#function-definition" id="toc-function-definition" class="nav-link active" data-scroll-target="#function-definition">🔹 Function Definition</a></li>
+  <li><a href="#purpose" id="toc-purpose" class="nav-link" data-scroll-target="#purpose">🎯 Purpose</a></li>
+  <li><a href="#arguments" id="toc-arguments" class="nav-link" data-scroll-target="#arguments">⚙️ Arguments</a></li>
+  <li><a href="#corpus-metrics-explained" id="toc-corpus-metrics-explained" class="nav-link" data-scroll-target="#corpus-metrics-explained">📊 Corpus Metrics Explained</a>
+  <ul class="collapse">
+  <li><a href="#ndoc-number-of-documents" id="toc-ndoc-number-of-documents" class="nav-link" data-scroll-target="#ndoc-number-of-documents">1. <strong>nDoc</strong> — Number of Documents</a></li>
+  <li><a href="#dimcorpus-total-tokens" id="toc-dimcorpus-total-tokens" class="nav-link" data-scroll-target="#dimcorpus-total-tokens">2. <strong>dimCorpus</strong> — Total Tokens</a></li>
+  <li><a href="#csum-sum-of-keyword-frequencies" id="toc-csum-sum-of-keyword-frequencies" class="nav-link" data-scroll-target="#csum-sum-of-keyword-frequencies">3. <strong>Csum</strong> — Sum of Keyword Frequencies</a></li>
+  <li><a href="#mcf-maximum-keyword-frequency" id="toc-mcf-maximum-keyword-frequency" class="nav-link" data-scroll-target="#mcf-maximum-keyword-frequency">4. <strong>Mcf</strong> — Maximum Keyword Frequency</a></li>
+  </ul></li>
+  <li><a href="#understanding-scaling-factors" id="toc-understanding-scaling-factors" class="nav-link" data-scroll-target="#understanding-scaling-factors">🎨 Understanding Scaling Factors</a></li>
+  <li><a href="#output" id="toc-output" class="nav-link" data-scroll-target="#output">📦 Output</a></li>
+  <li><a href="#usage-examples" id="toc-usage-examples" class="nav-link" data-scroll-target="#usage-examples">💡 Usage Examples</a>
+  <ul class="collapse">
+  <li><a href="#basic-usage" id="toc-basic-usage" class="nav-link" data-scroll-target="#basic-usage">Basic Usage</a></li>
+  </ul></li>
+  <li><a href="#interpreting-the-plot" id="toc-interpreting-the-plot" class="nav-link" data-scroll-target="#interpreting-the-plot">🔍 Interpreting the Plot</a>
+  <ul class="collapse">
+  <li><a href="#common-patterns" id="toc-common-patterns" class="nav-link" data-scroll-target="#common-patterns">Common Patterns</a></li>
+  </ul></li>
+  <li><a href="#what-to-look-for" id="toc-what-to-look-for" class="nav-link" data-scroll-target="#what-to-look-for">🎯 What to Look For</a>
+  <ul class="collapse">
+  <li><a href="#temporal-coverage" id="toc-temporal-coverage" class="nav-link" data-scroll-target="#temporal-coverage">1. <strong>Temporal Coverage</strong></a></li>
+  <li><a href="#growth-patterns" id="toc-growth-patterns" class="nav-link" data-scroll-target="#growth-patterns">2. <strong>Growth Patterns</strong></a></li>
+  <li><a href="#proportionality" id="toc-proportionality" class="nav-link" data-scroll-target="#proportionality">3. <strong>Proportionality</strong></a></li>
+  <li><a href="#anomalies" id="toc-anomalies" class="nav-link" data-scroll-target="#anomalies">4. <strong>Anomalies</strong></a></li>
+  </ul></li>
+  <li><a href="#use-cases" id="toc-use-cases" class="nav-link" data-scroll-target="#use-cases">📈 Use Cases</a>
+  <ul class="collapse">
+  <li><a href="#data-quality-assessment" id="toc-data-quality-assessment" class="nav-link" data-scroll-target="#data-quality-assessment">1. <strong>Data Quality Assessment</strong></a></li>
+  <li><a href="#normalization-decision" id="toc-normalization-decision" class="nav-link" data-scroll-target="#normalization-decision">2. <strong>Normalization Decision</strong></a></li>
+  <li><a href="#historical-context" id="toc-historical-context" class="nav-link" data-scroll-target="#historical-context">3. <strong>Historical Context</strong></a></li>
+  <li><a href="#methodology-documentation" id="toc-methodology-documentation" class="nav-link" data-scroll-target="#methodology-documentation">4. <strong>Methodology Documentation</strong></a></li>
+  <li><a href="#comparative-studies" id="toc-comparative-studies" class="nav-link" data-scroll-target="#comparative-studies">5. <strong>Comparative Studies</strong></a></li>
+  </ul></li>
+  <li><a href="#tips-best-practices" id="toc-tips-best-practices" class="nav-link" data-scroll-target="#tips-best-practices">💡 Tips &amp; Best Practices</a></li>
+  <li><a href="#see-also" id="toc-see-also" class="nav-link" data-scroll-target="#see-also">📚 See Also</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content column-page" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content column-page-left" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">colMassPlot()</h1>
+</div>
 
 
 
+<div class="quarto-title-meta column-page-left">
 
-<section id="colmassplot" class="level1">
-<h1>colMassPlot()</h1>
-<p>Plot Temporal Dimensions of a Corpus</p>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><strong>Visualize Temporal Dimensions of Corpus Structure</strong></p>
+<p>The <code>colMassPlot()</code> function creates a multi-line plot showing how four key corpus metrics evolve over time. This provides crucial insights into corpus growth patterns, data collection trends, and temporal coverage.</p>
 <hr>
 <section id="function-definition" class="level2">
 <h2 class="anchored" data-anchor-id="function-definition">🔹 Function Definition</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>colMassPlot <span class="ot">&lt;-</span> (data,</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">sc =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">1</span>),</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">r =</span> <span class="dv">1</span>,</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">textty =</span> <span class="st">"text"</span>,</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">themety =</span> <span class="st">"light"</span>,</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>                        <span class="at">size_b =</span> <span class="fl">2.5</span>,</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>                        <span class="at">x_lab =</span> <span class="st">"years"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colMassPlot</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  data,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">sc =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">1</span>),</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">r =</span> <span class="dv">1</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">textty =</span> <span class="st">"text"</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">themety =</span> <span class="st">"light"</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">size_b =</span> <span class="fl">2.5</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">x_lab =</span> <span class="st">"years"</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<hr>
 </section>
-<section id="aim" class="level2">
-<h2 class="anchored" data-anchor-id="aim">🎯 Aim</h2>
-<p>The <code>colMassPlot()</code> function creates a <strong>multi-line plot</strong> displaying the temporal evolution of four corpus-level metrics:</p>
-<ul>
-<li>Number of documents (<code>nDoc</code>)</li>
-<li>Number of tokens (<code>dimCorpus</code>)</li>
-<li>Sum of keyword frequencies (<code>Csum</code>)</li>
-<li>Maximum keyword frequency (<code>Mcf</code>)</li>
-</ul>
-<p>All measures are <strong>rescaled by user-defined factors</strong> to improve visual comparability across different dimensions of the corpus.</p>
+<section id="purpose" class="level2">
+<h2 class="anchored" data-anchor-id="purpose">🎯 Purpose</h2>
+<p>Understanding the temporal structure of your corpus is essential for interpreting frequency trends. The <code>colMassPlot()</code> function helps you:</p>
+<ol type="1">
+<li><strong>Visualize corpus growth</strong> — See how the corpus expands over time</li>
+<li><strong>Identify collection patterns</strong> — Detect periods of intensive/sparse data collection</li>
+<li><strong>Assess temporal balance</strong> — Evaluate whether time periods are comparably represented</li>
+<li><strong>Detect anomalies</strong> — Spot unusual spikes or drops in corpus size</li>
+<li><strong>Contextualize term frequencies</strong> — Understand how corpus size affects frequency patterns</li>
+<li><strong>Validate data quality</strong> — Ensure corpus metadata is consistent and complete</li>
+</ol>
+<p>This function is typically used <strong>after</strong> <code>importData()</code> and alongside <code>rowMassPlot()</code> for comprehensive data exploration before normalization.</p>
 <hr>
 </section>
 <section id="arguments" class="level2">
 <h2 class="anchored" data-anchor-id="arguments">⚙️ Arguments</h2>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 36%">
-<col style="width: 20%">
-<col style="width: 43%">
+<col style="width: 26%">
+<col style="width: 15%">
+<col style="width: 23%">
+<col style="width: 34%">
 </colgroup>
 <thead>
 <tr class="header">
 <th>Argument</th>
 <th>Type</th>
+<th>Default</th>
 <th>Description</th>
 </tr>
 </thead>
@@ -216,49 +286,88 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="odd">
 <td><strong>data</strong></td>
 <td>List</td>
-<td>A list containing the output of <code>importData()</code>.</td>
+<td><em>required</em></td>
+<td>A list object returned by <code>importData()</code>, containing the TDM and corpus metadata.</td>
 </tr>
 <tr class="even">
 <td><strong>sc</strong></td>
-<td>Numeric vector (length = 4)</td>
-<td>Scaling factors for <code>nDoc</code>, <code>dimCorpus</code>, <code>Csum</code>, and <code>Mcf</code>. Default: <code>c(1, 10, 10, 1)</code>.</td>
+<td>Numeric vector</td>
+<td><code>c(1, 10, 10, 1)</code></td>
+<td>Scaling factors for the four metrics (in order):<br>1. <code>nDoc</code> (number of documents)<br>2. <code>dimCorpus</code> (total tokens)<br>3. <code>Csum</code> (sum of keyword frequencies)<br>4. <code>Mcf</code> (maximum keyword frequency)<br>Adjust to make lines visually comparable.</td>
 </tr>
 <tr class="odd">
 <td><strong>r</strong></td>
 <td>Integer</td>
-<td>Interval for thinning x-axis labels. Default: <code>1</code> (shows all years).</td>
+<td><code>1</code></td>
+<td>Interval for x-axis label thinning. <code>r = 2</code> shows every 2nd year, <code>r = 5</code> shows every 5th year, etc. Useful for long time series.</td>
 </tr>
 <tr class="even">
 <td><strong>textty</strong></td>
 <td>Character</td>
-<td>Unit of analysis for legend labels (e.g., <code>"text"</code>, <code>"place"</code>, <code>"paper"</code>).</td>
+<td><code>"text"</code></td>
+<td>Label for the unit of analysis in the legend (e.g., <code>"text"</code>, <code>"document"</code>, <code>"paper"</code>, <code>"article"</code>).</td>
 </tr>
 <tr class="odd">
 <td><strong>themety</strong></td>
 <td>Character</td>
-<td>Plot theme type. Either <code>"light"</code> (default) or <code>"dark"</code>.</td>
+<td><code>"light"</code></td>
+<td>Visual theme for the plot:<br>• <code>"light"</code>: Light background (default)<br>• <code>"dark"</code>: Dark background</td>
 </tr>
 <tr class="even">
 <td><strong>size_b</strong></td>
 <td>Numeric</td>
-<td>Base size for bar lines. Default: <code>2.5</code>.</td>
+<td><code>2.5</code></td>
+<td>Line thickness for the plot. Increase for bolder lines, decrease for finer lines.</td>
 </tr>
 <tr class="odd">
 <td><strong>x_lab</strong></td>
 <td>Character</td>
-<td>X-axis label. Default: <code>"year"</code>.</td>
+<td><code>"years"</code></td>
+<td>Label for the x-axis (e.g., <code>"Years"</code>, <code>"Time Period"</code>, <code>"Publication Year"</code>).</td>
 </tr>
 </tbody>
 </table>
 <hr>
 </section>
+<section id="corpus-metrics-explained" class="level2">
+<h2 class="anchored" data-anchor-id="corpus-metrics-explained">📊 Corpus Metrics Explained</h2>
+<section id="ndoc-number-of-documents" class="level3">
+<h3 class="anchored" data-anchor-id="ndoc-number-of-documents">1. <strong>nDoc</strong> — Number of Documents</h3>
+<p>The count of documents/texts in the corpus for each time period.</p>
+<p><strong>Insights:</strong> - Shows data collection intensity - Reveals archival coverage patterns - Indicates periods of high/low publication activity</p>
+</section>
+<section id="dimcorpus-total-tokens" class="level3">
+<h3 class="anchored" data-anchor-id="dimcorpus-total-tokens">2. <strong>dimCorpus</strong> — Total Tokens</h3>
+<p>The total number of words/tokens in all documents for each time period.</p>
+<p><strong>Insights:</strong> - Represents overall corpus size - Important for normalization decisions - Shows writing/publication volume trends</p>
+</section>
+<section id="csum-sum-of-keyword-frequencies" class="level3">
+<h3 class="anchored" data-anchor-id="csum-sum-of-keyword-frequencies">3. <strong>Csum</strong> — Sum of Keyword Frequencies</h3>
+<p>The total frequency of all keywords across all documents in each time period.</p>
+<p><strong>Insights:</strong> - Indicates keyword density in the corpus - Shows overall vocabulary coverage - Helps assess keyword selection adequacy</p>
+</section>
+<section id="mcf-maximum-keyword-frequency" class="level3">
+<h3 class="anchored" data-anchor-id="mcf-maximum-keyword-frequency">4. <strong>Mcf</strong> — Maximum Keyword Frequency</h3>
+<p>The highest frequency of any single keyword in each time period.</p>
+<p><strong>Insights:</strong> - Identifies periods dominated by specific terms - Shows potential outliers or dominant topics - Indicates vocabulary concentration patterns</p>
+<hr>
+</section>
+</section>
+<section id="understanding-scaling-factors" class="level2">
+<h2 class="anchored" data-anchor-id="understanding-scaling-factors">🎨 Understanding Scaling Factors</h2>
+<p>Different metrics have vastly different scales: - <code>nDoc</code> might range from 10-100 - <code>dimCorpus</code> might range from 10,000-1,000,000 - <code>Csum</code> might range from 5,000-500,000 - <code>Mcf</code> might range from 50-5,000</p>
+<p><strong>Scaling makes visual comparison possible</strong> by bringing all metrics to similar ranges.</p>
+<p><strong>Default scaling:</strong> <code>c(1, 10, 10, 1)</code> - <code>nDoc</code>: ×1 (no scaling) - <code>dimCorpus</code>: ×10 (reduces by factor of 10) - <code>Csum</code>: ×10 (reduces by factor of 10) - <code>Mcf</code>: ×1 (no scaling)</p>
+<p><strong>Adjust scaling</strong> if lines are too far apart or overlapping too much.</p>
+<hr>
+</section>
 <section id="output" class="level2">
 <h2 class="anchored" data-anchor-id="output">📦 Output</h2>
-<p>Returns a <strong><code>ggplot2</code> object</strong> representing the temporal evolution of corpus structure.</p>
+<p>Returns a <strong><code>ggplot2</code> object</strong> with the following characteristics:</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 43%">
-<col style="width: 56%">
+<col style="width: 40%">
+<col style="width: 59%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -268,30 +377,158 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>x-axis</strong></td>
-<td>Years.</td>
+<td><strong>X-axis</strong></td>
+<td>Time periods (years) from the corpus metadata</td>
 </tr>
 <tr class="even">
-<td><strong>y-axis</strong></td>
-<td>Rescaled measures representing corpus size and term frequencies.</td>
+<td><strong>Y-axis</strong></td>
+<td>Rescaled values of the four corpus metrics</td>
 </tr>
 <tr class="odd">
 <td><strong>Lines</strong></td>
-<td>Show the evolution of <code>nDoc</code>, <code>dimCorpus</code>, <code>Csum</code>, and <code>Mcf</code> over time.</td>
+<td>Four colored lines representing each metric’s temporal evolution</td>
 </tr>
 <tr class="even">
-<td><strong>Colors</strong></td>
-<td>Distinguish between the four corpus metrics.</td>
+<td><strong>Legend</strong></td>
+<td>Shows metric names with scaling factors (e.g., “nDoc (×1)”, “dimCorpus (×10)”)</td>
 </tr>
 <tr class="odd">
-<td><strong>Legend</strong></td>
-<td>Provides details about scaling factors and corresponding measures.</td>
+<td><strong>Theme</strong></td>
+<td>Light or dark background based on <code>themety</code> parameter</td>
 </tr>
 </tbody>
 </table>
-
-
+<hr>
 </section>
+<section id="usage-examples" class="level2">
+<h2 class="anchored" data-anchor-id="usage-examples">💡 Usage Examples</h2>
+<section id="basic-usage" class="level3">
+<h3 class="anchored" data-anchor-id="basic-usage">Basic Usage</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cccc)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Import data</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>corpus <span class="ot">&lt;-</span> <span class="fu">importData</span>(<span class="st">"tdm.csv"</span>, <span class="st">"corpus_info.csv"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Create temporal plot with default settings</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">colMassPlot</span>(corpus)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<hr>
+</section>
+</section>
+<section id="interpreting-the-plot" class="level2">
+<h2 class="anchored" data-anchor-id="interpreting-the-plot">🔍 Interpreting the Plot</h2>
+<section id="common-patterns" class="level3">
+<h3 class="anchored" data-anchor-id="common-patterns">Common Patterns</h3>
+<section id="parallel-growth" class="level4">
+<h4 class="anchored" data-anchor-id="parallel-growth">1. <strong>Parallel Growth</strong></h4>
+<p>All four lines increase proportionally over time.</p>
+<pre><code>📈 All metrics ↗️</code></pre>
+<p><strong>Interpretation</strong>: Consistent corpus expansion with stable composition</p>
+</section>
+<section id="diverging-trends" class="level4">
+<h4 class="anchored" data-anchor-id="diverging-trends">2. <strong>Diverging Trends</strong></h4>
+<p>Lines separate or converge over time.</p>
+<pre><code>📈 nDoc &amp; dimCorpus ↗️ but Csum ↘️</code></pre>
+<p><strong>Interpretation</strong>: Corpus growing but keyword density decreasing (vocabulary diversification)</p>
+</section>
+<section id="spikes-or-drops" class="level4">
+<h4 class="anchored" data-anchor-id="spikes-or-drops">3. <strong>Spikes or Drops</strong></h4>
+<p>Sudden changes in one or more metrics.</p>
+<pre><code>📈 nDoc: sudden spike in specific year</code></pre>
+<p><strong>Interpretation</strong>: Intensive data collection period or archival event</p>
+</section>
+<section id="plateau-patterns" class="level4">
+<h4 class="anchored" data-anchor-id="plateau-patterns">4. <strong>Plateau Patterns</strong></h4>
+<p>Metrics level off after initial growth.</p>
+<pre><code>📈 Early growth → → → flat</code></pre>
+<p><strong>Interpretation</strong>: Complete historical coverage or saturation</p>
+<hr>
+</section>
+</section>
+</section>
+<section id="what-to-look-for" class="level2">
+<h2 class="anchored" data-anchor-id="what-to-look-for">🎯 What to Look For</h2>
+<section id="temporal-coverage" class="level3">
+<h3 class="anchored" data-anchor-id="temporal-coverage">1. <strong>Temporal Coverage</strong></h3>
+<ul>
+<li>Are all time periods equally represented?</li>
+<li>Are there gaps or sparse periods?</li>
+<li>Does coverage increase toward recent years?</li>
+</ul>
+</section>
+<section id="growth-patterns" class="level3">
+<h3 class="anchored" data-anchor-id="growth-patterns">2. <strong>Growth Patterns</strong></h3>
+<ul>
+<li>Linear growth (steady increase)</li>
+<li>Exponential growth (accelerating increase)</li>
+<li>Irregular patterns (varying collection intensity)</li>
+</ul>
+</section>
+<section id="proportionality" class="level3">
+<h3 class="anchored" data-anchor-id="proportionality">3. <strong>Proportionality</strong></h3>
+<ul>
+<li>Do nDoc and dimCorpus grow together? (expected)</li>
+<li>Does Csum follow dimCorpus? (indicates keyword coverage)</li>
+<li>Are there periods where Mcf spikes? (term dominance)</li>
+</ul>
+</section>
+<section id="anomalies" class="level3">
+<h3 class="anchored" data-anchor-id="anomalies">4. <strong>Anomalies</strong></h3>
+<ul>
+<li>Sudden drops (potential data quality issues)</li>
+<li>Isolated spikes (special events or archival additions)</li>
+<li>Plateaus (collection boundaries)</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="use-cases" class="level2">
+<h2 class="anchored" data-anchor-id="use-cases">📈 Use Cases</h2>
+<section id="data-quality-assessment" class="level3">
+<h3 class="anchored" data-anchor-id="data-quality-assessment">1. <strong>Data Quality Assessment</strong></h3>
+<p>Verify that corpus metadata is complete and consistent across time periods.</p>
+</section>
+<section id="normalization-decision" class="level3">
+<h3 class="anchored" data-anchor-id="normalization-decision">2. <strong>Normalization Decision</strong></h3>
+<p>Determine whether normalization is necessary based on corpus size variation.</p>
+</section>
+<section id="historical-context" class="level3">
+<h3 class="anchored" data-anchor-id="historical-context">3. <strong>Historical Context</strong></h3>
+<p>Understand how corpus collection reflects historical publication/archival patterns.</p>
+</section>
+<section id="methodology-documentation" class="level3">
+<h3 class="anchored" data-anchor-id="methodology-documentation">4. <strong>Methodology Documentation</strong></h3>
+<p>Create figures for research papers showing corpus characteristics.</p>
+</section>
+<section id="comparative-studies" class="level3">
+<h3 class="anchored" data-anchor-id="comparative-studies">5. <strong>Comparative Studies</strong></h3>
+<p>Compare temporal structures of different corpora or subcorpora.</p>
+<hr>
+</section>
+</section>
+<section id="tips-best-practices" class="level2">
+<h2 class="anchored" data-anchor-id="tips-best-practices">💡 Tips &amp; Best Practices</h2>
+<ol type="1">
+<li><strong>Always check this plot</strong> before normalization to understand corpus growth patterns</li>
+<li><strong>Experiment with scaling</strong> to find the most informative visualization</li>
+<li><strong>Compare with rowMassPlot()</strong> for comprehensive data exploration</li>
+<li><strong>Document temporal patterns</strong> in your methodology section</li>
+<li><strong>Use r parameter</strong> for long time series (&gt;30 years) to avoid label clutter</li>
+<li><strong>Save high-resolution versions</strong> for publications</li>
+<li><strong>Consider normalization</strong> if you see large variations in corpus size across time</li>
+</ol>
+<hr>
+</section>
+<section id="see-also" class="level2">
+<h2 class="anchored" data-anchor-id="see-also">📚 See Also</h2>
+<ul>
+<li><a href="importData.html"><code>importData()</code></a> — Import corpus data and metadata</li>
+<li><a href="rowMassPlot.html"><code>rowMassPlot()</code></a> — Visualize keyword frequency distribution</li>
+<li><a href="normalization.html"><code>normalization()</code></a> — Normalize frequencies (often needed when corpus size varies)</li>
+<li><a href="curvePlot.html"><code>curvePlot()</code></a> — Visualize individual keyword trajectories</li>
+</ul>
+<hr>
+
+
 </section>
 
 </main> <!-- /main -->

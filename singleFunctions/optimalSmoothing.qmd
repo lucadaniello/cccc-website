@@ -1,51 +1,267 @@
 ---
-title: ""
+title: "optimalSmoothing()"
 format:
   html:
-    toc: false
+    toc: true
+    toc-depth: 3
 page-layout: full
 ---
-  
-# optimalSmoothing()
-  
-Selection of Optimal Spline Degree and Penalization Strategy
+**Select Optimal Spline Degree and Penalization Strategy**
+
+The `optimalSmoothing()` function compares multiple smoothing strategies to identify the best combination of spline degree and penalty type. It synthesizes results from multiple `smoothingSelection()` runs to make a final, informed decision about optimal smoothing parameters.
 
 ---
 
 ## 🔹 Function Definition
 
 ```r
-optimalSmoothing <- (smoothing_results, plot = TRUE)
+optimalSmoothing(
+  smoothing_results,
+  plot = TRUE
+)
 ```
 
-## 🎯 Aim
+---
 
-The `optimalSmoothing()` function compares multiple **smoothing strategies**—each defined by a specific **penalization type**—to identify the optimal combination of **spline degree (`m`)** and **penalty** that minimizes the **Generalized Cross-Validation (GCV)** criterion.  
-It takes as input the results produced by multiple calls to `smoothingSelection()` (one per penalty type) and constructs a **comparison matrix** of GCV values across all spline degrees and penalties.
+## 🎯 Purpose
 
-Optionally, it can also generate **diagnostic plots** showing how `GCV`, `OCV`, `df`, and `SSE` vary across spline degrees and penalty types, supporting a visual evaluation of the optimal smoothing configuration.
+While `smoothingSelection()` finds optimal parameters for a **single** penalty type, `optimalSmoothing()` compares **multiple** penalty strategies to find the globally optimal smoothing configuration.
+
+This function helps you:
+
+1. **Compare penalty strategies** — Evaluate different derivative-based penalization approaches
+2. **Make final parameter decisions** — Select the single best combination of degree and penalty
+3. **Visualize trade-offs** — See how different strategies perform across metrics
+4. **Ensure robustness** — Verify that your choice is stable across different penalties
+5. **Document methodology** — Provide systematic justification for smoothing choices
+6. **Prepare for clustering** — Finalize parameters before applying to all keywords
+
+The function creates a comprehensive comparison matrix and diagnostic plots to support evidence-based parameter selection.
+
+---
+
+## 🧮 Understanding Penalty Types
+
+Different penalty types control smoothness in different ways:
+
+### **"m-2"** — Adaptive Penalty (Recommended)
+- Penalizes the (m-2)th derivative
+- Adapts to spline degree automatically
+- **Use when**: You want penalty that scales with spline complexity
+- **Example**: For m=4, penalizes 2nd derivative (curvature)
+
+### **"2"** — Second Derivative Penalty
+- Always penalizes curvature (second derivative)
+- Independent of spline degree
+- **Use when**: You want consistent curvature control
+- **Example**: Prevents sharp bends in trajectories
+
+### **"3"** — Third Derivative Penalty
+- Penalizes rate of curvature change (wiggliness)
+- Requires m ≥ 4
+- **Use when**: You want to control oscillations
+- **Example**: Smooths out rapid fluctuations
+
+### **"0"** — Ridge Penalty
+- Penalizes coefficient magnitudes
+- No derivative involved
+- **Use when**: You want simple shrinkage
+- **Example**: Reduces overall curve amplitude
 
 ---
 
 ## ⚙️ Arguments
 
-| Argument | Type | Description |
-|-----------|------|-------------|
-| **smoothing_results** | List | A named list of results from `smoothingSelection()`, with each entry corresponding to a penalty type (`"m-2"`, `"2"`, `"1"`, `"0"`). |
-| **plot** | Logical | If `TRUE` (default), returns comparative `ggplot2`-based visualizations of smoothing diagnostics across penalty types and spline degrees. |
+| Argument | Type | Default | Description |
+|----------|------|---------|-------------|
+| **smoothing_results** | Named list | *required* | A named list where each element is the output from `smoothingSelection()` with a different penalty type. Names should be penalty types: `"m-2"`, `"2"`, `"3"`, `"0"`. |
+| **plot** | Logical | `TRUE` | If `TRUE`, generates comparative diagnostic plots showing GCV, OCV, df, and SSE across penalty types and spline degrees. |
 
 ---
 
 ## 📦 Output
 
-Returns a **list** containing the optimal smoothing configuration, diagnostic matrices, and (optionally) comparative plots.
+Returns a **list** with the optimal smoothing configuration and comparative diagnostics:
 
-| Element | Description |
-|----------|-------------|
-| **optSmoothing** | Full set of results from the optimal penalization strategy, as returned by `smoothingSelection()`. |
-| **m_opt** | Integer. Optimal spline degree that minimizes the GCV across all penalty types. |
-| **penalty_opt** | Character. Optimal penalty type (`"m-2"`, `"2"`, `"1"`, or `"0"`). |
-| **lambda_opt** | Numeric. Optimal log10(λ) value corresponding to the selected degree and penalty. |
-| **gcv_matrix** | Numeric matrix of GCV values, where rows correspond to penalties and columns to spline degrees. |
-| **plots** | (Optional) List of `ggplot2` objects for `GCV`, `OCV`, `df`, and `SSE` comparisons across penalties and degrees. |
-| **call** | The matched function call, useful for reproducibility. |
+| Element | Type | Description |
+|---------|------|-------------|
+| **optSmoothing** | list | Complete results from `smoothingSelection()` for the optimal penalty strategy. Contains all diagnostic information for the best configuration. |
+| **m_opt** | integer | Optimal spline degree (m) that minimizes GCV across all penalty types and degrees. |
+| **penalty_opt** | character | Optimal penalty type (e.g., `"m-2"`, `"2"`, `"3"`, `"0"`). |
+| **lambda_opt** | numeric | Optimal log₁₀(λ) value corresponding to the selected degree and penalty combination. |
+| **gcv_matrix** | matrix | Comparison matrix of GCV values with penalties as rows and degrees as columns. Lower values = better. |
+| **plots** | list | (If `plot = TRUE`) List of `ggplot2` objects showing GCV, OCV, df, and SSE comparisons. |
+| **call** | call | Function call for reproducibility. |
+
+---
+
+## 💡 Usage Examples
+
+### Basic Usage (Two Penalties)
+
+```r
+library(cccc)
+
+# Import and normalize data
+corpus <- importData("tdm.csv", "corpus_info.csv")
+corpus_norm <- normalization(corpus, normty = "nc")
+
+# Run smoothingSelection for different penalty types
+smooth_m2 <- smoothingSelection(corpus_norm, penalty_type = "m-2", plot = FALSE)
+smooth_2 <- smoothingSelection(corpus_norm, penalty_type = "2", plot = FALSE)
+
+# Compare and select optimal
+results <- list("m-2" = smooth_m2, "2" = smooth_2)
+optimal <- optimalSmoothing(results, plot = TRUE)
+
+# View optimal parameters
+cat("Optimal degree:", optimal$m_opt, "\n")
+cat("Optimal penalty:", optimal$penalty_opt, "\n")
+cat("Optimal log10(lambda):", optimal$lambda_opt, "\n")
+```
+
+### Complete Comparison (Four Penalties)
+
+```r
+# Test all common penalty types
+smooth_m2 <- smoothingSelection(corpus_norm, penalty_type = "m-2", plot = FALSE)
+smooth_2 <- smoothingSelection(corpus_norm, penalty_type = "2", plot = FALSE)
+smooth_3 <- smoothingSelection(corpus_norm, penalty_type = "3", plot = FALSE)
+smooth_0 <- smoothingSelection(corpus_norm, penalty_type = "0", plot = FALSE)
+
+# Combine results
+all_results <- list(
+  "m-2" = smooth_m2,
+  "2" = smooth_2,
+  "3" = smooth_3,
+  "0" = smooth_0
+)
+
+# Find optimal
+optimal <- optimalSmoothing(all_results, plot = TRUE)
+
+# View GCV comparison matrix
+print(optimal$gcv_matrix)
+```
+---
+
+## 📊 Interpreting the Output
+
+### 1. GCV Comparison Matrix
+
+```r
+optimal$gcv_matrix
+```
+
+**Example output:**
+```
+        degree_2  degree_3  degree_4  degree_5
+m-2     0.0125    0.0108    0.0095    0.0102
+2       0.0131    0.0112    0.0098    0.0105
+3       0.0145    0.0120    0.0110    0.0115
+```
+
+**How to read:**
+- **Rows**: Penalty types
+- **Columns**: Spline degrees
+- **Values**: GCV scores (lower = better)
+- **Minimum**: Optimal combination (e.g., degree 4 with "m-2" penalty)
+
+### 2. Diagnostic Plots
+
+Four comparative plots are generated (if `plot = TRUE`):
+
+#### **GCV Comparison Plot**
+Shows GCV across degrees for each penalty type.
+- **Find the lowest point** across all lines
+- **Check for convergence** — do different penalties agree?
+
+#### **OCV Comparison Plot**
+Shows ordinary cross-validation scores.
+- Should align with GCV patterns
+- **Discrepancies** may indicate overfitting
+
+#### **Degrees of Freedom Plot**
+Shows model complexity for each penalty.
+- **Higher df** = more flexible model
+- **Compare at same degree** — penalties affect complexity differently
+
+#### **SSE Comparison Plot**
+Shows fit to data for each penalty.
+- **Lower SSE** = better fit to observed data
+- **Trade-off with smoothness** — lowest SSE may overfit
+
+---
+
+## 🎯 Decision-Making Guide
+
+### Step 1: Examine GCV Matrix
+
+```r
+# Find minimum GCV
+min_gcv <- which(optimal$gcv_matrix == min(optimal$gcv_matrix), arr.ind = TRUE)
+best_penalty <- rownames(optimal$gcv_matrix)[min_gcv[1]]
+best_degree <- as.numeric(sub("degree_", "", colnames(optimal$gcv_matrix)[min_gcv[2]]))
+```
+
+### Step 2: Check Plot Patterns
+
+**Good signs:**
+- ✅ Clear minimum in GCV plot
+- ✅ GCV and OCV agree
+- ✅ Different penalties converge to similar degree
+- ✅ df values are reasonable (not too extreme)
+
+**Warning signs:**
+- ⚠️ GCV keeps decreasing (no clear minimum)
+- ⚠️ Large discrepancy between GCV and OCV
+- ⚠️ Very different optimal degrees across penalties
+- ⚠️ Extremely high or low df values
+
+### Step 3: Validate Choice
+
+```r
+# Use plotSuboptimalFits to visualize smoothed curves
+# (covered in next function documentation)
+```
+---
+
+## 📈 Use Cases
+
+### 1. **Final Parameter Selection**
+After exploring with `smoothingSelection()`, make final decision systematically.
+
+### 2. **Robustness Check**
+Verify that conclusions don't depend critically on penalty choice.
+
+### 3. **Method Comparison Studies**
+Compare how different penalty strategies affect results in your domain.
+
+### 4. **Publication Preparation**
+Document systematic parameter selection with GCV matrix and plots.
+
+### 5. **Multi-Corpus Analysis**
+Find consistent smoothing strategy across different corpora.
+
+---
+
+## 💡 Tips & Best Practices
+
+1. **Start with 2-3 penalties** — Testing all four is often unnecessary
+2. **"m-2" is usually best** — It adapts well to different degrees
+3. **Check consistency** — If penalties disagree strongly, investigate data quality
+4. **Don't over-optimize** — Small GCV differences (< 1-2%) are not meaningful
+5. **Consider computation** — More penalties = longer runtime
+6. **Document choices** — Save gcv_matrix for methods sections
+7. **Validate visually** — Always check plots, don't rely only on numbers
+8. **Use practical constraints** — Degrees 3-5 cover most use cases
+
+---
+
+## 📚 See Also
+
+- [`smoothingSelection()`](smoothingSelection.html) — Find optimal λ for each penalty (prerequisite)
+- [`plotSuboptimalFits()`](plotSuboptimalFits.html) — Visualize smoothed curves with selected parameters
+- [`curvePlot()`](curvePlot.html) — Visualize raw trajectories before smoothing
+- [`normalization()`](normalization.html) — Normalize data before smoothing
+

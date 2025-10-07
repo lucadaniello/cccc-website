@@ -1,63 +1,243 @@
 ---
-title: ""
+title: "colMassPlot()"
 format:
   html:
-    toc: false
+    toc: true
+    toc-depth: 3
 page-layout: full
 ---
+**Visualize Temporal Dimensions of Corpus Structure**
 
-# colMassPlot()
+The `colMassPlot()` function creates a multi-line plot showing how four key corpus metrics evolve over time. This provides crucial insights into corpus growth patterns, data collection trends, and temporal coverage.
 
-Plot Temporal Dimensions of a Corpus
 ---
 
 ## 🔹 Function Definition
 
 ```r
-colMassPlot <- (data,
-                        sc = c(1, 10, 10, 1),
-                        r = 1,
-                        textty = "text",
-                        themety = "light",
-                        size_b = 2.5,
-                        x_lab = "years")
+colMassPlot(
+  data,
+  sc = c(1, 10, 10, 1),
+  r = 1,
+  textty = "text",
+  themety = "light",
+  size_b = 2.5,
+  x_lab = "years"
+)
 ```
 
-## 🎯 Aim
+---
 
-The `colMassPlot()` function creates a **multi-line plot** displaying the temporal evolution of four corpus-level metrics:
+## 🎯 Purpose
 
-- Number of documents (`nDoc`)
-- Number of tokens (`dimCorpus`)
-- Sum of keyword frequencies (`Csum`)
-- Maximum keyword frequency (`Mcf`)
+Understanding the temporal structure of your corpus is essential for interpreting frequency trends. The `colMassPlot()` function helps you:
 
-All measures are **rescaled by user-defined factors** to improve visual comparability across different dimensions of the corpus.
+1. **Visualize corpus growth** — See how the corpus expands over time
+2. **Identify collection patterns** — Detect periods of intensive/sparse data collection
+3. **Assess temporal balance** — Evaluate whether time periods are comparably represented
+4. **Detect anomalies** — Spot unusual spikes or drops in corpus size
+5. **Contextualize term frequencies** — Understand how corpus size affects frequency patterns
+6. **Validate data quality** — Ensure corpus metadata is consistent and complete
+
+This function is typically used **after** `importData()` and alongside `rowMassPlot()` for comprehensive data exploration before normalization.
 
 ---
 
 ## ⚙️ Arguments
 
-| Argument | Type | Description |
-|-----------|------|-------------|
-| **data** | List | A list containing the output of `importData()`. |
-| **sc** | Numeric vector (length = 4) | Scaling factors for `nDoc`, `dimCorpus`, `Csum`, and `Mcf`. Default: `c(1, 10, 10, 1)`. |
-| **r** | Integer | Interval for thinning x-axis labels. Default: `1` (shows all years). |
-| **textty** | Character | Unit of analysis for legend labels (e.g., `"text"`, `"place"`, `"paper"`). |
-| **themety** | Character | Plot theme type. Either `"light"` (default) or `"dark"`. |
-| **size_b** | Numeric | Base size for bar lines. Default: `2.5`. |
-| **x_lab** | Character | X-axis label. Default: `"year"`. |
+| Argument | Type | Default | Description |
+|----------|------|---------|-------------|
+| **data** | List | *required* | A list object returned by `importData()`, containing the TDM and corpus metadata. |
+| **sc** | Numeric vector | `c(1, 10, 10, 1)` | Scaling factors for the four metrics (in order):<br>1. `nDoc` (number of documents)<br>2. `dimCorpus` (total tokens)<br>3. `Csum` (sum of keyword frequencies)<br>4. `Mcf` (maximum keyword frequency)<br>Adjust to make lines visually comparable. |
+| **r** | Integer | `1` | Interval for x-axis label thinning. `r = 2` shows every 2nd year, `r = 5` shows every 5th year, etc. Useful for long time series. |
+| **textty** | Character | `"text"` | Label for the unit of analysis in the legend (e.g., `"text"`, `"document"`, `"paper"`, `"article"`). |
+| **themety** | Character | `"light"` | Visual theme for the plot:<br>• `"light"`: Light background (default)<br>• `"dark"`: Dark background |
+| **size_b** | Numeric | `2.5` | Line thickness for the plot. Increase for bolder lines, decrease for finer lines. |
+| **x_lab** | Character | `"years"` | Label for the x-axis (e.g., `"Years"`, `"Time Period"`, `"Publication Year"`). |
+
+---
+
+## 📊 Corpus Metrics Explained
+
+### 1. **nDoc** — Number of Documents
+The count of documents/texts in the corpus for each time period.
+
+**Insights:**
+- Shows data collection intensity
+- Reveals archival coverage patterns
+- Indicates periods of high/low publication activity
+
+### 2. **dimCorpus** — Total Tokens
+The total number of words/tokens in all documents for each time period.
+
+**Insights:**
+- Represents overall corpus size
+- Important for normalization decisions
+- Shows writing/publication volume trends
+
+### 3. **Csum** — Sum of Keyword Frequencies
+The total frequency of all keywords across all documents in each time period.
+
+**Insights:**
+- Indicates keyword density in the corpus
+- Shows overall vocabulary coverage
+- Helps assess keyword selection adequacy
+
+### 4. **Mcf** — Maximum Keyword Frequency
+The highest frequency of any single keyword in each time period.
+
+**Insights:**
+- Identifies periods dominated by specific terms
+- Shows potential outliers or dominant topics
+- Indicates vocabulary concentration patterns
+
+---
+
+## 🎨 Understanding Scaling Factors
+
+Different metrics have vastly different scales:
+- `nDoc` might range from 10-100
+- `dimCorpus` might range from 10,000-1,000,000
+- `Csum` might range from 5,000-500,000
+- `Mcf` might range from 50-5,000
+
+**Scaling makes visual comparison possible** by bringing all metrics to similar ranges.
+
+**Default scaling:** `c(1, 10, 10, 1)`
+- `nDoc`: ×1 (no scaling)
+- `dimCorpus`: ×10 (reduces by factor of 10)
+- `Csum`: ×10 (reduces by factor of 10)
+- `Mcf`: ×1 (no scaling)
+
+**Adjust scaling** if lines are too far apart or overlapping too much.
 
 ---
 
 ## 📦 Output
 
-Returns a **`ggplot2` object** representing the temporal evolution of corpus structure.
+Returns a **`ggplot2` object** with the following characteristics:
 
 | Element | Description |
-|----------|-------------|
-| **x-axis** | Years. |
-| **y-axis** | Rescaled measures representing corpus size and term frequencies. |
-| **Lines** | Show the evolution of `nDoc`, `dimCorpus`, `Csum`, and `Mcf` over time. |
-| **Colors** | Distinguish between the four corpus metrics. |
-| **Legend** | Provides details about scaling factors and corresponding measures. |
+|---------|-------------|
+| **X-axis** | Time periods (years) from the corpus metadata |
+| **Y-axis** | Rescaled values of the four corpus metrics |
+| **Lines** | Four colored lines representing each metric's temporal evolution |
+| **Legend** | Shows metric names with scaling factors (e.g., "nDoc (×1)", "dimCorpus (×10)") |
+| **Theme** | Light or dark background based on `themety` parameter |
+
+---
+
+## 💡 Usage Examples
+
+### Basic Usage
+
+```r
+library(cccc)
+
+# Import data
+corpus <- importData("tdm.csv", "corpus_info.csv")
+
+# Create temporal plot with default settings
+colMassPlot(corpus)
+```
+
+
+---
+
+## 🔍 Interpreting the Plot
+
+### Common Patterns
+
+#### 1. **Parallel Growth**
+All four lines increase proportionally over time.
+```
+📈 All metrics ↗️
+```
+**Interpretation**: Consistent corpus expansion with stable composition
+
+#### 2. **Diverging Trends**
+Lines separate or converge over time.
+```
+📈 nDoc & dimCorpus ↗️ but Csum ↘️
+```
+**Interpretation**: Corpus growing but keyword density decreasing (vocabulary diversification)
+
+#### 3. **Spikes or Drops**
+Sudden changes in one or more metrics.
+```
+📈 nDoc: sudden spike in specific year
+```
+**Interpretation**: Intensive data collection period or archival event
+
+#### 4. **Plateau Patterns**
+Metrics level off after initial growth.
+```
+📈 Early growth → → → flat
+```
+**Interpretation**: Complete historical coverage or saturation
+
+---
+
+## 🎯 What to Look For
+
+### 1. **Temporal Coverage**
+- Are all time periods equally represented?
+- Are there gaps or sparse periods?
+- Does coverage increase toward recent years?
+
+### 2. **Growth Patterns**
+- Linear growth (steady increase)
+- Exponential growth (accelerating increase)
+- Irregular patterns (varying collection intensity)
+
+### 3. **Proportionality**
+- Do nDoc and dimCorpus grow together? (expected)
+- Does Csum follow dimCorpus? (indicates keyword coverage)
+- Are there periods where Mcf spikes? (term dominance)
+
+### 4. **Anomalies**
+- Sudden drops (potential data quality issues)
+- Isolated spikes (special events or archival additions)
+- Plateaus (collection boundaries)
+
+---
+
+## 📈 Use Cases
+
+### 1. **Data Quality Assessment**
+Verify that corpus metadata is complete and consistent across time periods.
+
+### 2. **Normalization Decision**
+Determine whether normalization is necessary based on corpus size variation.
+
+### 3. **Historical Context**
+Understand how corpus collection reflects historical publication/archival patterns.
+
+### 4. **Methodology Documentation**
+Create figures for research papers showing corpus characteristics.
+
+### 5. **Comparative Studies**
+Compare temporal structures of different corpora or subcorpora.
+
+---
+
+## 💡 Tips & Best Practices
+
+1. **Always check this plot** before normalization to understand corpus growth patterns
+2. **Experiment with scaling** to find the most informative visualization
+3. **Compare with rowMassPlot()** for comprehensive data exploration
+4. **Document temporal patterns** in your methodology section
+5. **Use r parameter** for long time series (>30 years) to avoid label clutter
+6. **Save high-resolution versions** for publications
+7. **Consider normalization** if you see large variations in corpus size across time
+
+---
+
+## 📚 See Also
+
+- [`importData()`](importData.html) — Import corpus data and metadata
+- [`rowMassPlot()`](rowMassPlot.html) — Visualize keyword frequency distribution
+- [`normalization()`](normalization.html) — Normalize frequencies (often needed when corpus size varies)
+- [`curvePlot()`](curvePlot.html) — Visualize individual keyword trajectories
+
+---

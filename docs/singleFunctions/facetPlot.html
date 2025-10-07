@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>facetplot</title>
+<title>facetPlot()</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -131,6 +131,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Functions</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="../download.html"> 
+<span class="menu-text">Download</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="../use-cases.html"> 
 <span class="menu-text">Use Cases</span></a>
   </li>  
@@ -164,46 +168,149 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#function-definition" id="toc-function-definition" class="nav-link active" data-scroll-target="#function-definition">🔹 Function Definition</a></li>
+  <li><a href="#purpose" id="toc-purpose" class="nav-link" data-scroll-target="#purpose">🎯 Purpose</a></li>
+  <li><a href="#keyword-selection-strategies" id="toc-keyword-selection-strategies" class="nav-link" data-scroll-target="#keyword-selection-strategies">🧮 Keyword Selection Strategies</a>
+  <ul class="collapse">
+  <li><a href="#by-frequency-type-frequency" id="toc-by-frequency-type-frequency" class="nav-link" data-scroll-target="#by-frequency-type-frequency">1. <strong>By Frequency</strong> (<code>type = "frequency"</code>)</a></li>
+  <li><a href="#random-selection-type-random" id="toc-random-selection-type-random" class="nav-link" data-scroll-target="#random-selection-type-random">2. <strong>Random Selection</strong> (<code>type = "random"</code>)</a></li>
+  <li><a href="#custom-list-type-list" id="toc-custom-list-type-list" class="nav-link" data-scroll-target="#custom-list-type-list">3. <strong>Custom List</strong> (<code>type = "list"</code>)</a></li>
+  </ul></li>
+  <li><a href="#arguments" id="toc-arguments" class="nav-link" data-scroll-target="#arguments">⚙️ Arguments</a></li>
+  <li><a href="#understanding-scales" id="toc-understanding-scales" class="nav-link" data-scroll-target="#understanding-scales">📊 Understanding Scales</a>
+  <ul class="collapse">
+  <li><a href="#fixed-scales-scales-fixed" id="toc-fixed-scales-scales-fixed" class="nav-link" data-scroll-target="#fixed-scales-scales-fixed">Fixed Scales (<code>scales = "fixed"</code>)</a></li>
+  <li><a href="#free-scales-scales-free-or-free_y" id="toc-free-scales-scales-free-or-free_y" class="nav-link" data-scroll-target="#free-scales-scales-free-or-free_y">Free Scales (<code>scales = "free"</code> or <code>"free_y"</code>)</a></li>
+  </ul></li>
+  <li><a href="#usage-examples" id="toc-usage-examples" class="nav-link" data-scroll-target="#usage-examples">💡 Usage Examples</a>
+  <ul class="collapse">
+  <li><a href="#basic-usage---top-keywords-per-zone" id="toc-basic-usage---top-keywords-per-zone" class="nav-link" data-scroll-target="#basic-usage---top-keywords-per-zone">Basic Usage - Top Keywords per Zone</a></li>
+  <li><a href="#random-selection" id="toc-random-selection" class="nav-link" data-scroll-target="#random-selection">Random Selection</a></li>
+  <li><a href="#custom-keyword-list" id="toc-custom-keyword-list" class="nav-link" data-scroll-target="#custom-keyword-list">Custom Keyword List</a></li>
+  </ul></li>
+  <li><a href="#interpreting-faceted-plots" id="toc-interpreting-faceted-plots" class="nav-link" data-scroll-target="#interpreting-faceted-plots">🔍 Interpreting Faceted Plots</a>
+  <ul class="collapse">
+  <li><a href="#what-to-look-for-in-each-panel" id="toc-what-to-look-for-in-each-panel" class="nav-link" data-scroll-target="#what-to-look-for-in-each-panel">What to Look For in Each Panel</a></li>
+  <li><a href="#cross-panel-comparisons" id="toc-cross-panel-comparisons" class="nav-link" data-scroll-target="#cross-panel-comparisons">Cross-Panel Comparisons</a></li>
+  </ul></li>
+  <li><a href="#choosing-between-fixed-and-free-scales" id="toc-choosing-between-fixed-and-free-scales" class="nav-link" data-scroll-target="#choosing-between-fixed-and-free-scales">🎯 Choosing Between Fixed and Free Scales</a>
+  <ul class="collapse">
+  <li><a href="#use-fixed-scales-when" id="toc-use-fixed-scales-when" class="nav-link" data-scroll-target="#use-fixed-scales-when">Use Fixed Scales When:</a></li>
+  <li><a href="#use-free-scales-when" id="toc-use-free-scales-when" class="nav-link" data-scroll-target="#use-free-scales-when">Use Free Scales When:</a></li>
+  </ul></li>
+  <li><a href="#use-cases" id="toc-use-cases" class="nav-link" data-scroll-target="#use-cases">📈 Use Cases</a>
+  <ul class="collapse">
+  <li><a href="#zone-comparison-studies" id="toc-zone-comparison-studies" class="nav-link" data-scroll-target="#zone-comparison-studies">1. <strong>Zone Comparison Studies</strong></a></li>
+  <li><a href="#pattern-discovery" id="toc-pattern-discovery" class="nav-link" data-scroll-target="#pattern-discovery">2. <strong>Pattern Discovery</strong></a></li>
+  <li><a href="#publication-figures" id="toc-publication-figures" class="nav-link" data-scroll-target="#publication-figures">3. <strong>Publication Figures</strong></a></li>
+  <li><a href="#presentation-material" id="toc-presentation-material" class="nav-link" data-scroll-target="#presentation-material">4. <strong>Presentation Material</strong></a></li>
+  <li><a href="#data-exploration" id="toc-data-exploration" class="nav-link" data-scroll-target="#data-exploration">5. <strong>Data Exploration</strong></a></li>
+  <li><a href="#validation" id="toc-validation" class="nav-link" data-scroll-target="#validation">6. <strong>Validation</strong></a></li>
+  <li><a href="#hypothesis-testing" id="toc-hypothesis-testing" class="nav-link" data-scroll-target="#hypothesis-testing">7. <strong>Hypothesis Testing</strong></a></li>
+  </ul></li>
+  <li><a href="#tips-best-practices" id="toc-tips-best-practices" class="nav-link" data-scroll-target="#tips-best-practices">💡 Tips &amp; Best Practices</a></li>
+  <li><a href="#see-also" id="toc-see-also" class="nav-link" data-scroll-target="#see-also">📚 See Also</a></li>
+  <li><a href="#need-help" id="toc-need-help" class="nav-link" data-scroll-target="#need-help">💬 Need Help?</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content column-page" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content column-page-left" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">facetPlot()</h1>
+</div>
 
 
 
+<div class="quarto-title-meta column-page-left">
 
-<section id="facetplot" class="level1">
-<h1>facetPlot()</h1>
-<p>Faceted Plot of Keyword Frequency Curves</p>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><strong>Create Faceted Visualizations of Keyword Trajectories by Zone</strong></p>
+<p>The <code>facetPlot()</code> function creates multi-panel plots showing keyword frequency trajectories separated by frequency zones. This faceted approach allows clear comparison of temporal patterns across different vocabulary strata without visual clutter.</p>
 <hr>
 <section id="function-definition" class="level2">
 <h2 class="anchored" data-anchor-id="function-definition">🔹 Function Definition</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>facetPlot <span class="ot">&lt;-</span> (data, <span class="at">keyword_selection =</span> <span class="fu">list</span>(<span class="at">type=</span><span class="st">"frequency"</span>, </span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">n=</span><span class="dv">3</span>, <span class="at">kw.list=</span><span class="cn">NULL</span>),</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">r =</span> <span class="dv">4</span>, <span class="at">scales =</span> <span class="st">"fixed"</span>, </span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">leg =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">themety =</span> <span class="st">"light"</span>,</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">size_class =</span> <span class="cn">NULL</span>, </span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">x_lab =</span> <span class="st">"year"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="aim" class="level2">
-<h2 class="anchored" data-anchor-id="aim">🎯 Aim</h2>
-<p>The <code>facetPlot()</code> function produces a <strong>faceted visualization of keyword frequency trajectories</strong> over time, grouped by frequency zones (e.g., <em>high</em>, <em>medium</em>, <em>low</em>).<br>
-It allows users to highlight a subset of keywords either by <strong>highest frequency</strong>, <strong>random sampling</strong>, or <strong>custom selection</strong>, displaying them in distinct colors within each zone.<br>
-Each facet corresponds to a frequency zone, enabling a clear comparative view of the temporal behavior of keywords across different frequency ranges.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">facetPlot</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  data,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">keyword_selection =</span> <span class="fu">list</span>(<span class="at">type =</span> <span class="st">"frequency"</span>, <span class="at">n =</span> <span class="dv">3</span>, <span class="at">kw.list =</span> <span class="cn">NULL</span>),</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">r =</span> <span class="dv">4</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">scales =</span> <span class="st">"fixed"</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">leg =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">themety =</span> <span class="st">"light"</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">size_class =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">x_lab =</span> <span class="st">"years"</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <hr>
+</section>
+<section id="purpose" class="level2">
+<h2 class="anchored" data-anchor-id="purpose">🎯 Purpose</h2>
+<p>When visualizing temporal patterns across many keywords, overlapping trajectories can become difficult to interpret. Faceting by frequency zone provides clarity by:</p>
+<ol type="1">
+<li><strong>Separating complexity</strong> — Each zone displayed in its own panel</li>
+<li><strong>Enabling comparisons</strong> — Easy to compare patterns across zones</li>
+<li><strong>Reducing clutter</strong> — Keywords don’t overlap across different frequency ranges</li>
+<li><strong>Highlighting representatives</strong> — Emphasize specific keywords within each zone</li>
+<li><strong>Supporting analysis</strong> — Different scales can reveal zone-specific patterns</li>
+<li><strong>Creating clarity</strong> — Clean, organized visualizations for publications</li>
+<li><strong>Facilitating interpretation</strong> — Zone-specific dynamics become immediately apparent</li>
+<li><strong>Flexible selection</strong> — Choose keywords by frequency, randomly, or manually</li>
+</ol>
+<p>This function is particularly powerful for corpora with many keywords across diverse frequency ranges.</p>
+<hr>
+</section>
+<section id="keyword-selection-strategies" class="level2">
+<h2 class="anchored" data-anchor-id="keyword-selection-strategies">🧮 Keyword Selection Strategies</h2>
+<p>The <code>keyword_selection</code> parameter controls which keywords are highlighted in each zone:</p>
+<section id="by-frequency-type-frequency" class="level3">
+<h3 class="anchored" data-anchor-id="by-frequency-type-frequency">1. <strong>By Frequency</strong> (<code>type = "frequency"</code>)</h3>
+<p>Selects the <strong>top N</strong> most frequent keywords in each zone.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>keyword_selection <span class="ot">=</span> <span class="fu">list</span>(<span class="at">type =</span> <span class="st">"frequency"</span>, <span class="at">n =</span> <span class="dv">3</span>, <span class="at">kw.list =</span> <span class="cn">NULL</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Use when:</strong> - You want to highlight the most important terms per zone - Exploring core vocabulary within each frequency stratum - Creating representative visualizations</p>
+</section>
+<section id="random-selection-type-random" class="level3">
+<h3 class="anchored" data-anchor-id="random-selection-type-random">2. <strong>Random Selection</strong> (<code>type = "random"</code>)</h3>
+<p>Randomly samples <strong>N</strong> keywords from each zone.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>keyword_selection <span class="ot">=</span> <span class="fu">list</span>(<span class="at">type =</span> <span class="st">"random"</span>, <span class="at">n =</span> <span class="dv">3</span>, <span class="at">kw.list =</span> <span class="cn">NULL</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Use when:</strong> - You want unbiased representation - Exploring general zone behavior - Testing methodology robustness</p>
+</section>
+<section id="custom-list-type-list" class="level3">
+<h3 class="anchored" data-anchor-id="custom-list-type-list">3. <strong>Custom List</strong> (<code>type = "list"</code>)</h3>
+<p>Manually specify which keywords to highlight.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>keyword_selection <span class="ot">=</span> <span class="fu">list</span>(<span class="at">type =</span> <span class="st">"list"</span>, <span class="at">n =</span> <span class="cn">NULL</span>, <span class="at">kw.list =</span> <span class="fu">c</span>(<span class="st">"algorithm"</span>, <span class="st">"data"</span>, <span class="st">"network"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Use when:</strong> - You have specific keywords of interest - Creating targeted visualizations - Following up on previous analyses</p>
+<hr>
+</section>
 </section>
 <section id="arguments" class="level2">
 <h2 class="anchored" data-anchor-id="arguments">⚙️ Arguments</h2>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 36%">
-<col style="width: 20%">
-<col style="width: 43%">
+<col style="width: 26%">
+<col style="width: 15%">
+<col style="width: 23%">
+<col style="width: 34%">
 </colgroup>
 <thead>
 <tr class="header">
 <th>Argument</th>
 <th>Type</th>
+<th>Default</th>
 <th>Description</th>
 </tr>
 </thead>
@@ -211,91 +318,239 @@ Each facet corresponds to a frequency zone, enabling a clear comparative view of
 <tr class="odd">
 <td><strong>data</strong></td>
 <td>List</td>
-<td>A list returned by <code>importData()</code>, containing the term-document matrix in long format and corpus metadata.</td>
+<td><em>required</em></td>
+<td>A list object returned by <code>importData()</code> or <code>normalization()</code>, containing the TDM and corpus metadata.</td>
 </tr>
 <tr class="even">
 <td><strong>keyword_selection</strong></td>
 <td>List</td>
-<td>Specifies how keywords are selected for highlighting. Must include: <br>• <code>type</code> — <code>"frequency"</code>, <code>"random"</code>, or <code>"list"</code> <br>• <code>n</code> — Number of keywords per zone (for <code>"frequency"</code> or <code>"random"</code>) <br>• <code>kw.list</code> — Character vector of custom keywords (for <code>"list"</code>).</td>
+<td>See below</td>
+<td>Controls keyword highlighting:<br>• <code>type</code>: <code>"frequency"</code>, <code>"random"</code>, or <code>"list"</code><br>• <code>n</code>: Number of keywords per zone (for frequency/random)<br>• <code>kw.list</code>: Vector of specific keywords (for list type)</td>
 </tr>
 <tr class="odd">
 <td><strong>r</strong></td>
 <td>Integer</td>
-<td>Interval for thinning x-axis year labels (e.g., show one label every <code>r</code> years). Default: <code>4</code>.</td>
+<td><code>4</code></td>
+<td>Interval for x-axis label thinning. Shows one label every <code>r</code> years.</td>
 </tr>
 <tr class="even">
 <td><strong>scales</strong></td>
 <td>Character</td>
-<td>Whether y-axis scales are <code>"fixed"</code> (default) or <code>"free"</code> across facets.</td>
+<td><code>"fixed"</code></td>
+<td>Y-axis scale behavior:<br>• <code>"fixed"</code>: Same scale across all facets<br>• <code>"free"</code>: Each facet has independent scale<br>• <code>"free_y"</code>: Free y-axis, fixed x-axis</td>
 </tr>
 <tr class="odd">
 <td><strong>leg</strong></td>
 <td>Logical</td>
-<td>Whether to display the legend. Default: <code>TRUE</code>.</td>
+<td><code>TRUE</code></td>
+<td>If <code>TRUE</code>, displays legend showing zones and highlighted keywords.</td>
 </tr>
 <tr class="even">
 <td><strong>themety</strong></td>
 <td>Character</td>
-<td>Theme type. Either <code>"light"</code> (default) or <code>"dark"</code>.</td>
+<td><code>"light"</code></td>
+<td>Visual theme:<br>• <code>"light"</code>: Light background<br>• <code>"dark"</code>: Dark background</td>
 </tr>
 <tr class="odd">
 <td><strong>size_class</strong></td>
 <td>Numeric vector</td>
-<td>Optional vector defining relative line thickness by zone. Defaults depend on the selected theme.</td>
+<td><code>NULL</code></td>
+<td>Custom line thickness for each zone. If <code>NULL</code>, uses theme defaults.</td>
 </tr>
 <tr class="even">
 <td><strong>x_lab</strong></td>
 <td>Character</td>
-<td>Label for the x-axis. Default: <code>"year"</code>.</td>
+<td><code>"years"</code></td>
+<td>Label for x-axis.</td>
 </tr>
 </tbody>
 </table>
 <hr>
 </section>
-<section id="output" class="level2">
-<h2 class="anchored" data-anchor-id="output">📦 Output</h2>
-<p>Returns a <strong><code>ggplot2</code> object</strong> with faceted panels showing the temporal evolution of keyword frequencies.</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 43%">
-<col style="width: 56%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Element</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Facets</strong></td>
-<td>Each panel corresponds to a frequency zone (e.g., high, medium, low).</td>
-</tr>
-<tr class="even">
-<td><strong>Highlighted keywords</strong></td>
-<td>Selected keywords are shown in distinct colors for easy identification.</td>
-</tr>
-<tr class="odd">
-<td><strong>x-axis</strong></td>
-<td>Represents time (years). Labels can be thinned using <code>r</code>.</td>
-</tr>
-<tr class="even">
-<td><strong>y-axis</strong></td>
-<td>Represents keyword frequency (raw or normalized).</td>
-</tr>
-<tr class="odd">
-<td><strong>Legend</strong></td>
-<td>Optional; displays both zone and keyword colors.</td>
-</tr>
-<tr class="even">
-<td><strong>Theme</strong></td>
-<td>Adjustable between light and dark modes.</td>
-</tr>
-</tbody>
-</table>
-
-
+<section id="understanding-scales" class="level2">
+<h2 class="anchored" data-anchor-id="understanding-scales">📊 Understanding Scales</h2>
+<section id="fixed-scales-scales-fixed" class="level3">
+<h3 class="anchored" data-anchor-id="fixed-scales-scales-fixed">Fixed Scales (<code>scales = "fixed"</code>)</h3>
+<pre><code>Zone 4 │ [0-1000]
+Zone 3 │ [0-1000]  ← Same y-axis range
+Zone 2 │ [0-1000]
+Zone 1 │ [0-1000]</code></pre>
+<p><strong>Advantages:</strong> - Easy to compare absolute frequencies across zones - Immediately see which zones have higher frequencies - Maintains proportional relationships</p>
+<p><strong>Disadvantages:</strong> - Low-frequency zones may appear flat - Details in smaller zones harder to see</p>
 </section>
+<section id="free-scales-scales-free-or-free_y" class="level3">
+<h3 class="anchored" data-anchor-id="free-scales-scales-free-or-free_y">Free Scales (<code>scales = "free"</code> or <code>"free_y"</code>)</h3>
+<pre><code>Zone 4 │ [500-1000]
+Zone 3 │ [200-500]   ← Each zone optimized
+Zone 2 │ [50-150]
+Zone 1 │ [0-50]</code></pre>
+<p><strong>Advantages:</strong> - Each zone’s patterns clearly visible - Reveals details in low-frequency zones - Better for pattern analysis</p>
+<p><strong>Disadvantages:</strong> - Cannot compare absolute frequencies - May be misleading if not clearly labeled</p>
+<hr>
+</section>
+</section>
+<section id="usage-examples" class="level2">
+<h2 class="anchored" data-anchor-id="usage-examples">💡 Usage Examples</h2>
+<section id="basic-usage---top-keywords-per-zone" class="level3">
+<h3 class="anchored" data-anchor-id="basic-usage---top-keywords-per-zone">Basic Usage - Top Keywords per Zone</h3>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cccc)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Import and normalize</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>corpus <span class="ot">&lt;-</span> <span class="fu">importData</span>(<span class="st">"tdm.csv"</span>, <span class="st">"corpus_info.csv"</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>corpus_norm <span class="ot">&lt;-</span> <span class="fu">normalization</span>(corpus, <span class="at">normty =</span> <span class="st">"nc"</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Create faceted plot with top 3 keywords per zone</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu">facetPlot</span>(</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  corpus_norm,</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">keyword_selection =</span> <span class="fu">list</span>(<span class="at">type =</span> <span class="st">"frequency"</span>, <span class="at">n =</span> <span class="dv">3</span>)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="random-selection" class="level3">
+<h3 class="anchored" data-anchor-id="random-selection">Random Selection</h3>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Randomly select 5 keywords per zone</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">facetPlot</span>(</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  corpus_norm,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">keyword_selection =</span> <span class="fu">list</span>(<span class="at">type =</span> <span class="st">"random"</span>, <span class="at">n =</span> <span class="dv">5</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="custom-keyword-list" class="level3">
+<h3 class="anchored" data-anchor-id="custom-keyword-list">Custom Keyword List</h3>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Highlight specific keywords</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">facetPlot</span>(</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  corpus_norm,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">keyword_selection =</span> <span class="fu">list</span>(</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">type =</span> <span class="st">"list"</span>, </span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">kw.list =</span> <span class="fu">c</span>(<span class="st">"algorithm"</span>, <span class="st">"data"</span>, <span class="st">"network"</span>, <span class="st">"cloud"</span>, <span class="st">"machine"</span>, <span class="st">"learning"</span>)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<hr>
+</section>
+</section>
+<section id="interpreting-faceted-plots" class="level2">
+<h2 class="anchored" data-anchor-id="interpreting-faceted-plots">🔍 Interpreting Faceted Plots</h2>
+<section id="what-to-look-for-in-each-panel" class="level3">
+<h3 class="anchored" data-anchor-id="what-to-look-for-in-each-panel">What to Look For in Each Panel</h3>
+<section id="high-frequency-zone-panel" class="level4">
+<h4 class="anchored" data-anchor-id="high-frequency-zone-panel"><strong>High-Frequency Zone Panel</strong></h4>
+<ul>
+<li>Core vocabulary of the corpus</li>
+<li>Typically more stable trajectories</li>
+<li>Changes indicate major conceptual shifts</li>
+<li>Often shows gradual evolution rather than spikes</li>
+</ul>
+</section>
+<section id="medium-frequency-zone-panels" class="level4">
+<h4 class="anchored" data-anchor-id="medium-frequency-zone-panels"><strong>Medium-Frequency Zone Panels</strong></h4>
+<ul>
+<li>Specialized but established terms</li>
+<li>May show more dynamic patterns than high-freq zone</li>
+<li>Often contains rising/falling terms</li>
+<li>Balance between stability and volatility</li>
+</ul>
+</section>
+<section id="low-frequency-zone-panel" class="level4">
+<h4 class="anchored" data-anchor-id="low-frequency-zone-panel"><strong>Low-Frequency Zone Panel</strong></h4>
+<ul>
+<li>Rare, emerging, or declining terms</li>
+<li>More volatile and noisy trajectories</li>
+<li>Spikes may indicate temporary importance</li>
+<li>Harder to distinguish signal from noise</li>
+</ul>
+</section>
+</section>
+<section id="cross-panel-comparisons" class="level3">
+<h3 class="anchored" data-anchor-id="cross-panel-comparisons">Cross-Panel Comparisons</h3>
+<p><strong>Parallel trends across zones:</strong> - Indicates corpus-wide phenomena - May reflect historical events or methodological artifacts</p>
+<p><strong>Divergent trends:</strong> - High-freq stable while low-freq volatile = normal pattern - All zones showing similar patterns = investigate common cause</p>
+<p><strong>Zone-specific spikes:</strong> - High-freq spike = major event (likely real signal) - Low-freq spike = may be noise or micro-trend</p>
+<hr>
+</section>
+</section>
+<section id="choosing-between-fixed-and-free-scales" class="level2">
+<h2 class="anchored" data-anchor-id="choosing-between-fixed-and-free-scales">🎯 Choosing Between Fixed and Free Scales</h2>
+<section id="use-fixed-scales-when" class="level3">
+<h3 class="anchored" data-anchor-id="use-fixed-scales-when">Use Fixed Scales When:</h3>
+<p>✅ You want to compare absolute frequencies across zones<br>
+✅ Showing the magnitude difference between zones is important<br>
+✅ Creating visualizations for readers unfamiliar with faceting<br>
+✅ Emphasizing that high-freq terms dominate the corpus</p>
+<p><strong>Example scenario:</strong> Demonstrating that core vocabulary (high-freq) is much more prevalent than specialized terms (low-freq).</p>
+</section>
+<section id="use-free-scales-when" class="level3">
+<h3 class="anchored" data-anchor-id="use-free-scales-when">Use Free Scales When:</h3>
+<p>✅ You want to see patterns within each zone clearly<br>
+✅ Low-frequency zones would be too flat with fixed scales<br>
+✅ Analyzing temporal dynamics rather than absolute frequencies<br>
+✅ Looking for similar patterns across different scales</p>
+<p><strong>Example scenario:</strong> Identifying whether low-frequency emerging terms show similar temporal patterns to established high-frequency terms.</p>
+<p>⚠️ <strong>Important:</strong> Always clearly label when using free scales to avoid misleading readers!</p>
+<hr>
+</section>
+</section>
+<section id="use-cases" class="level2">
+<h2 class="anchored" data-anchor-id="use-cases">📈 Use Cases</h2>
+<section id="zone-comparison-studies" class="level3">
+<h3 class="anchored" data-anchor-id="zone-comparison-studies">1. <strong>Zone Comparison Studies</strong></h3>
+<p>Compare how different frequency zones evolve over time.</p>
+</section>
+<section id="pattern-discovery" class="level3">
+<h3 class="anchored" data-anchor-id="pattern-discovery">2. <strong>Pattern Discovery</strong></h3>
+<p>Identify zone-specific temporal patterns not visible in combined plots.</p>
+</section>
+<section id="publication-figures" class="level3">
+<h3 class="anchored" data-anchor-id="publication-figures">3. <strong>Publication Figures</strong></h3>
+<p>Create clear, organized visualizations for papers showing zone structure.</p>
+</section>
+<section id="presentation-material" class="level3">
+<h3 class="anchored" data-anchor-id="presentation-material">4. <strong>Presentation Material</strong></h3>
+<p>Use free scales to show patterns clearly to audiences.</p>
+</section>
+<section id="data-exploration" class="level3">
+<h3 class="anchored" data-anchor-id="data-exploration">5. <strong>Data Exploration</strong></h3>
+<p>Systematically examine keywords across frequency strata.</p>
+</section>
+<section id="validation" class="level3">
+<h3 class="anchored" data-anchor-id="validation">6. <strong>Validation</strong></h3>
+<p>Verify that zone classification captures meaningful differences.</p>
+</section>
+<section id="hypothesis-testing" class="level3">
+<h3 class="anchored" data-anchor-id="hypothesis-testing">7. <strong>Hypothesis Testing</strong></h3>
+<p>Test whether predicted patterns appear in expected zones.</p>
+<hr>
+</section>
+</section>
+<section id="tips-best-practices" class="level2">
+<h2 class="anchored" data-anchor-id="tips-best-practices">💡 Tips &amp; Best Practices</h2>
+<ol type="1">
+<li><strong>Start with frequency selection</strong> — See most important terms first</li>
+<li><strong>Try both scale types</strong> — Compare fixed vs.&nbsp;free to understand your data</li>
+<li><strong>Use appropriate n</strong> — 2-4 keywords per zone usually optimal</li>
+<li><strong>Save large versions</strong> — Faceted plots need more space than single plots</li>
+<li><strong>Label clearly</strong> — Especially important when using free scales</li>
+<li><strong>Match theme to context</strong> — Light for papers, dark for talks</li>
+<li><strong>Consider zone count</strong> — More zones = need more vertical space</li>
+<li><strong>Test keyword selection</strong> — Try random selection to verify representativeness</li>
+<li><strong>Document choices</strong> — Note which keywords and why in methods</li>
+<li><strong>Combine with other plots</strong> — Use alongside <code>curveCtuPlot()</code> for comprehensive view</li>
+</ol>
+<hr>
+</section>
+<section id="see-also" class="level2">
+<h2 class="anchored" data-anchor-id="see-also">📚 See Also</h2>
+<ul>
+<li><a href="curvePlot.html"><code>curvePlot()</code></a> — Plot all keywords together without faceting</li>
+<li><a href="curveCtuPlot.html"><code>curveCtuPlot()</code></a> — Zone curves with highlighted examples (alternative approach)</li>
+<li><a href="rowMassPlot.html"><code>rowMassPlot()</code></a> — Visualize frequency distribution by zone</li>
+<li><a href="normalization.html"><code>normalization()</code></a> — Normalize before plotting for fair comparison</li>
+<li><a href="importData.html"><code>importData()</code></a> — Zone classification happens here</li>
+</ul>
+<hr>
+</section>
+<section id="need-help" class="level2">
+<h2 class="anchored" data-anchor-id="need-help">💬 Need Help?</h2>
+<p>For questions about faceted visualizations: - Check the <a href="../use-cases.html">Use Cases</a> page for complete workflow examples - Visit the <a href="../projects.html">Projects</a> page to see real applications - Open an issue on <a href="https://github.com/matildet/cccc/issues">GitHub</a> - Contact the team via the <a href="../about-us.html">About Us</a> page</p>
+
+
 </section>
 
 </main> <!-- /main -->

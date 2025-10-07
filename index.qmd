@@ -12,56 +12,92 @@ page-layout: full
   align-items: center;
   justify-content: center;
   gap: 40px;
-  padding: 6rem 2rem;
+  padding: 6rem 2rem 2rem 2rem;
   background: linear-gradient(180deg, #f9fbfd 0%, #ffffff 100%);
   border-bottom: 1px solid #eee;
 ">
 
   <!-- Logo -->
-  <img src="images/cccc_logo.png" alt="cccc logo" width="160" style="flex-shrink:0;">
+  <img src="images/cccc_logo.png" alt="cccc logo" width="180" style="flex-shrink:0;">
 
   <!-- Text block -->
-  <div style="max-width: 600px; text-align: right;">
-    <h2 style="font-weight:700; color:#002b5c; margin-bottom:0.1em;">cccc</h2>
-    <h3 style="font-style:italic; color:#002b5c; margin-top:0;">Chronological Corpora Curve Clustering</h3>
-    <p style="font-size:1.25em; color:#444; margin-top:1.2em;">
-      An R package for analyzing the temporal evolution of concepts and terms in scientific corpora.
+  <div style="max-width: 700px; text-align: right;">
+    <!-- <h1 style="font-weight:700; color:#002b5c; margin-bottom:0.1em; font-size: 2.5em;">cccc</h1> -->
+    <h2 style="font-style:italic; color:#002b5c; margin-top:0; font-size: 1.5em; font-weight: 400;">Chronological Corpora Curve Clustering</h2>
+    <p style="font-size:1.3em; color:#444; margin-top:1.5em; line-height: 1.6;">
+      Analyze the <strong>temporal evolution of concepts</strong> and <strong>semantic trajectories</strong> in scientific corpora through advanced statistical modeling and clustering.
     </p>
 
-    <a href="cccc-package.html" 
-       class="btn btn-primary btn-lg" 
-       style="background-color:#002b5c; border:none; margin-top:1.8em;">
-       <b>Explore the Package</b>
-    </a>
+    <div style="display: flex; gap: 1rem; margin-top: 2em; justify-content: flex-end;">
+      <a href="cccc-package.html" 
+         class="btn btn-primary btn-lg" 
+         style="background-color:#002b5c; border:none; padding: 0.75rem 1.5rem;">
+         <b>Explore the Package</b>
+      </a>
+      <a href="download.html" 
+         class="btn btn-outline-primary btn-lg" 
+         style="color:#002b5c; border: 2px solid #002b5c; background: white; padding: 0.75rem 1.5rem;">
+         <b>Get Started</b>
+      </a>
+    </div>
   </div>
 
 </section>
 
-<!-- Highlights -->
-<section style="padding:3rem 2rem; text-align:center;">
-  <h2 style="color:#002b5c; font-weight:600;">Discover what cccc can do</h2>
+<!-- Key Features -->
+<section style="padding: 1rem 2rem 4rem 2rem; background: white;">
+  <h2 style="color:#002b5c; font-weight:600; text-align: center; font-size: 2em; margin-bottom: 2rem;">
+    Powerful Tools for Temporal Corpus Analysis
+  </h2>
 
   <div style="
-    display:flex;
-    justify-content:center;
-    gap:40px;
-    flex-wrap:wrap;
-    margin-top:2.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
   ">
 
-    <div style="max-width:260px;">
-      <h4 style="color:#002b5c;">📈 <b>Temporal Modeling</b></h4>
-      <p>Model the evolution of terms across time through smoothing spline trajectories.</p>
+    <div style="padding: 2rem; border: 1px solid #e0e0e0; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+      <h3 style="color:#002b5c; font-size: 1.3em; margin-bottom: 0.5em;">📥 <b>Data Import & Preprocessing</b></h3>
+      <p style="color:#555; line-height: 1.6;">
+        Import term-document matrices, clean data, and automatically classify terms into frequency zones for stratified analysis.
+      </p>
     </div>
 
-    <div style="max-width:260px;">
-      <h4 style="color:#002b5c;">🧩 <b>Clustering</b></h4>
-      <p>Group terms with similar temporal patterns and explore knowledge dynamics.</p>
+    <div style="padding: 2rem; border: 1px solid #e0e0e0; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+      <h3 style="color:#002b5c; font-size: 1.3em; margin-bottom: 0.5em;">📊 <b>Flexible Normalization</b></h3>
+      <p style="color:#555; line-height: 1.6;">
+        Multiple normalization methods (nc, nchi, nM, nmM, nnl) to account for corpus size variations and enable fair temporal comparisons.
+      </p>
     </div>
 
-    <div style="max-width:260px;">
-      <h4 style="color:#002b5c;">🔍 <b>Visualization</b></h4>
-      <p>Visualize trajectories and clusters interactively for deeper understanding.</p>
+    <div style="padding: 2rem; border: 1px solid #e0e0e0; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+      <h3 style="color:#002b5c; font-size: 1.3em; margin-bottom: 0.5em;">📈 <b>Temporal Modeling</b></h3>
+      <p style="color:#555; line-height: 1.6;">
+        Model term life-cycles using B-spline smoothing with cross-validated parameter selection for optimal trajectory estimation.
+      </p>
+    </div>
+
+    <div style="padding: 2rem; border: 1px solid #e0e0e0; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+      <h3 style="color:#002b5c; font-size: 1.3em; margin-bottom: 0.5em;">🧩 <b>Trajectory Clustering</b></h3>
+      <p style="color:#555; line-height: 1.6;">
+        Cluster terms with similar temporal patterns to identify conceptual convergence, divergence, and knowledge dynamics.
+      </p>
+    </div>
+
+    <div style="padding: 2rem; border: 1px solid #e0e0e0; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+      <h3 style="color:#002b5c; font-size: 1.3em; margin-bottom: 0.5em;">🔍 <b>Rich Visualization</b></h3>
+      <p style="color:#555; line-height: 1.6;">
+        Publication-ready plots including temporal curves, faceted visualizations, and zone-based comparisons with customizable themes.
+      </p>
+    </div>
+
+    <div style="padding: 2rem; border: 1px solid #e0e0e0; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+      <h3 style="color:#002b5c; font-size: 1.3em; margin-bottom: 0.5em;">⚙️ <b>Statistical Rigor</b></h3>
+      <p style="color:#555; line-height: 1.6;">
+        Grounded in temporal scientometrics with GCV/OCV criteria for parameter selection and diagnostic validation tools.
+      </p>
     </div>
 
   </div>

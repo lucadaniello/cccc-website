@@ -1,62 +1,153 @@
 ---
 title: "Function Reference"
 page-layout: full
+---
+
+The **cccc** package provides a comprehensive set of functions organized around the four-stage analytical pipeline. Below, functions are grouped by their primary purpose to help you navigate the workflow more effectively.
 
 ---
 
-Below is the list of available functions in the **cccc** package.  
-Click on each function name to access its documentation.
+## 📥 Data Import & Preprocessing
+
+Functions for importing, validating, and preparing your corpus data.
 
 ```{=html}
-<table style="width:100%; border-collapse:collapse; border:none;">
+<table style="width:100%; border-collapse:collapse; border:1px solid #ddd; margin-bottom:2rem;">
   <thead>
-    <tr style="border-bottom:1px solid #ddd;">
-      <th style="text-align:left; padding:8px; width:30%;">Function</th>
-      <th style="text-align:left; padding:8px;">Description</th>
+    <tr style="background-color:#f8f9fa; border-bottom:2px solid #002b5c;">
+      <th style="text-align:left; padding:12px; width:30%;">Function</th>
+      <th style="text-align:left; padding:12px;">Description</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td style="padding:8px;"><a href="singleFunctions/importData.html"><code>importData()</code></a></td>
-      <td style="padding:8px;">Imports and validates corpus data and metadata into a standardized structure.</td>
+      <td style="padding:12px; border-bottom:1px solid #eee;"><a href="singleFunctions/importData.html"><code>importData()</code></a></td>
+      <td style="padding:12px; border-bottom:1px solid #eee;">Imports and validates corpus data and metadata into a standardized structure for analysis.</td>
     </tr>
     <tr>
-      <td style="padding:8px;"><a href="singleFunctions/rowMassPlot.html"><code>rowMassPlot()</code></a></td>
-      <td style="padding:8px;">Creates a bar plot of keywords ordered by their total frequency
-#' and colored by their assigned frequency zone, combining both the zone
-#' and its frequency interval label.</td>
-    </tr>
-    <tr>
-      <td style="padding:8px;"><a href="singleFunctions/colMassPlot.html"><code>colMassPlot()</code></a></td>
-      <td style="padding:8px;">Plot Temporal Dimensions of a Corpus.</td>
-    </tr>
-    <tr>
-      <td style="padding:8px;"><a href="singleFunctions/curvePlot.html"><code>curvePlot()</code></a></td>
-      <td style="padding:8px;">Plot Temporal Curves of Keyword Frequencies.</td>
-    </tr>
-    <tr>
-      <td style="padding:8px;"><a href="singleFunctions/curveCtuPlot.html"><code>curveCtuPlot()</code></a></td>
-      <td style="padding:8px;">Plot of Temporal Curves for Frequency Zones and Example Keywords.</td>
-    </tr>
-    <tr>
-      <td style="padding:8px;"><a href="singleFunctions/normalization.html"><code>normalization()</code></a></td>
-      <td style="padding:8px;">Normalize Term-Document Matrix (TDM).</td>
-    </tr>
-    <tr>
-      <td style="padding:8px;"><a href="singleFunctions/facetPlot.html"><code>facetPlot()</code></a></td>
-      <td style="padding:8px;">Faceted Plot of Keyword Frequency Curves.</td>
-    </tr>
-    <tr>
-      <td style="padding:8px;"><a href="singleFunctions/smoothingSelection.html"><code>smoothingSelection()</code></a></td>
-      <td style="padding:8px;">Selection of Optimal Smoothing Parameters for Chronological Keyword Curves.</td>
-    </tr>
-    <tr>
-      <td style="padding:8px;"><a href="singleFunctions/optimalSmoothing.html"><code>optimalSmoothing()</code></a></td>
-      <td style="padding:8px;">Selection of Optimal Spline Degree and Penalization Strategy.</td>
-    </tr>
-    <tr>
-      <td style="padding:8px;"><a href="singleFunctions/plotSuboptimalFits.html"><code>plotSuboptimalFits()</code></a></td>
-      <td style="padding:8px;">Plot Suboptimal Smoothed Curves for Selected Keywords.</td>
+      <td style="padding:12px; border-bottom:1px solid #eee;"><a href="singleFunctions/normalization.html"><code>normalization()</code></a></td>
+      <td style="padding:12px; border-bottom:1px solid #eee;">Normalizes the term-document matrix using various schemes (nc, nchi, nM, nmM, nnl).</td>
     </tr>
   </tbody>
 </table>
+```
+
+---
+
+## 📊 Exploratory Visualization
+
+Functions for initial exploration and visualization of corpus characteristics.
+
+```{=html}
+<table style="width:100%; border-collapse:collapse; border:1px solid #ddd; margin-bottom:2rem;">
+  <thead>
+    <tr style="background-color:#f8f9fa; border-bottom:2px solid #002b5c;">
+      <th style="text-align:left; padding:12px; width:30%;">Function</th>
+      <th style="text-align:left; padding:12px;">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="padding:12px; border-bottom:1px solid #eee;"><a href="singleFunctions/rowMassPlot.html"><code>rowMassPlot()</code></a></td>
+      <td style="padding:12px; border-bottom:1px solid #eee;">Creates a bar plot of keywords ordered by total frequency and colored by frequency zone.</td>
+    </tr>
+    <tr>
+      <td style="padding:12px; border-bottom:1px solid #eee;"><a href="singleFunctions/colMassPlot.html"><code>colMassPlot()</code></a></td>
+      <td style="padding:12px; border-bottom:1px solid #eee;">Plots the temporal dimensions of a corpus, showing distribution across time periods.</td>
+    </tr>
+  </tbody>
+</table>
+```
+
+---
+
+## 📈 Temporal Modeling & Smoothing
+
+Functions for modeling keyword trajectories and selecting optimal smoothing parameters.
+
+```{=html}
+<table style="width:100%; border-collapse:collapse; border:1px solid #ddd; margin-bottom:2rem;">
+  <thead>
+    <tr style="background-color:#f8f9fa; border-bottom:2px solid #002b5c;">
+      <th style="text-align:left; padding:12px; width:30%;">Function</th>
+      <th style="text-align:left; padding:12px;">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="padding:12px; border-bottom:1px solid #eee;"><a href="singleFunctions/smoothingSelection.html"><code>smoothingSelection()</code></a></td>
+      <td style="padding:12px; border-bottom:1px solid #eee;">Selects optimal smoothing parameters for chronological keyword curves using cross-validation.</td>
+    </tr>
+    <tr>
+      <td style="padding:12px; border-bottom:1px solid #eee;"><a href="singleFunctions/optimalSmoothing.html"><code>optimalSmoothing()</code></a></td>
+      <td style="padding:12px; border-bottom:1px solid #eee;">Selects the optimal spline degree and penalization strategy for trajectory smoothing.</td>
+    </tr>
+    <tr>
+      <td style="padding:12px; border-bottom:1px solid #eee;"><a href="singleFunctions/plotSuboptimalFits.html"><code>plotSuboptimalFits()</code></a></td>
+      <td style="padding:12px; border-bottom:1px solid #eee;">Plots suboptimal smoothed curves for selected keywords to compare different smoothing approaches.</td>
+    </tr>
+  </tbody>
+</table>
+```
+
+---
+
+## 📉 Trajectory Visualization
+
+Functions for visualizing temporal curves and frequency patterns.
+
+```{=html}
+<table style="width:100%; border-collapse:collapse; border:1px solid #ddd; margin-bottom:2rem;">
+  <thead>
+    <tr style="background-color:#f8f9fa; border-bottom:2px solid #002b5c;">
+      <th style="text-align:left; padding:12px; width:30%;">Function</th>
+      <th style="text-align:left; padding:12px;">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="padding:12px; border-bottom:1px solid #eee;"><a href="singleFunctions/curvePlot.html"><code>curvePlot()</code></a></td>
+      <td style="padding:12px; border-bottom:1px solid #eee;">Plots temporal curves of keyword frequencies over time periods.</td>
+    </tr>
+    <tr>
+      <td style="padding:12px; border-bottom:1px solid #eee;"><a href="singleFunctions/curveCtuPlot.html"><code>curveCtuPlot()</code></a></td>
+      <td style="padding:12px; border-bottom:1px solid #eee;">Plots temporal curves for frequency zones with example keywords highlighted.</td>
+    </tr>
+    <tr>
+      <td style="padding:12px; border-bottom:1px solid #eee;"><a href="singleFunctions/facetPlot.html"><code>facetPlot()</code></a></td>
+      <td style="padding:12px; border-bottom:1px solid #eee;">Creates faceted plots of keyword frequency curves for comparative visualization.</td>
+    </tr>
+  </tbody>
+</table>
+```
+
+---
+
+## 📖 Quick Reference Guide
+
+### Typical Workflow
+
+1. **Import your data** → `importData()`
+2. **Explore the corpus** → `rowMassPlot()`, `colMassPlot()`
+3. **Normalize frequencies** → `normalization()`
+4. **Visualize trajectories** → `curvePlot()`, `curveCtuPlot()`, `facetPlot()`
+5. **Select smoothing parameters** → `smoothingSelection()`, `optimalSmoothing()`
+6. **Compare fits** → `plotSuboptimalFits()`
+
+### Function Categories Summary
+
+| Category | Number of Functions | Purpose |
+|----------|---------------------|---------|
+| Data Import & Preprocessing | 2 | Prepare and normalize data |
+| Exploratory Visualization | 2 | Initial corpus exploration |
+| Temporal Modeling | 3 | Optimize smoothing parameters |
+| Trajectory Visualization | 3 | Visualize temporal patterns |
+
+---
+
+## 🔍 Need Help?
+
+- Click on any function name to see detailed documentation
+- Visit the [Use Cases](use-cases.html) page for practical examples
+- Check out [Projects](projects.html) to see cccc in action
+- Contact us via the [About Us](about-us.html) page for support and collaboration opportunities

@@ -97,6 +97,10 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Functions</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="./download.html"> 
+<span class="menu-text">Download</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="./use-cases.html"> 
 <span class="menu-text">Use Cases</span></a>
   </li>  
@@ -130,11 +134,26 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#data-import-preprocessing" id="toc-data-import-preprocessing" class="nav-link active" data-scroll-target="#data-import-preprocessing">📥 Data Import &amp; Preprocessing</a></li>
+  <li><a href="#exploratory-visualization" id="toc-exploratory-visualization" class="nav-link" data-scroll-target="#exploratory-visualization">📊 Exploratory Visualization</a></li>
+  <li><a href="#temporal-modeling-smoothing" id="toc-temporal-modeling-smoothing" class="nav-link" data-scroll-target="#temporal-modeling-smoothing">📈 Temporal Modeling &amp; Smoothing</a></li>
+  <li><a href="#trajectory-visualization" id="toc-trajectory-visualization" class="nav-link" data-scroll-target="#trajectory-visualization">📉 Trajectory Visualization</a></li>
+  <li><a href="#quick-reference-guide" id="toc-quick-reference-guide" class="nav-link" data-scroll-target="#quick-reference-guide">📖 Quick Reference Guide</a>
+  <ul class="collapse">
+  <li><a href="#typical-workflow" id="toc-typical-workflow" class="nav-link" data-scroll-target="#typical-workflow">Typical Workflow</a></li>
+  <li><a href="#function-categories-summary" id="toc-function-categories-summary" class="nav-link" data-scroll-target="#function-categories-summary">Function Categories Summary</a></li>
+  </ul></li>
+  <li><a href="#need-help" id="toc-need-help" class="nav-link" data-scroll-target="#need-help">🔍 Need Help?</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content column-page" id="quarto-document-content">
+<main class="content column-page-left" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -143,7 +162,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<div class="quarto-title-meta column-page">
+<div class="quarto-title-meta column-page-left">
 
     
   
@@ -155,104 +174,168 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Below is the list of available functions in the <strong>cccc</strong> package.<br>
-Click on each function name to access its documentation.</p>
-<table style="width:100%; border-collapse:collapse; border:none;">
+<p>The <strong>cccc</strong> package provides a comprehensive set of functions organized around the four-stage analytical pipeline. Below, functions are grouped by their primary purpose to help you navigate the workflow more effectively.</p>
+<hr>
+<section id="data-import-preprocessing" class="level2">
+<h2 class="anchored" data-anchor-id="data-import-preprocessing">📥 Data Import &amp; Preprocessing</h2>
+<p>Functions for importing, validating, and preparing your corpus data.</p>
+<table class="caption-top table" data-quarto-postprocess="true">
 <thead>
-<tr style="border-bottom:1px solid #ddd;">
-<th style="text-align:left; padding:8px; width:30%;">
-Function
-</th>
-<th style="text-align:left; padding:8px;">
-Description
-</th>
+<tr class="header" style="background-color:#f8f9fa; border-bottom:2px solid #002b5c;">
+<th data-quarto-table-cell-role="th" style="text-align: left; padding: 12px; width: 30%;">Function</th>
+<th data-quarto-table-cell-role="th" style="text-align: left; padding: 12px;">Description</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="padding:8px;">
-<a href="singleFunctions/importData.html"><code>importData()</code></a>
-</td>
-<td style="padding:8px;">
-Imports and validates corpus data and metadata into a standardized structure.
-</td>
+<tr class="odd">
+<td style="padding: 12px; border-bottom: 1px solid #eee"><a href="singleFunctions/importData.html"><code>importData()</code></a></td>
+<td style="padding: 12px; border-bottom: 1px solid #eee">Imports and validates corpus data and metadata into a standardized structure for analysis.</td>
 </tr>
-<tr>
-<td style="padding:8px;">
-<a href="singleFunctions/rowMassPlot.html"><code>rowMassPlot()</code></a>
-</td>
-<td style="padding:8px;">
-Creates a bar plot of keywords ordered by their total frequency #’ and colored by their assigned frequency zone, combining both the zone #’ and its frequency interval label.
-</td>
-</tr>
-<tr>
-<td style="padding:8px;">
-<a href="singleFunctions/colMassPlot.html"><code>colMassPlot()</code></a>
-</td>
-<td style="padding:8px;">
-Plot Temporal Dimensions of a Corpus.
-</td>
-</tr>
-<tr>
-<td style="padding:8px;">
-<a href="singleFunctions/curvePlot.html"><code>curvePlot()</code></a>
-</td>
-<td style="padding:8px;">
-Plot Temporal Curves of Keyword Frequencies.
-</td>
-</tr>
-<tr>
-<td style="padding:8px;">
-<a href="singleFunctions/curveCtuPlot.html"><code>curveCtuPlot()</code></a>
-</td>
-<td style="padding:8px;">
-Plot of Temporal Curves for Frequency Zones and Example Keywords.
-</td>
-</tr>
-<tr>
-<td style="padding:8px;">
-<a href="singleFunctions/normalization.html"><code>normalization()</code></a>
-</td>
-<td style="padding:8px;">
-Normalize Term-Document Matrix (TDM).
-</td>
-</tr>
-<tr>
-<td style="padding:8px;">
-<a href="singleFunctions/facetPlot.html"><code>facetPlot()</code></a>
-</td>
-<td style="padding:8px;">
-Faceted Plot of Keyword Frequency Curves.
-</td>
-</tr>
-<tr>
-<td style="padding:8px;">
-<a href="singleFunctions/smoothingSelection.html"><code>smoothingSelection()</code></a>
-</td>
-<td style="padding:8px;">
-Selection of Optimal Smoothing Parameters for Chronological Keyword Curves.
-</td>
-</tr>
-<tr>
-<td style="padding:8px;">
-<a href="singleFunctions/optimalSmoothing.html"><code>optimalSmoothing()</code></a>
-</td>
-<td style="padding:8px;">
-Selection of Optimal Spline Degree and Penalization Strategy.
-</td>
-</tr>
-<tr>
-<td style="padding:8px;">
-<a href="singleFunctions/plotSuboptimalFits.html"><code>plotSuboptimalFits()</code></a>
-</td>
-<td style="padding:8px;">
-Plot Suboptimal Smoothed Curves for Selected Keywords.
-</td>
+<tr class="even">
+<td style="padding: 12px; border-bottom: 1px solid #eee"><a href="singleFunctions/normalization.html"><code>normalization()</code></a></td>
+<td style="padding: 12px; border-bottom: 1px solid #eee">Normalizes the term-document matrix using various schemes (nc, nchi, nM, nmM, nnl).</td>
 </tr>
 </tbody>
 </table>
+<hr>
+</section>
+<section id="exploratory-visualization" class="level2">
+<h2 class="anchored" data-anchor-id="exploratory-visualization">📊 Exploratory Visualization</h2>
+<p>Functions for initial exploration and visualization of corpus characteristics.</p>
+<table class="caption-top table" data-quarto-postprocess="true">
+<thead>
+<tr class="header" style="background-color:#f8f9fa; border-bottom:2px solid #002b5c;">
+<th data-quarto-table-cell-role="th" style="text-align: left; padding: 12px; width: 30%;">Function</th>
+<th data-quarto-table-cell-role="th" style="text-align: left; padding: 12px;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="padding: 12px; border-bottom: 1px solid #eee"><a href="singleFunctions/rowMassPlot.html"><code>rowMassPlot()</code></a></td>
+<td style="padding: 12px; border-bottom: 1px solid #eee">Creates a bar plot of keywords ordered by total frequency and colored by frequency zone.</td>
+</tr>
+<tr class="even">
+<td style="padding: 12px; border-bottom: 1px solid #eee"><a href="singleFunctions/colMassPlot.html"><code>colMassPlot()</code></a></td>
+<td style="padding: 12px; border-bottom: 1px solid #eee">Plots the temporal dimensions of a corpus, showing distribution across time periods.</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="temporal-modeling-smoothing" class="level2">
+<h2 class="anchored" data-anchor-id="temporal-modeling-smoothing">📈 Temporal Modeling &amp; Smoothing</h2>
+<p>Functions for modeling keyword trajectories and selecting optimal smoothing parameters.</p>
+<table class="caption-top table" data-quarto-postprocess="true">
+<thead>
+<tr class="header" style="background-color:#f8f9fa; border-bottom:2px solid #002b5c;">
+<th data-quarto-table-cell-role="th" style="text-align: left; padding: 12px; width: 30%;">Function</th>
+<th data-quarto-table-cell-role="th" style="text-align: left; padding: 12px;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="padding: 12px; border-bottom: 1px solid #eee"><a href="singleFunctions/smoothingSelection.html"><code>smoothingSelection()</code></a></td>
+<td style="padding: 12px; border-bottom: 1px solid #eee">Selects optimal smoothing parameters for chronological keyword curves using cross-validation.</td>
+</tr>
+<tr class="even">
+<td style="padding: 12px; border-bottom: 1px solid #eee"><a href="singleFunctions/optimalSmoothing.html"><code>optimalSmoothing()</code></a></td>
+<td style="padding: 12px; border-bottom: 1px solid #eee">Selects the optimal spline degree and penalization strategy for trajectory smoothing.</td>
+</tr>
+<tr class="odd">
+<td style="padding: 12px; border-bottom: 1px solid #eee"><a href="singleFunctions/plotSuboptimalFits.html"><code>plotSuboptimalFits()</code></a></td>
+<td style="padding: 12px; border-bottom: 1px solid #eee">Plots suboptimal smoothed curves for selected keywords to compare different smoothing approaches.</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="trajectory-visualization" class="level2">
+<h2 class="anchored" data-anchor-id="trajectory-visualization">📉 Trajectory Visualization</h2>
+<p>Functions for visualizing temporal curves and frequency patterns.</p>
+<table class="caption-top table" data-quarto-postprocess="true">
+<thead>
+<tr class="header" style="background-color:#f8f9fa; border-bottom:2px solid #002b5c;">
+<th data-quarto-table-cell-role="th" style="text-align: left; padding: 12px; width: 30%;">Function</th>
+<th data-quarto-table-cell-role="th" style="text-align: left; padding: 12px;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="padding: 12px; border-bottom: 1px solid #eee"><a href="singleFunctions/curvePlot.html"><code>curvePlot()</code></a></td>
+<td style="padding: 12px; border-bottom: 1px solid #eee">Plots temporal curves of keyword frequencies over time periods.</td>
+</tr>
+<tr class="even">
+<td style="padding: 12px; border-bottom: 1px solid #eee"><a href="singleFunctions/curveCtuPlot.html"><code>curveCtuPlot()</code></a></td>
+<td style="padding: 12px; border-bottom: 1px solid #eee">Plots temporal curves for frequency zones with example keywords highlighted.</td>
+</tr>
+<tr class="odd">
+<td style="padding: 12px; border-bottom: 1px solid #eee"><a href="singleFunctions/facetPlot.html"><code>facetPlot()</code></a></td>
+<td style="padding: 12px; border-bottom: 1px solid #eee">Creates faceted plots of keyword frequency curves for comparative visualization.</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="quick-reference-guide" class="level2">
+<h2 class="anchored" data-anchor-id="quick-reference-guide">📖 Quick Reference Guide</h2>
+<section id="typical-workflow" class="level3">
+<h3 class="anchored" data-anchor-id="typical-workflow">Typical Workflow</h3>
+<ol type="1">
+<li><strong>Import your data</strong> → <code>importData()</code></li>
+<li><strong>Explore the corpus</strong> → <code>rowMassPlot()</code>, <code>colMassPlot()</code></li>
+<li><strong>Normalize frequencies</strong> → <code>normalization()</code></li>
+<li><strong>Visualize trajectories</strong> → <code>curvePlot()</code>, <code>curveCtuPlot()</code>, <code>facetPlot()</code></li>
+<li><strong>Select smoothing parameters</strong> → <code>smoothingSelection()</code>, <code>optimalSmoothing()</code></li>
+<li><strong>Compare fits</strong> → <code>plotSuboptimalFits()</code></li>
+</ol>
+</section>
+<section id="function-categories-summary" class="level3">
+<h3 class="anchored" data-anchor-id="function-categories-summary">Function Categories Summary</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Category</th>
+<th>Number of Functions</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Data Import &amp; Preprocessing</td>
+<td>2</td>
+<td>Prepare and normalize data</td>
+</tr>
+<tr class="even">
+<td>Exploratory Visualization</td>
+<td>2</td>
+<td>Initial corpus exploration</td>
+</tr>
+<tr class="odd">
+<td>Temporal Modeling</td>
+<td>3</td>
+<td>Optimize smoothing parameters</td>
+</tr>
+<tr class="even">
+<td>Trajectory Visualization</td>
+<td>3</td>
+<td>Visualize temporal patterns</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+</section>
+<section id="need-help" class="level2">
+<h2 class="anchored" data-anchor-id="need-help">🔍 Need Help?</h2>
+<ul>
+<li>Click on any function name to see detailed documentation</li>
+<li>Visit the <a href="use-cases.html">Use Cases</a> page for practical examples</li>
+<li>Check out <a href="projects.html">Projects</a> to see cccc in action</li>
+<li>Contact us via the <a href="about-us.html">About Us</a> page for support and collaboration opportunities</li>
+</ul>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
