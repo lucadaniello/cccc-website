@@ -17,6 +17,8 @@ website:
         text: cccc R Package
       - href: functions.qmd
         text: Functions
+      - href: download.qmd
+        text: Download
       - href: use-cases.qmd
         text: Use Cases
       - href: projects.qmd

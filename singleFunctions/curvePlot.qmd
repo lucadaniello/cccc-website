@@ -1,57 +1,280 @@
 ---
-title: ""
+title: "curvePlot()"
 format:
   html:
-    toc: false
+    toc: true
+    toc-depth: 3
 page-layout: full
 ---
+**Visualize Temporal Evolution of Keyword Frequencies**
 
-# curvePlot()
+The `curvePlot()` function creates multi-line plots showing how keyword frequencies change over time. It displays all keywords in your corpus simultaneously, with colors and line weights indicating frequency zones, providing a comprehensive view of temporal dynamics.
 
-Plot Temporal Curves of Keyword Frequencies
 ---
 
 ## 🔹 Function Definition
 
 ```r
-curvePlot <- (data,
-              r = 1,
-              themety = "light",
-              size_class = NULL,
-              x_leg = 0.85,
-              x_lab = "years")
+curvePlot(
+  data,
+  keywords = NULL,
+  r = 1,
+  themety = "light",
+  size_class = NULL,
+  x_leg = 0.85,
+  x_lab = "years"
+)
 ```
 
-## 🎯 Aim
+---
 
-The `curvePlot()` function visualizes the **temporal evolution of keyword frequencies** within a corpus.  
-It uses the term-document matrix (TDM) in long format to generate **curves grouped by frequency zones**, allowing users to analyze how terms evolve over time.  
-The plot supports both **light** and **dark themes**, customizable line thickness, and adjustable x-axis labels for improved readability.
+## 🎯 Purpose
+
+Understanding how terms evolve over time is fundamental to temporal corpus analysis. The `curvePlot()` function helps you:
+
+1. **Explore temporal patterns** — See how keywords rise, fall, or remain stable over time
+2. **Identify trends** — Spot emerging, declining, or persistent concepts
+3. **Compare trajectories** — Observe relationships between different keywords
+4. **Detect events** — Find spikes or drops that correspond to historical events
+5. **Visualize zones** — See how different frequency zones behave temporally
+6. **Assess data quality** — Identify anomalies or irregularities in the data
+7. **Generate insights** — Discover unexpected patterns for further investigation
+8. **Create publication figures** — Produce high-quality visualizations for papers
+
+This function can display either **all keywords** (comprehensive overview) or **selected keywords** (focused analysis), making it versatile for both exploration and presentation.
 
 ---
 
 ## ⚙️ Arguments
 
-| Argument | Type | Description |
-|-----------|------|-------------|
-| **data** | List | A list containing the output of `importData()`. |
-| **r** | Numeric (scalar) | Interval for thinning x-axis year labels. Default: `1`. |
-| **themety** | Character | Theme type. Either `"light"` (default) or `"dark"`. |
-| **size_class** | Numeric vector | Line sizes by frequency zone. If `NULL`, default values are assigned based on the selected theme. |
-| **x_leg** | Numeric | Horizontal position of the legend. Default: `0.85`. |
-| **x_lab** | Character | X-axis label. Default: `"years"`. |
+| Argument | Type | Default | Description |
+|----------|------|---------|-------------|
+| **data** | List | *required* | A list object returned by `importData()` or `normalization()`, containing the TDM and corpus metadata. |
+| **keywords** | Character vector | `NULL` | Specific keywords to plot. If `NULL`, plots all keywords in the corpus. Use this to focus on specific terms of interest. |
+| **r** | Integer | `1` | Interval for x-axis label thinning. `r = 1` shows all years, `r = 2` shows every 2nd year, etc. Useful for long time series. |
+| **themety** | Character | `"light"` | Visual theme:<br>• `"light"`: Light background (default)<br>• `"dark"`: Dark background (better for presentations) |
+| **size_class** | Numeric vector | `NULL` | Custom line thickness for each frequency zone. If `NULL`, uses theme-appropriate defaults. Vector length must match number of zones. |
+| **x_leg** | Numeric | `0.85` | Horizontal legend position (0 = left, 1 = right). Adjust if legend overlaps with curves. |
+| **x_lab** | Character | `"years"` | Label for x-axis (e.g., `"Years"`, `"Time Period"`, `"Publication Year"`). |
 
 ---
 
-## 📦 Output
+## 📊 Plot Components
 
-Returns a **`ggplot2` object** displaying temporal curves of keyword frequencies.
+### Visual Elements
 
-| Element | Description |
-|----------|-------------|
-| **x-axis** | Represents time (years). |
-| **y-axis** | Represents keyword frequency (normalized or raw). |
-| **Colors** | Correspond to frequency zones (e.g., “VH”, “H”, “L”, “VL”). |
-| **Line size** | Reflects the relative importance of frequency zones. |
-| **Theme** | Can be switched between light and dark for readability. |
-| **Legend** | Shown at the bottom, indicating frequency zones and line styles. |
+**Lines:**
+- Each keyword is represented by one line
+- Line color indicates frequency zone
+- Line thickness can vary by zone importance
+
+**X-axis:**
+- Time periods (years) from corpus metadata
+- Labels can be thinned for long time series
+
+**Y-axis:**
+- Frequency values (raw or normalized)
+- Scale depends on normalization applied
+
+**Legend:**
+- Shows frequency zones with corresponding colors
+- Position adjustable via `x_leg` parameter
+
+**Theme:**
+- Light: White background, dark text (publications)
+- Dark: Dark background, light text (presentations)
+
+---
+
+## 💡 Usage Examples
+
+### Basic Usage - All Keywords
+
+```r
+library(cccc)
+
+# Import data
+corpus <- importData("tdm.csv", "corpus_info.csv")
+
+# Plot all keyword trajectories
+curvePlot(corpus)
+```
+
+### Plot Specific Keywords
+
+```r
+# Import and normalize
+corpus <- importData("tdm.csv", "corpus_info.csv")
+corpus_norm <- normalization(corpus, normty = "nc")
+
+# Plot specific keywords of interest
+curvePlot(
+  corpus_norm, 
+  keywords = c("algorithm", "network", "data", "cloud")
+)
+```
+
+### Long Time Series
+
+```r
+# Show every 5th year on x-axis
+curvePlot(corpus_norm, r = 5)
+
+# Show every 10th year
+curvePlot(corpus_norm, r = 10, x_lab = "Decade")
+```
+
+---
+
+## 🔍 Interpreting Temporal Patterns
+
+### Common Trajectory Types
+
+#### 1. **Emerging Terms** 📈
+```
+Frequency
+    |           ╱───
+    |         ╱
+    |       ╱
+    |_____╱________Time
+```
+- Start low, increase over time
+- Indicate new concepts or growing importance
+- Examples: "cloud computing", "deep learning"
+
+#### 2. **Declining Terms** 📉
+```
+Frequency
+    |───╲
+    |     ╲
+    |       ╲
+    |         ╲___Time
+```
+- Start high, decrease over time
+- Indicate obsolescence or reduced relevance
+- Examples: "floppy disk", "mainframe"
+
+#### 3. **Stable Terms** ➡️
+```
+Frequency
+    |─────────────
+    |
+    |
+    |______________Time
+```
+- Consistent frequency over time
+- Indicate core, persistent concepts
+- Examples: "computer", "data", "system"
+
+#### 4. **Peaked Terms** 🏔️
+```
+Frequency
+    |      ╱╲
+    |    ╱    ╲
+    |  ╱        ╲
+    |╱____________╲_Time
+```
+- Rise and fall within time period
+- May indicate temporary trends or events
+- Examples: "Y2K", specific technology buzzwords
+
+#### 5. **Cyclical Terms** 🔄
+```
+Frequency
+    |  ╱╲    ╱╲
+    | ╱  ╲  ╱  ╲
+    |╱    ╲╱    ╲_Time
+```
+- Periodic fluctuations
+- May indicate recurring themes or seasonal patterns
+- Examples: Conference-related terms, annual events
+
+#### 6. **Volatile Terms** 📊
+```
+Frequency
+    | ╱╲╱╲╱╲╱╲
+    |╱        ╲Time
+```
+- Highly irregular patterns
+- May indicate noise or inconsistent usage
+- Consider smoothing or filtering
+
+---
+
+## 🎨 Visual Interpretation
+
+### Zone-Based Patterns
+
+**High-frequency zones (typically darker colors):**
+- Represent core vocabulary of the corpus
+- Trajectories often more stable
+- Changes indicate major conceptual shifts
+
+**Low-frequency zones (typically lighter colors):**
+- Represent specialized or emerging terms
+- More volatile trajectories
+- May show sharper rises/falls
+
+### Density and Overlap
+
+**Dense clustering:**
+- Many terms with similar temporal patterns
+- May indicate coherent topical evolution
+
+**Spread trajectories:**
+- Diverse temporal behaviors
+- Suggests heterogeneous corpus or multiple themes
+
+---
+
+## 📈 Use Cases
+
+### 1. **Initial Exploration**
+Get a first look at temporal dynamics before detailed analysis.
+
+### 2. **Hypothesis Generation**
+Identify unexpected patterns that merit further investigation.
+
+### 3. **Trend Validation**
+Verify expected temporal patterns (e.g., "internet" should rise after 1990s).
+
+### 4. **Comparative Analysis**
+Compare trajectories of related terms (e.g., "analog" vs "digital").
+
+### 5. **Event Detection**
+Find spikes or drops corresponding to historical events.
+
+### 6. **Normalization Assessment**
+Compare raw vs. normalized frequencies to see normalization effects.
+
+### 7. **Publication Figures**
+Create visualizations for papers, presentations, or reports.
+
+### 8. **Teaching/Communication**
+Show collaborators or students how terms evolve in your corpus.
+
+---
+
+## 💡 Tips & Best Practices
+
+1. **Start with all keywords** — Get overview before focusing
+2. **Use normalization** — Compare normalized trajectories for fair comparison
+3. **Focus selectively** — After overview, plot specific keywords of interest
+4. **Match theme to context** — Light for publications, dark for presentations
+5. **Thin x-axis for long series** — Prevent label overlap (use `r` parameter)
+6. **Save high resolution** — Use `dpi = 300` or higher for publications
+7. **Compare before/after normalization** — Understand normalization effects
+8. **Document patterns** — Keep notes on interesting trajectories for later analysis
+9. **Cross-reference with history** — Match patterns to known events/developments
+10. **Use with other plots** — Combine with `rowMassPlot()` and `colMassPlot()` for full picture
+
+---
+
+## 📚 See Also
+
+- [`importData()`](importData.html) — Import corpus data
+- [`normalization()`](normalization.html) — Normalize frequencies for fair comparison
+- [`rowMassPlot()`](rowMassPlot.html) — Visualize keyword frequency distribution
+- [`colMassPlot()`](colMassPlot.html) — Visualize temporal corpus structure
+- [`curveCtuPlot()`](curveCtuPlot.html) — Plot curves with example keywords by zone
+- [`facetPlot()`](facetPlot.html) — Create faceted visualizations by zone

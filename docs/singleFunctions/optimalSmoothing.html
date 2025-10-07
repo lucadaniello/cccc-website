@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>optimalsmoothing</title>
+<title>optimalSmoothing()</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -131,6 +131,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Functions</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="../download.html"> 
+<span class="menu-text">Download</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="../use-cases.html"> 
 <span class="menu-text">Use Cases</span></a>
   </li>  
@@ -164,53 +168,169 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#function-definition" id="toc-function-definition" class="nav-link active" data-scroll-target="#function-definition">🔹 Function Definition</a></li>
+  <li><a href="#purpose" id="toc-purpose" class="nav-link" data-scroll-target="#purpose">🎯 Purpose</a></li>
+  <li><a href="#understanding-penalty-types" id="toc-understanding-penalty-types" class="nav-link" data-scroll-target="#understanding-penalty-types">🧮 Understanding Penalty Types</a>
+  <ul class="collapse">
+  <li><a href="#m-2-adaptive-penalty-recommended" id="toc-m-2-adaptive-penalty-recommended" class="nav-link" data-scroll-target="#m-2-adaptive-penalty-recommended"><strong>“m-2”</strong> — Adaptive Penalty (Recommended)</a></li>
+  <li><a href="#second-derivative-penalty" id="toc-second-derivative-penalty" class="nav-link" data-scroll-target="#second-derivative-penalty"><strong>“2”</strong> — Second Derivative Penalty</a></li>
+  <li><a href="#third-derivative-penalty" id="toc-third-derivative-penalty" class="nav-link" data-scroll-target="#third-derivative-penalty"><strong>“3”</strong> — Third Derivative Penalty</a></li>
+  <li><a href="#ridge-penalty" id="toc-ridge-penalty" class="nav-link" data-scroll-target="#ridge-penalty"><strong>“0”</strong> — Ridge Penalty</a></li>
+  </ul></li>
+  <li><a href="#arguments" id="toc-arguments" class="nav-link" data-scroll-target="#arguments">⚙️ Arguments</a></li>
+  <li><a href="#output" id="toc-output" class="nav-link" data-scroll-target="#output">📦 Output</a></li>
+  <li><a href="#usage-examples" id="toc-usage-examples" class="nav-link" data-scroll-target="#usage-examples">💡 Usage Examples</a>
+  <ul class="collapse">
+  <li><a href="#basic-usage-two-penalties" id="toc-basic-usage-two-penalties" class="nav-link" data-scroll-target="#basic-usage-two-penalties">Basic Usage (Two Penalties)</a></li>
+  <li><a href="#complete-comparison-four-penalties" id="toc-complete-comparison-four-penalties" class="nav-link" data-scroll-target="#complete-comparison-four-penalties">Complete Comparison (Four Penalties)</a></li>
+  </ul></li>
+  <li><a href="#interpreting-the-output" id="toc-interpreting-the-output" class="nav-link" data-scroll-target="#interpreting-the-output">📊 Interpreting the Output</a>
+  <ul class="collapse">
+  <li><a href="#gcv-comparison-matrix" id="toc-gcv-comparison-matrix" class="nav-link" data-scroll-target="#gcv-comparison-matrix">1. GCV Comparison Matrix</a></li>
+  <li><a href="#diagnostic-plots" id="toc-diagnostic-plots" class="nav-link" data-scroll-target="#diagnostic-plots">2. Diagnostic Plots</a></li>
+  </ul></li>
+  <li><a href="#decision-making-guide" id="toc-decision-making-guide" class="nav-link" data-scroll-target="#decision-making-guide">🎯 Decision-Making Guide</a>
+  <ul class="collapse">
+  <li><a href="#step-1-examine-gcv-matrix" id="toc-step-1-examine-gcv-matrix" class="nav-link" data-scroll-target="#step-1-examine-gcv-matrix">Step 1: Examine GCV Matrix</a></li>
+  <li><a href="#step-2-check-plot-patterns" id="toc-step-2-check-plot-patterns" class="nav-link" data-scroll-target="#step-2-check-plot-patterns">Step 2: Check Plot Patterns</a></li>
+  <li><a href="#step-3-validate-choice" id="toc-step-3-validate-choice" class="nav-link" data-scroll-target="#step-3-validate-choice">Step 3: Validate Choice</a></li>
+  </ul></li>
+  <li><a href="#use-cases" id="toc-use-cases" class="nav-link" data-scroll-target="#use-cases">📈 Use Cases</a>
+  <ul class="collapse">
+  <li><a href="#final-parameter-selection" id="toc-final-parameter-selection" class="nav-link" data-scroll-target="#final-parameter-selection">1. <strong>Final Parameter Selection</strong></a></li>
+  <li><a href="#robustness-check" id="toc-robustness-check" class="nav-link" data-scroll-target="#robustness-check">2. <strong>Robustness Check</strong></a></li>
+  <li><a href="#method-comparison-studies" id="toc-method-comparison-studies" class="nav-link" data-scroll-target="#method-comparison-studies">3. <strong>Method Comparison Studies</strong></a></li>
+  <li><a href="#publication-preparation" id="toc-publication-preparation" class="nav-link" data-scroll-target="#publication-preparation">4. <strong>Publication Preparation</strong></a></li>
+  <li><a href="#multi-corpus-analysis" id="toc-multi-corpus-analysis" class="nav-link" data-scroll-target="#multi-corpus-analysis">5. <strong>Multi-Corpus Analysis</strong></a></li>
+  </ul></li>
+  <li><a href="#tips-best-practices" id="toc-tips-best-practices" class="nav-link" data-scroll-target="#tips-best-practices">💡 Tips &amp; Best Practices</a></li>
+  <li><a href="#see-also" id="toc-see-also" class="nav-link" data-scroll-target="#see-also">📚 See Also</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content column-page" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content column-page-left" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">optimalSmoothing()</h1>
+</div>
 
 
 
+<div class="quarto-title-meta column-page-left">
 
-<section id="optimalsmoothing" class="level1">
-<h1>optimalSmoothing()</h1>
-<p>Selection of Optimal Spline Degree and Penalization Strategy</p>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><strong>Select Optimal Spline Degree and Penalization Strategy</strong></p>
+<p>The <code>optimalSmoothing()</code> function compares multiple smoothing strategies to identify the best combination of spline degree and penalty type. It synthesizes results from multiple <code>smoothingSelection()</code> runs to make a final, informed decision about optimal smoothing parameters.</p>
 <hr>
 <section id="function-definition" class="level2">
 <h2 class="anchored" data-anchor-id="function-definition">🔹 Function Definition</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>optimalSmoothing <span class="ot">&lt;-</span> (smoothing_results, <span class="at">plot =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="aim" class="level2">
-<h2 class="anchored" data-anchor-id="aim">🎯 Aim</h2>
-<p>The <code>optimalSmoothing()</code> function compares multiple <strong>smoothing strategies</strong>—each defined by a specific <strong>penalization type</strong>—to identify the optimal combination of <strong>spline degree (<code>m</code>)</strong> and <strong>penalty</strong> that minimizes the <strong>Generalized Cross-Validation (GCV)</strong> criterion.<br>
-It takes as input the results produced by multiple calls to <code>smoothingSelection()</code> (one per penalty type) and constructs a <strong>comparison matrix</strong> of GCV values across all spline degrees and penalties.</p>
-<p>Optionally, it can also generate <strong>diagnostic plots</strong> showing how <code>GCV</code>, <code>OCV</code>, <code>df</code>, and <code>SSE</code> vary across spline degrees and penalty types, supporting a visual evaluation of the optimal smoothing configuration.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">optimalSmoothing</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  smoothing_results,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">plot =</span> <span class="cn">TRUE</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <hr>
+</section>
+<section id="purpose" class="level2">
+<h2 class="anchored" data-anchor-id="purpose">🎯 Purpose</h2>
+<p>While <code>smoothingSelection()</code> finds optimal parameters for a <strong>single</strong> penalty type, <code>optimalSmoothing()</code> compares <strong>multiple</strong> penalty strategies to find the globally optimal smoothing configuration.</p>
+<p>This function helps you:</p>
+<ol type="1">
+<li><strong>Compare penalty strategies</strong> — Evaluate different derivative-based penalization approaches</li>
+<li><strong>Make final parameter decisions</strong> — Select the single best combination of degree and penalty</li>
+<li><strong>Visualize trade-offs</strong> — See how different strategies perform across metrics</li>
+<li><strong>Ensure robustness</strong> — Verify that your choice is stable across different penalties</li>
+<li><strong>Document methodology</strong> — Provide systematic justification for smoothing choices</li>
+<li><strong>Prepare for clustering</strong> — Finalize parameters before applying to all keywords</li>
+</ol>
+<p>The function creates a comprehensive comparison matrix and diagnostic plots to support evidence-based parameter selection.</p>
+<hr>
+</section>
+<section id="understanding-penalty-types" class="level2">
+<h2 class="anchored" data-anchor-id="understanding-penalty-types">🧮 Understanding Penalty Types</h2>
+<p>Different penalty types control smoothness in different ways:</p>
+<section id="m-2-adaptive-penalty-recommended" class="level3">
+<h3 class="anchored" data-anchor-id="m-2-adaptive-penalty-recommended"><strong>“m-2”</strong> — Adaptive Penalty (Recommended)</h3>
+<ul>
+<li>Penalizes the (m-2)th derivative</li>
+<li>Adapts to spline degree automatically</li>
+<li><strong>Use when</strong>: You want penalty that scales with spline complexity</li>
+<li><strong>Example</strong>: For m=4, penalizes 2nd derivative (curvature)</li>
+</ul>
+</section>
+<section id="second-derivative-penalty" class="level3">
+<h3 class="anchored" data-anchor-id="second-derivative-penalty"><strong>“2”</strong> — Second Derivative Penalty</h3>
+<ul>
+<li>Always penalizes curvature (second derivative)</li>
+<li>Independent of spline degree</li>
+<li><strong>Use when</strong>: You want consistent curvature control</li>
+<li><strong>Example</strong>: Prevents sharp bends in trajectories</li>
+</ul>
+</section>
+<section id="third-derivative-penalty" class="level3">
+<h3 class="anchored" data-anchor-id="third-derivative-penalty"><strong>“3”</strong> — Third Derivative Penalty</h3>
+<ul>
+<li>Penalizes rate of curvature change (wiggliness)</li>
+<li>Requires m ≥ 4</li>
+<li><strong>Use when</strong>: You want to control oscillations</li>
+<li><strong>Example</strong>: Smooths out rapid fluctuations</li>
+</ul>
+</section>
+<section id="ridge-penalty" class="level3">
+<h3 class="anchored" data-anchor-id="ridge-penalty"><strong>“0”</strong> — Ridge Penalty</h3>
+<ul>
+<li>Penalizes coefficient magnitudes</li>
+<li>No derivative involved</li>
+<li><strong>Use when</strong>: You want simple shrinkage</li>
+<li><strong>Example</strong>: Reduces overall curve amplitude</li>
+</ul>
+<hr>
+</section>
 </section>
 <section id="arguments" class="level2">
 <h2 class="anchored" data-anchor-id="arguments">⚙️ Arguments</h2>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 36%">
-<col style="width: 20%">
-<col style="width: 43%">
+<col style="width: 26%">
+<col style="width: 15%">
+<col style="width: 23%">
+<col style="width: 34%">
 </colgroup>
 <thead>
 <tr class="header">
 <th>Argument</th>
 <th>Type</th>
+<th>Default</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td><strong>smoothing_results</strong></td>
-<td>List</td>
-<td>A named list of results from <code>smoothingSelection()</code>, with each entry corresponding to a penalty type (<code>"m-2"</code>, <code>"2"</code>, <code>"1"</code>, <code>"0"</code>).</td>
+<td>Named list</td>
+<td><em>required</em></td>
+<td>A named list where each element is the output from <code>smoothingSelection()</code> with a different penalty type. Names should be penalty types: <code>"m-2"</code>, <code>"2"</code>, <code>"3"</code>, <code>"0"</code>.</td>
 </tr>
 <tr class="even">
 <td><strong>plot</strong></td>
 <td>Logical</td>
-<td>If <code>TRUE</code> (default), returns comparative <code>ggplot2</code>-based visualizations of smoothing diagnostics across penalty types and spline degrees.</td>
+<td><code>TRUE</code></td>
+<td>If <code>TRUE</code>, generates comparative diagnostic plots showing GCV, OCV, df, and SSE across penalty types and spline degrees.</td>
 </tr>
 </tbody>
 </table>
@@ -218,52 +338,210 @@ It takes as input the results produced by multiple calls to <code>smoothingSelec
 </section>
 <section id="output" class="level2">
 <h2 class="anchored" data-anchor-id="output">📦 Output</h2>
-<p>Returns a <strong>list</strong> containing the optimal smoothing configuration, diagnostic matrices, and (optionally) comparative plots.</p>
+<p>Returns a <strong>list</strong> with the optimal smoothing configuration and comparative diagnostics:</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 43%">
-<col style="width: 56%">
+<col style="width: 32%">
+<col style="width: 21%">
+<col style="width: 46%">
 </colgroup>
 <thead>
 <tr class="header">
 <th>Element</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td><strong>optSmoothing</strong></td>
-<td>Full set of results from the optimal penalization strategy, as returned by <code>smoothingSelection()</code>.</td>
+<td>list</td>
+<td>Complete results from <code>smoothingSelection()</code> for the optimal penalty strategy. Contains all diagnostic information for the best configuration.</td>
 </tr>
 <tr class="even">
 <td><strong>m_opt</strong></td>
-<td>Integer. Optimal spline degree that minimizes the GCV across all penalty types.</td>
+<td>integer</td>
+<td>Optimal spline degree (m) that minimizes GCV across all penalty types and degrees.</td>
 </tr>
 <tr class="odd">
 <td><strong>penalty_opt</strong></td>
-<td>Character. Optimal penalty type (<code>"m-2"</code>, <code>"2"</code>, <code>"1"</code>, or <code>"0"</code>).</td>
+<td>character</td>
+<td>Optimal penalty type (e.g., <code>"m-2"</code>, <code>"2"</code>, <code>"3"</code>, <code>"0"</code>).</td>
 </tr>
 <tr class="even">
 <td><strong>lambda_opt</strong></td>
-<td>Numeric. Optimal log10(λ) value corresponding to the selected degree and penalty.</td>
+<td>numeric</td>
+<td>Optimal log₁₀(λ) value corresponding to the selected degree and penalty combination.</td>
 </tr>
 <tr class="odd">
 <td><strong>gcv_matrix</strong></td>
-<td>Numeric matrix of GCV values, where rows correspond to penalties and columns to spline degrees.</td>
+<td>matrix</td>
+<td>Comparison matrix of GCV values with penalties as rows and degrees as columns. Lower values = better.</td>
 </tr>
 <tr class="even">
 <td><strong>plots</strong></td>
-<td>(Optional) List of <code>ggplot2</code> objects for <code>GCV</code>, <code>OCV</code>, <code>df</code>, and <code>SSE</code> comparisons across penalties and degrees.</td>
+<td>list</td>
+<td>(If <code>plot = TRUE</code>) List of <code>ggplot2</code> objects showing GCV, OCV, df, and SSE comparisons.</td>
 </tr>
 <tr class="odd">
 <td><strong>call</strong></td>
-<td>The matched function call, useful for reproducibility.</td>
+<td>call</td>
+<td>Function call for reproducibility.</td>
 </tr>
 </tbody>
 </table>
-
-
+<hr>
 </section>
+<section id="usage-examples" class="level2">
+<h2 class="anchored" data-anchor-id="usage-examples">💡 Usage Examples</h2>
+<section id="basic-usage-two-penalties" class="level3">
+<h3 class="anchored" data-anchor-id="basic-usage-two-penalties">Basic Usage (Two Penalties)</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cccc)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Import and normalize data</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>corpus <span class="ot">&lt;-</span> <span class="fu">importData</span>(<span class="st">"tdm.csv"</span>, <span class="st">"corpus_info.csv"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>corpus_norm <span class="ot">&lt;-</span> <span class="fu">normalization</span>(corpus, <span class="at">normty =</span> <span class="st">"nc"</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Run smoothingSelection for different penalty types</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>smooth_m2 <span class="ot">&lt;-</span> <span class="fu">smoothingSelection</span>(corpus_norm, <span class="at">penalty_type =</span> <span class="st">"m-2"</span>, <span class="at">plot =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>smooth_2 <span class="ot">&lt;-</span> <span class="fu">smoothingSelection</span>(corpus_norm, <span class="at">penalty_type =</span> <span class="st">"2"</span>, <span class="at">plot =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare and select optimal</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">"m-2"</span> <span class="ot">=</span> smooth_m2, <span class="st">"2"</span> <span class="ot">=</span> smooth_2)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>optimal <span class="ot">&lt;-</span> <span class="fu">optimalSmoothing</span>(results, <span class="at">plot =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co"># View optimal parameters</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Optimal degree:"</span>, optimal<span class="sc">$</span>m_opt, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Optimal penalty:"</span>, optimal<span class="sc">$</span>penalty_opt, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Optimal log10(lambda):"</span>, optimal<span class="sc">$</span>lambda_opt, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="complete-comparison-four-penalties" class="level3">
+<h3 class="anchored" data-anchor-id="complete-comparison-four-penalties">Complete Comparison (Four Penalties)</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test all common penalty types</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>smooth_m2 <span class="ot">&lt;-</span> <span class="fu">smoothingSelection</span>(corpus_norm, <span class="at">penalty_type =</span> <span class="st">"m-2"</span>, <span class="at">plot =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>smooth_2 <span class="ot">&lt;-</span> <span class="fu">smoothingSelection</span>(corpus_norm, <span class="at">penalty_type =</span> <span class="st">"2"</span>, <span class="at">plot =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>smooth_3 <span class="ot">&lt;-</span> <span class="fu">smoothingSelection</span>(corpus_norm, <span class="at">penalty_type =</span> <span class="st">"3"</span>, <span class="at">plot =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>smooth_0 <span class="ot">&lt;-</span> <span class="fu">smoothingSelection</span>(corpus_norm, <span class="at">penalty_type =</span> <span class="st">"0"</span>, <span class="at">plot =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine results</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>all_results <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"m-2"</span> <span class="ot">=</span> smooth_m2,</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"2"</span> <span class="ot">=</span> smooth_2,</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">"3"</span> <span class="ot">=</span> smooth_3,</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">"0"</span> <span class="ot">=</span> smooth_0</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Find optimal</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>optimal <span class="ot">&lt;-</span> <span class="fu">optimalSmoothing</span>(all_results, <span class="at">plot =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="co"># View GCV comparison matrix</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(optimal<span class="sc">$</span>gcv_matrix)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<hr>
+</section>
+</section>
+<section id="interpreting-the-output" class="level2">
+<h2 class="anchored" data-anchor-id="interpreting-the-output">📊 Interpreting the Output</h2>
+<section id="gcv-comparison-matrix" class="level3">
+<h3 class="anchored" data-anchor-id="gcv-comparison-matrix">1. GCV Comparison Matrix</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>optimal<span class="sc">$</span>gcv_matrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Example output:</strong></p>
+<pre><code>        degree_2  degree_3  degree_4  degree_5
+m-2     0.0125    0.0108    0.0095    0.0102
+2       0.0131    0.0112    0.0098    0.0105
+3       0.0145    0.0120    0.0110    0.0115</code></pre>
+<p><strong>How to read:</strong> - <strong>Rows</strong>: Penalty types - <strong>Columns</strong>: Spline degrees - <strong>Values</strong>: GCV scores (lower = better) - <strong>Minimum</strong>: Optimal combination (e.g., degree 4 with “m-2” penalty)</p>
+</section>
+<section id="diagnostic-plots" class="level3">
+<h3 class="anchored" data-anchor-id="diagnostic-plots">2. Diagnostic Plots</h3>
+<p>Four comparative plots are generated (if <code>plot = TRUE</code>):</p>
+<section id="gcv-comparison-plot" class="level4">
+<h4 class="anchored" data-anchor-id="gcv-comparison-plot"><strong>GCV Comparison Plot</strong></h4>
+<p>Shows GCV across degrees for each penalty type. - <strong>Find the lowest point</strong> across all lines - <strong>Check for convergence</strong> — do different penalties agree?</p>
+</section>
+<section id="ocv-comparison-plot" class="level4">
+<h4 class="anchored" data-anchor-id="ocv-comparison-plot"><strong>OCV Comparison Plot</strong></h4>
+<p>Shows ordinary cross-validation scores. - Should align with GCV patterns - <strong>Discrepancies</strong> may indicate overfitting</p>
+</section>
+<section id="degrees-of-freedom-plot" class="level4">
+<h4 class="anchored" data-anchor-id="degrees-of-freedom-plot"><strong>Degrees of Freedom Plot</strong></h4>
+<p>Shows model complexity for each penalty. - <strong>Higher df</strong> = more flexible model - <strong>Compare at same degree</strong> — penalties affect complexity differently</p>
+</section>
+<section id="sse-comparison-plot" class="level4">
+<h4 class="anchored" data-anchor-id="sse-comparison-plot"><strong>SSE Comparison Plot</strong></h4>
+<p>Shows fit to data for each penalty. - <strong>Lower SSE</strong> = better fit to observed data - <strong>Trade-off with smoothness</strong> — lowest SSE may overfit</p>
+<hr>
+</section>
+</section>
+</section>
+<section id="decision-making-guide" class="level2">
+<h2 class="anchored" data-anchor-id="decision-making-guide">🎯 Decision-Making Guide</h2>
+<section id="step-1-examine-gcv-matrix" class="level3">
+<h3 class="anchored" data-anchor-id="step-1-examine-gcv-matrix">Step 1: Examine GCV Matrix</h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Find minimum GCV</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>min_gcv <span class="ot">&lt;-</span> <span class="fu">which</span>(optimal<span class="sc">$</span>gcv_matrix <span class="sc">==</span> <span class="fu">min</span>(optimal<span class="sc">$</span>gcv_matrix), <span class="at">arr.ind =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>best_penalty <span class="ot">&lt;-</span> <span class="fu">rownames</span>(optimal<span class="sc">$</span>gcv_matrix)[min_gcv[<span class="dv">1</span>]]</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>best_degree <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">sub</span>(<span class="st">"degree_"</span>, <span class="st">""</span>, <span class="fu">colnames</span>(optimal<span class="sc">$</span>gcv_matrix)[min_gcv[<span class="dv">2</span>]]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="step-2-check-plot-patterns" class="level3">
+<h3 class="anchored" data-anchor-id="step-2-check-plot-patterns">Step 2: Check Plot Patterns</h3>
+<p><strong>Good signs:</strong> - ✅ Clear minimum in GCV plot - ✅ GCV and OCV agree - ✅ Different penalties converge to similar degree - ✅ df values are reasonable (not too extreme)</p>
+<p><strong>Warning signs:</strong> - ⚠️ GCV keeps decreasing (no clear minimum) - ⚠️ Large discrepancy between GCV and OCV - ⚠️ Very different optimal degrees across penalties - ⚠️ Extremely high or low df values</p>
+</section>
+<section id="step-3-validate-choice" class="level3">
+<h3 class="anchored" data-anchor-id="step-3-validate-choice">Step 3: Validate Choice</h3>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use plotSuboptimalFits to visualize smoothed curves</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># (covered in next function documentation)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<hr>
+</section>
+</section>
+<section id="use-cases" class="level2">
+<h2 class="anchored" data-anchor-id="use-cases">📈 Use Cases</h2>
+<section id="final-parameter-selection" class="level3">
+<h3 class="anchored" data-anchor-id="final-parameter-selection">1. <strong>Final Parameter Selection</strong></h3>
+<p>After exploring with <code>smoothingSelection()</code>, make final decision systematically.</p>
+</section>
+<section id="robustness-check" class="level3">
+<h3 class="anchored" data-anchor-id="robustness-check">2. <strong>Robustness Check</strong></h3>
+<p>Verify that conclusions don’t depend critically on penalty choice.</p>
+</section>
+<section id="method-comparison-studies" class="level3">
+<h3 class="anchored" data-anchor-id="method-comparison-studies">3. <strong>Method Comparison Studies</strong></h3>
+<p>Compare how different penalty strategies affect results in your domain.</p>
+</section>
+<section id="publication-preparation" class="level3">
+<h3 class="anchored" data-anchor-id="publication-preparation">4. <strong>Publication Preparation</strong></h3>
+<p>Document systematic parameter selection with GCV matrix and plots.</p>
+</section>
+<section id="multi-corpus-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="multi-corpus-analysis">5. <strong>Multi-Corpus Analysis</strong></h3>
+<p>Find consistent smoothing strategy across different corpora.</p>
+<hr>
+</section>
+</section>
+<section id="tips-best-practices" class="level2">
+<h2 class="anchored" data-anchor-id="tips-best-practices">💡 Tips &amp; Best Practices</h2>
+<ol type="1">
+<li><strong>Start with 2-3 penalties</strong> — Testing all four is often unnecessary</li>
+<li><strong>“m-2” is usually best</strong> — It adapts well to different degrees</li>
+<li><strong>Check consistency</strong> — If penalties disagree strongly, investigate data quality</li>
+<li><strong>Don’t over-optimize</strong> — Small GCV differences (&lt; 1-2%) are not meaningful</li>
+<li><strong>Consider computation</strong> — More penalties = longer runtime</li>
+<li><strong>Document choices</strong> — Save gcv_matrix for methods sections</li>
+<li><strong>Validate visually</strong> — Always check plots, don’t rely only on numbers</li>
+<li><strong>Use practical constraints</strong> — Degrees 3-5 cover most use cases</li>
+</ol>
+<hr>
+</section>
+<section id="see-also" class="level2">
+<h2 class="anchored" data-anchor-id="see-also">📚 See Also</h2>
+<ul>
+<li><a href="smoothingSelection.html"><code>smoothingSelection()</code></a> — Find optimal λ for each penalty (prerequisite)</li>
+<li><a href="plotSuboptimalFits.html"><code>plotSuboptimalFits()</code></a> — Visualize smoothed curves with selected parameters</li>
+<li><a href="curvePlot.html"><code>curvePlot()</code></a> — Visualize raw trajectories before smoothing</li>
+<li><a href="normalization.html"><code>normalization()</code></a> — Normalize data before smoothing</li>
+</ul>
+
+
 </section>
 
 </main> <!-- /main -->

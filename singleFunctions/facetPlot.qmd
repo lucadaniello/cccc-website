@@ -1,61 +1,304 @@
 ---
-title: ""
+title: "facetPlot()"
 format:
   html:
-    toc: false
+    toc: true
+    toc-depth: 3
 page-layout: full
 ---
+**Create Faceted Visualizations of Keyword Trajectories by Zone**
 
-# facetPlot()
-
-Faceted Plot of Keyword Frequency Curves
+The `facetPlot()` function creates multi-panel plots showing keyword frequency trajectories separated by frequency zones. This faceted approach allows clear comparison of temporal patterns across different vocabulary strata without visual clutter.
 
 ---
 
 ## 🔹 Function Definition
 
 ```r
-facetPlot <- (data, keyword_selection = list(type="frequency", 
-              n=3, kw.list=NULL),
-              r = 4, scales = "fixed", 
-              leg = TRUE, 
-              themety = "light",
-              size_class = NULL, 
-              x_lab = "year")
+facetPlot(
+  data,
+  keyword_selection = list(type = "frequency", n = 3, kw.list = NULL),
+  r = 4,
+  scales = "fixed",
+  leg = TRUE,
+  themety = "light",
+  size_class = NULL,
+  x_lab = "years"
+)
 ```
 
-## 🎯 Aim
+---
 
-The `facetPlot()` function produces a **faceted visualization of keyword frequency trajectories** over time, grouped by frequency zones (e.g., *high*, *medium*, *low*).  
-It allows users to highlight a subset of keywords either by **highest frequency**, **random sampling**, or **custom selection**, displaying them in distinct colors within each zone.  
-Each facet corresponds to a frequency zone, enabling a clear comparative view of the temporal behavior of keywords across different frequency ranges.
+## 🎯 Purpose
+
+When visualizing temporal patterns across many keywords, overlapping trajectories can become difficult to interpret. Faceting by frequency zone provides clarity by:
+
+1. **Separating complexity** — Each zone displayed in its own panel
+2. **Enabling comparisons** — Easy to compare patterns across zones
+3. **Reducing clutter** — Keywords don't overlap across different frequency ranges
+4. **Highlighting representatives** — Emphasize specific keywords within each zone
+5. **Supporting analysis** — Different scales can reveal zone-specific patterns
+6. **Creating clarity** — Clean, organized visualizations for publications
+7. **Facilitating interpretation** — Zone-specific dynamics become immediately apparent
+8. **Flexible selection** — Choose keywords by frequency, randomly, or manually
+
+This function is particularly powerful for corpora with many keywords across diverse frequency ranges.
+
+---
+
+## 🧮 Keyword Selection Strategies
+
+The `keyword_selection` parameter controls which keywords are highlighted in each zone:
+
+### 1. **By Frequency** (`type = "frequency"`)
+Selects the **top N** most frequent keywords in each zone.
+
+```r
+keyword_selection = list(type = "frequency", n = 3, kw.list = NULL)
+```
+
+**Use when:**
+- You want to highlight the most important terms per zone
+- Exploring core vocabulary within each frequency stratum
+- Creating representative visualizations
+
+### 2. **Random Selection** (`type = "random"`)
+Randomly samples **N** keywords from each zone.
+
+```r
+keyword_selection = list(type = "random", n = 3, kw.list = NULL)
+```
+
+**Use when:**
+- You want unbiased representation
+- Exploring general zone behavior
+- Testing methodology robustness
+
+### 3. **Custom List** (`type = "list"`)
+Manually specify which keywords to highlight.
+
+```r
+keyword_selection = list(type = "list", n = NULL, kw.list = c("algorithm", "data", "network"))
+```
+
+**Use when:**
+- You have specific keywords of interest
+- Creating targeted visualizations
+- Following up on previous analyses
 
 ---
 
 ## ⚙️ Arguments
 
-| Argument | Type | Description |
-|-----------|------|-------------|
-| **data** | List | A list returned by `importData()`, containing the term-document matrix in long format and corpus metadata. |
-| **keyword_selection** | List | Specifies how keywords are selected for highlighting. Must include: <br>• `type` — `"frequency"`, `"random"`, or `"list"` <br>• `n` — Number of keywords per zone (for `"frequency"` or `"random"`) <br>• `kw.list` — Character vector of custom keywords (for `"list"`). |
-| **r** | Integer | Interval for thinning x-axis year labels (e.g., show one label every `r` years). Default: `4`. |
-| **scales** | Character | Whether y-axis scales are `"fixed"` (default) or `"free"` across facets. |
-| **leg** | Logical | Whether to display the legend. Default: `TRUE`. |
-| **themety** | Character | Theme type. Either `"light"` (default) or `"dark"`. |
-| **size_class** | Numeric vector | Optional vector defining relative line thickness by zone. Defaults depend on the selected theme. |
-| **x_lab** | Character | Label for the x-axis. Default: `"year"`. |
+| Argument | Type | Default | Description |
+|----------|------|---------|-------------|
+| **data** | List | *required* | A list object returned by `importData()` or `normalization()`, containing the TDM and corpus metadata. |
+| **keyword_selection** | List | See below | Controls keyword highlighting:<br>• `type`: `"frequency"`, `"random"`, or `"list"`<br>• `n`: Number of keywords per zone (for frequency/random)<br>• `kw.list`: Vector of specific keywords (for list type) |
+| **r** | Integer | `4` | Interval for x-axis label thinning. Shows one label every `r` years. |
+| **scales** | Character | `"fixed"` | Y-axis scale behavior:<br>• `"fixed"`: Same scale across all facets<br>• `"free"`: Each facet has independent scale<br>• `"free_y"`: Free y-axis, fixed x-axis |
+| **leg** | Logical | `TRUE` | If `TRUE`, displays legend showing zones and highlighted keywords. |
+| **themety** | Character | `"light"` | Visual theme:<br>• `"light"`: Light background<br>• `"dark"`: Dark background |
+| **size_class** | Numeric vector | `NULL` | Custom line thickness for each zone. If `NULL`, uses theme defaults. |
+| **x_lab** | Character | `"years"` | Label for x-axis. |
 
 ---
 
-## 📦 Output
+## 📊 Understanding Scales
 
-Returns a **`ggplot2` object** with faceted panels showing the temporal evolution of keyword frequencies.
+### Fixed Scales (`scales = "fixed"`)
+```
+Zone 4 │ [0-1000]
+Zone 3 │ [0-1000]  ← Same y-axis range
+Zone 2 │ [0-1000]
+Zone 1 │ [0-1000]
+```
 
-| Element | Description |
-|----------|-------------|
-| **Facets** | Each panel corresponds to a frequency zone (e.g., high, medium, low). |
-| **Highlighted keywords** | Selected keywords are shown in distinct colors for easy identification. |
-| **x-axis** | Represents time (years). Labels can be thinned using `r`. |
-| **y-axis** | Represents keyword frequency (raw or normalized). |
-| **Legend** | Optional; displays both zone and keyword colors. |
-| **Theme** | Adjustable between light and dark modes. |
+**Advantages:**
+- Easy to compare absolute frequencies across zones
+- Immediately see which zones have higher frequencies
+- Maintains proportional relationships
+
+**Disadvantages:**
+- Low-frequency zones may appear flat
+- Details in smaller zones harder to see
+
+### Free Scales (`scales = "free"` or `"free_y"`)
+```
+Zone 4 │ [500-1000]
+Zone 3 │ [200-500]   ← Each zone optimized
+Zone 2 │ [50-150]
+Zone 1 │ [0-50]
+```
+
+**Advantages:**
+- Each zone's patterns clearly visible
+- Reveals details in low-frequency zones
+- Better for pattern analysis
+
+**Disadvantages:**
+- Cannot compare absolute frequencies
+- May be misleading if not clearly labeled
+
+---
+
+## 💡 Usage Examples
+
+### Basic Usage - Top Keywords per Zone
+
+```r
+library(cccc)
+
+# Import and normalize
+corpus <- importData("tdm.csv", "corpus_info.csv")
+corpus_norm <- normalization(corpus, normty = "nc")
+
+# Create faceted plot with top 3 keywords per zone
+facetPlot(
+  corpus_norm,
+  keyword_selection = list(type = "frequency", n = 3)
+)
+```
+
+### Random Selection
+
+```r
+# Randomly select 5 keywords per zone
+facetPlot(
+  corpus_norm,
+  keyword_selection = list(type = "random", n = 5)
+)
+```
+
+### Custom Keyword List
+
+```r
+# Highlight specific keywords
+facetPlot(
+  corpus_norm,
+  keyword_selection = list(
+    type = "list", 
+    kw.list = c("algorithm", "data", "network", "cloud", "machine", "learning")
+  )
+)
+```
+---
+
+## 🔍 Interpreting Faceted Plots
+
+### What to Look For in Each Panel
+
+#### **High-Frequency Zone Panel**
+- Core vocabulary of the corpus
+- Typically more stable trajectories
+- Changes indicate major conceptual shifts
+- Often shows gradual evolution rather than spikes
+
+#### **Medium-Frequency Zone Panels**
+- Specialized but established terms
+- May show more dynamic patterns than high-freq zone
+- Often contains rising/falling terms
+- Balance between stability and volatility
+
+#### **Low-Frequency Zone Panel**
+- Rare, emerging, or declining terms
+- More volatile and noisy trajectories
+- Spikes may indicate temporary importance
+- Harder to distinguish signal from noise
+
+### Cross-Panel Comparisons
+
+**Parallel trends across zones:**
+- Indicates corpus-wide phenomena
+- May reflect historical events or methodological artifacts
+
+**Divergent trends:**
+- High-freq stable while low-freq volatile = normal pattern
+- All zones showing similar patterns = investigate common cause
+
+**Zone-specific spikes:**
+- High-freq spike = major event (likely real signal)
+- Low-freq spike = may be noise or micro-trend
+
+---
+
+## 🎯 Choosing Between Fixed and Free Scales
+
+### Use Fixed Scales When:
+
+✅ You want to compare absolute frequencies across zones  
+✅ Showing the magnitude difference between zones is important  
+✅ Creating visualizations for readers unfamiliar with faceting  
+✅ Emphasizing that high-freq terms dominate the corpus  
+
+**Example scenario:** Demonstrating that core vocabulary (high-freq) is much more prevalent than specialized terms (low-freq).
+
+### Use Free Scales When:
+
+✅ You want to see patterns within each zone clearly  
+✅ Low-frequency zones would be too flat with fixed scales  
+✅ Analyzing temporal dynamics rather than absolute frequencies  
+✅ Looking for similar patterns across different scales  
+
+**Example scenario:** Identifying whether low-frequency emerging terms show similar temporal patterns to established high-frequency terms.
+
+⚠️ **Important:** Always clearly label when using free scales to avoid misleading readers!
+
+---
+
+## 📈 Use Cases
+
+### 1. **Zone Comparison Studies**
+Compare how different frequency zones evolve over time.
+
+### 2. **Pattern Discovery**
+Identify zone-specific temporal patterns not visible in combined plots.
+
+### 3. **Publication Figures**
+Create clear, organized visualizations for papers showing zone structure.
+
+### 4. **Presentation Material**
+Use free scales to show patterns clearly to audiences.
+
+### 5. **Data Exploration**
+Systematically examine keywords across frequency strata.
+
+### 6. **Validation**
+Verify that zone classification captures meaningful differences.
+
+### 7. **Hypothesis Testing**
+Test whether predicted patterns appear in expected zones.
+
+---
+
+## 💡 Tips & Best Practices
+
+1. **Start with frequency selection** — See most important terms first
+2. **Try both scale types** — Compare fixed vs. free to understand your data
+3. **Use appropriate n** — 2-4 keywords per zone usually optimal
+4. **Save large versions** — Faceted plots need more space than single plots
+5. **Label clearly** — Especially important when using free scales
+6. **Match theme to context** — Light for papers, dark for talks
+7. **Consider zone count** — More zones = need more vertical space
+8. **Test keyword selection** — Try random selection to verify representativeness
+9. **Document choices** — Note which keywords and why in methods
+10. **Combine with other plots** — Use alongside `curveCtuPlot()` for comprehensive view
+
+---
+
+## 📚 See Also
+
+- [`curvePlot()`](curvePlot.html) — Plot all keywords together without faceting
+- [`curveCtuPlot()`](curveCtuPlot.html) — Zone curves with highlighted examples (alternative approach)
+- [`rowMassPlot()`](rowMassPlot.html) — Visualize frequency distribution by zone
+- [`normalization()`](normalization.html) — Normalize before plotting for fair comparison
+- [`importData()`](importData.html) — Zone classification happens here
+
+---
+
+## 💬 Need Help?
+
+For questions about faceted visualizations:
+- Check the [Use Cases](../use-cases.html) page for complete workflow examples
+- Visit the [Projects](../projects.html) page to see real applications
+- Open an issue on [GitHub](https://github.com/matildet/cccc/issues)
+- Contact the team via the [About Us](../about-us.html) page

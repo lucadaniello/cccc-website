@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>curvectuplot</title>
+<title>curveCtuPlot()</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -131,6 +131,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Functions</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="../download.html"> 
+<span class="menu-text">Download</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="../use-cases.html"> 
 <span class="menu-text">Use Cases</span></a>
   </li>  
@@ -164,45 +168,125 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#function-definition" id="toc-function-definition" class="nav-link active" data-scroll-target="#function-definition">🔹 Function Definition</a></li>
+  <li><a href="#purpose" id="toc-purpose" class="nav-link" data-scroll-target="#purpose">🎯 Purpose</a></li>
+  <li><a href="#understanding-ctu-characteristic-terms-by-usage" id="toc-understanding-ctu-characteristic-terms-by-usage" class="nav-link" data-scroll-target="#understanding-ctu-characteristic-terms-by-usage">🧮 Understanding CTU (Characteristic Terms by Usage)</a></li>
+  <li><a href="#arguments" id="toc-arguments" class="nav-link" data-scroll-target="#arguments">⚙️ Arguments</a></li>
+  <li><a href="#plot-components" id="toc-plot-components" class="nav-link" data-scroll-target="#plot-components">📊 Plot Components</a>
+  <ul class="collapse">
+  <li><a href="#visual-structure" id="toc-visual-structure" class="nav-link" data-scroll-target="#visual-structure">Visual Structure</a></li>
+  <li><a href="#dual-legend-system" id="toc-dual-legend-system" class="nav-link" data-scroll-target="#dual-legend-system">Dual Legend System</a></li>
+  </ul></li>
+  <li><a href="#usage-examples" id="toc-usage-examples" class="nav-link" data-scroll-target="#usage-examples">💡 Usage Examples</a>
+  <ul class="collapse">
+  <li><a href="#basic-usage-with-selected-keywords" id="toc-basic-usage-with-selected-keywords" class="nav-link" data-scroll-target="#basic-usage-with-selected-keywords">Basic Usage with Selected Keywords</a></li>
+  <li><a href="#automatic-keyword-selection" id="toc-automatic-keyword-selection" class="nav-link" data-scroll-target="#automatic-keyword-selection">Automatic Keyword Selection</a></li>
+  <li><a href="#long-time-series" id="toc-long-time-series" class="nav-link" data-scroll-target="#long-time-series">Long Time Series</a></li>
+  <li><a href="#dark-theme-for-presentations" id="toc-dark-theme-for-presentations" class="nav-link" data-scroll-target="#dark-theme-for-presentations">Dark Theme for Presentations</a></li>
+  </ul></li>
+  <li><a href="#selecting-good-example-keywords" id="toc-selecting-good-example-keywords" class="nav-link" data-scroll-target="#selecting-good-example-keywords">🎯 Selecting Good Example Keywords</a>
+  <ul class="collapse">
+  <li><a href="#criteria-for-ctu-selection" id="toc-criteria-for-ctu-selection" class="nav-link" data-scroll-target="#criteria-for-ctu-selection">Criteria for CTU Selection</a></li>
+  </ul></li>
+  <li><a href="#interpreting-the-plot" id="toc-interpreting-the-plot" class="nav-link" data-scroll-target="#interpreting-the-plot">🔍 Interpreting the Plot</a>
+  <ul class="collapse">
+  <li><a href="#understanding-zone-curves" id="toc-understanding-zone-curves" class="nav-link" data-scroll-target="#understanding-zone-curves">Understanding Zone Curves</a></li>
+  <li><a href="#understanding-highlighted-keywords" id="toc-understanding-highlighted-keywords" class="nav-link" data-scroll-target="#understanding-highlighted-keywords">Understanding Highlighted Keywords</a></li>
+  </ul></li>
+  <li><a href="#use-cases" id="toc-use-cases" class="nav-link" data-scroll-target="#use-cases">📈 Use Cases</a>
+  <ul class="collapse">
+  <li><a href="#conference-presentations" id="toc-conference-presentations" class="nav-link" data-scroll-target="#conference-presentations">1. <strong>Conference Presentations</strong></a></li>
+  <li><a href="#publication-figures" id="toc-publication-figures" class="nav-link" data-scroll-target="#publication-figures">2. <strong>Publication Figures</strong></a></li>
+  <li><a href="#teachingdemonstrations" id="toc-teachingdemonstrations" class="nav-link" data-scroll-target="#teachingdemonstrations">3. <strong>Teaching/Demonstrations</strong></a></li>
+  <li><a href="#methodology-validation" id="toc-methodology-validation" class="nav-link" data-scroll-target="#methodology-validation">4. <strong>Methodology Validation</strong></a></li>
+  <li><a href="#narrative-building" id="toc-narrative-building" class="nav-link" data-scroll-target="#narrative-building">5. <strong>Narrative Building</strong></a></li>
+  <li><a href="#comparative-analysis" id="toc-comparative-analysis" class="nav-link" data-scroll-target="#comparative-analysis">6. <strong>Comparative Analysis</strong></a></li>
+  <li><a href="#hypothesis-illustration" id="toc-hypothesis-illustration" class="nav-link" data-scroll-target="#hypothesis-illustration">7. <strong>Hypothesis Illustration</strong></a></li>
+  </ul></li>
+  <li><a href="#tips-best-practices" id="toc-tips-best-practices" class="nav-link" data-scroll-target="#tips-best-practices">💡 Tips &amp; Best Practices</a></li>
+  <li><a href="#see-also" id="toc-see-also" class="nav-link" data-scroll-target="#see-also">📚 See Also</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content column-page" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content column-page-left" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">curveCtuPlot()</h1>
+</div>
 
 
 
+<div class="quarto-title-meta column-page-left">
 
-<section id="curvectuplot" class="level1">
-<h1>curveCtuPlot()</h1>
-<p>Plot of Temporal Curves for Frequency Zones and Example Keywords</p>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><strong>Plot Temporal Curves with Highlighted Example Keywords by Zone</strong></p>
+<p>The <code>curveCtuPlot()</code> function creates a temporal visualization that combines zone-based frequency curves with highlighted example keywords. This allows you to show both the overall zone structure and specific representative terms simultaneously, making it ideal for presentations and publications.</p>
 <hr>
 <section id="function-definition" class="level2">
 <h2 class="anchored" data-anchor-id="function-definition">🔹 Function Definition</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>curveCtuPlot <span class="ot">&lt;-</span> (data,</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">ctu_noun =</span> <span class="cn">NULL</span>,</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">r =</span> <span class="dv">1</span>,</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">themety =</span> <span class="st">"light"</span>,</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">size_class =</span> <span class="cn">NULL</span>,</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">x_lab =</span> <span class="st">"year"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">curveCtuPlot</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  data,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">ctu_noun =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">r =</span> <span class="dv">1</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">themety =</span> <span class="st">"light"</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">size_class =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">x_lab =</span> <span class="st">"years"</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<hr>
 </section>
-<section id="aim" class="level2">
-<h2 class="anchored" data-anchor-id="aim">🎯 Aim</h2>
-<p>The <code>curveCtuPlot()</code> function generates a <strong>temporal line plot of keyword frequencies</strong>, distinguishing between <strong>predefined frequency zones</strong> (e.g., <em>high</em>, <em>medium</em>, <em>low</em>) and highlighting <strong>three example keywords</strong>, each belonging to a different zone.<br>
-It supports both normalized and raw frequencies, with separate color scales for zones and example keywords.<br>
-Each zone is labeled with its frequency interval, and the selected example keywords are displayed with distinct colors and a dedicated legend.</p>
+<section id="purpose" class="level2">
+<h2 class="anchored" data-anchor-id="purpose">🎯 Purpose</h2>
+<p>While <code>curvePlot()</code> shows all keywords together, <code>curveCtuPlot()</code> provides a more structured visualization by combining zone-level patterns with specific example keywords. This function helps you:</p>
+<ol type="1">
+<li><strong>Show zone structure</strong> — Display aggregate patterns for each frequency zone</li>
+<li><strong>Highlight representatives</strong> — Emphasize specific keywords as examples</li>
+<li><strong>Create clear narratives</strong> — Tell a story through selected exemplar terms</li>
+<li><strong>Combine overview and detail</strong> — Balance big picture with specific cases</li>
+<li><strong>Improve readability</strong> — Reduce clutter while maintaining informativeness</li>
+<li><strong>Support presentations</strong> — Create clear, focused visualizations for talks</li>
+<li><strong>Guide interpretation</strong> — Direct attention to key terms within zones</li>
+<li><strong>Demonstrate methodology</strong> — Show how zone classification works with concrete examples</li>
+</ol>
+<p>This function is particularly useful when you want to demonstrate temporal patterns without overwhelming your audience with hundreds of trajectories.</p>
+<hr>
+</section>
+<section id="understanding-ctu-characteristic-terms-by-usage" class="level2">
+<h2 class="anchored" data-anchor-id="understanding-ctu-characteristic-terms-by-usage">🧮 Understanding CTU (Characteristic Terms by Usage)</h2>
+<p><strong>CTU</strong> refers to selecting <strong>representative keywords</strong> from different frequency zones: - <strong>High-frequency zone</strong>: Core vocabulary terms - <strong>Medium-frequency zone</strong>: Specialized but common terms<br>
+- <strong>Low-frequency zone</strong>: Rare or emerging terms</p>
+<p>By highlighting one keyword from each zone, you show the <strong>spectrum of vocabulary</strong> in your corpus.</p>
 <hr>
 </section>
 <section id="arguments" class="level2">
 <h2 class="anchored" data-anchor-id="arguments">⚙️ Arguments</h2>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 36%">
-<col style="width: 20%">
-<col style="width: 43%">
+<col style="width: 26%">
+<col style="width: 15%">
+<col style="width: 23%">
+<col style="width: 34%">
 </colgroup>
 <thead>
 <tr class="header">
 <th>Argument</th>
 <th>Type</th>
+<th>Default</th>
 <th>Description</th>
 </tr>
 </thead>
@@ -210,81 +294,205 @@ Each zone is labeled with its frequency interval, and the selected example keywo
 <tr class="odd">
 <td><strong>data</strong></td>
 <td>List</td>
-<td>A list containing the output of <code>importData()</code>.</td>
+<td><em>required</em></td>
+<td>A list object returned by <code>importData()</code> or <code>normalization()</code>, containing the TDM and corpus metadata.</td>
 </tr>
 <tr class="even">
 <td><strong>ctu_noun</strong></td>
-<td>Character vector (length = 3)</td>
-<td>Specifies three example keywords to highlight in the plot. Each must belong to a different frequency zone (<em>high</em>, <em>medium</em>, <em>low</em>).</td>
+<td>Character vector</td>
+<td><code>NULL</code></td>
+<td>Vector of exactly 3 keywords to highlight, one from each frequency zone (typically high, medium, low). Order doesn’t matter; function assigns them to zones automatically. If <code>NULL</code>, function may auto-select representative terms.</td>
 </tr>
 <tr class="odd">
 <td><strong>r</strong></td>
 <td>Integer</td>
-<td>Thinning rate for x-axis labels; displays one label every <code>r</code> years. Default: <code>1</code>.</td>
+<td><code>1</code></td>
+<td>Interval for x-axis label thinning. <code>r = 1</code> shows all years, <code>r = 2</code> shows every 2nd year, etc.</td>
 </tr>
 <tr class="even">
 <td><strong>themety</strong></td>
 <td>Character</td>
-<td>Theme type: <code>"light"</code> (default) or <code>"dark"</code>. Affects plot colors and background.</td>
+<td><code>"light"</code></td>
+<td>Visual theme:<br>• <code>"light"</code>: Light background (default)<br>• <code>"dark"</code>: Dark background (presentations)</td>
 </tr>
 <tr class="odd">
 <td><strong>size_class</strong></td>
-<td>Numeric vector (length = 3)</td>
-<td>Defines line widths for the three zones. If <code>NULL</code>, default values are assigned depending on the theme.</td>
+<td>Numeric vector</td>
+<td><code>NULL</code></td>
+<td>Custom line thickness for the three main zones (typically high, medium, low). If <code>NULL</code>, uses theme-appropriate defaults. Vector length should match number of main zones.</td>
 </tr>
 <tr class="even">
 <td><strong>x_lab</strong></td>
 <td>Character</td>
-<td>Label for the x-axis. Default: <code>"year"</code>.</td>
+<td><code>"years"</code></td>
+<td>Label for x-axis (e.g., <code>"Years"</code>, <code>"Time Period"</code>, <code>"Publication Year"</code>).</td>
 </tr>
 </tbody>
 </table>
 <hr>
 </section>
-<section id="output" class="level2">
-<h2 class="anchored" data-anchor-id="output">📦 Output</h2>
-<p>Returns a <strong><code>ggplot2</code> object</strong> displaying keyword frequency trajectories over time.</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 43%">
-<col style="width: 56%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Element</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>x-axis</strong></td>
-<td>Represents time (years).</td>
-</tr>
-<tr class="even">
-<td><strong>y-axis</strong></td>
-<td>Represents keyword frequency (raw or normalized).</td>
-</tr>
-<tr class="odd">
-<td><strong>Colors</strong></td>
-<td>Two scales: one for frequency zones, one for the example keywords.</td>
-</tr>
-<tr class="even">
-<td><strong>Line width</strong></td>
-<td>Reflects the relative frequency zone (high, medium, low).</td>
-</tr>
-<tr class="odd">
-<td><strong>Legends</strong></td>
-<td>Two legends: one for frequency zones with intervals, one for highlighted example keywords.</td>
-</tr>
-<tr class="even">
-<td><strong>Theme</strong></td>
-<td>Adjustable (“light” or “dark”) for improved readability.</td>
-</tr>
-</tbody>
-</table>
-
-
+<section id="plot-components" class="level2">
+<h2 class="anchored" data-anchor-id="plot-components">📊 Plot Components</h2>
+<section id="visual-structure" class="level3">
+<h3 class="anchored" data-anchor-id="visual-structure">Visual Structure</h3>
+<p>The plot contains <strong>two layers</strong>:</p>
+<section id="layer-1-zone-curves-background" class="level4">
+<h4 class="anchored" data-anchor-id="layer-1-zone-curves-background">Layer 1: Zone Curves (Background)</h4>
+<ul>
+<li>Lines representing aggregated trajectories for each frequency zone</li>
+<li>Colors indicate zones (using corpus color palette)</li>
+<li>Line thickness varies by zone importance</li>
+<li>Shows overall zone behavior</li>
+</ul>
 </section>
+<section id="layer-2-example-keywords-foreground" class="level4">
+<h4 class="anchored" data-anchor-id="layer-2-example-keywords-foreground">Layer 2: Example Keywords (Foreground)</h4>
+<ul>
+<li>3 highlighted keywords from different zones</li>
+<li>Distinct colors separate from zone colors</li>
+<li>Emphasized line thickness for visibility</li>
+<li>Labels in legend identify specific terms</li>
+</ul>
+</section>
+</section>
+<section id="dual-legend-system" class="level3">
+<h3 class="anchored" data-anchor-id="dual-legend-system">Dual Legend System</h3>
+<p><strong>Zone Legend:</strong> - Shows frequency zones with interval ranges - Example: “Zone 4 [500-1000]”, “Zone 2 [50-100]”</p>
+<p><strong>Keyword Legend:</strong> - Shows the 3 highlighted example keywords - Example: “algorithm”, “preprocessing”, “noise”</p>
+<hr>
+</section>
+</section>
+<section id="usage-examples" class="level2">
+<h2 class="anchored" data-anchor-id="usage-examples">💡 Usage Examples</h2>
+<section id="basic-usage-with-selected-keywords" class="level3">
+<h3 class="anchored" data-anchor-id="basic-usage-with-selected-keywords">Basic Usage with Selected Keywords</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cccc)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Import and normalize data</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>corpus <span class="ot">&lt;-</span> <span class="fu">importData</span>(<span class="st">"tdm.csv"</span>, <span class="st">"corpus_info.csv"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>corpus_norm <span class="ot">&lt;-</span> <span class="fu">normalization</span>(corpus, <span class="at">normty =</span> <span class="st">"nc"</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot with 3 representative keywords from different zones</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">curveCtuPlot</span>(</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  corpus_norm,</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">ctu_noun =</span> <span class="fu">c</span>(<span class="st">"algorithm"</span>, <span class="st">"preprocessing"</span>, <span class="st">"noise"</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="automatic-keyword-selection" class="level3">
+<h3 class="anchored" data-anchor-id="automatic-keyword-selection">Automatic Keyword Selection</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Let function auto-select representative keywords</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">curveCtuPlot</span>(corpus_norm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="long-time-series" class="level3">
+<h3 class="anchored" data-anchor-id="long-time-series">Long Time Series</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show every 5th year on x-axis</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">curveCtuPlot</span>(</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  corpus_norm,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">ctu_noun =</span> <span class="fu">c</span>(<span class="st">"data"</span>, <span class="st">"network"</span>, <span class="st">"cloud"</span>),</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">r =</span> <span class="dv">5</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="dark-theme-for-presentations" class="level3">
+<h3 class="anchored" data-anchor-id="dark-theme-for-presentations">Dark Theme for Presentations</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use dark theme</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">curveCtuPlot</span>(</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  corpus_norm,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">ctu_noun =</span> <span class="fu">c</span>(<span class="st">"machine"</span>, <span class="st">"learning"</span>, <span class="st">"neural"</span>),</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">themety =</span> <span class="st">"dark"</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<hr>
+</section>
+</section>
+<section id="selecting-good-example-keywords" class="level2">
+<h2 class="anchored" data-anchor-id="selecting-good-example-keywords">🎯 Selecting Good Example Keywords</h2>
+<section id="criteria-for-ctu-selection" class="level3">
+<h3 class="anchored" data-anchor-id="criteria-for-ctu-selection">Criteria for CTU Selection</h3>
+<p><strong>1. Zone Distribution</strong> - Choose one keyword from high-frequency zone - Choose one from medium-frequency zone - Choose one from low-frequency zone</p>
+<p><strong>2. Clear Trajectories</strong> - Select keywords with distinct, interpretable patterns - Avoid keywords with flat or noisy trajectories - Choose terms that tell a story</p>
+<p><strong>3. Relevance</strong> - Select keywords meaningful to your research question - Choose terms your audience will recognize - Pick examples that illustrate interesting phenomena</p>
+<p><strong>4. Representativeness</strong> - Keywords should be typical of their zone - Avoid extreme outliers within zones - Select terms that generalize well</p>
+<hr>
+</section>
+</section>
+<section id="interpreting-the-plot" class="level2">
+<h2 class="anchored" data-anchor-id="interpreting-the-plot">🔍 Interpreting the Plot</h2>
+<section id="understanding-zone-curves" class="level3">
+<h3 class="anchored" data-anchor-id="understanding-zone-curves">Understanding Zone Curves</h3>
+<p><strong>High-frequency zone (typically darkest):</strong> - Shows behavior of core vocabulary - Usually more stable trajectories - Changes indicate major conceptual shifts</p>
+<p><strong>Medium-frequency zone:</strong> - Shows specialized vocabulary - May show more dynamic patterns - Often contains emerging important terms</p>
+<p><strong>Low-frequency zone (typically lightest):</strong> - Shows rare or specialized terms - More volatile, less stable - May contain emerging or declining concepts</p>
+</section>
+<section id="understanding-highlighted-keywords" class="level3">
+<h3 class="anchored" data-anchor-id="understanding-highlighted-keywords">Understanding Highlighted Keywords</h3>
+<p>The 3 highlighted keywords provide <strong>concrete examples</strong> of the abstract zone patterns:</p>
+<ul>
+<li><strong>High-freq example</strong>: Demonstrates core vocabulary evolution</li>
+<li><strong>Medium-freq example</strong>: Shows specialized term dynamics</li>
+<li><strong>Low-freq example</strong>: Illustrates niche or emerging concepts</li>
+</ul>
+<p><strong>Look for:</strong> - Do example keywords follow their zone’s pattern? - Are there divergences that tell a story? - Do trajectories align with domain knowledge?</p>
+<hr>
+</section>
+</section>
+<section id="use-cases" class="level2">
+<h2 class="anchored" data-anchor-id="use-cases">📈 Use Cases</h2>
+<section id="conference-presentations" class="level3">
+<h3 class="anchored" data-anchor-id="conference-presentations">1. <strong>Conference Presentations</strong></h3>
+<p>Create clear, focused visualizations showing zone structure with examples.</p>
+</section>
+<section id="publication-figures" class="level3">
+<h3 class="anchored" data-anchor-id="publication-figures">2. <strong>Publication Figures</strong></h3>
+<p>Generate figures demonstrating temporal patterns across frequency strata.</p>
+</section>
+<section id="teachingdemonstrations" class="level3">
+<h3 class="anchored" data-anchor-id="teachingdemonstrations">3. <strong>Teaching/Demonstrations</strong></h3>
+<p>Show students or colleagues how frequency zones behave differently.</p>
+</section>
+<section id="methodology-validation" class="level3">
+<h3 class="anchored" data-anchor-id="methodology-validation">4. <strong>Methodology Validation</strong></h3>
+<p>Demonstrate that zone classification captures meaningful distinctions.</p>
+</section>
+<section id="narrative-building" class="level3">
+<h3 class="anchored" data-anchor-id="narrative-building">5. <strong>Narrative Building</strong></h3>
+<p>Tell a story through carefully selected representative keywords.</p>
+</section>
+<section id="comparative-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="comparative-analysis">6. <strong>Comparative Analysis</strong></h3>
+<p>Compare zone patterns across different corpora or time periods.</p>
+</section>
+<section id="hypothesis-illustration" class="level3">
+<h3 class="anchored" data-anchor-id="hypothesis-illustration">7. <strong>Hypothesis Illustration</strong></h3>
+<p>Show specific keywords that exemplify theoretical predictions.</p>
+<hr>
+</section>
+</section>
+<section id="tips-best-practices" class="level2">
+<h2 class="anchored" data-anchor-id="tips-best-practices">💡 Tips &amp; Best Practices</h2>
+<ol type="1">
+<li><strong>Choose meaningful examples</strong> — Select keywords that resonate with your audience</li>
+<li><strong>Tell a story</strong> — Pick keywords that illustrate your main argument</li>
+<li><strong>Check zone membership</strong> — Verify keywords are in different zones</li>
+<li><strong>Test readability</strong> — Ensure highlighted keywords stand out</li>
+<li><strong>Match theme to context</strong> — Light for papers, dark for presentations</li>
+<li><strong>Use consistent examples</strong> — Keep same keywords across related plots</li>
+<li><strong>Document selection</strong> — Explain why you chose specific keywords</li>
+<li><strong>Validate patterns</strong> — Ensure examples are representative of their zones</li>
+<li><strong>Save high resolution</strong> — Use dpi = 300+ for publications</li>
+<li><strong>Combine with other plots</strong> — Use alongside <code>rowMassPlot()</code> and <code>colMassPlot()</code></li>
+</ol>
+<hr>
+</section>
+<section id="see-also" class="level2">
+<h2 class="anchored" data-anchor-id="see-also">📚 See Also</h2>
+<ul>
+<li><a href="curvePlot.html"><code>curvePlot()</code></a> — Plot all keyword trajectories without zone emphasis</li>
+<li><a href="facetPlot.html"><code>facetPlot()</code></a> — Create faceted visualizations by zone</li>
+<li><a href="rowMassPlot.html"><code>rowMassPlot()</code></a> — Visualize keyword frequency distribution</li>
+<li><a href="colMassPlot.html"><code>colMassPlot()</code></a> — Visualize temporal corpus structure</li>
+<li><a href="normalization.html"><code>normalization()</code></a> — Normalize frequencies before plotting</li>
+</ul>
+
+
 </section>
 
 </main> <!-- /main -->

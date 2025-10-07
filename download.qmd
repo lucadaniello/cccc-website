@@ -1,0 +1,68 @@
+---
+title: "Download and Installation"
+page-layout: full
+
+---
+
+## Prerequisites
+
+Before installing the `cccc` package, you need to have R and RStudio installed on your system.
+
+### Install R
+
+Download and install R from the [Comprehensive R Archive Network (CRAN)](https://cran.r-project.org/):
+
+- **Windows**: [Download R for Windows](https://cran.r-project.org/bin/windows/base/)
+- **macOS**: [Download R for macOS](https://cran.r-project.org/bin/macosx/)
+- **Linux**: [Download R for Linux](https://cran.r-project.org/bin/linux/)
+
+### Install RStudio (Recommended)
+
+RStudio is an integrated development environment (IDE) for R that makes working with R easier and more productive.
+
+Download and install RStudio Desktop from [Posit](https://posit.co/download/rstudio-desktop/).
+
+## Installing the cccc Package
+
+Currently, the `cccc` package is available exclusively on GitHub. To install it, you'll need to use the `remotes` package.
+
+### Step 1: Install remotes
+
+If you don't already have the `remotes` package installed, run the following command in your R console:
+
+```r
+install.packages("remotes")
+```
+
+### Step 2: Install cccc from GitHub
+
+Once `remotes` is installed, you can install the `cccc` package directly from GitHub:
+
+```r
+remotes::install_github("matildet/cccc")
+```
+
+### Step 3: Load the Package
+
+After installation, load the package to start using it:
+
+```r
+library(cccc)
+```
+
+## Troubleshooting
+
+If you encounter any issues during installation, please:
+
+1. Ensure you have the latest version of R installed
+2. Check that you have a stable internet connection
+3. Verify that you have the necessary system dependencies for package compilation
+4. [Open an issue](https://github.com/matildet/cccc/issues) on our GitHub repository for support
+
+## Staying Updated
+
+Since the package is under active development, you can update to the latest version at any time by running:
+
+```r
+remotes::install_github("matildet/cccc")
+```

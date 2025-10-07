@@ -1,65 +1,275 @@
 ---
-title: ""
+title: "plotSuboptimalFits()"
 format:
   html:
-    toc: false
+    toc: true
+    toc-depth: 3
 page-layout: full
 ---
 
-# plotSuboptimalFits()
+**Visualize Smoothed Curves for Quality Assessment**
 
-Plot Suboptimal Smoothed Curves for Selected Keywords
+The `plotSuboptimalFits()` function creates visual comparisons of raw and smoothed keyword frequency trajectories. It helps you assess how well your chosen smoothing parameters perform across different types of keywords in your corpus.
+
 ---
 
 ## 🔹 Function Definition
 
 ```r
-plotSuboptimalFits <- (data,
-                       opt_res,
-                       n_curves = 9,
-                       show_zone = FALSE,
-                       graph = FALSE)
+plotSuboptimalFits(
+  data,
+  opt_res,
+  n_curves = 9,
+  show_zone = FALSE,
+  graph = FALSE
+)
 ```
 
-## 🎯 Aim
+---
 
-The `plotSuboptimalFits()` function visualizes **raw and smoothed temporal curves** of keyword frequencies obtained from spline smoothing.  
-It selects a subset of keywords based on the **Root Mean Square (RMS)** residuals of the smoothed fits and displays both individual and combined plots to assess the variability of smoothing performance across terms.
+## 🎯 Purpose
 
-Each plot compares the **raw frequency trend** (dashed line) and its **smoothed version** (solid line), highlighting how well the smoothing captures the temporal dynamics of the keyword.
+After selecting optimal smoothing parameters with `optimalSmoothing()`, it's crucial to **visually validate** that the smoothing works well across your entire corpus. This function helps you:
+
+1. **Assess smoothing quality** — See how well smoothed curves capture underlying trends
+2. **Detect overfitting/undersmoothing** — Identify cases where smoothing is too aggressive or too weak
+3. **Evaluate representativeness** — Check performance across different keyword types
+4. **Compare raw vs. smoothed** — Understand what information is retained vs. filtered
+5. **Identify problematic cases** — Find keywords that may need special treatment
+6. **Build confidence** — Validate that parameters work well before applying to full corpus
+7. **Create publication figures** — Generate high-quality visualizations of smoothing results
+
+The function intelligently samples keywords across the **residual distribution** to show a representative range of smoothing performance.
+
+---
+
+## 🧮 How It Works
+
+### RMS Residual Sampling
+
+The function computes **Root Mean Square (RMS)** residuals for all keywords:
+
+```
+RMS = √(Σ(observed - smoothed)² / n)
+```
+
+Then selects `n_curves` keywords distributed across the RMS range:
+- **Low RMS**: Keywords where smoothing fits very well
+- **Medium RMS**: Typical smoothing performance
+- **High RMS**: Keywords with more complex patterns or poor fits
+
+This ensures you see the **full spectrum** of smoothing behavior, not just the best cases.
 
 ---
 
 ## ⚙️ Arguments
 
-| Argument | Type | Description |
-|-----------|------|-------------|
-| **data** | List | A list returned by `importData()`, containing the term-document matrix and metadata. |
-| **opt_res** | List | The optimal smoothing configuration returned by `optimalSmoothing()`, including spline degree and penalization type. |
-| **n_curves** | Integer | Number of keywords to visualize, sampled across the RMS residual distribution. Default: `9`. |
-| **show_zone** | Logical | If `TRUE`, adds the keyword’s frequency zone (if available) to the plot labels. Default: `FALSE`. |
-| **graph** | Logical | If `TRUE`, prints all individual and combined plots directly to the active R graphics device. Default: `FALSE`. |
+| Argument | Type | Default | Description |
+|----------|------|---------|-------------|
+| **data** | List | *required* | A list object returned by `importData()` or `normalization()`, containing the TDM and corpus metadata. |
+| **opt_res** | List | *required* | The optimal smoothing configuration returned by `optimalSmoothing()`, including spline degree (`m_opt`), penalty type (`penalty_opt`), and lambda (`lambda_opt`). |
+| **n_curves** | Integer | `9` | Number of keywords to visualize. Must be a perfect square for optimal grid layout (e.g., 4, 9, 16, 25). |
+| **show_zone** | Logical | `FALSE` | If `TRUE`, includes the keyword's frequency zone in plot titles (e.g., "algorithm [Zone 4]"). |
+| **graph** | Logical | `FALSE` | If `TRUE`, displays plots immediately in the R graphics device. If `FALSE` (default), plots are returned invisibly and can be accessed from the output list. |
 
 ---
 
 ## 📦 Output
 
-Returns (invisibly) a **list** containing all generated plots.
+Returns (invisibly) a **list** containing visualization objects:
 
-| Element | Description |
-|----------|-------------|
-| **singleKeywordPlot** | A list of `ggplot2` objects, one for each selected keyword, including raw and smoothed curves with full titles. |
-| **combinedKeywordPlot** | A combined `patchwork` layout displaying all selected keyword fits in a grid (default: 3 columns). |
+| Element | Type | Description |
+|---------|------|-------------|
+| **singleKeywordPlot** | list | A list of individual `ggplot2` objects, one for each selected keyword. Each plot shows raw (dashed) and smoothed (solid) curves with keyword name in title. |
+| **combinedKeywordPlot** | patchwork | A combined grid layout displaying all selected keyword plots together. Uses `patchwork` package for arrangement. |
+
+**Plot characteristics:**
+- **Grey dashed line**: Raw frequency trajectory
+- **Red solid line**: Smoothed spline fit
+- **X-axis**: Time periods (years)
+- **Y-axis**: Frequency (raw or normalized, depending on input data)
+- **Title**: Keyword name (and zone if `show_zone = TRUE`)
 
 ---
 
-### 🧩 Details
+## 💡 Usage Examples
 
-- The function extracts the smoothed spline fits using the optimal configuration from `optimalSmoothing()`.  
-- For each keyword, it computes the **residual RMS** error and selects representative terms distributed across the RMS range.  
-- Both **individual** and **aggregated** visualizations are produced, showing:
-  - The raw term frequency curve (grey dashed line);
-  - The smoothed spline fit (red solid line);
-  - Optional zone information (if `show_zone = TRUE`).
+### Basic Usage
 
-These plots allow users to evaluate suboptimal smoothing behavior and identify potential inconsistencies or overfitting in the temporal modeling process.
+```r
+library(cccc)
+
+# Complete workflow
+corpus <- importData("tdm.csv", "corpus_info.csv")
+corpus_norm <- normalization(corpus, normty = "nc")
+
+# Find optimal parameters
+smooth_m2 <- smoothingSelection(corpus_norm, penalty_type = "m-2", plot = FALSE)
+smooth_2 <- smoothingSelection(corpus_norm, penalty_type = "2", plot = FALSE)
+optimal <- optimalSmoothing(list("m-2" = smooth_m2, "2" = smooth_2))
+
+# Visualize smoothing quality
+fits <- plotSuboptimalFits(corpus_norm, optimal)
+
+# Display combined plot
+fits$combinedKeywordPlot
+```
+
+### Show Individual Plots
+
+```r
+# Create plots
+fits <- plotSuboptimalFits(corpus_norm, optimal, n_curves = 9)
+
+# View first individual plot
+fits$singleKeywordPlot[[1]]
+
+# View specific keyword plot
+fits$singleKeywordPlot[[5]]
+
+# Save individual plots
+library(ggplot2)
+ggsave("keyword1_fit.png", fits$singleKeywordPlot[[1]], width = 8, height = 5)
+```
+
+### Include Zone Information
+
+```r
+# Add frequency zone to titles
+fits <- plotSuboptimalFits(
+  corpus_norm, 
+  optimal, 
+  n_curves = 9,
+  show_zone = TRUE
+)
+
+# Now titles show: "algorithm [Zone 4]"
+fits$combinedKeywordPlot
+```
+
+
+### More/Fewer Keywords
+
+```r
+# Show 4 keywords (2×2 grid)
+fits_small <- plotSuboptimalFits(corpus_norm, optimal, n_curves = 4)
+
+# Show 16 keywords (4×4 grid)
+fits_large <- plotSuboptimalFits(corpus_norm, optimal, n_curves = 16)
+
+# Show 25 keywords (5×5 grid)
+fits_xlarge <- plotSuboptimalFits(corpus_norm, optimal, n_curves = 25)
+```
+---
+
+## 🔍 Interpreting the Plots
+
+### What to Look For
+
+#### ✅ **Good Smoothing**
+```
+Raw:     • • •  •  •
+           ╱╲  ╱╲
+Smooth: ─────────────  (captures trend, reduces noise)
+```
+- Smoothed curve follows general trend
+- Reduces noise without losing important features
+- No systematic bias (doesn't consistently over/underestimate)
+
+#### ⚠️ **Oversmoothing**
+```
+Raw:     • • •  •  •
+           ╱╲╱╲╱╲
+Smooth: ───────────── (too flat)
+```
+- Smoothed curve misses important peaks or valleys
+- Trajectory appears unnaturally flat
+- Real patterns are suppressed
+
+#### ⚠️ **Undersmoothing**
+```
+Raw:     • • •  •  •
+           ╱╲╱╲╱╲
+Smooth:   ╱╲╱╲╱╲  (too wiggly)
+```
+- Smoothed curve follows noise too closely
+- Trajectory has spurious fluctuations
+- Fails to reveal underlying trend
+
+#### ⚠️ **Systematic Bias**
+```
+Raw:     • • •  •  •
+         ╱╲╱╲╱╲
+Smooth: ─────────── (consistently below/above)
+```
+- Smoothed curve consistently over- or underestimates
+- May indicate inappropriate penalty or normalization
+
+---
+
+## 📊 Understanding the Selection
+
+### RMS Distribution Sampling
+
+If you have 1000 keywords and request `n_curves = 9`, the function:
+
+1. **Computes RMS** for all 1000 keywords
+2. **Sorts** keywords by RMS (low to high)
+3. **Samples** 9 keywords evenly across the distribution:
+   - Keywords ~1, 125, 250, 375, 500, 625, 750, 875, 1000
+
+This gives you:
+- **Low RMS keywords**: Best-fit cases (smooth, predictable)
+- **Medium RMS keywords**: Typical cases (moderate complexity)
+- **High RMS keywords**: Challenging cases (noisy, volatile)
+
+### Why This Matters
+
+Seeing only low-RMS keywords would give false confidence. Seeing only high-RMS keywords would be unnecessarily discouraging. The representative sample shows you the **realistic range** of smoothing performance.
+
+---
+
+## 📈 Use Cases
+
+### 1. **Quality Assurance**
+Before applying smoothing to full corpus, verify it works well.
+
+### 2. **Parameter Validation**
+Confirm that `optimalSmoothing()` choices are actually optimal visually.
+
+### 3. **Method Comparison**
+Compare smoothing with different parameters side-by-side.
+
+### 4. **Publication Figures**
+Create figures showing smoothing effectiveness for methods sections.
+
+### 5. **Identifying Outliers**
+Find keywords with unusual temporal patterns that need special attention.
+
+### 6. **Training Examples**
+Show collaborators/reviewers how smoothing works on your data.
+
+---
+
+## 💡 Tips & Best Practices
+
+1. **Always run this function** — Don't skip visual validation
+2. **Use perfect squares** for n_curves (4, 9, 16, 25) for clean grid layouts
+3. **Start with 9** — Good balance between coverage and readability
+4. **Check high-RMS cases** — If they look terrible, reconsider parameters
+5. **Save the plots** — Include in supplementary materials or methods sections
+6. **Show to colleagues** — Get feedback on whether smoothing looks reasonable
+7. **Don't expect perfection** — Some keywords will always be noisy
+8. **Compare normalizations** — Try different normalization methods if smoothing looks poor
+
+---
+
+## 📚 See Also
+
+- [`optimalSmoothing()`](optimalSmoothing.html) — Select parameters (prerequisite for this function)
+- [`smoothingSelection()`](smoothingSelection.html) — Find optimal λ for penalties
+- [`curvePlot()`](curvePlot.html) — Visualize specific keyword trajectories
+- [`facetPlot()`](facetPlot.html) — Create faceted visualizations by zone
+
+---
+

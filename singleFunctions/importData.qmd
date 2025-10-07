@@ -1,21 +1,21 @@
 ---
-title: ""
+title: "importData()"
 format:
   html:
-    toc: false
+    toc: true
+    toc-depth: 3
 page-layout: full
 ---
+**Import and Validate Corpus Data**
 
-# importData()
-
-Imports and validates corpus data and metadata into a standardized structure.
+The `importData()` function is the entry point for the cccc analytical pipeline. It imports, validates, and structures your corpus data and metadata into a standardized format ready for temporal analysis.
 
 ---
 
 ## 🔹 Function Definition
 
 ```r
-importData <- (
+importData(
   tdm_file,
   corpus_file,
   sep_tdm = ";",
@@ -24,35 +24,174 @@ importData <- (
   verbose = TRUE
 )
 ```
-## 🎯 Aim
 
-The `importData()` function reads and processes a Term Document Matrix (TDM) and corpus information from CSV or Excel files.  
-It standardizes formats, renames columns, cleans keywords, computes total frequency per term, and classifies each term into frequency zones.
+---
+
+## 🎯 Purpose
+
+This function performs several critical operations:
+
+1. **Reads data files** — Imports term-document matrix (TDM) and corpus metadata from CSV or Excel files
+2. **Validates structure** — Ensures data format consistency and completeness
+3. **Cleans keywords** — Standardizes term formatting and removes duplicates
+4. **Computes frequencies** — Calculates total frequency per term across all time periods
+5. **Assigns zones** — Classifies terms into frequency zones for stratified analysis
+6. **Structures output** — Returns a standardized list object for downstream analysis
+
+This function is essential for ensuring data quality and consistency before any temporal modeling or clustering operations.
 
 ---
 
 ## ⚙️ Arguments
 
-| Argument | Type | Description |
-|-----------|------|-------------|
-| **tdm_file** | Character | Path to the term-document matrix file (CSV or Excel). The first column must contain the list of terms, while all other columns represent years. |
-| **corpus_file** | Character | Path to the corpus information file (CSV or Excel). Must include columns for years, tokens, and documents per year. |
-| **sep_tdm** | Character / NULL | Separator for the TDM CSV file (ignored if Excel). Default: `";"`. |
-| **sep_corpus_info** | Character / NULL | Separator for the corpus information CSV file (ignored if Excel). Default: `";"`. |
-| **zone** | Character | Zone classification strategy: `"stat"` (statistical quartiles) or `"ling"` (linguistic frequency-based). Default: `"stat"`. |
-| **verbose** | Logical | If `TRUE`, prints progress messages. Default: `TRUE`. |
+| Argument | Type | Default | Description |
+|----------|------|---------|-------------|
+| **tdm_file** | Character | *required* | Path to the term-document matrix file (CSV or Excel). **First column**: keywords/terms. **Remaining columns**: frequencies per year. |
+| **corpus_file** | Character | *required* | Path to the corpus information file (CSV or Excel). Must include columns for years, tokens, and number of documents per year. |
+| **sep_tdm** | Character | `";"` | Column separator for TDM CSV file. Ignored if file is Excel format. |
+| **sep_corpus_info** | Character | `";"` | Column separator for corpus info CSV file. Ignored if file is Excel format. |
+| **zone** | Character | `"stat"` | Frequency zone classification strategy:<br>• `"stat"`: Statistical quartiles<br>• `"ling"`: Linguistic frequency-based zones |
+| **verbose** | Logical | `TRUE` | If `TRUE`, prints progress messages during import and processing. |
+
+---
+
+## 📊 Input File Requirements
+
+### Term-Document Matrix (TDM) File
+
+The TDM file must have the following structure:
+
+| keyword | 2000 | 2001 | 2002 | ... |
+|---------|------|------|------|-----|
+| algorithm | 145 | 178 | 203 | ... |
+| data | 892 | 945 | 1021 | ... |
+| network | 234 | 267 | 289 | ... |
+
+**Requirements:**
+- First column contains keywords/terms
+- Subsequent columns represent years (column names should be year values)
+- Cell values are raw frequencies for each term in each year
+- Supported formats: CSV (with customizable separator) or Excel (.xlsx, .xls)
+
+### Corpus Information File
+
+The corpus metadata file must include:
+
+| year | dimCorpus | nDoc |
+|------|-----------|------|
+| 2000 | 1500000 | 450 |
+| 2001 | 1650000 | 478 |
+| 2002 | 1820000 | 502 |
+
+**Requirements:**
+- `year`: Year identifier (must match TDM column names)
+- `dimCorpus`: Total number of tokens in the corpus for that year
+- `nDoc`: Number of documents in the corpus for that year
+- Additional metadata columns are preserved but not required
 
 ---
 
 ## 📦 Output
 
-Returns a **list** with the following elements:
+Returns a **list** object with the following components:
 
-| Element | Description |
-|----------|-------------|
-| **tdm** | A tibble representing the cleaned and processed term-document matrix, including `keyword`, `tot_freq`, `int_freq`, `zone`, and yearly frequency columns. |
-| **corpus_info** | A tibble containing corpus-level yearly metadata (`years`, `dimCorpus`, `nDoc`, and optional `metadata`). |
-| **norm** | Logical. Indicates whether the TDM has been normalized (default: `FALSE`). |
-| **year_cols** | Numeric vector indicating which columns in the TDM correspond to yearly frequencies. |
-| **zone** | Character vector of unique frequency zones. |
-| **colors** | Character vector of default colors associated with zones. |
+| Element | Type | Description |
+|---------|------|-------------|
+| **tdm** | tibble | Processed term-document matrix including:<br>• `keyword`: Cleaned term<br>• `tot_freq`: Total frequency across all years<br>• `int_freq`: Frequency interval label<br>• `zone`: Assigned frequency zone<br>• Year columns: Frequencies per year |
+| **corpus_info** | tibble | Corpus metadata with `years`, `dimCorpus`, `nDoc`, and any additional metadata columns |
+| **norm** | logical | Normalization status (initially `FALSE`, updated after `normalization()`) |
+| **year_cols** | numeric | Vector of column indices corresponding to yearly frequencies in the TDM |
+| **zone** | character | Vector of unique frequency zone labels |
+| **colors** | character | Default color palette for zones (used in visualization functions) |
+
+---
+
+## 🔍 Frequency Zones
+
+### Statistical Zones (`zone = "stat"`)
+
+Terms are classified into quartile-based zones:
+- **Zone 1**: Q1 (0-25th percentile) — Low frequency terms
+- **Zone 2**: Q2 (25-50th percentile) — Lower-medium frequency terms
+- **Zone 3**: Q3 (50-75th percentile) — Upper-medium frequency terms
+- **Zone 4**: Q4 (75-100th percentile) — High frequency terms
+
+### Linguistic Zones (`zone = "ling"`)
+
+Terms are classified based on linguistic frequency theory:
+- Different thresholds based on corpus-linguistic principles
+- Zones reflect natural language frequency distributions
+- More aligned with Zipf's law and lexical stratification
+
+---
+
+## 💡 Usage Examples
+
+### Basic Usage
+
+```r
+library(cccc)
+
+# Import data with default settings
+corpus_data <- importData(
+  tdm_file = "data/term_document_matrix.csv",
+  corpus_file = "data/corpus_info.csv"
+)
+
+# Check structure
+str(corpus_data)
+names(corpus_data$tdm)
+```
+
+### Using Excel Files
+
+```r
+# Import from Excel files (separator arguments are ignored)
+corpus_data <- importData(
+  tdm_file = "data/tdm.xlsx",
+  corpus_file = "data/corpus_metadata.xlsx",
+  zone = "ling"  # Use linguistic zones
+)
+```
+
+### Custom Separator for CSV
+
+```r
+# Import CSV files with comma separator
+corpus_data <- importData(
+  tdm_file = "data/tdm.csv",
+  corpus_file = "data/corpus.csv",
+  sep_tdm = ",",
+  sep_corpus_info = ",",
+  verbose = TRUE
+)
+```
+
+---
+
+## 🔗 Typical Workflow
+
+After importing data with `importData()`, the typical next steps are:
+
+1. **Explore the data** → Use `rowMassPlot()` and `colMassPlot()` to visualize frequency distributions
+2. **Normalize frequencies** → Apply `normalization()` to account for corpus size variations
+3. **Visualize trajectories** → Use `curvePlot()` or `facetPlot()` to examine temporal patterns
+4. **Model and smooth** → Apply smoothing functions to identify trends
+
+<!-- ```r -->
+<!-- # Complete example -->
+<!-- corpus <- importData("tdm.csv", "corpus.csv") -->
+<!-- rowMassPlot(corpus)  # Explore keyword frequencies -->
+<!-- corpus_norm <- normalization(corpus, method = "nchi")  # Normalize -->
+<!-- curvePlot(corpus_norm, keywords = c("algorithm", "data"))  # Visualize -->
+<!-- ``` -->
+
+---
+
+## 📚 See Also
+
+- [`normalization()`](normalization.html) — Normalize the imported TDM
+- [`rowMassPlot()`](rowMassPlot.html) — Visualize keyword frequency distribution
+- [`colMassPlot()`](colMassPlot.html) — Visualize temporal corpus dimensions
+
+---

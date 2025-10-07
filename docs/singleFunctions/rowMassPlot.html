@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>rowmassplot</title>
+<title>rowMassPlot()</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -131,6 +131,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Functions</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="../download.html"> 
+<span class="menu-text">Download</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="../use-cases.html"> 
 <span class="menu-text">Use Cases</span></a>
   </li>  
@@ -164,39 +168,94 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#function-definition" id="toc-function-definition" class="nav-link active" data-scroll-target="#function-definition">🔹 Function Definition</a></li>
+  <li><a href="#purpose" id="toc-purpose" class="nav-link" data-scroll-target="#purpose">🎯 Purpose</a></li>
+  <li><a href="#arguments" id="toc-arguments" class="nav-link" data-scroll-target="#arguments">⚙️ Arguments</a></li>
+  <li><a href="#plot-components" id="toc-plot-components" class="nav-link" data-scroll-target="#plot-components">📊 Plot Components</a>
+  <ul class="collapse">
+  <li><a href="#x-axis" id="toc-x-axis" class="nav-link" data-scroll-target="#x-axis">X-axis</a></li>
+  <li><a href="#y-axis" id="toc-y-axis" class="nav-link" data-scroll-target="#y-axis">Y-axis</a></li>
+  <li><a href="#colors" id="toc-colors" class="nav-link" data-scroll-target="#colors">Colors</a></li>
+  <li><a href="#legend" id="toc-legend" class="nav-link" data-scroll-target="#legend">Legend</a></li>
+  </ul></li>
+  <li><a href="#output" id="toc-output" class="nav-link" data-scroll-target="#output">📦 Output</a></li>
+  <li><a href="#usage-examples" id="toc-usage-examples" class="nav-link" data-scroll-target="#usage-examples">💡 Usage Examples</a>
+  <ul class="collapse">
+  <li><a href="#basic-usage" id="toc-basic-usage" class="nav-link" data-scroll-target="#basic-usage">Basic Usage</a></li>
+  <li><a href="#compare-statistical-vs-linguistic-zones" id="toc-compare-statistical-vs-linguistic-zones" class="nav-link" data-scroll-target="#compare-statistical-vs-linguistic-zones">Compare Statistical vs Linguistic Zones</a></li>
+  </ul></li>
+  <li><a href="#interpreting-the-plot" id="toc-interpreting-the-plot" class="nav-link" data-scroll-target="#interpreting-the-plot">🔍 Interpreting the Plot</a>
+  <ul class="collapse">
+  <li><a href="#zone-distribution-patterns" id="toc-zone-distribution-patterns" class="nav-link" data-scroll-target="#zone-distribution-patterns">Zone Distribution Patterns</a></li>
+  <li><a href="#key-observations-to-look-for" id="toc-key-observations-to-look-for" class="nav-link" data-scroll-target="#key-observations-to-look-for">Key Observations to Look For</a></li>
+  </ul></li>
+  <li><a href="#zone-color-schemes" id="toc-zone-color-schemes" class="nav-link" data-scroll-target="#zone-color-schemes">🎨 Zone Color Schemes</a></li>
+  <li><a href="#see-also" id="toc-see-also" class="nav-link" data-scroll-target="#see-also">📚 See Also</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content column-page" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content column-page-left" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">rowMassPlot()</h1>
+</div>
 
 
 
+<div class="quarto-title-meta column-page-left">
 
-<section id="rowmassplot" class="level1">
-<h1>rowMassPlot()</h1>
-<p>Creates a bar plot of keywords ordered by their total frequency and colored by their assigned frequency zone, combining both the zone and its frequency interval label.</p>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><strong>Visualize Keyword Frequency Distribution by Zone</strong></p>
+<p>The <code>rowMassPlot()</code> function creates a bar plot showing the total frequency of each keyword in your corpus, colored by frequency zone. This provides an immediate visual overview of term distribution and helps identify which terms dominate the corpus.</p>
 <hr>
 <section id="function-definition" class="level2">
 <h2 class="anchored" data-anchor-id="function-definition">🔹 Function Definition</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>rowMassPlot <span class="ot">&lt;-</span> (data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rowMassPlot</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<hr>
 </section>
-<section id="aim" class="level2">
-<h2 class="anchored" data-anchor-id="aim">🎯 Aim</h2>
-<p>The <code>rowMassPlot()</code> function generates a bar plot showing the total frequency of each keyword, colored according to its frequency zone and labeled by its interval.<br>
-It provides a visual summary of the distribution of term frequencies across zones, based on the output of <code>importData()</code>.</p>
+<section id="purpose" class="level2">
+<h2 class="anchored" data-anchor-id="purpose">🎯 Purpose</h2>
+<p>Understanding the frequency distribution of terms in your corpus is a crucial first step in temporal analysis. The <code>rowMassPlot()</code> function helps you:</p>
+<ol type="1">
+<li><strong>Visualize frequency hierarchy</strong> — See which terms are most/least frequent</li>
+<li><strong>Understand zone distribution</strong> — Observe how terms are distributed across frequency zones</li>
+<li><strong>Identify dominant terms</strong> — Quickly spot high-frequency keywords</li>
+<li><strong>Assess data quality</strong> — Detect potential issues like outliers or unexpected patterns</li>
+<li><strong>Guide analysis decisions</strong> — Inform which terms to focus on for deeper analysis</li>
+</ol>
+<p>This function is typically used <strong>immediately after</strong> <code>importData()</code> and <strong>before</strong> normalization to understand the raw frequency landscape of your corpus.</p>
 <hr>
 </section>
 <section id="arguments" class="level2">
 <h2 class="anchored" data-anchor-id="arguments">⚙️ Arguments</h2>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 36%">
-<col style="width: 20%">
-<col style="width: 43%">
+<col style="width: 26%">
+<col style="width: 15%">
+<col style="width: 23%">
+<col style="width: 34%">
 </colgroup>
 <thead>
 <tr class="header">
 <th>Argument</th>
 <th>Type</th>
+<th>Default</th>
 <th>Description</th>
 </tr>
 </thead>
@@ -204,48 +263,152 @@ It provides a visual summary of the distribution of term frequencies across zone
 <tr class="odd">
 <td><strong>data</strong></td>
 <td>List</td>
-<td>A list containing the output of <code>importData()</code>, including the processed term-document matrix (<code>tdm</code>) and related metadata.</td>
+<td><em>required</em></td>
+<td>A list object returned by <code>importData()</code>, containing the processed TDM (<code>tdm</code>), corpus metadata, zone information, and color palette.</td>
 </tr>
 </tbody>
 </table>
 <hr>
 </section>
+<section id="plot-components" class="level2">
+<h2 class="anchored" data-anchor-id="plot-components">📊 Plot Components</h2>
+<p>The generated plot includes:</p>
+<section id="x-axis" class="level3">
+<h3 class="anchored" data-anchor-id="x-axis">X-axis</h3>
+<ul>
+<li><strong>Keywords</strong> ordered by total frequency (descending)</li>
+<li>Terms are positioned from highest to lowest frequency</li>
+</ul>
+</section>
+<section id="y-axis" class="level3">
+<h3 class="anchored" data-anchor-id="y-axis">Y-axis</h3>
+<ul>
+<li><strong>Total frequency</strong> across all time periods</li>
+<li>Raw count of occurrences for each keyword</li>
+</ul>
+</section>
+<section id="colors" class="level3">
+<h3 class="anchored" data-anchor-id="colors">Colors</h3>
+<ul>
+<li>Each bar is colored according to its <strong>frequency zone</strong></li>
+<li>Colors represent both the zone and its frequency interval</li>
+<li>Example labels: <code>"Zone 1 [0-25]"</code>, <code>"Zone 4 [500-1000]"</code></li>
+</ul>
+</section>
+<section id="legend" class="level3">
+<h3 class="anchored" data-anchor-id="legend">Legend</h3>
+<ul>
+<li>Positioned at the bottom of the plot</li>
+<li>Shows all zone-interval combinations present in the data</li>
+<li>Colors match those assigned during <code>importData()</code></li>
+</ul>
+<hr>
+</section>
+</section>
 <section id="output" class="level2">
 <h2 class="anchored" data-anchor-id="output">📦 Output</h2>
-<p>Returns a <strong><code>ggplot2</code> object</strong> representing a bar plot of total keyword frequencies grouped and colored by frequency zone.</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 43%">
-<col style="width: 56%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Element</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>x-axis</strong></td>
-<td>Keywords ordered by total frequency.</td>
-</tr>
-<tr class="even">
-<td><strong>y-axis</strong></td>
-<td>Total frequency of each keyword.</td>
-</tr>
-<tr class="odd">
-<td><strong>Colors</strong></td>
-<td>Represent frequency zones and intervals (e.g., “VH [50–100]”, “L [5–10]”).</td>
-</tr>
-<tr class="even">
-<td><strong>Legend</strong></td>
-<td>Displayed at the bottom, showing the zone–interval combinations.</td>
-</tr>
-</tbody>
-</table>
-
-
+<p>Returns a <strong><code>ggplot2</code> object</strong> that can be: - Displayed directly in R - Saved to a file using <code>ggsave()</code> - Further customized using <code>ggplot2</code> functions</p>
+<p><strong>Plot characteristics:</strong> - Bar plot with keywords on x-axis - Total frequency on y-axis - Bars colored by frequency zone - Legend showing zone classifications</p>
+<hr>
 </section>
+<section id="usage-examples" class="level2">
+<h2 class="anchored" data-anchor-id="usage-examples">💡 Usage Examples</h2>
+<section id="basic-usage" class="level3">
+<h3 class="anchored" data-anchor-id="basic-usage">Basic Usage</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cccc)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Import data</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>corpus <span class="ot">&lt;-</span> <span class="fu">importData</span>(<span class="st">"tdm.csv"</span>, <span class="st">"corpus_info.csv"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Create frequency plot</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">rowMassPlot</span>(corpus)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="compare-statistical-vs-linguistic-zones" class="level3">
+<h3 class="anchored" data-anchor-id="compare-statistical-vs-linguistic-zones">Compare Statistical vs Linguistic Zones</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import with statistical zones</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>corpus_stat <span class="ot">&lt;-</span> <span class="fu">importData</span>(<span class="st">"tdm.csv"</span>, <span class="st">"corpus_info.csv"</span>, <span class="at">zone =</span> <span class="st">"stat"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>plot_stat <span class="ot">&lt;-</span> <span class="fu">rowMassPlot</span>(corpus_stat)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Import with linguistic zones</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>corpus_ling <span class="ot">&lt;-</span> <span class="fu">importData</span>(<span class="st">"tdm.csv"</span>, <span class="st">"corpus_info.csv"</span>, <span class="at">zone =</span> <span class="st">"ling"</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>plot_ling <span class="ot">&lt;-</span> <span class="fu">rowMassPlot</span>(corpus_ling)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Display side by side</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>plot_stat <span class="sc">+</span> plot_ling <span class="sc">+</span> </span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_annotation</span>(<span class="at">title =</span> <span class="st">"Comparison of Zone Classification Methods"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<hr>
+</section>
+</section>
+<section id="interpreting-the-plot" class="level2">
+<h2 class="anchored" data-anchor-id="interpreting-the-plot">🔍 Interpreting the Plot</h2>
+<section id="zone-distribution-patterns" class="level3">
+<h3 class="anchored" data-anchor-id="zone-distribution-patterns">Zone Distribution Patterns</h3>
+<p><strong>Balanced Distribution:</strong></p>
+<pre><code>Zone 1 ████████ (many low-frequency terms)
+Zone 2 ██████ (medium-low frequency)
+Zone 3 ████ (medium-high frequency)  
+Zone 4 ██ (few high-frequency terms)</code></pre>
+<p>Indicates a typical Zipfian distribution common in natural language.</p>
+<p><strong>Skewed Distribution:</strong></p>
+<pre><code>Zone 1 ██ (few low-frequency terms)
+Zone 2 ████ 
+Zone 3 ████
+Zone 4 ████████████ (many high-frequency terms)</code></pre>
+<p>May indicate a specialized corpus or potential data quality issues.</p>
+</section>
+<section id="key-observations-to-look-for" class="level3">
+<h3 class="anchored" data-anchor-id="key-observations-to-look-for">Key Observations to Look For</h3>
+<ol type="1">
+<li><strong>Frequency Range</strong>:
+<ul>
+<li>Large gaps between zones suggest clear stratification</li>
+<li>Smooth transitions suggest continuous frequency distribution</li>
+</ul></li>
+<li><strong>Zone Sizes</strong>:
+<ul>
+<li>Roughly equal zone sizes indicate balanced classification</li>
+<li>Highly unequal sizes may require different zone strategy</li>
+</ul></li>
+<li><strong>Outliers</strong>:
+<ul>
+<li>Extremely high-frequency terms may dominate the corpus</li>
+<li>Consider whether these should be excluded from analysis</li>
+</ul></li>
+<li><strong>Missing Zones</strong>:
+<ul>
+<li>Absence of certain zones may indicate limited vocabulary range</li>
+<li>Common in specialized or small corpora</li>
+</ul></li>
+</ol>
+<hr>
+</section>
+</section>
+<section id="zone-color-schemes" class="level2">
+<h2 class="anchored" data-anchor-id="zone-color-schemes">🎨 Zone Color Schemes</h2>
+<p>The plot uses colors assigned during <code>importData()</code>:</p>
+<p><strong>Default Color Palette:</strong> - Zone 1 (lowest): Light colors (e.g., light blue, yellow) - Zone 2: Medium colors - Zone 3: Darker colors - Zone 4 (highest): Darkest colors (e.g., dark blue, red)</p>
+<p>Colors are consistent across all cccc visualizations, allowing easy comparison between plots.</p>
+<hr>
+<!-- ## 💡 Tips & Best Practices -->
+<!-- - **Always check this plot first** after importing data to understand your corpus structure -->
+<!-- - **Compare zone methods** (statistical vs linguistic) to see which better suits your data -->
+<!-- - **Look for outliers** that might skew your analysis -->
+<!-- - **Consider normalization** if frequency ranges are extremely wide -->
+<!-- - **Save high-resolution versions** for publications (use `dpi = 300` or higher) -->
+<!-- - **Document your observations** about frequency distribution for methods sections -->
+<!-- --- -->
+</section>
+<section id="see-also" class="level2">
+<h2 class="anchored" data-anchor-id="see-also">📚 See Also</h2>
+<ul>
+<li><a href="importData.html"><code>importData()</code></a> — Import data and assign frequency zones</li>
+<li><a href="colMassPlot.html"><code>colMassPlot()</code></a> — Visualize temporal corpus dimensions</li>
+<li><a href="curvePlot.html"><code>curvePlot()</code></a> — Plot individual keyword trajectories</li>
+<li><a href="facetPlot.html"><code>facetPlot()</code></a> — Create faceted visualizations by zone</li>
+</ul>
+
+
 </section>
 
 </main> <!-- /main -->

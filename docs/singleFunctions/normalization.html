@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>normalization</title>
+<title>normalization()</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -131,6 +131,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Functions</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="../download.html"> 
+<span class="menu-text">Download</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="../use-cases.html"> 
 <span class="menu-text">Use Cases</span></a>
   </li>  
@@ -164,56 +168,105 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#function-definition" id="toc-function-definition" class="nav-link active" data-scroll-target="#function-definition">🔹 Function Definition</a></li>
+  <li><a href="#purpose" id="toc-purpose" class="nav-link" data-scroll-target="#purpose">🎯 Purpose</a></li>
+  <li><a href="#arguments" id="toc-arguments" class="nav-link" data-scroll-target="#arguments">⚙️ Arguments</a></li>
+  <li><a href="#normalization-methods" id="toc-normalization-methods" class="nav-link" data-scroll-target="#normalization-methods">📊 Normalization Methods</a>
+  <ul class="collapse">
+  <li><a href="#column-normalization-nc" id="toc-column-normalization-nc" class="nav-link" data-scroll-target="#column-normalization-nc">1. Column Normalization (<code>"nc"</code>)</a></li>
+  <li><a href="#chi-square-normalization-nchi" id="toc-chi-square-normalization-nchi" class="nav-link" data-scroll-target="#chi-square-normalization-nchi">2. Chi-square Normalization (<code>"nchi"</code>)</a></li>
+  <li><a href="#maximum-frequency-normalization-nm" id="toc-maximum-frequency-normalization-nm" class="nav-link" data-scroll-target="#maximum-frequency-normalization-nm">3. Maximum Frequency Normalization (<code>"nM"</code>)</a></li>
+  <li><a href="#min-max-normalization-nmm" id="toc-min-max-normalization-nmm" class="nav-link" data-scroll-target="#min-max-normalization-nmm">4. Min-Max Normalization (<code>"nmM"</code>)</a></li>
+  <li><a href="#non-linear-normalization-nnl" id="toc-non-linear-normalization-nnl" class="nav-link" data-scroll-target="#non-linear-normalization-nnl">5. Non-linear Normalization (<code>"nnl"</code>)</a></li>
+  </ul></li>
+  <li><a href="#output" id="toc-output" class="nav-link" data-scroll-target="#output">📦 Output</a></li>
+  <li><a href="#usage-examples" id="toc-usage-examples" class="nav-link" data-scroll-target="#usage-examples">💡 Usage Examples</a>
+  <ul class="collapse">
+  <li><a href="#basic-column-normalization" id="toc-basic-column-normalization" class="nav-link" data-scroll-target="#basic-column-normalization">Basic Column Normalization</a></li>
+  <li><a href="#comparing-different-methods" id="toc-comparing-different-methods" class="nav-link" data-scroll-target="#comparing-different-methods">Comparing Different Methods</a></li>
+  <li><a href="#non-linear-normalization-with-asymmetry" id="toc-non-linear-normalization-with-asymmetry" class="nav-link" data-scroll-target="#non-linear-normalization-with-asymmetry">Non-linear Normalization with Asymmetry</a></li>
+  <li><a href="#custom-scaling-factor" id="toc-custom-scaling-factor" class="nav-link" data-scroll-target="#custom-scaling-factor">Custom Scaling Factor</a></li>
+  </ul></li>
+  <li><a href="#choosing-the-right-method" id="toc-choosing-the-right-method" class="nav-link" data-scroll-target="#choosing-the-right-method">📊 Choosing the Right Method</a></li>
+  <li><a href="#typical-workflow" id="toc-typical-workflow" class="nav-link" data-scroll-target="#typical-workflow">🔗 Typical Workflow</a></li>
+  <li><a href="#important-notes" id="toc-important-notes" class="nav-link" data-scroll-target="#important-notes">⚠️ Important Notes</a>
+  <ul class="collapse">
+  <li><a href="#re-normalization" id="toc-re-normalization" class="nav-link" data-scroll-target="#re-normalization">Re-normalization</a></li>
+  <li><a href="#zero-frequencies" id="toc-zero-frequencies" class="nav-link" data-scroll-target="#zero-frequencies">Zero Frequencies</a></li>
+  <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation">Interpretation</a></li>
+  </ul></li>
+  <li><a href="#see-also" id="toc-see-also" class="nav-link" data-scroll-target="#see-also">📚 See Also</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content column-page" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content column-page-left" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">normalization()</h1>
+</div>
 
 
 
+<div class="quarto-title-meta column-page-left">
 
-<section id="normalization" class="level1">
-<h1>normalization()</h1>
-<p>Normalize Term-Document Matrix (TDM)</p>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><strong>Normalize Term-Document Matrix for Temporal Analysis</strong></p>
+<p>The <code>normalization()</code> function standardizes raw keyword frequencies to enable meaningful comparisons across time periods with varying corpus sizes. It applies one of five normalization strategies, each suited to different analytical goals.</p>
 <hr>
 <section id="function-definition" class="level2">
 <h2 class="anchored" data-anchor-id="function-definition">🔹 Function Definition</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>normalization <span class="ot">&lt;-</span> (data,</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">normty =</span> <span class="st">"nc"</span>,</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">sc =</span> <span class="dv">1000</span>,</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">nnlty =</span> <span class="st">"V"</span>,</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">p_asy =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">normalization</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  data,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">normty =</span> <span class="st">"nc"</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">sc =</span> <span class="dv">1000</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">nnlty =</span> <span class="st">"V"</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">p_asy =</span> <span class="cn">TRUE</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<hr>
 </section>
-<section id="aim" class="level2">
-<h2 class="anchored" data-anchor-id="aim">🎯 Aim</h2>
-<p>The <code>normalization()</code> function standardizes the <strong>term-document matrix (TDM)</strong> contained within the object returned by <code>importData()</code>, applying one of several normalization strategies.<br>
-These methods transform raw keyword frequencies to allow for <strong>more meaningful comparison</strong> across documents or time periods.<br>
-Depending on the chosen method, normalization can be performed <strong>column-wise</strong>, <strong>row-wise</strong>, or using <strong>non-linear transformations</strong> that account for asymmetry and variance.</p>
-<p>Available normalization types:</p>
-<ul>
-<li><code>"nc"</code> – column-wise normalization by corpus size (tokens per year).<br>
-</li>
-<li><code>"nchi"</code> – chi-square-like normalization based on row masses and expected frequencies.<br>
-</li>
-<li><code>"nM"</code> – normalization by maximum frequency per row.<br>
-</li>
-<li><code>"nmM"</code> – row-wise min–max normalization.<br>
-</li>
-<li><code>"nnl"</code> – non-linear normalization using asymmetry factors (variance- or mean-median–based).</li>
-</ul>
+<section id="purpose" class="level2">
+<h2 class="anchored" data-anchor-id="purpose">🎯 Purpose</h2>
+<p>Raw frequency counts are influenced by corpus size variations across time periods. A term appearing 100 times in a corpus of 10,000 words is much more significant than the same count in a corpus of 1,000,000 words.</p>
+<p>The <code>normalization()</code> function addresses this by:</p>
+<ol type="1">
+<li><strong>Adjusting for corpus size</strong> — Accounts for different document/token counts per year</li>
+<li><strong>Enabling fair comparisons</strong> — Makes frequencies comparable across time periods</li>
+<li><strong>Highlighting relative importance</strong> — Emphasizes terms’ relative prominence</li>
+<li><strong>Preparing for modeling</strong> — Creates standardized data for temporal smoothing and clustering</li>
+</ol>
+<p>This function is typically applied <strong>after</strong> <code>importData()</code> and <strong>before</strong> temporal modeling and visualization.</p>
 <hr>
 </section>
 <section id="arguments" class="level2">
 <h2 class="anchored" data-anchor-id="arguments">⚙️ Arguments</h2>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 36%">
-<col style="width: 20%">
-<col style="width: 43%">
+<col style="width: 26%">
+<col style="width: 15%">
+<col style="width: 23%">
+<col style="width: 34%">
 </colgroup>
 <thead>
 <tr class="header">
 <th>Argument</th>
 <th>Type</th>
+<th>Default</th>
 <th>Description</th>
 </tr>
 </thead>
@@ -221,68 +274,300 @@ Depending on the chosen method, normalization can be performed <strong>column-wi
 <tr class="odd">
 <td><strong>data</strong></td>
 <td>List</td>
-<td>A list returned by <code>importData()</code>, containing the term-document matrix (<code>tdm</code>) and corpus information.</td>
+<td><em>required</em></td>
+<td>A list object returned by <code>importData()</code>, containing the TDM and corpus metadata.</td>
 </tr>
 <tr class="even">
 <td><strong>normty</strong></td>
 <td>Character</td>
-<td>Type of normalization to apply. One of <code>"nc"</code>, <code>"nchi"</code>, <code>"nM"</code>, <code>"nmM"</code>, or <code>"nnl"</code>.</td>
+<td><code>"nc"</code></td>
+<td>Normalization method to apply. Options:<br>• <code>"nc"</code>: Column normalization by corpus size<br>• <code>"nchi"</code>: Chi-square-like normalization<br>• <code>"nM"</code>: Maximum frequency normalization<br>• <code>"nmM"</code>: Min-max normalization<br>• <code>"nnl"</code>: Non-linear normalization</td>
 </tr>
 <tr class="odd">
 <td><strong>sc</strong></td>
 <td>Numeric</td>
-<td>Scaling factor applied after normalization. Default: <code>1000</code> for <code>"nc"</code> and <code>"nM"</code>, otherwise <code>1</code>.</td>
+<td><code>1000</code></td>
+<td>Scaling factor applied after normalization. Default is 1000 for <code>"nc"</code> and <code>"nM"</code>, otherwise 1.</td>
 </tr>
 <tr class="even">
 <td><strong>nnlty</strong></td>
 <td>Character</td>
-<td>If <code>normty = "nnl"</code>, defines the asymmetry measure: <code>"V"</code> (variance-based) or <code>"M"</code> (mean–median–based). Default: <code>"V"</code>.</td>
+<td><code>"V"</code></td>
+<td>Asymmetry measure for non-linear normalization (only used when <code>normty = "nnl"</code>):<br>• <code>"V"</code>: Variance-based asymmetry<br>• <code>"M"</code>: Mean-median-based asymmetry</td>
 </tr>
 <tr class="odd">
 <td><strong>p_asy</strong></td>
 <td>Logical</td>
-<td>If <code>TRUE</code> (default) and <code>normty = "nnl"</code>, includes the numeric vector <code>p_asy</code> with the asymmetry coefficients used for the transformation.</td>
+<td><code>TRUE</code></td>
+<td>If <code>TRUE</code> and <code>normty = "nnl"</code>, includes asymmetry coefficients in the output.</td>
 </tr>
 </tbody>
 </table>
 <hr>
 </section>
+<section id="normalization-methods" class="level2">
+<h2 class="anchored" data-anchor-id="normalization-methods">📊 Normalization Methods</h2>
+<section id="column-normalization-nc" class="level3">
+<h3 class="anchored" data-anchor-id="column-normalization-nc">1. Column Normalization (<code>"nc"</code>)</h3>
+<p><strong>Formula</strong>: Normalized frequency = (raw frequency / total tokens in year) × scaling factor</p>
+<p><strong>Use when:</strong> - You want to account for varying corpus sizes across time periods - Comparing frequencies across years with different document counts - Standard normalization for most temporal analyses</p>
+<p><strong>Example:</strong></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>corpus_norm <span class="ot">&lt;-</span> <span class="fu">normalization</span>(corpus_data, <span class="at">normty =</span> <span class="st">"nc"</span>, <span class="at">sc =</span> <span class="dv">1000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This converts raw frequencies to “per 1000 tokens” rates.</p>
+<hr>
+</section>
+<section id="chi-square-normalization-nchi" class="level3">
+<h3 class="anchored" data-anchor-id="chi-square-normalization-nchi">2. Chi-square Normalization (<code>"nchi"</code>)</h3>
+<p><strong>Formula</strong>: Based on chi-square decomposition using row masses and expected frequencies</p>
+<p><strong>Use when:</strong> - You want to emphasize deviations from expected frequencies - Performing correspondence analysis-style normalization - Highlighting terms that appear more/less than expected</p>
+<p><strong>Example:</strong></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>corpus_norm <span class="ot">&lt;-</span> <span class="fu">normalization</span>(corpus_data, <span class="at">normty =</span> <span class="st">"nchi"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This method is rooted in correspondence analysis theory and emphasizes relative contributions.</p>
+<hr>
+</section>
+<section id="maximum-frequency-normalization-nm" class="level3">
+<h3 class="anchored" data-anchor-id="maximum-frequency-normalization-nm">3. Maximum Frequency Normalization (<code>"nM"</code>)</h3>
+<p><strong>Formula</strong>: Normalized frequency = (raw frequency / maximum frequency in row) × scaling factor</p>
+<p><strong>Use when:</strong> - You want to focus on relative peaks within each term’s trajectory - Comparing temporal patterns regardless of absolute frequency - All terms scaled to same maximum (useful for clustering)</p>
+<p><strong>Example:</strong></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>corpus_norm <span class="ot">&lt;-</span> <span class="fu">normalization</span>(corpus_data, <span class="at">normty =</span> <span class="st">"nM"</span>, <span class="at">sc =</span> <span class="dv">1000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Each term’s maximum frequency becomes the scaling reference point.</p>
+<hr>
+</section>
+<section id="min-max-normalization-nmm" class="level3">
+<h3 class="anchored" data-anchor-id="min-max-normalization-nmm">4. Min-Max Normalization (<code>"nmM"</code>)</h3>
+<p><strong>Formula</strong>: Normalized frequency = (raw frequency - min) / (max - min)</p>
+<p><strong>Use when:</strong> - You need all values scaled to [0, 1] range - Comparing terms with vastly different frequency ranges - Preparing data for specific clustering algorithms</p>
+<p><strong>Example:</strong></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>corpus_norm <span class="ot">&lt;-</span> <span class="fu">normalization</span>(corpus_data, <span class="at">normty =</span> <span class="st">"nmM"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>All normalized values fall between 0 (minimum) and 1 (maximum) for each term.</p>
+<hr>
+</section>
+<section id="non-linear-normalization-nnl" class="level3">
+<h3 class="anchored" data-anchor-id="non-linear-normalization-nnl">5. Non-linear Normalization (<code>"nnl"</code>)</h3>
+<p><strong>Formula</strong>: Incorporates asymmetry coefficients based on distribution shape</p>
+<p><strong>Use when:</strong> - Term frequencies show strong skewness or asymmetry - You want to account for variance or mean-median differences - Advanced modeling requires distribution-aware normalization</p>
+<p><strong>Asymmetry types:</strong> - <code>"V"</code>: Variance-based (accounts for spread) - <code>"M"</code>: Mean-median-based (accounts for skewness)</p>
+<p><strong>Example:</strong></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Variance-based</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>corpus_norm <span class="ot">&lt;-</span> <span class="fu">normalization</span>(corpus_data, <span class="at">normty =</span> <span class="st">"nnl"</span>, <span class="at">nnlty =</span> <span class="st">"V"</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Mean-median-based</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>corpus_norm <span class="ot">&lt;-</span> <span class="fu">normalization</span>(corpus_data, <span class="at">normty =</span> <span class="st">"nnl"</span>, <span class="at">nnlty =</span> <span class="st">"M"</span>, <span class="at">p_asy =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<hr>
+</section>
+</section>
 <section id="output" class="level2">
 <h2 class="anchored" data-anchor-id="output">📦 Output</h2>
-<p>Returns a <strong>list</strong> identical in structure to the input <code>data</code>, with the following updates:</p>
+<p>Returns a <strong>list</strong> with the same structure as input, with these updates:</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 43%">
-<col style="width: 56%">
+<col style="width: 32%">
+<col style="width: 21%">
+<col style="width: 46%">
 </colgroup>
 <thead>
 <tr class="header">
 <th>Element</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td><strong>tdm</strong></td>
-<td>Normalized term-document matrix.</td>
+<td>tibble</td>
+<td>Term-document matrix with normalized frequencies</td>
 </tr>
 <tr class="even">
-<td><strong>norm</strong></td>
-<td>Logical flag set to <code>TRUE</code> to indicate that normalization has been applied.</td>
+<td><strong>corpus_info</strong></td>
+<td>tibble</td>
+<td>Unchanged corpus metadata</td>
 </tr>
 <tr class="odd">
+<td><strong>norm</strong></td>
+<td>logical</td>
+<td>Set to <code>TRUE</code> indicating normalization has been applied</td>
+</tr>
+<tr class="even">
 <td><strong>normty</strong></td>
-<td>Character. The normalization type used.</td>
+<td>character</td>
+<td>The normalization method used</td>
+</tr>
+<tr class="odd">
+<td><strong>year_cols</strong></td>
+<td>numeric</td>
+<td>Unchanged column indices for yearly data</td>
+</tr>
+<tr class="even">
+<td><strong>zone</strong></td>
+<td>character</td>
+<td>Unchanged frequency zones</td>
+</tr>
+<tr class="odd">
+<td><strong>colors</strong></td>
+<td>character</td>
+<td>Unchanged color palette</td>
 </tr>
 <tr class="even">
 <td><strong>p_asy</strong></td>
-<td>(Optional) Numeric vector of asymmetry parameters, included only when <code>normty = "nnl"</code> and <code>p_asy = TRUE</code>.</td>
+<td>numeric</td>
+<td>(Optional) Asymmetry coefficients (only for <code>"nnl"</code> method with <code>p_asy = TRUE</code>)</td>
 </tr>
 </tbody>
 </table>
-
-
+<hr>
 </section>
+<section id="usage-examples" class="level2">
+<h2 class="anchored" data-anchor-id="usage-examples">💡 Usage Examples</h2>
+<section id="basic-column-normalization" class="level3">
+<h3 class="anchored" data-anchor-id="basic-column-normalization">Basic Column Normalization</h3>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cccc)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Import data</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>corpus <span class="ot">&lt;-</span> <span class="fu">importData</span>(<span class="st">"tdm.csv"</span>, <span class="st">"corpus_info.csv"</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply standard column normalization (per 1000 tokens)</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>corpus_norm <span class="ot">&lt;-</span> <span class="fu">normalization</span>(corpus, <span class="at">normty =</span> <span class="st">"nc"</span>, <span class="at">sc =</span> <span class="dv">1000</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Check normalization status</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>corpus_norm<span class="sc">$</span>norm  <span class="co"># Should be TRUE</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>corpus_norm<span class="sc">$</span>normty  <span class="co"># Should be "nc"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="comparing-different-methods" class="level3">
+<h3 class="anchored" data-anchor-id="comparing-different-methods">Comparing Different Methods</h3>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Column normalization</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>corpus_nc <span class="ot">&lt;-</span> <span class="fu">normalization</span>(corpus, <span class="at">normty =</span> <span class="st">"nc"</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Chi-square normalization</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>corpus_nchi <span class="ot">&lt;-</span> <span class="fu">normalization</span>(corpus, <span class="at">normty =</span> <span class="st">"nchi"</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Max normalization</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>corpus_nM <span class="ot">&lt;-</span> <span class="fu">normalization</span>(corpus, <span class="at">normty =</span> <span class="st">"nM"</span>)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare visualizations</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="fu">curvePlot</span>(corpus_nc, <span class="at">keywords =</span> <span class="fu">c</span>(<span class="st">"algorithm"</span>, <span class="st">"data"</span>))</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="fu">curvePlot</span>(corpus_nchi, <span class="at">keywords =</span> <span class="fu">c</span>(<span class="st">"algorithm"</span>, <span class="st">"data"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="non-linear-normalization-with-asymmetry" class="level3">
+<h3 class="anchored" data-anchor-id="non-linear-normalization-with-asymmetry">Non-linear Normalization with Asymmetry</h3>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply non-linear normalization with variance-based asymmetry</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>corpus_nnl <span class="ot">&lt;-</span> <span class="fu">normalization</span>(</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  corpus, </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">normty =</span> <span class="st">"nnl"</span>, </span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">nnlty =</span> <span class="st">"V"</span>, </span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">p_asy =</span> <span class="cn">TRUE</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co"># View asymmetry coefficients</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(corpus_nnl<span class="sc">$</span>p_asy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="custom-scaling-factor" class="level3">
+<h3 class="anchored" data-anchor-id="custom-scaling-factor">Custom Scaling Factor</h3>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Normalize to "per 10,000 tokens" instead of per 1000</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>corpus_norm <span class="ot">&lt;-</span> <span class="fu">normalization</span>(corpus, <span class="at">normty =</span> <span class="st">"nc"</span>, <span class="at">sc =</span> <span class="dv">10000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<hr>
+</section>
+</section>
+<section id="choosing-the-right-method" class="level2">
+<h2 class="anchored" data-anchor-id="choosing-the-right-method">📊 Choosing the Right Method</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 26%">
+<col style="width: 33%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Method</th>
+<th>Best For</th>
+<th>Pros</th>
+<th>Cons</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>nc</strong></td>
+<td>General temporal analysis</td>
+<td>Simple, interpretable</td>
+<td>May not handle extreme skewness well</td>
+</tr>
+<tr class="even">
+<td><strong>nchi</strong></td>
+<td>Deviation-focused analysis</td>
+<td>Emphasizes unexpected patterns</td>
+<td>Less intuitive interpretation</td>
+</tr>
+<tr class="odd">
+<td><strong>nM</strong></td>
+<td>Pattern comparison</td>
+<td>Good for clustering</td>
+<td>Loses absolute frequency information</td>
+</tr>
+<tr class="even">
+<td><strong>nmM</strong></td>
+<td>Algorithm preparation</td>
+<td>Bounded [0,1] range</td>
+<td>Sensitive to outliers</td>
+</tr>
+<tr class="odd">
+<td><strong>nnl</strong></td>
+<td>Asymmetric distributions</td>
+<td>Accounts for skewness</td>
+<td>More complex, requires understanding</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Recommendation</strong>: Start with <code>"nc"</code> for most analyses. Use <code>"nchi"</code> for correspondence-style analysis, <code>"nM"</code> for clustering, and <code>"nnl"</code> for distributions with strong asymmetry.</p>
+<hr>
+</section>
+<section id="typical-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="typical-workflow">🔗 Typical Workflow</h2>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Import data</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>corpus <span class="ot">&lt;-</span> <span class="fu">importData</span>(<span class="st">"tdm.csv"</span>, <span class="st">"corpus_info.csv"</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Explore raw frequencies</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rowMassPlot</span>(corpus)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="fu">colMassPlot</span>(corpus)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Normalize</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>corpus_norm <span class="ot">&lt;-</span> <span class="fu">normalization</span>(corpus, <span class="at">normty =</span> <span class="st">"nc"</span>, <span class="at">sc =</span> <span class="dv">1000</span>)</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Visualize normalized trajectories</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="fu">curvePlot</span>(corpus_norm, <span class="at">keywords =</span> <span class="fu">c</span>(<span class="st">"algorithm"</span>, <span class="st">"network"</span>, <span class="st">"data"</span>))</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="fu">facetPlot</span>(corpus_norm, <span class="at">zone =</span> <span class="st">"all"</span>)</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Proceed with smoothing</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>smooth_params <span class="ot">&lt;-</span> <span class="fu">smoothingSelection</span>(corpus_norm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<hr>
+</section>
+<section id="important-notes" class="level2">
+<h2 class="anchored" data-anchor-id="important-notes">⚠️ Important Notes</h2>
+<section id="re-normalization" class="level3">
+<h3 class="anchored" data-anchor-id="re-normalization">Re-normalization</h3>
+<p>Once a dataset is normalized (<code>norm = TRUE</code>), applying <code>normalization()</code> again will normalize the already-normalized data. Always start from raw data if you need to try different normalization methods.</p>
+</section>
+<section id="zero-frequencies" class="level3">
+<h3 class="anchored" data-anchor-id="zero-frequencies">Zero Frequencies</h3>
+<p>Terms with zero frequencies in all time periods will remain zero after normalization. Consider filtering these out before normalization if needed.</p>
+</section>
+<section id="interpretation" class="level3">
+<h3 class="anchored" data-anchor-id="interpretation">Interpretation</h3>
+<p>After normalization, frequency values no longer represent raw counts. Always specify the normalization method and scaling factor when reporting results.</p>
+<hr>
+</section>
+</section>
+<section id="see-also" class="level2">
+<h2 class="anchored" data-anchor-id="see-also">📚 See Also</h2>
+<ul>
+<li><a href="importData.html"><code>importData()</code></a> — Import and prepare data (required before normalization)</li>
+<li><a href="curvePlot.html"><code>curvePlot()</code></a> — Visualize normalized temporal curves</li>
+<li><a href="facetPlot.html"><code>facetPlot()</code></a> — Compare normalized trajectories across zones</li>
+<li><a href="smoothingSelection.html"><code>smoothingSelection()</code></a> — Next step: select smoothing parameters</li>
+</ul>
+
+
 </section>
 
 </main> <!-- /main -->

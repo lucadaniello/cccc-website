@@ -1,45 +1,187 @@
 ---
-title: ""
+title: "rowMassPlot()"
 format:
   html:
-    toc: false
+    toc: true
+    toc-depth: 3
 page-layout: full
 ---
+**Visualize Keyword Frequency Distribution by Zone**
 
-# rowMassPlot()
-
-Creates a bar plot of keywords ordered by their total frequency and colored by their assigned frequency zone, combining both the zone and its frequency interval label.
+The `rowMassPlot()` function creates a bar plot showing the total frequency of each keyword in your corpus, colored by frequency zone. This provides an immediate visual overview of term distribution and helps identify which terms dominate the corpus.
 
 ---
 
 ## 🔹 Function Definition
 
 ```r
-rowMassPlot <- (data)
+rowMassPlot(data)
 ```
 
-## 🎯 Aim
+---
 
-The `rowMassPlot()` function generates a bar plot showing the total frequency of each keyword, colored according to its frequency zone and labeled by its interval.  
-It provides a visual summary of the distribution of term frequencies across zones, based on the output of `importData()`.
+## 🎯 Purpose
+
+Understanding the frequency distribution of terms in your corpus is a crucial first step in temporal analysis. The `rowMassPlot()` function helps you:
+
+1. **Visualize frequency hierarchy** — See which terms are most/least frequent
+2. **Understand zone distribution** — Observe how terms are distributed across frequency zones
+3. **Identify dominant terms** — Quickly spot high-frequency keywords
+4. **Assess data quality** — Detect potential issues like outliers or unexpected patterns
+5. **Guide analysis decisions** — Inform which terms to focus on for deeper analysis
+
+This function is typically used **immediately after** `importData()` and **before** normalization to understand the raw frequency landscape of your corpus.
 
 ---
 
 ## ⚙️ Arguments
 
-| Argument | Type | Description |
-|-----------|------|-------------|
-| **data** | List | A list containing the output of `importData()`, including the processed term-document matrix (`tdm`) and related metadata. |
+| Argument | Type | Default | Description |
+|----------|------|---------|-------------|
+| **data** | List | *required* | A list object returned by `importData()`, containing the processed TDM (`tdm`), corpus metadata, zone information, and color palette. |
+
+---
+
+## 📊 Plot Components
+
+The generated plot includes:
+
+### X-axis
+- **Keywords** ordered by total frequency (descending)
+- Terms are positioned from highest to lowest frequency
+
+### Y-axis
+- **Total frequency** across all time periods
+- Raw count of occurrences for each keyword
+
+### Colors
+- Each bar is colored according to its **frequency zone**
+- Colors represent both the zone and its frequency interval
+- Example labels: `"Zone 1 [0-25]"`, `"Zone 4 [500-1000]"`
+
+### Legend
+- Positioned at the bottom of the plot
+- Shows all zone-interval combinations present in the data
+- Colors match those assigned during `importData()`
 
 ---
 
 ## 📦 Output
 
-Returns a **`ggplot2` object** representing a bar plot of total keyword frequencies grouped and colored by frequency zone.
+Returns a **`ggplot2` object** that can be:
+- Displayed directly in R
+- Saved to a file using `ggsave()`
+- Further customized using `ggplot2` functions
 
-| Element | Description |
-|----------|-------------|
-| **x-axis** | Keywords ordered by total frequency. |
-| **y-axis** | Total frequency of each keyword. |
-| **Colors** | Represent frequency zones and intervals (e.g., “VH [50–100]”, “L [5–10]”). |
-| **Legend** | Displayed at the bottom, showing the zone–interval combinations. |
+**Plot characteristics:**
+- Bar plot with keywords on x-axis
+- Total frequency on y-axis
+- Bars colored by frequency zone
+- Legend showing zone classifications
+
+---
+
+## 💡 Usage Examples
+
+### Basic Usage
+
+```r
+library(cccc)
+
+# Import data
+corpus <- importData("tdm.csv", "corpus_info.csv")
+
+# Create frequency plot
+rowMassPlot(corpus)
+```
+
+### Compare Statistical vs Linguistic Zones
+
+```r
+# Import with statistical zones
+corpus_stat <- importData("tdm.csv", "corpus_info.csv", zone = "stat")
+plot_stat <- rowMassPlot(corpus_stat)
+
+# Import with linguistic zones
+corpus_ling <- importData("tdm.csv", "corpus_info.csv", zone = "ling")
+plot_ling <- rowMassPlot(corpus_ling)
+
+# Display side by side
+library(patchwork)
+plot_stat + plot_ling + 
+  plot_annotation(title = "Comparison of Zone Classification Methods")
+```
+
+---
+
+## 🔍 Interpreting the Plot
+
+### Zone Distribution Patterns
+
+**Balanced Distribution:**
+```
+Zone 1 ████████ (many low-frequency terms)
+Zone 2 ██████ (medium-low frequency)
+Zone 3 ████ (medium-high frequency)  
+Zone 4 ██ (few high-frequency terms)
+```
+Indicates a typical Zipfian distribution common in natural language.
+
+**Skewed Distribution:**
+```
+Zone 1 ██ (few low-frequency terms)
+Zone 2 ████ 
+Zone 3 ████
+Zone 4 ████████████ (many high-frequency terms)
+```
+May indicate a specialized corpus or potential data quality issues.
+
+### Key Observations to Look For
+
+1. **Frequency Range**: 
+   - Large gaps between zones suggest clear stratification
+   - Smooth transitions suggest continuous frequency distribution
+
+2. **Zone Sizes**:
+   - Roughly equal zone sizes indicate balanced classification
+   - Highly unequal sizes may require different zone strategy
+
+3. **Outliers**:
+   - Extremely high-frequency terms may dominate the corpus
+   - Consider whether these should be excluded from analysis
+
+4. **Missing Zones**:
+   - Absence of certain zones may indicate limited vocabulary range
+   - Common in specialized or small corpora
+
+---
+
+## 🎨 Zone Color Schemes
+
+The plot uses colors assigned during `importData()`:
+
+**Default Color Palette:**
+- Zone 1 (lowest): Light colors (e.g., light blue, yellow)
+- Zone 2: Medium colors
+- Zone 3: Darker colors
+- Zone 4 (highest): Darkest colors (e.g., dark blue, red)
+
+Colors are consistent across all cccc visualizations, allowing easy comparison between plots.
+
+---
+<!-- ## 💡 Tips & Best Practices -->
+
+<!-- - **Always check this plot first** after importing data to understand your corpus structure -->
+<!-- - **Compare zone methods** (statistical vs linguistic) to see which better suits your data -->
+<!-- - **Look for outliers** that might skew your analysis -->
+<!-- - **Consider normalization** if frequency ranges are extremely wide -->
+<!-- - **Save high-resolution versions** for publications (use `dpi = 300` or higher) -->
+<!-- - **Document your observations** about frequency distribution for methods sections -->
+<!-- --- -->
+
+## 📚 See Also
+
+- [`importData()`](importData.html) — Import data and assign frequency zones
+- [`colMassPlot()`](colMassPlot.html) — Visualize temporal corpus dimensions
+- [`curvePlot()`](curvePlot.html) — Plot individual keyword trajectories
+- [`facetPlot()`](facetPlot.html) — Create faceted visualizations by zone

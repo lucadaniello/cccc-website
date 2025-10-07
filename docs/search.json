@@ -11,175 +11,392 @@
     "href": "singleFunctions/rowMassPlot.html",
     "title": "rowMassPlot()",
     "section": "",
-    "text": "Creates a bar plot of keywords ordered by their total frequency and colored by their assigned frequency zone, combining both the zone and its frequency interval label.\n\n\n\nrowMassPlot &lt;- (data)\n\n\n\nThe rowMassPlot() function generates a bar plot showing the total frequency of each keyword, colored according to its frequency zone and labeled by its interval.\nIt provides a visual summary of the distribution of term frequencies across zones, based on the output of importData().\n\n\n\n\n\n\n\n\n\n\n\n\nArgument\nType\nDescription\n\n\n\n\ndata\nList\nA list containing the output of importData(), including the processed term-document matrix (tdm) and related metadata.\n\n\n\n\n\n\n\nReturns a ggplot2 object representing a bar plot of total keyword frequencies grouped and colored by frequency zone.\n\n\n\n\n\n\n\nElement\nDescription\n\n\n\n\nx-axis\nKeywords ordered by total frequency.\n\n\ny-axis\nTotal frequency of each keyword.\n\n\nColors\nRepresent frequency zones and intervals (e.g., “VH [50–100]”, “L [5–10]”).\n\n\nLegend\nDisplayed at the bottom, showing the zone–interval combinations."
+    "text": "Visualize Keyword Frequency Distribution by Zone\nThe rowMassPlot() function creates a bar plot showing the total frequency of each keyword in your corpus, colored by frequency zone. This provides an immediate visual overview of term distribution and helps identify which terms dominate the corpus."
   },
   {
     "objectID": "singleFunctions/rowMassPlot.html#function-definition",
     "href": "singleFunctions/rowMassPlot.html#function-definition",
     "title": "rowMassPlot()",
-    "section": "",
-    "text": "rowMassPlot &lt;- (data)"
+    "section": "🔹 Function Definition",
+    "text": "🔹 Function Definition\nrowMassPlot(data)"
   },
   {
-    "objectID": "singleFunctions/rowMassPlot.html#aim",
-    "href": "singleFunctions/rowMassPlot.html#aim",
+    "objectID": "singleFunctions/rowMassPlot.html#purpose",
+    "href": "singleFunctions/rowMassPlot.html#purpose",
     "title": "rowMassPlot()",
-    "section": "",
-    "text": "The rowMassPlot() function generates a bar plot showing the total frequency of each keyword, colored according to its frequency zone and labeled by its interval.\nIt provides a visual summary of the distribution of term frequencies across zones, based on the output of importData()."
+    "section": "🎯 Purpose",
+    "text": "🎯 Purpose\nUnderstanding the frequency distribution of terms in your corpus is a crucial first step in temporal analysis. The rowMassPlot() function helps you:\n\nVisualize frequency hierarchy — See which terms are most/least frequent\nUnderstand zone distribution — Observe how terms are distributed across frequency zones\nIdentify dominant terms — Quickly spot high-frequency keywords\nAssess data quality — Detect potential issues like outliers or unexpected patterns\nGuide analysis decisions — Inform which terms to focus on for deeper analysis\n\nThis function is typically used immediately after importData() and before normalization to understand the raw frequency landscape of your corpus."
   },
   {
     "objectID": "singleFunctions/rowMassPlot.html#arguments",
     "href": "singleFunctions/rowMassPlot.html#arguments",
     "title": "rowMassPlot()",
-    "section": "",
-    "text": "Argument\nType\nDescription\n\n\n\n\ndata\nList\nA list containing the output of importData(), including the processed term-document matrix (tdm) and related metadata."
+    "section": "⚙️ Arguments",
+    "text": "⚙️ Arguments\n\n\n\n\n\n\n\n\n\nArgument\nType\nDefault\nDescription\n\n\n\n\ndata\nList\nrequired\nA list object returned by importData(), containing the processed TDM (tdm), corpus metadata, zone information, and color palette."
+  },
+  {
+    "objectID": "singleFunctions/rowMassPlot.html#plot-components",
+    "href": "singleFunctions/rowMassPlot.html#plot-components",
+    "title": "rowMassPlot()",
+    "section": "📊 Plot Components",
+    "text": "📊 Plot Components\nThe generated plot includes:\n\nX-axis\n\nKeywords ordered by total frequency (descending)\nTerms are positioned from highest to lowest frequency\n\n\n\nY-axis\n\nTotal frequency across all time periods\nRaw count of occurrences for each keyword\n\n\n\nColors\n\nEach bar is colored according to its frequency zone\nColors represent both the zone and its frequency interval\nExample labels: \"Zone 1 [0-25]\", \"Zone 4 [500-1000]\"\n\n\n\nLegend\n\nPositioned at the bottom of the plot\nShows all zone-interval combinations present in the data\nColors match those assigned during importData()"
   },
   {
     "objectID": "singleFunctions/rowMassPlot.html#output",
     "href": "singleFunctions/rowMassPlot.html#output",
     "title": "rowMassPlot()",
-    "section": "",
-    "text": "Returns a ggplot2 object representing a bar plot of total keyword frequencies grouped and colored by frequency zone.\n\n\n\n\n\n\n\nElement\nDescription\n\n\n\n\nx-axis\nKeywords ordered by total frequency.\n\n\ny-axis\nTotal frequency of each keyword.\n\n\nColors\nRepresent frequency zones and intervals (e.g., “VH [50–100]”, “L [5–10]”).\n\n\nLegend\nDisplayed at the bottom, showing the zone–interval combinations."
+    "section": "📦 Output",
+    "text": "📦 Output\nReturns a ggplot2 object that can be: - Displayed directly in R - Saved to a file using ggsave() - Further customized using ggplot2 functions\nPlot characteristics: - Bar plot with keywords on x-axis - Total frequency on y-axis - Bars colored by frequency zone - Legend showing zone classifications"
+  },
+  {
+    "objectID": "singleFunctions/rowMassPlot.html#usage-examples",
+    "href": "singleFunctions/rowMassPlot.html#usage-examples",
+    "title": "rowMassPlot()",
+    "section": "💡 Usage Examples",
+    "text": "💡 Usage Examples\n\nBasic Usage\nlibrary(cccc)\n\n# Import data\ncorpus &lt;- importData(\"tdm.csv\", \"corpus_info.csv\")\n\n# Create frequency plot\nrowMassPlot(corpus)\n\n\nCompare Statistical vs Linguistic Zones\n# Import with statistical zones\ncorpus_stat &lt;- importData(\"tdm.csv\", \"corpus_info.csv\", zone = \"stat\")\nplot_stat &lt;- rowMassPlot(corpus_stat)\n\n# Import with linguistic zones\ncorpus_ling &lt;- importData(\"tdm.csv\", \"corpus_info.csv\", zone = \"ling\")\nplot_ling &lt;- rowMassPlot(corpus_ling)\n\n# Display side by side\nlibrary(patchwork)\nplot_stat + plot_ling + \n  plot_annotation(title = \"Comparison of Zone Classification Methods\")"
+  },
+  {
+    "objectID": "singleFunctions/rowMassPlot.html#interpreting-the-plot",
+    "href": "singleFunctions/rowMassPlot.html#interpreting-the-plot",
+    "title": "rowMassPlot()",
+    "section": "🔍 Interpreting the Plot",
+    "text": "🔍 Interpreting the Plot\n\nZone Distribution Patterns\nBalanced Distribution:\nZone 1 ████████ (many low-frequency terms)\nZone 2 ██████ (medium-low frequency)\nZone 3 ████ (medium-high frequency)  \nZone 4 ██ (few high-frequency terms)\nIndicates a typical Zipfian distribution common in natural language.\nSkewed Distribution:\nZone 1 ██ (few low-frequency terms)\nZone 2 ████ \nZone 3 ████\nZone 4 ████████████ (many high-frequency terms)\nMay indicate a specialized corpus or potential data quality issues.\n\n\nKey Observations to Look For\n\nFrequency Range:\n\nLarge gaps between zones suggest clear stratification\nSmooth transitions suggest continuous frequency distribution\n\nZone Sizes:\n\nRoughly equal zone sizes indicate balanced classification\nHighly unequal sizes may require different zone strategy\n\nOutliers:\n\nExtremely high-frequency terms may dominate the corpus\nConsider whether these should be excluded from analysis\n\nMissing Zones:\n\nAbsence of certain zones may indicate limited vocabulary range\nCommon in specialized or small corpora"
+  },
+  {
+    "objectID": "singleFunctions/rowMassPlot.html#zone-color-schemes",
+    "href": "singleFunctions/rowMassPlot.html#zone-color-schemes",
+    "title": "rowMassPlot()",
+    "section": "🎨 Zone Color Schemes",
+    "text": "🎨 Zone Color Schemes\nThe plot uses colors assigned during importData():\nDefault Color Palette: - Zone 1 (lowest): Light colors (e.g., light blue, yellow) - Zone 2: Medium colors - Zone 3: Darker colors - Zone 4 (highest): Darkest colors (e.g., dark blue, red)\nColors are consistent across all cccc visualizations, allowing easy comparison between plots."
+  },
+  {
+    "objectID": "singleFunctions/rowMassPlot.html#see-also",
+    "href": "singleFunctions/rowMassPlot.html#see-also",
+    "title": "rowMassPlot()",
+    "section": "📚 See Also",
+    "text": "📚 See Also\n\nimportData() — Import data and assign frequency zones\ncolMassPlot() — Visualize temporal corpus dimensions\ncurvePlot() — Plot individual keyword trajectories\nfacetPlot() — Create faceted visualizations by zone"
   },
   {
     "objectID": "singleFunctions/optimalSmoothing.html",
     "href": "singleFunctions/optimalSmoothing.html",
     "title": "optimalSmoothing()",
     "section": "",
-    "text": "Selection of Optimal Spline Degree and Penalization Strategy\n\n\n\noptimalSmoothing &lt;- (smoothing_results, plot = TRUE)\n\n\n\nThe optimalSmoothing() function compares multiple smoothing strategies—each defined by a specific penalization type—to identify the optimal combination of spline degree (m) and penalty that minimizes the Generalized Cross-Validation (GCV) criterion.\nIt takes as input the results produced by multiple calls to smoothingSelection() (one per penalty type) and constructs a comparison matrix of GCV values across all spline degrees and penalties.\nOptionally, it can also generate diagnostic plots showing how GCV, OCV, df, and SSE vary across spline degrees and penalty types, supporting a visual evaluation of the optimal smoothing configuration.\n\n\n\n\n\n\n\n\n\n\n\n\nArgument\nType\nDescription\n\n\n\n\nsmoothing_results\nList\nA named list of results from smoothingSelection(), with each entry corresponding to a penalty type (\"m-2\", \"2\", \"1\", \"0\").\n\n\nplot\nLogical\nIf TRUE (default), returns comparative ggplot2-based visualizations of smoothing diagnostics across penalty types and spline degrees.\n\n\n\n\n\n\n\nReturns a list containing the optimal smoothing configuration, diagnostic matrices, and (optionally) comparative plots.\n\n\n\n\n\n\n\nElement\nDescription\n\n\n\n\noptSmoothing\nFull set of results from the optimal penalization strategy, as returned by smoothingSelection().\n\n\nm_opt\nInteger. Optimal spline degree that minimizes the GCV across all penalty types.\n\n\npenalty_opt\nCharacter. Optimal penalty type (\"m-2\", \"2\", \"1\", or \"0\").\n\n\nlambda_opt\nNumeric. Optimal log10(λ) value corresponding to the selected degree and penalty.\n\n\ngcv_matrix\nNumeric matrix of GCV values, where rows correspond to penalties and columns to spline degrees.\n\n\nplots\n(Optional) List of ggplot2 objects for GCV, OCV, df, and SSE comparisons across penalties and degrees.\n\n\ncall\nThe matched function call, useful for reproducibility."
+    "text": "Select Optimal Spline Degree and Penalization Strategy\nThe optimalSmoothing() function compares multiple smoothing strategies to identify the best combination of spline degree and penalty type. It synthesizes results from multiple smoothingSelection() runs to make a final, informed decision about optimal smoothing parameters."
   },
   {
     "objectID": "singleFunctions/optimalSmoothing.html#function-definition",
     "href": "singleFunctions/optimalSmoothing.html#function-definition",
     "title": "optimalSmoothing()",
-    "section": "",
-    "text": "optimalSmoothing &lt;- (smoothing_results, plot = TRUE)"
+    "section": "🔹 Function Definition",
+    "text": "🔹 Function Definition\noptimalSmoothing(\n  smoothing_results,\n  plot = TRUE\n)"
   },
   {
-    "objectID": "singleFunctions/optimalSmoothing.html#aim",
-    "href": "singleFunctions/optimalSmoothing.html#aim",
+    "objectID": "singleFunctions/optimalSmoothing.html#purpose",
+    "href": "singleFunctions/optimalSmoothing.html#purpose",
     "title": "optimalSmoothing()",
-    "section": "",
-    "text": "The optimalSmoothing() function compares multiple smoothing strategies—each defined by a specific penalization type—to identify the optimal combination of spline degree (m) and penalty that minimizes the Generalized Cross-Validation (GCV) criterion.\nIt takes as input the results produced by multiple calls to smoothingSelection() (one per penalty type) and constructs a comparison matrix of GCV values across all spline degrees and penalties.\nOptionally, it can also generate diagnostic plots showing how GCV, OCV, df, and SSE vary across spline degrees and penalty types, supporting a visual evaluation of the optimal smoothing configuration."
+    "section": "🎯 Purpose",
+    "text": "🎯 Purpose\nWhile smoothingSelection() finds optimal parameters for a single penalty type, optimalSmoothing() compares multiple penalty strategies to find the globally optimal smoothing configuration.\nThis function helps you:\n\nCompare penalty strategies — Evaluate different derivative-based penalization approaches\nMake final parameter decisions — Select the single best combination of degree and penalty\nVisualize trade-offs — See how different strategies perform across metrics\nEnsure robustness — Verify that your choice is stable across different penalties\nDocument methodology — Provide systematic justification for smoothing choices\nPrepare for clustering — Finalize parameters before applying to all keywords\n\nThe function creates a comprehensive comparison matrix and diagnostic plots to support evidence-based parameter selection."
+  },
+  {
+    "objectID": "singleFunctions/optimalSmoothing.html#understanding-penalty-types",
+    "href": "singleFunctions/optimalSmoothing.html#understanding-penalty-types",
+    "title": "optimalSmoothing()",
+    "section": "🧮 Understanding Penalty Types",
+    "text": "🧮 Understanding Penalty Types\nDifferent penalty types control smoothness in different ways:\n\n“m-2” — Adaptive Penalty (Recommended)\n\nPenalizes the (m-2)th derivative\nAdapts to spline degree automatically\nUse when: You want penalty that scales with spline complexity\nExample: For m=4, penalizes 2nd derivative (curvature)\n\n\n\n“2” — Second Derivative Penalty\n\nAlways penalizes curvature (second derivative)\nIndependent of spline degree\nUse when: You want consistent curvature control\nExample: Prevents sharp bends in trajectories\n\n\n\n“3” — Third Derivative Penalty\n\nPenalizes rate of curvature change (wiggliness)\nRequires m ≥ 4\nUse when: You want to control oscillations\nExample: Smooths out rapid fluctuations\n\n\n\n“0” — Ridge Penalty\n\nPenalizes coefficient magnitudes\nNo derivative involved\nUse when: You want simple shrinkage\nExample: Reduces overall curve amplitude"
   },
   {
     "objectID": "singleFunctions/optimalSmoothing.html#arguments",
     "href": "singleFunctions/optimalSmoothing.html#arguments",
     "title": "optimalSmoothing()",
-    "section": "",
-    "text": "Argument\nType\nDescription\n\n\n\n\nsmoothing_results\nList\nA named list of results from smoothingSelection(), with each entry corresponding to a penalty type (\"m-2\", \"2\", \"1\", \"0\").\n\n\nplot\nLogical\nIf TRUE (default), returns comparative ggplot2-based visualizations of smoothing diagnostics across penalty types and spline degrees."
+    "section": "⚙️ Arguments",
+    "text": "⚙️ Arguments\n\n\n\n\n\n\n\n\n\nArgument\nType\nDefault\nDescription\n\n\n\n\nsmoothing_results\nNamed list\nrequired\nA named list where each element is the output from smoothingSelection() with a different penalty type. Names should be penalty types: \"m-2\", \"2\", \"3\", \"0\".\n\n\nplot\nLogical\nTRUE\nIf TRUE, generates comparative diagnostic plots showing GCV, OCV, df, and SSE across penalty types and spline degrees."
   },
   {
     "objectID": "singleFunctions/optimalSmoothing.html#output",
     "href": "singleFunctions/optimalSmoothing.html#output",
     "title": "optimalSmoothing()",
-    "section": "",
-    "text": "Returns a list containing the optimal smoothing configuration, diagnostic matrices, and (optionally) comparative plots.\n\n\n\n\n\n\n\nElement\nDescription\n\n\n\n\noptSmoothing\nFull set of results from the optimal penalization strategy, as returned by smoothingSelection().\n\n\nm_opt\nInteger. Optimal spline degree that minimizes the GCV across all penalty types.\n\n\npenalty_opt\nCharacter. Optimal penalty type (\"m-2\", \"2\", \"1\", or \"0\").\n\n\nlambda_opt\nNumeric. Optimal log10(λ) value corresponding to the selected degree and penalty.\n\n\ngcv_matrix\nNumeric matrix of GCV values, where rows correspond to penalties and columns to spline degrees.\n\n\nplots\n(Optional) List of ggplot2 objects for GCV, OCV, df, and SSE comparisons across penalties and degrees.\n\n\ncall\nThe matched function call, useful for reproducibility."
+    "section": "📦 Output",
+    "text": "📦 Output\nReturns a list with the optimal smoothing configuration and comparative diagnostics:\n\n\n\n\n\n\n\n\nElement\nType\nDescription\n\n\n\n\noptSmoothing\nlist\nComplete results from smoothingSelection() for the optimal penalty strategy. Contains all diagnostic information for the best configuration.\n\n\nm_opt\ninteger\nOptimal spline degree (m) that minimizes GCV across all penalty types and degrees.\n\n\npenalty_opt\ncharacter\nOptimal penalty type (e.g., \"m-2\", \"2\", \"3\", \"0\").\n\n\nlambda_opt\nnumeric\nOptimal log₁₀(λ) value corresponding to the selected degree and penalty combination.\n\n\ngcv_matrix\nmatrix\nComparison matrix of GCV values with penalties as rows and degrees as columns. Lower values = better.\n\n\nplots\nlist\n(If plot = TRUE) List of ggplot2 objects showing GCV, OCV, df, and SSE comparisons.\n\n\ncall\ncall\nFunction call for reproducibility."
+  },
+  {
+    "objectID": "singleFunctions/optimalSmoothing.html#usage-examples",
+    "href": "singleFunctions/optimalSmoothing.html#usage-examples",
+    "title": "optimalSmoothing()",
+    "section": "💡 Usage Examples",
+    "text": "💡 Usage Examples\n\nBasic Usage (Two Penalties)\nlibrary(cccc)\n\n# Import and normalize data\ncorpus &lt;- importData(\"tdm.csv\", \"corpus_info.csv\")\ncorpus_norm &lt;- normalization(corpus, normty = \"nc\")\n\n# Run smoothingSelection for different penalty types\nsmooth_m2 &lt;- smoothingSelection(corpus_norm, penalty_type = \"m-2\", plot = FALSE)\nsmooth_2 &lt;- smoothingSelection(corpus_norm, penalty_type = \"2\", plot = FALSE)\n\n# Compare and select optimal\nresults &lt;- list(\"m-2\" = smooth_m2, \"2\" = smooth_2)\noptimal &lt;- optimalSmoothing(results, plot = TRUE)\n\n# View optimal parameters\ncat(\"Optimal degree:\", optimal$m_opt, \"\\n\")\ncat(\"Optimal penalty:\", optimal$penalty_opt, \"\\n\")\ncat(\"Optimal log10(lambda):\", optimal$lambda_opt, \"\\n\")\n\n\nComplete Comparison (Four Penalties)\n# Test all common penalty types\nsmooth_m2 &lt;- smoothingSelection(corpus_norm, penalty_type = \"m-2\", plot = FALSE)\nsmooth_2 &lt;- smoothingSelection(corpus_norm, penalty_type = \"2\", plot = FALSE)\nsmooth_3 &lt;- smoothingSelection(corpus_norm, penalty_type = \"3\", plot = FALSE)\nsmooth_0 &lt;- smoothingSelection(corpus_norm, penalty_type = \"0\", plot = FALSE)\n\n# Combine results\nall_results &lt;- list(\n  \"m-2\" = smooth_m2,\n  \"2\" = smooth_2,\n  \"3\" = smooth_3,\n  \"0\" = smooth_0\n)\n\n# Find optimal\noptimal &lt;- optimalSmoothing(all_results, plot = TRUE)\n\n# View GCV comparison matrix\nprint(optimal$gcv_matrix)"
+  },
+  {
+    "objectID": "singleFunctions/optimalSmoothing.html#interpreting-the-output",
+    "href": "singleFunctions/optimalSmoothing.html#interpreting-the-output",
+    "title": "optimalSmoothing()",
+    "section": "📊 Interpreting the Output",
+    "text": "📊 Interpreting the Output\n\n1. GCV Comparison Matrix\noptimal$gcv_matrix\nExample output:\n        degree_2  degree_3  degree_4  degree_5\nm-2     0.0125    0.0108    0.0095    0.0102\n2       0.0131    0.0112    0.0098    0.0105\n3       0.0145    0.0120    0.0110    0.0115\nHow to read: - Rows: Penalty types - Columns: Spline degrees - Values: GCV scores (lower = better) - Minimum: Optimal combination (e.g., degree 4 with “m-2” penalty)\n\n\n2. Diagnostic Plots\nFour comparative plots are generated (if plot = TRUE):\n\nGCV Comparison Plot\nShows GCV across degrees for each penalty type. - Find the lowest point across all lines - Check for convergence — do different penalties agree?\n\n\nOCV Comparison Plot\nShows ordinary cross-validation scores. - Should align with GCV patterns - Discrepancies may indicate overfitting\n\n\nDegrees of Freedom Plot\nShows model complexity for each penalty. - Higher df = more flexible model - Compare at same degree — penalties affect complexity differently\n\n\nSSE Comparison Plot\nShows fit to data for each penalty. - Lower SSE = better fit to observed data - Trade-off with smoothness — lowest SSE may overfit"
+  },
+  {
+    "objectID": "singleFunctions/optimalSmoothing.html#decision-making-guide",
+    "href": "singleFunctions/optimalSmoothing.html#decision-making-guide",
+    "title": "optimalSmoothing()",
+    "section": "🎯 Decision-Making Guide",
+    "text": "🎯 Decision-Making Guide\n\nStep 1: Examine GCV Matrix\n# Find minimum GCV\nmin_gcv &lt;- which(optimal$gcv_matrix == min(optimal$gcv_matrix), arr.ind = TRUE)\nbest_penalty &lt;- rownames(optimal$gcv_matrix)[min_gcv[1]]\nbest_degree &lt;- as.numeric(sub(\"degree_\", \"\", colnames(optimal$gcv_matrix)[min_gcv[2]]))\n\n\nStep 2: Check Plot Patterns\nGood signs: - ✅ Clear minimum in GCV plot - ✅ GCV and OCV agree - ✅ Different penalties converge to similar degree - ✅ df values are reasonable (not too extreme)\nWarning signs: - ⚠️ GCV keeps decreasing (no clear minimum) - ⚠️ Large discrepancy between GCV and OCV - ⚠️ Very different optimal degrees across penalties - ⚠️ Extremely high or low df values\n\n\nStep 3: Validate Choice\n# Use plotSuboptimalFits to visualize smoothed curves\n# (covered in next function documentation)"
+  },
+  {
+    "objectID": "singleFunctions/optimalSmoothing.html#use-cases",
+    "href": "singleFunctions/optimalSmoothing.html#use-cases",
+    "title": "optimalSmoothing()",
+    "section": "📈 Use Cases",
+    "text": "📈 Use Cases\n\n1. Final Parameter Selection\nAfter exploring with smoothingSelection(), make final decision systematically.\n\n\n2. Robustness Check\nVerify that conclusions don’t depend critically on penalty choice.\n\n\n3. Method Comparison Studies\nCompare how different penalty strategies affect results in your domain.\n\n\n4. Publication Preparation\nDocument systematic parameter selection with GCV matrix and plots.\n\n\n5. Multi-Corpus Analysis\nFind consistent smoothing strategy across different corpora."
+  },
+  {
+    "objectID": "singleFunctions/optimalSmoothing.html#tips-best-practices",
+    "href": "singleFunctions/optimalSmoothing.html#tips-best-practices",
+    "title": "optimalSmoothing()",
+    "section": "💡 Tips & Best Practices",
+    "text": "💡 Tips & Best Practices\n\nStart with 2-3 penalties — Testing all four is often unnecessary\n“m-2” is usually best — It adapts well to different degrees\nCheck consistency — If penalties disagree strongly, investigate data quality\nDon’t over-optimize — Small GCV differences (&lt; 1-2%) are not meaningful\nConsider computation — More penalties = longer runtime\nDocument choices — Save gcv_matrix for methods sections\nValidate visually — Always check plots, don’t rely only on numbers\nUse practical constraints — Degrees 3-5 cover most use cases"
+  },
+  {
+    "objectID": "singleFunctions/optimalSmoothing.html#see-also",
+    "href": "singleFunctions/optimalSmoothing.html#see-also",
+    "title": "optimalSmoothing()",
+    "section": "📚 See Also",
+    "text": "📚 See Also\n\nsmoothingSelection() — Find optimal λ for each penalty (prerequisite)\nplotSuboptimalFits() — Visualize smoothed curves with selected parameters\ncurvePlot() — Visualize raw trajectories before smoothing\nnormalization() — Normalize data before smoothing"
   },
   {
     "objectID": "singleFunctions/importData.html",
     "href": "singleFunctions/importData.html",
     "title": "importData()",
     "section": "",
-    "text": "Imports and validates corpus data and metadata into a standardized structure.\n\n\n\nimportData &lt;- (\n  tdm_file,\n  corpus_file,\n  sep_tdm = \";\",\n  sep_corpus_info = \";\",\n  zone = \"stat\",\n  verbose = TRUE\n)\n\n\n\nThe importData() function reads and processes a Term Document Matrix (TDM) and corpus information from CSV or Excel files.\nIt standardizes formats, renames columns, cleans keywords, computes total frequency per term, and classifies each term into frequency zones.\n\n\n\n\n\n\n\n\n\n\n\n\nArgument\nType\nDescription\n\n\n\n\ntdm_file\nCharacter\nPath to the term-document matrix file (CSV or Excel). The first column must contain the list of terms, while all other columns represent years.\n\n\ncorpus_file\nCharacter\nPath to the corpus information file (CSV or Excel). Must include columns for years, tokens, and documents per year.\n\n\nsep_tdm\nCharacter / NULL\nSeparator for the TDM CSV file (ignored if Excel). Default: \";\".\n\n\nsep_corpus_info\nCharacter / NULL\nSeparator for the corpus information CSV file (ignored if Excel). Default: \";\".\n\n\nzone\nCharacter\nZone classification strategy: \"stat\" (statistical quartiles) or \"ling\" (linguistic frequency-based). Default: \"stat\".\n\n\nverbose\nLogical\nIf TRUE, prints progress messages. Default: TRUE.\n\n\n\n\n\n\n\nReturns a list with the following elements:\n\n\n\n\n\n\n\nElement\nDescription\n\n\n\n\ntdm\nA tibble representing the cleaned and processed term-document matrix, including keyword, tot_freq, int_freq, zone, and yearly frequency columns.\n\n\ncorpus_info\nA tibble containing corpus-level yearly metadata (years, dimCorpus, nDoc, and optional metadata).\n\n\nnorm\nLogical. Indicates whether the TDM has been normalized (default: FALSE).\n\n\nyear_cols\nNumeric vector indicating which columns in the TDM correspond to yearly frequencies.\n\n\nzone\nCharacter vector of unique frequency zones.\n\n\ncolors\nCharacter vector of default colors associated with zones."
+    "text": "Import and Validate Corpus Data\nThe importData() function is the entry point for the cccc analytical pipeline. It imports, validates, and structures your corpus data and metadata into a standardized format ready for temporal analysis."
   },
   {
     "objectID": "singleFunctions/importData.html#function-definition",
     "href": "singleFunctions/importData.html#function-definition",
     "title": "importData()",
-    "section": "",
-    "text": "importData &lt;- (\n  tdm_file,\n  corpus_file,\n  sep_tdm = \";\",\n  sep_corpus_info = \";\",\n  zone = \"stat\",\n  verbose = TRUE\n)"
+    "section": "🔹 Function Definition",
+    "text": "🔹 Function Definition\nimportData(\n  tdm_file,\n  corpus_file,\n  sep_tdm = \";\",\n  sep_corpus_info = \";\",\n  zone = \"stat\",\n  verbose = TRUE\n)"
   },
   {
-    "objectID": "singleFunctions/importData.html#aim",
-    "href": "singleFunctions/importData.html#aim",
+    "objectID": "singleFunctions/importData.html#purpose",
+    "href": "singleFunctions/importData.html#purpose",
     "title": "importData()",
-    "section": "",
-    "text": "The importData() function reads and processes a Term Document Matrix (TDM) and corpus information from CSV or Excel files.\nIt standardizes formats, renames columns, cleans keywords, computes total frequency per term, and classifies each term into frequency zones."
+    "section": "🎯 Purpose",
+    "text": "🎯 Purpose\nThis function performs several critical operations:\n\nReads data files — Imports term-document matrix (TDM) and corpus metadata from CSV or Excel files\nValidates structure — Ensures data format consistency and completeness\nCleans keywords — Standardizes term formatting and removes duplicates\nComputes frequencies — Calculates total frequency per term across all time periods\nAssigns zones — Classifies terms into frequency zones for stratified analysis\nStructures output — Returns a standardized list object for downstream analysis\n\nThis function is essential for ensuring data quality and consistency before any temporal modeling or clustering operations."
   },
   {
     "objectID": "singleFunctions/importData.html#arguments",
     "href": "singleFunctions/importData.html#arguments",
     "title": "importData()",
-    "section": "",
-    "text": "Argument\nType\nDescription\n\n\n\n\ntdm_file\nCharacter\nPath to the term-document matrix file (CSV or Excel). The first column must contain the list of terms, while all other columns represent years.\n\n\ncorpus_file\nCharacter\nPath to the corpus information file (CSV or Excel). Must include columns for years, tokens, and documents per year.\n\n\nsep_tdm\nCharacter / NULL\nSeparator for the TDM CSV file (ignored if Excel). Default: \";\".\n\n\nsep_corpus_info\nCharacter / NULL\nSeparator for the corpus information CSV file (ignored if Excel). Default: \";\".\n\n\nzone\nCharacter\nZone classification strategy: \"stat\" (statistical quartiles) or \"ling\" (linguistic frequency-based). Default: \"stat\".\n\n\nverbose\nLogical\nIf TRUE, prints progress messages. Default: TRUE."
+    "section": "⚙️ Arguments",
+    "text": "⚙️ Arguments\n\n\n\n\n\n\n\n\n\nArgument\nType\nDefault\nDescription\n\n\n\n\ntdm_file\nCharacter\nrequired\nPath to the term-document matrix file (CSV or Excel). First column: keywords/terms. Remaining columns: frequencies per year.\n\n\ncorpus_file\nCharacter\nrequired\nPath to the corpus information file (CSV or Excel). Must include columns for years, tokens, and number of documents per year.\n\n\nsep_tdm\nCharacter\n\";\"\nColumn separator for TDM CSV file. Ignored if file is Excel format.\n\n\nsep_corpus_info\nCharacter\n\";\"\nColumn separator for corpus info CSV file. Ignored if file is Excel format.\n\n\nzone\nCharacter\n\"stat\"\nFrequency zone classification strategy:• \"stat\": Statistical quartiles• \"ling\": Linguistic frequency-based zones\n\n\nverbose\nLogical\nTRUE\nIf TRUE, prints progress messages during import and processing."
+  },
+  {
+    "objectID": "singleFunctions/importData.html#input-file-requirements",
+    "href": "singleFunctions/importData.html#input-file-requirements",
+    "title": "importData()",
+    "section": "📊 Input File Requirements",
+    "text": "📊 Input File Requirements\n\nTerm-Document Matrix (TDM) File\nThe TDM file must have the following structure:\n\n\n\nkeyword\n2000\n2001\n2002\n…\n\n\n\n\nalgorithm\n145\n178\n203\n…\n\n\ndata\n892\n945\n1021\n…\n\n\nnetwork\n234\n267\n289\n…\n\n\n\nRequirements: - First column contains keywords/terms - Subsequent columns represent years (column names should be year values) - Cell values are raw frequencies for each term in each year - Supported formats: CSV (with customizable separator) or Excel (.xlsx, .xls)\n\n\nCorpus Information File\nThe corpus metadata file must include:\n\n\n\nyear\ndimCorpus\nnDoc\n\n\n\n\n2000\n1500000\n450\n\n\n2001\n1650000\n478\n\n\n2002\n1820000\n502\n\n\n\nRequirements: - year: Year identifier (must match TDM column names) - dimCorpus: Total number of tokens in the corpus for that year - nDoc: Number of documents in the corpus for that year - Additional metadata columns are preserved but not required"
   },
   {
     "objectID": "singleFunctions/importData.html#output",
     "href": "singleFunctions/importData.html#output",
     "title": "importData()",
-    "section": "",
-    "text": "Returns a list with the following elements:\n\n\n\n\n\n\n\nElement\nDescription\n\n\n\n\ntdm\nA tibble representing the cleaned and processed term-document matrix, including keyword, tot_freq, int_freq, zone, and yearly frequency columns.\n\n\ncorpus_info\nA tibble containing corpus-level yearly metadata (years, dimCorpus, nDoc, and optional metadata).\n\n\nnorm\nLogical. Indicates whether the TDM has been normalized (default: FALSE).\n\n\nyear_cols\nNumeric vector indicating which columns in the TDM correspond to yearly frequencies.\n\n\nzone\nCharacter vector of unique frequency zones.\n\n\ncolors\nCharacter vector of default colors associated with zones."
+    "section": "📦 Output",
+    "text": "📦 Output\nReturns a list object with the following components:\n\n\n\n\n\n\n\n\nElement\nType\nDescription\n\n\n\n\ntdm\ntibble\nProcessed term-document matrix including:• keyword: Cleaned term• tot_freq: Total frequency across all years• int_freq: Frequency interval label• zone: Assigned frequency zone• Year columns: Frequencies per year\n\n\ncorpus_info\ntibble\nCorpus metadata with years, dimCorpus, nDoc, and any additional metadata columns\n\n\nnorm\nlogical\nNormalization status (initially FALSE, updated after normalization())\n\n\nyear_cols\nnumeric\nVector of column indices corresponding to yearly frequencies in the TDM\n\n\nzone\ncharacter\nVector of unique frequency zone labels\n\n\ncolors\ncharacter\nDefault color palette for zones (used in visualization functions)"
+  },
+  {
+    "objectID": "singleFunctions/importData.html#frequency-zones",
+    "href": "singleFunctions/importData.html#frequency-zones",
+    "title": "importData()",
+    "section": "🔍 Frequency Zones",
+    "text": "🔍 Frequency Zones\n\nStatistical Zones (zone = \"stat\")\nTerms are classified into quartile-based zones: - Zone 1: Q1 (0-25th percentile) — Low frequency terms - Zone 2: Q2 (25-50th percentile) — Lower-medium frequency terms - Zone 3: Q3 (50-75th percentile) — Upper-medium frequency terms - Zone 4: Q4 (75-100th percentile) — High frequency terms\n\n\nLinguistic Zones (zone = \"ling\")\nTerms are classified based on linguistic frequency theory: - Different thresholds based on corpus-linguistic principles - Zones reflect natural language frequency distributions - More aligned with Zipf’s law and lexical stratification"
+  },
+  {
+    "objectID": "singleFunctions/importData.html#usage-examples",
+    "href": "singleFunctions/importData.html#usage-examples",
+    "title": "importData()",
+    "section": "💡 Usage Examples",
+    "text": "💡 Usage Examples\n\nBasic Usage\nlibrary(cccc)\n\n# Import data with default settings\ncorpus_data &lt;- importData(\n  tdm_file = \"data/term_document_matrix.csv\",\n  corpus_file = \"data/corpus_info.csv\"\n)\n\n# Check structure\nstr(corpus_data)\nnames(corpus_data$tdm)\n\n\nUsing Excel Files\n# Import from Excel files (separator arguments are ignored)\ncorpus_data &lt;- importData(\n  tdm_file = \"data/tdm.xlsx\",\n  corpus_file = \"data/corpus_metadata.xlsx\",\n  zone = \"ling\"  # Use linguistic zones\n)\n\n\nCustom Separator for CSV\n# Import CSV files with comma separator\ncorpus_data &lt;- importData(\n  tdm_file = \"data/tdm.csv\",\n  corpus_file = \"data/corpus.csv\",\n  sep_tdm = \",\",\n  sep_corpus_info = \",\",\n  verbose = TRUE\n)"
+  },
+  {
+    "objectID": "singleFunctions/importData.html#typical-workflow",
+    "href": "singleFunctions/importData.html#typical-workflow",
+    "title": "importData()",
+    "section": "🔗 Typical Workflow",
+    "text": "🔗 Typical Workflow\nAfter importing data with importData(), the typical next steps are:\n\nExplore the data → Use rowMassPlot() and colMassPlot() to visualize frequency distributions\nNormalize frequencies → Apply normalization() to account for corpus size variations\nVisualize trajectories → Use curvePlot() or facetPlot() to examine temporal patterns\nModel and smooth → Apply smoothing functions to identify trends"
+  },
+  {
+    "objectID": "singleFunctions/importData.html#see-also",
+    "href": "singleFunctions/importData.html#see-also",
+    "title": "importData()",
+    "section": "📚 See Also",
+    "text": "📚 See Also\n\nnormalization() — Normalize the imported TDM\nrowMassPlot() — Visualize keyword frequency distribution\ncolMassPlot() — Visualize temporal corpus dimensions"
   },
   {
     "objectID": "singleFunctions/curvePlot.html",
     "href": "singleFunctions/curvePlot.html",
     "title": "curvePlot()",
     "section": "",
-    "text": "Plot Temporal Curves of Keyword Frequencies\n\n\n\ncurvePlot &lt;- (data,\n              r = 1,\n              themety = \"light\",\n              size_class = NULL,\n              x_leg = 0.85,\n              x_lab = \"years\")\n\n\n\nThe curvePlot() function visualizes the temporal evolution of keyword frequencies within a corpus.\nIt uses the term-document matrix (TDM) in long format to generate curves grouped by frequency zones, allowing users to analyze how terms evolve over time.\nThe plot supports both light and dark themes, customizable line thickness, and adjustable x-axis labels for improved readability.\n\n\n\n\n\n\n\n\n\n\n\n\nArgument\nType\nDescription\n\n\n\n\ndata\nList\nA list containing the output of importData().\n\n\nr\nNumeric (scalar)\nInterval for thinning x-axis year labels. Default: 1.\n\n\nthemety\nCharacter\nTheme type. Either \"light\" (default) or \"dark\".\n\n\nsize_class\nNumeric vector\nLine sizes by frequency zone. If NULL, default values are assigned based on the selected theme.\n\n\nx_leg\nNumeric\nHorizontal position of the legend. Default: 0.85.\n\n\nx_lab\nCharacter\nX-axis label. Default: \"years\".\n\n\n\n\n\n\n\nReturns a ggplot2 object displaying temporal curves of keyword frequencies.\n\n\n\n\n\n\n\nElement\nDescription\n\n\n\n\nx-axis\nRepresents time (years).\n\n\ny-axis\nRepresents keyword frequency (normalized or raw).\n\n\nColors\nCorrespond to frequency zones (e.g., “VH”, “H”, “L”, “VL”).\n\n\nLine size\nReflects the relative importance of frequency zones.\n\n\nTheme\nCan be switched between light and dark for readability.\n\n\nLegend\nShown at the bottom, indicating frequency zones and line styles."
+    "text": "Visualize Temporal Evolution of Keyword Frequencies\nThe curvePlot() function creates multi-line plots showing how keyword frequencies change over time. It displays all keywords in your corpus simultaneously, with colors and line weights indicating frequency zones, providing a comprehensive view of temporal dynamics."
   },
   {
     "objectID": "singleFunctions/curvePlot.html#function-definition",
     "href": "singleFunctions/curvePlot.html#function-definition",
     "title": "curvePlot()",
-    "section": "",
-    "text": "curvePlot &lt;- (data,\n              r = 1,\n              themety = \"light\",\n              size_class = NULL,\n              x_leg = 0.85,\n              x_lab = \"years\")"
+    "section": "🔹 Function Definition",
+    "text": "🔹 Function Definition\ncurvePlot(\n  data,\n  keywords = NULL,\n  r = 1,\n  themety = \"light\",\n  size_class = NULL,\n  x_leg = 0.85,\n  x_lab = \"years\"\n)"
   },
   {
-    "objectID": "singleFunctions/curvePlot.html#aim",
-    "href": "singleFunctions/curvePlot.html#aim",
+    "objectID": "singleFunctions/curvePlot.html#purpose",
+    "href": "singleFunctions/curvePlot.html#purpose",
     "title": "curvePlot()",
-    "section": "",
-    "text": "The curvePlot() function visualizes the temporal evolution of keyword frequencies within a corpus.\nIt uses the term-document matrix (TDM) in long format to generate curves grouped by frequency zones, allowing users to analyze how terms evolve over time.\nThe plot supports both light and dark themes, customizable line thickness, and adjustable x-axis labels for improved readability."
+    "section": "🎯 Purpose",
+    "text": "🎯 Purpose\nUnderstanding how terms evolve over time is fundamental to temporal corpus analysis. The curvePlot() function helps you:\n\nExplore temporal patterns — See how keywords rise, fall, or remain stable over time\nIdentify trends — Spot emerging, declining, or persistent concepts\nCompare trajectories — Observe relationships between different keywords\nDetect events — Find spikes or drops that correspond to historical events\nVisualize zones — See how different frequency zones behave temporally\nAssess data quality — Identify anomalies or irregularities in the data\nGenerate insights — Discover unexpected patterns for further investigation\nCreate publication figures — Produce high-quality visualizations for papers\n\nThis function can display either all keywords (comprehensive overview) or selected keywords (focused analysis), making it versatile for both exploration and presentation."
   },
   {
     "objectID": "singleFunctions/curvePlot.html#arguments",
     "href": "singleFunctions/curvePlot.html#arguments",
     "title": "curvePlot()",
-    "section": "",
-    "text": "Argument\nType\nDescription\n\n\n\n\ndata\nList\nA list containing the output of importData().\n\n\nr\nNumeric (scalar)\nInterval for thinning x-axis year labels. Default: 1.\n\n\nthemety\nCharacter\nTheme type. Either \"light\" (default) or \"dark\".\n\n\nsize_class\nNumeric vector\nLine sizes by frequency zone. If NULL, default values are assigned based on the selected theme.\n\n\nx_leg\nNumeric\nHorizontal position of the legend. Default: 0.85.\n\n\nx_lab\nCharacter\nX-axis label. Default: \"years\"."
+    "section": "⚙️ Arguments",
+    "text": "⚙️ Arguments\n\n\n\n\n\n\n\n\n\nArgument\nType\nDefault\nDescription\n\n\n\n\ndata\nList\nrequired\nA list object returned by importData() or normalization(), containing the TDM and corpus metadata.\n\n\nkeywords\nCharacter vector\nNULL\nSpecific keywords to plot. If NULL, plots all keywords in the corpus. Use this to focus on specific terms of interest.\n\n\nr\nInteger\n1\nInterval for x-axis label thinning. r = 1 shows all years, r = 2 shows every 2nd year, etc. Useful for long time series.\n\n\nthemety\nCharacter\n\"light\"\nVisual theme:• \"light\": Light background (default)• \"dark\": Dark background (better for presentations)\n\n\nsize_class\nNumeric vector\nNULL\nCustom line thickness for each frequency zone. If NULL, uses theme-appropriate defaults. Vector length must match number of zones.\n\n\nx_leg\nNumeric\n0.85\nHorizontal legend position (0 = left, 1 = right). Adjust if legend overlaps with curves.\n\n\nx_lab\nCharacter\n\"years\"\nLabel for x-axis (e.g., \"Years\", \"Time Period\", \"Publication Year\")."
   },
   {
-    "objectID": "singleFunctions/curvePlot.html#output",
-    "href": "singleFunctions/curvePlot.html#output",
+    "objectID": "singleFunctions/curvePlot.html#plot-components",
+    "href": "singleFunctions/curvePlot.html#plot-components",
     "title": "curvePlot()",
-    "section": "",
-    "text": "Returns a ggplot2 object displaying temporal curves of keyword frequencies.\n\n\n\n\n\n\n\nElement\nDescription\n\n\n\n\nx-axis\nRepresents time (years).\n\n\ny-axis\nRepresents keyword frequency (normalized or raw).\n\n\nColors\nCorrespond to frequency zones (e.g., “VH”, “H”, “L”, “VL”).\n\n\nLine size\nReflects the relative importance of frequency zones.\n\n\nTheme\nCan be switched between light and dark for readability.\n\n\nLegend\nShown at the bottom, indicating frequency zones and line styles."
+    "section": "📊 Plot Components",
+    "text": "📊 Plot Components\n\nVisual Elements\nLines: - Each keyword is represented by one line - Line color indicates frequency zone - Line thickness can vary by zone importance\nX-axis: - Time periods (years) from corpus metadata - Labels can be thinned for long time series\nY-axis: - Frequency values (raw or normalized) - Scale depends on normalization applied\nLegend: - Shows frequency zones with corresponding colors - Position adjustable via x_leg parameter\nTheme: - Light: White background, dark text (publications) - Dark: Dark background, light text (presentations)"
+  },
+  {
+    "objectID": "singleFunctions/curvePlot.html#usage-examples",
+    "href": "singleFunctions/curvePlot.html#usage-examples",
+    "title": "curvePlot()",
+    "section": "💡 Usage Examples",
+    "text": "💡 Usage Examples\n\nBasic Usage - All Keywords\nlibrary(cccc)\n\n# Import data\ncorpus &lt;- importData(\"tdm.csv\", \"corpus_info.csv\")\n\n# Plot all keyword trajectories\ncurvePlot(corpus)\n\n\nPlot Specific Keywords\n# Import and normalize\ncorpus &lt;- importData(\"tdm.csv\", \"corpus_info.csv\")\ncorpus_norm &lt;- normalization(corpus, normty = \"nc\")\n\n# Plot specific keywords of interest\ncurvePlot(\n  corpus_norm, \n  keywords = c(\"algorithm\", \"network\", \"data\", \"cloud\")\n)\n\n\nLong Time Series\n# Show every 5th year on x-axis\ncurvePlot(corpus_norm, r = 5)\n\n# Show every 10th year\ncurvePlot(corpus_norm, r = 10, x_lab = \"Decade\")"
+  },
+  {
+    "objectID": "singleFunctions/curvePlot.html#interpreting-temporal-patterns",
+    "href": "singleFunctions/curvePlot.html#interpreting-temporal-patterns",
+    "title": "curvePlot()",
+    "section": "🔍 Interpreting Temporal Patterns",
+    "text": "🔍 Interpreting Temporal Patterns\n\nCommon Trajectory Types\n\n1. Emerging Terms 📈\nFrequency\n    |           ╱───\n    |         ╱\n    |       ╱\n    |_____╱________Time\n\nStart low, increase over time\nIndicate new concepts or growing importance\nExamples: “cloud computing”, “deep learning”\n\n\n\n2. Declining Terms 📉\nFrequency\n    |───╲\n    |     ╲\n    |       ╲\n    |         ╲___Time\n\nStart high, decrease over time\nIndicate obsolescence or reduced relevance\nExamples: “floppy disk”, “mainframe”\n\n\n\n3. Stable Terms ➡️\nFrequency\n    |─────────────\n    |\n    |\n    |______________Time\n\nConsistent frequency over time\nIndicate core, persistent concepts\nExamples: “computer”, “data”, “system”\n\n\n\n4. Peaked Terms 🏔️\nFrequency\n    |      ╱╲\n    |    ╱    ╲\n    |  ╱        ╲\n    |╱____________╲_Time\n\nRise and fall within time period\nMay indicate temporary trends or events\nExamples: “Y2K”, specific technology buzzwords\n\n\n\n5. Cyclical Terms 🔄\nFrequency\n    |  ╱╲    ╱╲\n    | ╱  ╲  ╱  ╲\n    |╱    ╲╱    ╲_Time\n\nPeriodic fluctuations\nMay indicate recurring themes or seasonal patterns\nExamples: Conference-related terms, annual events\n\n\n\n6. Volatile Terms 📊\nFrequency\n    | ╱╲╱╲╱╲╱╲\n    |╱        ╲Time\n\nHighly irregular patterns\nMay indicate noise or inconsistent usage\nConsider smoothing or filtering"
+  },
+  {
+    "objectID": "singleFunctions/curvePlot.html#visual-interpretation",
+    "href": "singleFunctions/curvePlot.html#visual-interpretation",
+    "title": "curvePlot()",
+    "section": "🎨 Visual Interpretation",
+    "text": "🎨 Visual Interpretation\n\nZone-Based Patterns\nHigh-frequency zones (typically darker colors): - Represent core vocabulary of the corpus - Trajectories often more stable - Changes indicate major conceptual shifts\nLow-frequency zones (typically lighter colors): - Represent specialized or emerging terms - More volatile trajectories - May show sharper rises/falls\n\n\nDensity and Overlap\nDense clustering: - Many terms with similar temporal patterns - May indicate coherent topical evolution\nSpread trajectories: - Diverse temporal behaviors - Suggests heterogeneous corpus or multiple themes"
+  },
+  {
+    "objectID": "singleFunctions/curvePlot.html#use-cases",
+    "href": "singleFunctions/curvePlot.html#use-cases",
+    "title": "curvePlot()",
+    "section": "📈 Use Cases",
+    "text": "📈 Use Cases\n\n1. Initial Exploration\nGet a first look at temporal dynamics before detailed analysis.\n\n\n2. Hypothesis Generation\nIdentify unexpected patterns that merit further investigation.\n\n\n3. Trend Validation\nVerify expected temporal patterns (e.g., “internet” should rise after 1990s).\n\n\n4. Comparative Analysis\nCompare trajectories of related terms (e.g., “analog” vs “digital”).\n\n\n5. Event Detection\nFind spikes or drops corresponding to historical events.\n\n\n6. Normalization Assessment\nCompare raw vs. normalized frequencies to see normalization effects.\n\n\n7. Publication Figures\nCreate visualizations for papers, presentations, or reports.\n\n\n8. Teaching/Communication\nShow collaborators or students how terms evolve in your corpus."
+  },
+  {
+    "objectID": "singleFunctions/curvePlot.html#tips-best-practices",
+    "href": "singleFunctions/curvePlot.html#tips-best-practices",
+    "title": "curvePlot()",
+    "section": "💡 Tips & Best Practices",
+    "text": "💡 Tips & Best Practices\n\nStart with all keywords — Get overview before focusing\nUse normalization — Compare normalized trajectories for fair comparison\nFocus selectively — After overview, plot specific keywords of interest\nMatch theme to context — Light for publications, dark for presentations\nThin x-axis for long series — Prevent label overlap (use r parameter)\nSave high resolution — Use dpi = 300 or higher for publications\nCompare before/after normalization — Understand normalization effects\nDocument patterns — Keep notes on interesting trajectories for later analysis\nCross-reference with history — Match patterns to known events/developments\nUse with other plots — Combine with rowMassPlot() and colMassPlot() for full picture"
+  },
+  {
+    "objectID": "singleFunctions/curvePlot.html#see-also",
+    "href": "singleFunctions/curvePlot.html#see-also",
+    "title": "curvePlot()",
+    "section": "📚 See Also",
+    "text": "📚 See Also\n\nimportData() — Import corpus data\nnormalization() — Normalize frequencies for fair comparison\nrowMassPlot() — Visualize keyword frequency distribution\ncolMassPlot() — Visualize temporal corpus structure\ncurveCtuPlot() — Plot curves with example keywords by zone\nfacetPlot() — Create faceted visualizations by zone"
   },
   {
     "objectID": "singleFunctions/colMassPlot.html",
     "href": "singleFunctions/colMassPlot.html",
     "title": "colMassPlot()",
     "section": "",
-    "text": "Plot Temporal Dimensions of a Corpus\n\n\n\ncolMassPlot &lt;- (data,\n                        sc = c(1, 10, 10, 1),\n                        r = 1,\n                        textty = \"text\",\n                        themety = \"light\",\n                        size_b = 2.5,\n                        x_lab = \"years\")\n\n\n\nThe colMassPlot() function creates a multi-line plot displaying the temporal evolution of four corpus-level metrics:\n\nNumber of documents (nDoc)\nNumber of tokens (dimCorpus)\nSum of keyword frequencies (Csum)\nMaximum keyword frequency (Mcf)\n\nAll measures are rescaled by user-defined factors to improve visual comparability across different dimensions of the corpus.\n\n\n\n\n\n\n\n\n\n\n\n\nArgument\nType\nDescription\n\n\n\n\ndata\nList\nA list containing the output of importData().\n\n\nsc\nNumeric vector (length = 4)\nScaling factors for nDoc, dimCorpus, Csum, and Mcf. Default: c(1, 10, 10, 1).\n\n\nr\nInteger\nInterval for thinning x-axis labels. Default: 1 (shows all years).\n\n\ntextty\nCharacter\nUnit of analysis for legend labels (e.g., \"text\", \"place\", \"paper\").\n\n\nthemety\nCharacter\nPlot theme type. Either \"light\" (default) or \"dark\".\n\n\nsize_b\nNumeric\nBase size for bar lines. Default: 2.5.\n\n\nx_lab\nCharacter\nX-axis label. Default: \"year\".\n\n\n\n\n\n\n\nReturns a ggplot2 object representing the temporal evolution of corpus structure.\n\n\n\n\n\n\n\nElement\nDescription\n\n\n\n\nx-axis\nYears.\n\n\ny-axis\nRescaled measures representing corpus size and term frequencies.\n\n\nLines\nShow the evolution of nDoc, dimCorpus, Csum, and Mcf over time.\n\n\nColors\nDistinguish between the four corpus metrics.\n\n\nLegend\nProvides details about scaling factors and corresponding measures."
+    "text": "Visualize Temporal Dimensions of Corpus Structure\nThe colMassPlot() function creates a multi-line plot showing how four key corpus metrics evolve over time. This provides crucial insights into corpus growth patterns, data collection trends, and temporal coverage."
   },
   {
     "objectID": "singleFunctions/colMassPlot.html#function-definition",
     "href": "singleFunctions/colMassPlot.html#function-definition",
     "title": "colMassPlot()",
-    "section": "",
-    "text": "colMassPlot &lt;- (data,\n                        sc = c(1, 10, 10, 1),\n                        r = 1,\n                        textty = \"text\",\n                        themety = \"light\",\n                        size_b = 2.5,\n                        x_lab = \"years\")"
+    "section": "🔹 Function Definition",
+    "text": "🔹 Function Definition\ncolMassPlot(\n  data,\n  sc = c(1, 10, 10, 1),\n  r = 1,\n  textty = \"text\",\n  themety = \"light\",\n  size_b = 2.5,\n  x_lab = \"years\"\n)"
   },
   {
-    "objectID": "singleFunctions/colMassPlot.html#aim",
-    "href": "singleFunctions/colMassPlot.html#aim",
+    "objectID": "singleFunctions/colMassPlot.html#purpose",
+    "href": "singleFunctions/colMassPlot.html#purpose",
     "title": "colMassPlot()",
-    "section": "",
-    "text": "The colMassPlot() function creates a multi-line plot displaying the temporal evolution of four corpus-level metrics:\n\nNumber of documents (nDoc)\nNumber of tokens (dimCorpus)\nSum of keyword frequencies (Csum)\nMaximum keyword frequency (Mcf)\n\nAll measures are rescaled by user-defined factors to improve visual comparability across different dimensions of the corpus."
+    "section": "🎯 Purpose",
+    "text": "🎯 Purpose\nUnderstanding the temporal structure of your corpus is essential for interpreting frequency trends. The colMassPlot() function helps you:\n\nVisualize corpus growth — See how the corpus expands over time\nIdentify collection patterns — Detect periods of intensive/sparse data collection\nAssess temporal balance — Evaluate whether time periods are comparably represented\nDetect anomalies — Spot unusual spikes or drops in corpus size\nContextualize term frequencies — Understand how corpus size affects frequency patterns\nValidate data quality — Ensure corpus metadata is consistent and complete\n\nThis function is typically used after importData() and alongside rowMassPlot() for comprehensive data exploration before normalization."
   },
   {
     "objectID": "singleFunctions/colMassPlot.html#arguments",
     "href": "singleFunctions/colMassPlot.html#arguments",
     "title": "colMassPlot()",
-    "section": "",
-    "text": "Argument\nType\nDescription\n\n\n\n\ndata\nList\nA list containing the output of importData().\n\n\nsc\nNumeric vector (length = 4)\nScaling factors for nDoc, dimCorpus, Csum, and Mcf. Default: c(1, 10, 10, 1).\n\n\nr\nInteger\nInterval for thinning x-axis labels. Default: 1 (shows all years).\n\n\ntextty\nCharacter\nUnit of analysis for legend labels (e.g., \"text\", \"place\", \"paper\").\n\n\nthemety\nCharacter\nPlot theme type. Either \"light\" (default) or \"dark\".\n\n\nsize_b\nNumeric\nBase size for bar lines. Default: 2.5.\n\n\nx_lab\nCharacter\nX-axis label. Default: \"year\"."
+    "section": "⚙️ Arguments",
+    "text": "⚙️ Arguments\n\n\n\n\n\n\n\n\n\nArgument\nType\nDefault\nDescription\n\n\n\n\ndata\nList\nrequired\nA list object returned by importData(), containing the TDM and corpus metadata.\n\n\nsc\nNumeric vector\nc(1, 10, 10, 1)\nScaling factors for the four metrics (in order):1. nDoc (number of documents)2. dimCorpus (total tokens)3. Csum (sum of keyword frequencies)4. Mcf (maximum keyword frequency)Adjust to make lines visually comparable.\n\n\nr\nInteger\n1\nInterval for x-axis label thinning. r = 2 shows every 2nd year, r = 5 shows every 5th year, etc. Useful for long time series.\n\n\ntextty\nCharacter\n\"text\"\nLabel for the unit of analysis in the legend (e.g., \"text\", \"document\", \"paper\", \"article\").\n\n\nthemety\nCharacter\n\"light\"\nVisual theme for the plot:• \"light\": Light background (default)• \"dark\": Dark background\n\n\nsize_b\nNumeric\n2.5\nLine thickness for the plot. Increase for bolder lines, decrease for finer lines.\n\n\nx_lab\nCharacter\n\"years\"\nLabel for the x-axis (e.g., \"Years\", \"Time Period\", \"Publication Year\")."
+  },
+  {
+    "objectID": "singleFunctions/colMassPlot.html#corpus-metrics-explained",
+    "href": "singleFunctions/colMassPlot.html#corpus-metrics-explained",
+    "title": "colMassPlot()",
+    "section": "📊 Corpus Metrics Explained",
+    "text": "📊 Corpus Metrics Explained\n\n1. nDoc — Number of Documents\nThe count of documents/texts in the corpus for each time period.\nInsights: - Shows data collection intensity - Reveals archival coverage patterns - Indicates periods of high/low publication activity\n\n\n2. dimCorpus — Total Tokens\nThe total number of words/tokens in all documents for each time period.\nInsights: - Represents overall corpus size - Important for normalization decisions - Shows writing/publication volume trends\n\n\n3. Csum — Sum of Keyword Frequencies\nThe total frequency of all keywords across all documents in each time period.\nInsights: - Indicates keyword density in the corpus - Shows overall vocabulary coverage - Helps assess keyword selection adequacy\n\n\n4. Mcf — Maximum Keyword Frequency\nThe highest frequency of any single keyword in each time period.\nInsights: - Identifies periods dominated by specific terms - Shows potential outliers or dominant topics - Indicates vocabulary concentration patterns"
+  },
+  {
+    "objectID": "singleFunctions/colMassPlot.html#understanding-scaling-factors",
+    "href": "singleFunctions/colMassPlot.html#understanding-scaling-factors",
+    "title": "colMassPlot()",
+    "section": "🎨 Understanding Scaling Factors",
+    "text": "🎨 Understanding Scaling Factors\nDifferent metrics have vastly different scales: - nDoc might range from 10-100 - dimCorpus might range from 10,000-1,000,000 - Csum might range from 5,000-500,000 - Mcf might range from 50-5,000\nScaling makes visual comparison possible by bringing all metrics to similar ranges.\nDefault scaling: c(1, 10, 10, 1) - nDoc: ×1 (no scaling) - dimCorpus: ×10 (reduces by factor of 10) - Csum: ×10 (reduces by factor of 10) - Mcf: ×1 (no scaling)\nAdjust scaling if lines are too far apart or overlapping too much."
   },
   {
     "objectID": "singleFunctions/colMassPlot.html#output",
     "href": "singleFunctions/colMassPlot.html#output",
     "title": "colMassPlot()",
-    "section": "",
-    "text": "Returns a ggplot2 object representing the temporal evolution of corpus structure.\n\n\n\n\n\n\n\nElement\nDescription\n\n\n\n\nx-axis\nYears.\n\n\ny-axis\nRescaled measures representing corpus size and term frequencies.\n\n\nLines\nShow the evolution of nDoc, dimCorpus, Csum, and Mcf over time.\n\n\nColors\nDistinguish between the four corpus metrics.\n\n\nLegend\nProvides details about scaling factors and corresponding measures."
+    "section": "📦 Output",
+    "text": "📦 Output\nReturns a ggplot2 object with the following characteristics:\n\n\n\n\n\n\n\nElement\nDescription\n\n\n\n\nX-axis\nTime periods (years) from the corpus metadata\n\n\nY-axis\nRescaled values of the four corpus metrics\n\n\nLines\nFour colored lines representing each metric’s temporal evolution\n\n\nLegend\nShows metric names with scaling factors (e.g., “nDoc (×1)”, “dimCorpus (×10)”)\n\n\nTheme\nLight or dark background based on themety parameter"
+  },
+  {
+    "objectID": "singleFunctions/colMassPlot.html#usage-examples",
+    "href": "singleFunctions/colMassPlot.html#usage-examples",
+    "title": "colMassPlot()",
+    "section": "💡 Usage Examples",
+    "text": "💡 Usage Examples\n\nBasic Usage\nlibrary(cccc)\n\n# Import data\ncorpus &lt;- importData(\"tdm.csv\", \"corpus_info.csv\")\n\n# Create temporal plot with default settings\ncolMassPlot(corpus)"
+  },
+  {
+    "objectID": "singleFunctions/colMassPlot.html#interpreting-the-plot",
+    "href": "singleFunctions/colMassPlot.html#interpreting-the-plot",
+    "title": "colMassPlot()",
+    "section": "🔍 Interpreting the Plot",
+    "text": "🔍 Interpreting the Plot\n\nCommon Patterns\n\n1. Parallel Growth\nAll four lines increase proportionally over time.\n📈 All metrics ↗️\nInterpretation: Consistent corpus expansion with stable composition\n\n\n2. Diverging Trends\nLines separate or converge over time.\n📈 nDoc & dimCorpus ↗️ but Csum ↘️\nInterpretation: Corpus growing but keyword density decreasing (vocabulary diversification)\n\n\n3. Spikes or Drops\nSudden changes in one or more metrics.\n📈 nDoc: sudden spike in specific year\nInterpretation: Intensive data collection period or archival event\n\n\n4. Plateau Patterns\nMetrics level off after initial growth.\n📈 Early growth → → → flat\nInterpretation: Complete historical coverage or saturation"
+  },
+  {
+    "objectID": "singleFunctions/colMassPlot.html#what-to-look-for",
+    "href": "singleFunctions/colMassPlot.html#what-to-look-for",
+    "title": "colMassPlot()",
+    "section": "🎯 What to Look For",
+    "text": "🎯 What to Look For\n\n1. Temporal Coverage\n\nAre all time periods equally represented?\nAre there gaps or sparse periods?\nDoes coverage increase toward recent years?\n\n\n\n2. Growth Patterns\n\nLinear growth (steady increase)\nExponential growth (accelerating increase)\nIrregular patterns (varying collection intensity)\n\n\n\n3. Proportionality\n\nDo nDoc and dimCorpus grow together? (expected)\nDoes Csum follow dimCorpus? (indicates keyword coverage)\nAre there periods where Mcf spikes? (term dominance)\n\n\n\n4. Anomalies\n\nSudden drops (potential data quality issues)\nIsolated spikes (special events or archival additions)\nPlateaus (collection boundaries)"
+  },
+  {
+    "objectID": "singleFunctions/colMassPlot.html#use-cases",
+    "href": "singleFunctions/colMassPlot.html#use-cases",
+    "title": "colMassPlot()",
+    "section": "📈 Use Cases",
+    "text": "📈 Use Cases\n\n1. Data Quality Assessment\nVerify that corpus metadata is complete and consistent across time periods.\n\n\n2. Normalization Decision\nDetermine whether normalization is necessary based on corpus size variation.\n\n\n3. Historical Context\nUnderstand how corpus collection reflects historical publication/archival patterns.\n\n\n4. Methodology Documentation\nCreate figures for research papers showing corpus characteristics.\n\n\n5. Comparative Studies\nCompare temporal structures of different corpora or subcorpora."
+  },
+  {
+    "objectID": "singleFunctions/colMassPlot.html#tips-best-practices",
+    "href": "singleFunctions/colMassPlot.html#tips-best-practices",
+    "title": "colMassPlot()",
+    "section": "💡 Tips & Best Practices",
+    "text": "💡 Tips & Best Practices\n\nAlways check this plot before normalization to understand corpus growth patterns\nExperiment with scaling to find the most informative visualization\nCompare with rowMassPlot() for comprehensive data exploration\nDocument temporal patterns in your methodology section\nUse r parameter for long time series (&gt;30 years) to avoid label clutter\nSave high-resolution versions for publications\nConsider normalization if you see large variations in corpus size across time"
+  },
+  {
+    "objectID": "singleFunctions/colMassPlot.html#see-also",
+    "href": "singleFunctions/colMassPlot.html#see-also",
+    "title": "colMassPlot()",
+    "section": "📚 See Also",
+    "text": "📚 See Also\n\nimportData() — Import corpus data and metadata\nrowMassPlot() — Visualize keyword frequency distribution\nnormalization() — Normalize frequencies (often needed when corpus size varies)\ncurvePlot() — Visualize individual keyword trajectories"
   },
   {
     "objectID": "projects.html",
@@ -196,67 +413,151 @@
     "text": "The cccc package has been developed within the RIND Project - Research INtelligence Development, coordinated by the University of Trieste.\nThe RIND project is an interdisciplinary research initiative that combines methods and perspectives from computational and corpus linguistics, quantitative literary studies, data science, statistics, and translation studies.\nBuilding on Franco Moretti’s seminal approach to distant reading, the project aims to conduct large-scale quantitative analyses on a corpus of approximately 1.000 Italian novels and short story collections, including Italian translations from other languages, published between 1830 and 1930.\nThe corpus is carefully balanced to account for the distribution of authors and translators, gender, publication date, text length, and the distinction between canonical and non-canonical literature.\n\n\n\n\nRIND pursues two main research goals:\n\nAnalyzing how literary characters express thoughts and emotions, through quantitative and automatic extraction methods that capture pragma-linguistic phenomena emerging beyond the boundaries of words and sentences.\n\nTracing social change in Italian novels by exploring lexical fields related to professions, military ranks, religious titles, buildings (residential, commercial, industrial, religious, rural, urban, etc.), and other domains that reflect transformations in society.\n\nBoth objectives are innovative, as few studies have applied quantitative and computational methods to the analysis of reported discourse or to the periodization of Italian literary prose using criteria independent from traditional literary criticism.\nThe comparison between original Italian works and translations will also shed light on the influence of foreign models on Italian literary prose.\n\n\n\n\nThe project draws on three main disciplinary pillars:\n\nLinguistics, to identify morphological and syntactic features leading to pragmatic patterns and lexical lists, and to map their diachronic evolution across semantic domains.\n\nStatistics and Machine Learning, to classify texts through topic modeling, content analysis, word embeddings, time series extraction, and advanced data visualization techniques.\n\nLiterary and Comparative Studies, to interpret results within the historical and cultural contexts of Italian, European, and global literature from Realism to Modernism.\n\n\n\n\n\nBy integrating linguistic, literary, and statistical expertise, the RIND project seeks to provide both a theoretical and methodological contribution to the study of literary language and cultural evolution.\nIts results will enhance our understanding of how language and society co-evolved in Italian prose during a century of profound artistic and social transformation.\nVisit the project page: https://rind.units.it/home/"
   },
   {
-    "objectID": "functions/functions:index.html",
-    "href": "functions/functions:index.html",
-    "title": "Functions",
+    "objectID": "functions.html",
+    "href": "functions.html",
+    "title": "Function Reference",
     "section": "",
-    "text": "Function Reference\nBelow is the list of available functions in the cccc package.\nClick on each function name to access its documentation.\n\nimportData()\ncolmass_plot()\nnormalize()\nrunClusteringRange()\nevaluateClusteringQuality()\nselectBestKfromRand()\nplotClusterPanel()"
+    "text": "The cccc package provides a comprehensive set of functions organized around the four-stage analytical pipeline. Below, functions are grouped by their primary purpose to help you navigate the workflow more effectively."
+  },
+  {
+    "objectID": "functions.html#data-import-preprocessing",
+    "href": "functions.html#data-import-preprocessing",
+    "title": "Function Reference",
+    "section": "📥 Data Import & Preprocessing",
+    "text": "📥 Data Import & Preprocessing\nFunctions for importing, validating, and preparing your corpus data.\n\n\n\nFunction\nDescription\n\n\n\n\nimportData()\nImports and validates corpus data and metadata into a standardized structure for analysis.\n\n\nnormalization()\nNormalizes the term-document matrix using various schemes (nc, nchi, nM, nmM, nnl)."
+  },
+  {
+    "objectID": "functions.html#exploratory-visualization",
+    "href": "functions.html#exploratory-visualization",
+    "title": "Function Reference",
+    "section": "📊 Exploratory Visualization",
+    "text": "📊 Exploratory Visualization\nFunctions for initial exploration and visualization of corpus characteristics.\n\n\n\nFunction\nDescription\n\n\n\n\nrowMassPlot()\nCreates a bar plot of keywords ordered by total frequency and colored by frequency zone.\n\n\ncolMassPlot()\nPlots the temporal dimensions of a corpus, showing distribution across time periods."
+  },
+  {
+    "objectID": "functions.html#temporal-modeling-smoothing",
+    "href": "functions.html#temporal-modeling-smoothing",
+    "title": "Function Reference",
+    "section": "📈 Temporal Modeling & Smoothing",
+    "text": "📈 Temporal Modeling & Smoothing\nFunctions for modeling keyword trajectories and selecting optimal smoothing parameters.\n\n\n\nFunction\nDescription\n\n\n\n\nsmoothingSelection()\nSelects optimal smoothing parameters for chronological keyword curves using cross-validation.\n\n\noptimalSmoothing()\nSelects the optimal spline degree and penalization strategy for trajectory smoothing.\n\n\nplotSuboptimalFits()\nPlots suboptimal smoothed curves for selected keywords to compare different smoothing approaches."
+  },
+  {
+    "objectID": "functions.html#trajectory-visualization",
+    "href": "functions.html#trajectory-visualization",
+    "title": "Function Reference",
+    "section": "📉 Trajectory Visualization",
+    "text": "📉 Trajectory Visualization\nFunctions for visualizing temporal curves and frequency patterns.\n\n\n\nFunction\nDescription\n\n\n\n\ncurvePlot()\nPlots temporal curves of keyword frequencies over time periods.\n\n\ncurveCtuPlot()\nPlots temporal curves for frequency zones with example keywords highlighted.\n\n\nfacetPlot()\nCreates faceted plots of keyword frequency curves for comparative visualization."
+  },
+  {
+    "objectID": "functions.html#quick-reference-guide",
+    "href": "functions.html#quick-reference-guide",
+    "title": "Function Reference",
+    "section": "📖 Quick Reference Guide",
+    "text": "📖 Quick Reference Guide\n\nTypical Workflow\n\nImport your data → importData()\nExplore the corpus → rowMassPlot(), colMassPlot()\nNormalize frequencies → normalization()\nVisualize trajectories → curvePlot(), curveCtuPlot(), facetPlot()\nSelect smoothing parameters → smoothingSelection(), optimalSmoothing()\nCompare fits → plotSuboptimalFits()\n\n\n\nFunction Categories Summary\n\n\n\nCategory\nNumber of Functions\nPurpose\n\n\n\n\nData Import & Preprocessing\n2\nPrepare and normalize data\n\n\nExploratory Visualization\n2\nInitial corpus exploration\n\n\nTemporal Modeling\n3\nOptimize smoothing parameters\n\n\nTrajectory Visualization\n3\nVisualize temporal patterns"
+  },
+  {
+    "objectID": "functions.html#need-help",
+    "href": "functions.html#need-help",
+    "title": "Function Reference",
+    "section": "🔍 Need Help?",
+    "text": "🔍 Need Help?\n\nClick on any function name to see detailed documentation\nVisit the Use Cases page for practical examples\nCheck out Projects to see cccc in action\nContact us via the About Us page for support and collaboration opportunities"
   },
   {
     "objectID": "cccc-package.html",
     "href": "cccc-package.html",
     "title": "cccc R Package",
     "section": "",
-    "text": "cccc (Chronological Corpora Curve Clustering) is an R package developed to analyze the temporal evolution of concepts and semantic trajectories within scientific corpora.\nIt provides a comprehensive workflow to import, normalize, model, and cluster keyword frequency curves across time, revealing how terms emerge, evolve, and decline within a knowledge domain.\nRooted in the paradigm of temporal scientometrics and textual dynamics modeling, cccc offers a data-driven framework to study conceptual change, topic diffusion, and knowledge transformation across years or decades.\nIt bridges quantitative linguistics, statistical modeling, and corpus-based research, providing interpretable tools for mapping how science evolves through its language."
+    "text": "cccc (Chronological Corpora Curve Clustering) is an innovative R package designed to analyze the temporal evolution of concepts and semantic trajectories within scientific corpora. Developed as part of the RIND Project, it provides researchers with powerful tools to understand how scientific language and knowledge evolve over time."
   },
   {
-    "objectID": "cccc-package.html#about",
-    "href": "cccc-package.html#about",
+    "objectID": "cccc-package.html#the-vision",
+    "href": "cccc-package.html#the-vision",
     "title": "cccc R Package",
-    "section": "",
-    "text": "cccc (Chronological Corpora Curve Clustering) is an R package developed to analyze the temporal evolution of concepts and semantic trajectories within scientific corpora.\nIt provides a comprehensive workflow to import, normalize, model, and cluster keyword frequency curves across time, revealing how terms emerge, evolve, and decline within a knowledge domain.\nRooted in the paradigm of temporal scientometrics and textual dynamics modeling, cccc offers a data-driven framework to study conceptual change, topic diffusion, and knowledge transformation across years or decades.\nIt bridges quantitative linguistics, statistical modeling, and corpus-based research, providing interpretable tools for mapping how science evolves through its language."
+    "section": "The Vision",
+    "text": "The Vision\nIn the digital age, scientific knowledge grows exponentially, with millions of publications shaping and reshaping our understanding of the world. The cccc package was created to answer fundamental questions about this knowledge evolution:\n\nHow do scientific concepts emerge and evolve?\nWhich terms gain or lose prominence over time?\nWhat patterns characterize the life-cycle of ideas?\nHow can we map the semantic trajectories of entire research domains?\n\nBy transforming chronological corpora into living systems of evolving meanings, cccc captures how knowledge takes shape, spreads, and transforms across time periods."
   },
   {
-    "objectID": "cccc-package.html#objectives",
-    "href": "cccc-package.html#objectives",
+    "objectID": "cccc-package.html#methodological-foundation",
+    "href": "cccc-package.html#methodological-foundation",
     "title": "cccc R Package",
-    "section": "🎯 Objectives",
-    "text": "🎯 Objectives\nThe package implements a full analytical pipeline structured around four key objectives:\n\nData Import and Preprocessing\n\nImport term–document matrices and corpus metadata from CSV or Excel files.\n\nClean and harmonize lexical units.\n\nAutomatically compute total frequencies and assign terms to frequency zones (linguistic or statistical).\n\nTemporal Modeling and Smoothing\n\nModel word life-cycles using B-spline smoothing and penalized regression splines.\n\nSelect optimal smoothing parameters through cross-validation and generalized cross-validation (GCV).\n\nVisualize raw and smoothed trajectories to assess temporal stability or volatility of terms.\n\nClustering and Knowledge Dynamics\n\nCluster term trajectories according to their temporal profiles.\n\nIdentify groups of words sharing similar growth, stability, or decline patterns.\n\nQuantify conceptual convergence/divergence across periods and topics.\n\nVisualization and Interpretation\n\nGenerate detailed graphical representations of term dynamics, zones, and clusters.\n\nHighlight representative keywords and temporal peaks.\n\nProvide interactive and faceted visual summaries for interpretability and dissemination."
+    "section": "Methodological Foundation",
+    "text": "Methodological Foundation\nThe package is rooted in the paradigm of temporal scientometrics and textual dynamics modeling. It bridges:\n\n📊 Quantitative Linguistics — Statistical analysis of language patterns\n🔬 Computational Methods — Advanced modeling and clustering algorithms\n\n📚 Corpus-Based Research — Large-scale textual data analysis\n🧠 Digital Humanities — Interpretable tools for knowledge mapping\n\nThis multidisciplinary approach enables researchers to study conceptual change, topic diffusion, and knowledge transformation in ways that were previously impossible."
   },
   {
-    "objectID": "cccc-package.html#research-context",
-    "href": "cccc-package.html#research-context",
+    "objectID": "cccc-package.html#core-capabilities",
+    "href": "cccc-package.html#core-capabilities",
     "title": "cccc R Package",
-    "section": "🔍 Research Context",
-    "text": "🔍 Research Context\nThe cccc R package is part of the RIND Project, aimed at developing new methodological tools for research knowledge evolution analysis. RIND is a multidisciplinary research initiative combining computational linguistics, statistical modeling, and digital humanities.\nThe methodological framework developed in cccc extends beyond literary studies:\nit is designed for scientometric, sociolinguistic, and bibliometric analyses,\nenabling researchers to detect emerging themes, shifting paradigms, and the evolution of scientific discourse over time."
+    "section": "Core Capabilities",
+    "text": "Core Capabilities\nThe cccc package implements a comprehensive analytical pipeline:\n\n1. Data Import & Preprocessing\n\nImport term-document matrices from CSV or Excel files\nClean and harmonize lexical units\nAutomatically compute frequencies and assign terms to linguistic zones\n\n\n\n2. Temporal Modeling\n\nModel word life-cycles using B-spline smoothing and penalized regression splines\nOptimize smoothing parameters through cross-validation and GCV\nVisualize raw and smoothed trajectories to assess temporal patterns\n\n\n\n3. Clustering & Analysis\n\nCluster term trajectories based on temporal profiles\nIdentify groups sharing similar growth, stability, or decline patterns\nQuantify conceptual convergence/divergence across periods\n\n\n\n4. Visualization\n\nGenerate publication-ready graphics of term dynamics\nCreate interactive and faceted visual summaries\nHighlight representative keywords and temporal peaks"
+  },
+  {
+    "objectID": "cccc-package.html#research-applications",
+    "href": "cccc-package.html#research-applications",
+    "title": "cccc R Package",
+    "section": "Research Applications",
+    "text": "Research Applications\nWhile initially developed for literary studies, cccc extends to:\n\nScientometric Analysis — Track emerging research themes\nBibliometric Studies — Analyze citation and terminology trends\nSociolinguistic Research — Study language change in social contexts\nDigital Humanities — Explore conceptual evolution in historical texts"
   },
   {
     "objectID": "cccc-package.html#key-features",
     "href": "cccc-package.html#key-features",
     "title": "cccc R Package",
     "section": "⚙️ Key Features",
-    "text": "⚙️ Key Features\n\nUnified interface for importing and managing temporal corpora.\n\nFlexible normalization schemes (nc, nchi, nM, nmM, nnl).\n\nAutomated smoothing parameter optimization and visualization tools.\n\nClustering of term trajectories with multiple quality indices.\n\nPublication-ready visualizations of conceptual dynamics.\n\n\n\ncccc turns chronological corpora into living systems of evolving meanings,\ncapturing how knowledge takes shape, spreads, and transforms over time."
+    "text": "⚙️ Key Features\n\nUnified interface for importing and managing temporal corpora.\n\nFlexible normalization schemes (nc, nchi, nM, nmM, nnl).\n\nAutomated smoothing parameter optimization and visualization tools.\n\nClustering of term trajectories with multiple quality indices.\n\nPublication-ready visualizations of conceptual dynamics.\n\n\n\n  \n    \n      Part of the RIND Project\n    \n    \n      cccc is developed as part of the RIND Project (Research on the INnovation Dynamics), \n      a multidisciplinary initiative combining computational linguistics, statistical modeling, and digital \n      humanities to create innovative tools for analyzing research knowledge evolution.\n    \n    \n      Learn More About RIND →\n    \n  \n\n\n\n\n  \n    Ready to Explore Temporal Patterns in Your Corpus?\n  \n  \n    Start analyzing how concepts evolve over time with cccc\n  \n  \n    \n      View Full Documentation\n    \n    \n      Browse Functions\n    \n    \n      See Examples\n    \n  \n\n\n\ncccc turns chronological corpora into living systems of evolving meanings,\ncapturing how knowledge takes shape, spreads, and transforms over time."
   },
   {
     "objectID": "about-us.html",
     "href": "about-us.html",
     "title": "About Us",
     "section": "",
-    "text": "👥 Developers\n\n\n\n  \n  \n    Matilde Trevisani\n    University of Trieste\n    MATILDE.TREVISANI@deams.units.it\n  \n\n\n\n  \n  \n    Arjuna Tuzzi\n    University of Padova\n    arjuna.tuzzi@unipd.it\n  \n\n\n\n  \n  \n    Luca D’Aniello\n    University of Naples Federico II\n    luca.daniello@unina.it\n  \n\n\n\n\n\nContact\nFor questions or collaborations: 📧 MATILDE.TREVISANI@deams.units.it"
+    "text": "The cccc package is developed and maintained by a team of researchers specializing in statistics, linguistics, and computational methods:"
   },
   {
-    "objectID": "functions.html",
-    "href": "functions.html",
-    "title": "Function Reference",
+    "objectID": "about-us.html#acknowledgments",
+    "href": "about-us.html#acknowledgments",
+    "title": "About Us",
+    "section": "Acknowledgments",
+    "text": "Acknowledgments\nThis work is supported by the RIND Project and affiliated research institutions. We are grateful to the broader R community and the developers of key dependencies that make cccc possible."
+  },
+  {
+    "objectID": "download.html",
+    "href": "download.html",
+    "title": "Download and Installation",
     "section": "",
-    "text": "Below is the list of available functions in the cccc package.\nClick on each function name to access its documentation.\n\n\n\n\nFunction\n\n\nDescription\n\n\n\n\n\n\nimportData()\n\n\nImports and validates corpus data and metadata into a standardized structure.\n\n\n\n\nrowMassPlot()\n\n\nCreates a bar plot of keywords ordered by their total frequency #’ and colored by their assigned frequency zone, combining both the zone #’ and its frequency interval label.\n\n\n\n\ncolMassPlot()\n\n\nPlot Temporal Dimensions of a Corpus.\n\n\n\n\ncurvePlot()\n\n\nPlot Temporal Curves of Keyword Frequencies.\n\n\n\n\ncurveCtuPlot()\n\n\nPlot of Temporal Curves for Frequency Zones and Example Keywords.\n\n\n\n\nnormalization()\n\n\nNormalize Term-Document Matrix (TDM).\n\n\n\n\nfacetPlot()\n\n\nFaceted Plot of Keyword Frequency Curves.\n\n\n\n\nsmoothingSelection()\n\n\nSelection of Optimal Smoothing Parameters for Chronological Keyword Curves.\n\n\n\n\noptimalSmoothing()\n\n\nSelection of Optimal Spline Degree and Penalization Strategy.\n\n\n\n\nplotSuboptimalFits()\n\n\nPlot Suboptimal Smoothed Curves for Selected Keywords."
+    "text": "Before installing the cccc package, you need to have R and RStudio installed on your system.\n\n\nDownload and install R from the Comprehensive R Archive Network (CRAN):\n\nWindows: Download R for Windows\nmacOS: Download R for macOS\nLinux: Download R for Linux\n\n\n\n\nRStudio is an integrated development environment (IDE) for R that makes working with R easier and more productive.\nDownload and install RStudio Desktop from Posit."
+  },
+  {
+    "objectID": "download.html#prerequisites",
+    "href": "download.html#prerequisites",
+    "title": "Download and Installation",
+    "section": "",
+    "text": "Before installing the cccc package, you need to have R and RStudio installed on your system.\n\n\nDownload and install R from the Comprehensive R Archive Network (CRAN):\n\nWindows: Download R for Windows\nmacOS: Download R for macOS\nLinux: Download R for Linux\n\n\n\n\nRStudio is an integrated development environment (IDE) for R that makes working with R easier and more productive.\nDownload and install RStudio Desktop from Posit."
+  },
+  {
+    "objectID": "download.html#installing-the-cccc-package",
+    "href": "download.html#installing-the-cccc-package",
+    "title": "Download and Installation",
+    "section": "Installing the cccc Package",
+    "text": "Installing the cccc Package\nCurrently, the cccc package is available exclusively on GitHub. To install it, you’ll need to use the remotes package.\n\nStep 1: Install remotes\nIf you don’t already have the remotes package installed, run the following command in your R console:\ninstall.packages(\"remotes\")\n\n\nStep 2: Install cccc from GitHub\nOnce remotes is installed, you can install the cccc package directly from GitHub:\nremotes::install_github(\"matildet/cccc\")\n\n\nStep 3: Load the Package\nAfter installation, load the package to start using it:\nlibrary(cccc)"
+  },
+  {
+    "objectID": "download.html#troubleshooting",
+    "href": "download.html#troubleshooting",
+    "title": "Download and Installation",
+    "section": "Troubleshooting",
+    "text": "Troubleshooting\nIf you encounter any issues during installation, please:\n\nEnsure you have the latest version of R installed\nCheck that you have a stable internet connection\nVerify that you have the necessary system dependencies for package compilation\nOpen an issue on our GitHub repository for support"
+  },
+  {
+    "objectID": "download.html#staying-updated",
+    "href": "download.html#staying-updated",
+    "title": "Download and Installation",
+    "section": "Staying Updated",
+    "text": "Staying Updated\nSince the package is under active development, you can update to the latest version at any time by running:\nremotes::install_github(\"matildet/cccc\")"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "",
     "section": "",
-    "text": "cccc\n    Chronological Corpora Curve Clustering\n    \n      An R package for analyzing the temporal evolution of concepts and terms in scientific corpora.\n    \n\n    \n       Explore the Package\n    \n  \n\n\n\n\n\n  Discover what cccc can do\n\n  \n\n    \n      📈 Temporal Modeling\n      Model the evolution of terms across time through smoothing spline trajectories.\n    \n\n    \n      🧩 Clustering\n      Group terms with similar temporal patterns and explore knowledge dynamics.\n    \n\n    \n      🔍 Visualization\n      Visualize trajectories and clusters interactively for deeper understanding."
+    "text": "Chronological Corpora Curve Clustering\n    \n      Analyze the temporal evolution of concepts and semantic trajectories in scientific corpora through advanced statistical modeling and clustering.\n    \n\n    \n      \n         Explore the Package\n      \n      \n         Get Started\n      \n    \n  \n\n\n\n\n\n  \n    Powerful Tools for Temporal Corpus Analysis\n  \n\n  \n\n    \n      📥 Data Import & Preprocessing\n      \n        Import term-document matrices, clean data, and automatically classify terms into frequency zones for stratified analysis.\n      \n    \n\n    \n      📊 Flexible Normalization\n      \n        Multiple normalization methods (nc, nchi, nM, nmM, nnl) to account for corpus size variations and enable fair temporal comparisons.\n      \n    \n\n    \n      📈 Temporal Modeling\n      \n        Model term life-cycles using B-spline smoothing with cross-validated parameter selection for optimal trajectory estimation.\n      \n    \n\n    \n      🧩 Trajectory Clustering\n      \n        Cluster terms with similar temporal patterns to identify conceptual convergence, divergence, and knowledge dynamics.\n      \n    \n\n    \n      🔍 Rich Visualization\n      \n        Publication-ready plots including temporal curves, faceted visualizations, and zone-based comparisons with customizable themes.\n      \n    \n\n    \n      ⚙️ Statistical Rigor\n      \n        Grounded in temporal scientometrics with GCV/OCV criteria for parameter selection and diagnostic validation tools."
   },
   {
     "objectID": "references.html",
@@ -270,174 +571,419 @@
     "href": "singleFunctions/curveCtuPlot.html",
     "title": "curveCtuPlot()",
     "section": "",
-    "text": "Plot of Temporal Curves for Frequency Zones and Example Keywords\n\n\n\ncurveCtuPlot &lt;- (data,\n                 ctu_noun = NULL,\n                 r = 1,\n                 themety = \"light\",\n                 size_class = NULL,\n                 x_lab = \"year\")\n\n\n\nThe curveCtuPlot() function generates a temporal line plot of keyword frequencies, distinguishing between predefined frequency zones (e.g., high, medium, low) and highlighting three example keywords, each belonging to a different zone.\nIt supports both normalized and raw frequencies, with separate color scales for zones and example keywords.\nEach zone is labeled with its frequency interval, and the selected example keywords are displayed with distinct colors and a dedicated legend.\n\n\n\n\n\n\n\n\n\n\n\n\nArgument\nType\nDescription\n\n\n\n\ndata\nList\nA list containing the output of importData().\n\n\nctu_noun\nCharacter vector (length = 3)\nSpecifies three example keywords to highlight in the plot. Each must belong to a different frequency zone (high, medium, low).\n\n\nr\nInteger\nThinning rate for x-axis labels; displays one label every r years. Default: 1.\n\n\nthemety\nCharacter\nTheme type: \"light\" (default) or \"dark\". Affects plot colors and background.\n\n\nsize_class\nNumeric vector (length = 3)\nDefines line widths for the three zones. If NULL, default values are assigned depending on the theme.\n\n\nx_lab\nCharacter\nLabel for the x-axis. Default: \"year\".\n\n\n\n\n\n\n\nReturns a ggplot2 object displaying keyword frequency trajectories over time.\n\n\n\n\n\n\n\nElement\nDescription\n\n\n\n\nx-axis\nRepresents time (years).\n\n\ny-axis\nRepresents keyword frequency (raw or normalized).\n\n\nColors\nTwo scales: one for frequency zones, one for the example keywords.\n\n\nLine width\nReflects the relative frequency zone (high, medium, low).\n\n\nLegends\nTwo legends: one for frequency zones with intervals, one for highlighted example keywords.\n\n\nTheme\nAdjustable (“light” or “dark”) for improved readability."
+    "text": "Plot Temporal Curves with Highlighted Example Keywords by Zone\nThe curveCtuPlot() function creates a temporal visualization that combines zone-based frequency curves with highlighted example keywords. This allows you to show both the overall zone structure and specific representative terms simultaneously, making it ideal for presentations and publications."
   },
   {
     "objectID": "singleFunctions/curveCtuPlot.html#function-definition",
     "href": "singleFunctions/curveCtuPlot.html#function-definition",
     "title": "curveCtuPlot()",
-    "section": "",
-    "text": "curveCtuPlot &lt;- (data,\n                 ctu_noun = NULL,\n                 r = 1,\n                 themety = \"light\",\n                 size_class = NULL,\n                 x_lab = \"year\")"
+    "section": "🔹 Function Definition",
+    "text": "🔹 Function Definition\ncurveCtuPlot(\n  data,\n  ctu_noun = NULL,\n  r = 1,\n  themety = \"light\",\n  size_class = NULL,\n  x_lab = \"years\"\n)"
   },
   {
-    "objectID": "singleFunctions/curveCtuPlot.html#aim",
-    "href": "singleFunctions/curveCtuPlot.html#aim",
+    "objectID": "singleFunctions/curveCtuPlot.html#purpose",
+    "href": "singleFunctions/curveCtuPlot.html#purpose",
     "title": "curveCtuPlot()",
-    "section": "",
-    "text": "The curveCtuPlot() function generates a temporal line plot of keyword frequencies, distinguishing between predefined frequency zones (e.g., high, medium, low) and highlighting three example keywords, each belonging to a different zone.\nIt supports both normalized and raw frequencies, with separate color scales for zones and example keywords.\nEach zone is labeled with its frequency interval, and the selected example keywords are displayed with distinct colors and a dedicated legend."
+    "section": "🎯 Purpose",
+    "text": "🎯 Purpose\nWhile curvePlot() shows all keywords together, curveCtuPlot() provides a more structured visualization by combining zone-level patterns with specific example keywords. This function helps you:\n\nShow zone structure — Display aggregate patterns for each frequency zone\nHighlight representatives — Emphasize specific keywords as examples\nCreate clear narratives — Tell a story through selected exemplar terms\nCombine overview and detail — Balance big picture with specific cases\nImprove readability — Reduce clutter while maintaining informativeness\nSupport presentations — Create clear, focused visualizations for talks\nGuide interpretation — Direct attention to key terms within zones\nDemonstrate methodology — Show how zone classification works with concrete examples\n\nThis function is particularly useful when you want to demonstrate temporal patterns without overwhelming your audience with hundreds of trajectories."
+  },
+  {
+    "objectID": "singleFunctions/curveCtuPlot.html#understanding-ctu-characteristic-terms-by-usage",
+    "href": "singleFunctions/curveCtuPlot.html#understanding-ctu-characteristic-terms-by-usage",
+    "title": "curveCtuPlot()",
+    "section": "🧮 Understanding CTU (Characteristic Terms by Usage)",
+    "text": "🧮 Understanding CTU (Characteristic Terms by Usage)\nCTU refers to selecting representative keywords from different frequency zones: - High-frequency zone: Core vocabulary terms - Medium-frequency zone: Specialized but common terms\n- Low-frequency zone: Rare or emerging terms\nBy highlighting one keyword from each zone, you show the spectrum of vocabulary in your corpus."
   },
   {
     "objectID": "singleFunctions/curveCtuPlot.html#arguments",
     "href": "singleFunctions/curveCtuPlot.html#arguments",
     "title": "curveCtuPlot()",
-    "section": "",
-    "text": "Argument\nType\nDescription\n\n\n\n\ndata\nList\nA list containing the output of importData().\n\n\nctu_noun\nCharacter vector (length = 3)\nSpecifies three example keywords to highlight in the plot. Each must belong to a different frequency zone (high, medium, low).\n\n\nr\nInteger\nThinning rate for x-axis labels; displays one label every r years. Default: 1.\n\n\nthemety\nCharacter\nTheme type: \"light\" (default) or \"dark\". Affects plot colors and background.\n\n\nsize_class\nNumeric vector (length = 3)\nDefines line widths for the three zones. If NULL, default values are assigned depending on the theme.\n\n\nx_lab\nCharacter\nLabel for the x-axis. Default: \"year\"."
+    "section": "⚙️ Arguments",
+    "text": "⚙️ Arguments\n\n\n\n\n\n\n\n\n\nArgument\nType\nDefault\nDescription\n\n\n\n\ndata\nList\nrequired\nA list object returned by importData() or normalization(), containing the TDM and corpus metadata.\n\n\nctu_noun\nCharacter vector\nNULL\nVector of exactly 3 keywords to highlight, one from each frequency zone (typically high, medium, low). Order doesn’t matter; function assigns them to zones automatically. If NULL, function may auto-select representative terms.\n\n\nr\nInteger\n1\nInterval for x-axis label thinning. r = 1 shows all years, r = 2 shows every 2nd year, etc.\n\n\nthemety\nCharacter\n\"light\"\nVisual theme:• \"light\": Light background (default)• \"dark\": Dark background (presentations)\n\n\nsize_class\nNumeric vector\nNULL\nCustom line thickness for the three main zones (typically high, medium, low). If NULL, uses theme-appropriate defaults. Vector length should match number of main zones.\n\n\nx_lab\nCharacter\n\"years\"\nLabel for x-axis (e.g., \"Years\", \"Time Period\", \"Publication Year\")."
   },
   {
-    "objectID": "singleFunctions/curveCtuPlot.html#output",
-    "href": "singleFunctions/curveCtuPlot.html#output",
+    "objectID": "singleFunctions/curveCtuPlot.html#plot-components",
+    "href": "singleFunctions/curveCtuPlot.html#plot-components",
     "title": "curveCtuPlot()",
-    "section": "",
-    "text": "Returns a ggplot2 object displaying keyword frequency trajectories over time.\n\n\n\n\n\n\n\nElement\nDescription\n\n\n\n\nx-axis\nRepresents time (years).\n\n\ny-axis\nRepresents keyword frequency (raw or normalized).\n\n\nColors\nTwo scales: one for frequency zones, one for the example keywords.\n\n\nLine width\nReflects the relative frequency zone (high, medium, low).\n\n\nLegends\nTwo legends: one for frequency zones with intervals, one for highlighted example keywords.\n\n\nTheme\nAdjustable (“light” or “dark”) for improved readability."
+    "section": "📊 Plot Components",
+    "text": "📊 Plot Components\n\nVisual Structure\nThe plot contains two layers:\n\nLayer 1: Zone Curves (Background)\n\nLines representing aggregated trajectories for each frequency zone\nColors indicate zones (using corpus color palette)\nLine thickness varies by zone importance\nShows overall zone behavior\n\n\n\nLayer 2: Example Keywords (Foreground)\n\n3 highlighted keywords from different zones\nDistinct colors separate from zone colors\nEmphasized line thickness for visibility\nLabels in legend identify specific terms\n\n\n\n\nDual Legend System\nZone Legend: - Shows frequency zones with interval ranges - Example: “Zone 4 [500-1000]”, “Zone 2 [50-100]”\nKeyword Legend: - Shows the 3 highlighted example keywords - Example: “algorithm”, “preprocessing”, “noise”"
+  },
+  {
+    "objectID": "singleFunctions/curveCtuPlot.html#usage-examples",
+    "href": "singleFunctions/curveCtuPlot.html#usage-examples",
+    "title": "curveCtuPlot()",
+    "section": "💡 Usage Examples",
+    "text": "💡 Usage Examples\n\nBasic Usage with Selected Keywords\nlibrary(cccc)\n\n# Import and normalize data\ncorpus &lt;- importData(\"tdm.csv\", \"corpus_info.csv\")\ncorpus_norm &lt;- normalization(corpus, normty = \"nc\")\n\n# Plot with 3 representative keywords from different zones\ncurveCtuPlot(\n  corpus_norm,\n  ctu_noun = c(\"algorithm\", \"preprocessing\", \"noise\")\n)\n\n\nAutomatic Keyword Selection\n# Let function auto-select representative keywords\ncurveCtuPlot(corpus_norm)\n\n\nLong Time Series\n# Show every 5th year on x-axis\ncurveCtuPlot(\n  corpus_norm,\n  ctu_noun = c(\"data\", \"network\", \"cloud\"),\n  r = 5\n)\n\n\nDark Theme for Presentations\n# Use dark theme\ncurveCtuPlot(\n  corpus_norm,\n  ctu_noun = c(\"machine\", \"learning\", \"neural\"),\n  themety = \"dark\"\n)"
+  },
+  {
+    "objectID": "singleFunctions/curveCtuPlot.html#selecting-good-example-keywords",
+    "href": "singleFunctions/curveCtuPlot.html#selecting-good-example-keywords",
+    "title": "curveCtuPlot()",
+    "section": "🎯 Selecting Good Example Keywords",
+    "text": "🎯 Selecting Good Example Keywords\n\nCriteria for CTU Selection\n1. Zone Distribution - Choose one keyword from high-frequency zone - Choose one from medium-frequency zone - Choose one from low-frequency zone\n2. Clear Trajectories - Select keywords with distinct, interpretable patterns - Avoid keywords with flat or noisy trajectories - Choose terms that tell a story\n3. Relevance - Select keywords meaningful to your research question - Choose terms your audience will recognize - Pick examples that illustrate interesting phenomena\n4. Representativeness - Keywords should be typical of their zone - Avoid extreme outliers within zones - Select terms that generalize well"
+  },
+  {
+    "objectID": "singleFunctions/curveCtuPlot.html#interpreting-the-plot",
+    "href": "singleFunctions/curveCtuPlot.html#interpreting-the-plot",
+    "title": "curveCtuPlot()",
+    "section": "🔍 Interpreting the Plot",
+    "text": "🔍 Interpreting the Plot\n\nUnderstanding Zone Curves\nHigh-frequency zone (typically darkest): - Shows behavior of core vocabulary - Usually more stable trajectories - Changes indicate major conceptual shifts\nMedium-frequency zone: - Shows specialized vocabulary - May show more dynamic patterns - Often contains emerging important terms\nLow-frequency zone (typically lightest): - Shows rare or specialized terms - More volatile, less stable - May contain emerging or declining concepts\n\n\nUnderstanding Highlighted Keywords\nThe 3 highlighted keywords provide concrete examples of the abstract zone patterns:\n\nHigh-freq example: Demonstrates core vocabulary evolution\nMedium-freq example: Shows specialized term dynamics\nLow-freq example: Illustrates niche or emerging concepts\n\nLook for: - Do example keywords follow their zone’s pattern? - Are there divergences that tell a story? - Do trajectories align with domain knowledge?"
+  },
+  {
+    "objectID": "singleFunctions/curveCtuPlot.html#use-cases",
+    "href": "singleFunctions/curveCtuPlot.html#use-cases",
+    "title": "curveCtuPlot()",
+    "section": "📈 Use Cases",
+    "text": "📈 Use Cases\n\n1. Conference Presentations\nCreate clear, focused visualizations showing zone structure with examples.\n\n\n2. Publication Figures\nGenerate figures demonstrating temporal patterns across frequency strata.\n\n\n3. Teaching/Demonstrations\nShow students or colleagues how frequency zones behave differently.\n\n\n4. Methodology Validation\nDemonstrate that zone classification captures meaningful distinctions.\n\n\n5. Narrative Building\nTell a story through carefully selected representative keywords.\n\n\n6. Comparative Analysis\nCompare zone patterns across different corpora or time periods.\n\n\n7. Hypothesis Illustration\nShow specific keywords that exemplify theoretical predictions."
+  },
+  {
+    "objectID": "singleFunctions/curveCtuPlot.html#tips-best-practices",
+    "href": "singleFunctions/curveCtuPlot.html#tips-best-practices",
+    "title": "curveCtuPlot()",
+    "section": "💡 Tips & Best Practices",
+    "text": "💡 Tips & Best Practices\n\nChoose meaningful examples — Select keywords that resonate with your audience\nTell a story — Pick keywords that illustrate your main argument\nCheck zone membership — Verify keywords are in different zones\nTest readability — Ensure highlighted keywords stand out\nMatch theme to context — Light for papers, dark for presentations\nUse consistent examples — Keep same keywords across related plots\nDocument selection — Explain why you chose specific keywords\nValidate patterns — Ensure examples are representative of their zones\nSave high resolution — Use dpi = 300+ for publications\nCombine with other plots — Use alongside rowMassPlot() and colMassPlot()"
+  },
+  {
+    "objectID": "singleFunctions/curveCtuPlot.html#see-also",
+    "href": "singleFunctions/curveCtuPlot.html#see-also",
+    "title": "curveCtuPlot()",
+    "section": "📚 See Also",
+    "text": "📚 See Also\n\ncurvePlot() — Plot all keyword trajectories without zone emphasis\nfacetPlot() — Create faceted visualizations by zone\nrowMassPlot() — Visualize keyword frequency distribution\ncolMassPlot() — Visualize temporal corpus structure\nnormalization() — Normalize frequencies before plotting"
   },
   {
     "objectID": "singleFunctions/facetPlot.html",
     "href": "singleFunctions/facetPlot.html",
     "title": "facetPlot()",
     "section": "",
-    "text": "Faceted Plot of Keyword Frequency Curves\n\n\n\nfacetPlot &lt;- (data, keyword_selection = list(type=\"frequency\", \n              n=3, kw.list=NULL),\n              r = 4, scales = \"fixed\", \n              leg = TRUE, \n              themety = \"light\",\n              size_class = NULL, \n              x_lab = \"year\")\n\n\n\nThe facetPlot() function produces a faceted visualization of keyword frequency trajectories over time, grouped by frequency zones (e.g., high, medium, low).\nIt allows users to highlight a subset of keywords either by highest frequency, random sampling, or custom selection, displaying them in distinct colors within each zone.\nEach facet corresponds to a frequency zone, enabling a clear comparative view of the temporal behavior of keywords across different frequency ranges.\n\n\n\n\n\n\n\n\n\n\n\n\nArgument\nType\nDescription\n\n\n\n\ndata\nList\nA list returned by importData(), containing the term-document matrix in long format and corpus metadata.\n\n\nkeyword_selection\nList\nSpecifies how keywords are selected for highlighting. Must include: • type — \"frequency\", \"random\", or \"list\" • n — Number of keywords per zone (for \"frequency\" or \"random\") • kw.list — Character vector of custom keywords (for \"list\").\n\n\nr\nInteger\nInterval for thinning x-axis year labels (e.g., show one label every r years). Default: 4.\n\n\nscales\nCharacter\nWhether y-axis scales are \"fixed\" (default) or \"free\" across facets.\n\n\nleg\nLogical\nWhether to display the legend. Default: TRUE.\n\n\nthemety\nCharacter\nTheme type. Either \"light\" (default) or \"dark\".\n\n\nsize_class\nNumeric vector\nOptional vector defining relative line thickness by zone. Defaults depend on the selected theme.\n\n\nx_lab\nCharacter\nLabel for the x-axis. Default: \"year\".\n\n\n\n\n\n\n\nReturns a ggplot2 object with faceted panels showing the temporal evolution of keyword frequencies.\n\n\n\n\n\n\n\nElement\nDescription\n\n\n\n\nFacets\nEach panel corresponds to a frequency zone (e.g., high, medium, low).\n\n\nHighlighted keywords\nSelected keywords are shown in distinct colors for easy identification.\n\n\nx-axis\nRepresents time (years). Labels can be thinned using r.\n\n\ny-axis\nRepresents keyword frequency (raw or normalized).\n\n\nLegend\nOptional; displays both zone and keyword colors.\n\n\nTheme\nAdjustable between light and dark modes."
+    "text": "Create Faceted Visualizations of Keyword Trajectories by Zone\nThe facetPlot() function creates multi-panel plots showing keyword frequency trajectories separated by frequency zones. This faceted approach allows clear comparison of temporal patterns across different vocabulary strata without visual clutter."
   },
   {
     "objectID": "singleFunctions/facetPlot.html#function-definition",
     "href": "singleFunctions/facetPlot.html#function-definition",
     "title": "facetPlot()",
-    "section": "",
-    "text": "facetPlot &lt;- (data, keyword_selection = list(type=\"frequency\", \n              n=3, kw.list=NULL),\n              r = 4, scales = \"fixed\", \n              leg = TRUE, \n              themety = \"light\",\n              size_class = NULL, \n              x_lab = \"year\")"
+    "section": "🔹 Function Definition",
+    "text": "🔹 Function Definition\nfacetPlot(\n  data,\n  keyword_selection = list(type = \"frequency\", n = 3, kw.list = NULL),\n  r = 4,\n  scales = \"fixed\",\n  leg = TRUE,\n  themety = \"light\",\n  size_class = NULL,\n  x_lab = \"years\"\n)"
   },
   {
-    "objectID": "singleFunctions/facetPlot.html#aim",
-    "href": "singleFunctions/facetPlot.html#aim",
+    "objectID": "singleFunctions/facetPlot.html#purpose",
+    "href": "singleFunctions/facetPlot.html#purpose",
     "title": "facetPlot()",
-    "section": "",
-    "text": "The facetPlot() function produces a faceted visualization of keyword frequency trajectories over time, grouped by frequency zones (e.g., high, medium, low).\nIt allows users to highlight a subset of keywords either by highest frequency, random sampling, or custom selection, displaying them in distinct colors within each zone.\nEach facet corresponds to a frequency zone, enabling a clear comparative view of the temporal behavior of keywords across different frequency ranges."
+    "section": "🎯 Purpose",
+    "text": "🎯 Purpose\nWhen visualizing temporal patterns across many keywords, overlapping trajectories can become difficult to interpret. Faceting by frequency zone provides clarity by:\n\nSeparating complexity — Each zone displayed in its own panel\nEnabling comparisons — Easy to compare patterns across zones\nReducing clutter — Keywords don’t overlap across different frequency ranges\nHighlighting representatives — Emphasize specific keywords within each zone\nSupporting analysis — Different scales can reveal zone-specific patterns\nCreating clarity — Clean, organized visualizations for publications\nFacilitating interpretation — Zone-specific dynamics become immediately apparent\nFlexible selection — Choose keywords by frequency, randomly, or manually\n\nThis function is particularly powerful for corpora with many keywords across diverse frequency ranges."
+  },
+  {
+    "objectID": "singleFunctions/facetPlot.html#keyword-selection-strategies",
+    "href": "singleFunctions/facetPlot.html#keyword-selection-strategies",
+    "title": "facetPlot()",
+    "section": "🧮 Keyword Selection Strategies",
+    "text": "🧮 Keyword Selection Strategies\nThe keyword_selection parameter controls which keywords are highlighted in each zone:\n\n1. By Frequency (type = \"frequency\")\nSelects the top N most frequent keywords in each zone.\nkeyword_selection = list(type = \"frequency\", n = 3, kw.list = NULL)\nUse when: - You want to highlight the most important terms per zone - Exploring core vocabulary within each frequency stratum - Creating representative visualizations\n\n\n2. Random Selection (type = \"random\")\nRandomly samples N keywords from each zone.\nkeyword_selection = list(type = \"random\", n = 3, kw.list = NULL)\nUse when: - You want unbiased representation - Exploring general zone behavior - Testing methodology robustness\n\n\n3. Custom List (type = \"list\")\nManually specify which keywords to highlight.\nkeyword_selection = list(type = \"list\", n = NULL, kw.list = c(\"algorithm\", \"data\", \"network\"))\nUse when: - You have specific keywords of interest - Creating targeted visualizations - Following up on previous analyses"
   },
   {
     "objectID": "singleFunctions/facetPlot.html#arguments",
     "href": "singleFunctions/facetPlot.html#arguments",
     "title": "facetPlot()",
-    "section": "",
-    "text": "Argument\nType\nDescription\n\n\n\n\ndata\nList\nA list returned by importData(), containing the term-document matrix in long format and corpus metadata.\n\n\nkeyword_selection\nList\nSpecifies how keywords are selected for highlighting. Must include: • type — \"frequency\", \"random\", or \"list\" • n — Number of keywords per zone (for \"frequency\" or \"random\") • kw.list — Character vector of custom keywords (for \"list\").\n\n\nr\nInteger\nInterval for thinning x-axis year labels (e.g., show one label every r years). Default: 4.\n\n\nscales\nCharacter\nWhether y-axis scales are \"fixed\" (default) or \"free\" across facets.\n\n\nleg\nLogical\nWhether to display the legend. Default: TRUE.\n\n\nthemety\nCharacter\nTheme type. Either \"light\" (default) or \"dark\".\n\n\nsize_class\nNumeric vector\nOptional vector defining relative line thickness by zone. Defaults depend on the selected theme.\n\n\nx_lab\nCharacter\nLabel for the x-axis. Default: \"year\"."
+    "section": "⚙️ Arguments",
+    "text": "⚙️ Arguments\n\n\n\n\n\n\n\n\n\nArgument\nType\nDefault\nDescription\n\n\n\n\ndata\nList\nrequired\nA list object returned by importData() or normalization(), containing the TDM and corpus metadata.\n\n\nkeyword_selection\nList\nSee below\nControls keyword highlighting:• type: \"frequency\", \"random\", or \"list\"• n: Number of keywords per zone (for frequency/random)• kw.list: Vector of specific keywords (for list type)\n\n\nr\nInteger\n4\nInterval for x-axis label thinning. Shows one label every r years.\n\n\nscales\nCharacter\n\"fixed\"\nY-axis scale behavior:• \"fixed\": Same scale across all facets• \"free\": Each facet has independent scale• \"free_y\": Free y-axis, fixed x-axis\n\n\nleg\nLogical\nTRUE\nIf TRUE, displays legend showing zones and highlighted keywords.\n\n\nthemety\nCharacter\n\"light\"\nVisual theme:• \"light\": Light background• \"dark\": Dark background\n\n\nsize_class\nNumeric vector\nNULL\nCustom line thickness for each zone. If NULL, uses theme defaults.\n\n\nx_lab\nCharacter\n\"years\"\nLabel for x-axis."
   },
   {
-    "objectID": "singleFunctions/facetPlot.html#output",
-    "href": "singleFunctions/facetPlot.html#output",
+    "objectID": "singleFunctions/facetPlot.html#understanding-scales",
+    "href": "singleFunctions/facetPlot.html#understanding-scales",
     "title": "facetPlot()",
-    "section": "",
-    "text": "Returns a ggplot2 object with faceted panels showing the temporal evolution of keyword frequencies.\n\n\n\n\n\n\n\nElement\nDescription\n\n\n\n\nFacets\nEach panel corresponds to a frequency zone (e.g., high, medium, low).\n\n\nHighlighted keywords\nSelected keywords are shown in distinct colors for easy identification.\n\n\nx-axis\nRepresents time (years). Labels can be thinned using r.\n\n\ny-axis\nRepresents keyword frequency (raw or normalized).\n\n\nLegend\nOptional; displays both zone and keyword colors.\n\n\nTheme\nAdjustable between light and dark modes."
+    "section": "📊 Understanding Scales",
+    "text": "📊 Understanding Scales\n\nFixed Scales (scales = \"fixed\")\nZone 4 │ [0-1000]\nZone 3 │ [0-1000]  ← Same y-axis range\nZone 2 │ [0-1000]\nZone 1 │ [0-1000]\nAdvantages: - Easy to compare absolute frequencies across zones - Immediately see which zones have higher frequencies - Maintains proportional relationships\nDisadvantages: - Low-frequency zones may appear flat - Details in smaller zones harder to see\n\n\nFree Scales (scales = \"free\" or \"free_y\")\nZone 4 │ [500-1000]\nZone 3 │ [200-500]   ← Each zone optimized\nZone 2 │ [50-150]\nZone 1 │ [0-50]\nAdvantages: - Each zone’s patterns clearly visible - Reveals details in low-frequency zones - Better for pattern analysis\nDisadvantages: - Cannot compare absolute frequencies - May be misleading if not clearly labeled"
+  },
+  {
+    "objectID": "singleFunctions/facetPlot.html#usage-examples",
+    "href": "singleFunctions/facetPlot.html#usage-examples",
+    "title": "facetPlot()",
+    "section": "💡 Usage Examples",
+    "text": "💡 Usage Examples\n\nBasic Usage - Top Keywords per Zone\nlibrary(cccc)\n\n# Import and normalize\ncorpus &lt;- importData(\"tdm.csv\", \"corpus_info.csv\")\ncorpus_norm &lt;- normalization(corpus, normty = \"nc\")\n\n# Create faceted plot with top 3 keywords per zone\nfacetPlot(\n  corpus_norm,\n  keyword_selection = list(type = \"frequency\", n = 3)\n)\n\n\nRandom Selection\n# Randomly select 5 keywords per zone\nfacetPlot(\n  corpus_norm,\n  keyword_selection = list(type = \"random\", n = 5)\n)\n\n\nCustom Keyword List\n# Highlight specific keywords\nfacetPlot(\n  corpus_norm,\n  keyword_selection = list(\n    type = \"list\", \n    kw.list = c(\"algorithm\", \"data\", \"network\", \"cloud\", \"machine\", \"learning\")\n  )\n)"
+  },
+  {
+    "objectID": "singleFunctions/facetPlot.html#interpreting-faceted-plots",
+    "href": "singleFunctions/facetPlot.html#interpreting-faceted-plots",
+    "title": "facetPlot()",
+    "section": "🔍 Interpreting Faceted Plots",
+    "text": "🔍 Interpreting Faceted Plots\n\nWhat to Look For in Each Panel\n\nHigh-Frequency Zone Panel\n\nCore vocabulary of the corpus\nTypically more stable trajectories\nChanges indicate major conceptual shifts\nOften shows gradual evolution rather than spikes\n\n\n\nMedium-Frequency Zone Panels\n\nSpecialized but established terms\nMay show more dynamic patterns than high-freq zone\nOften contains rising/falling terms\nBalance between stability and volatility\n\n\n\nLow-Frequency Zone Panel\n\nRare, emerging, or declining terms\nMore volatile and noisy trajectories\nSpikes may indicate temporary importance\nHarder to distinguish signal from noise\n\n\n\n\nCross-Panel Comparisons\nParallel trends across zones: - Indicates corpus-wide phenomena - May reflect historical events or methodological artifacts\nDivergent trends: - High-freq stable while low-freq volatile = normal pattern - All zones showing similar patterns = investigate common cause\nZone-specific spikes: - High-freq spike = major event (likely real signal) - Low-freq spike = may be noise or micro-trend"
+  },
+  {
+    "objectID": "singleFunctions/facetPlot.html#choosing-between-fixed-and-free-scales",
+    "href": "singleFunctions/facetPlot.html#choosing-between-fixed-and-free-scales",
+    "title": "facetPlot()",
+    "section": "🎯 Choosing Between Fixed and Free Scales",
+    "text": "🎯 Choosing Between Fixed and Free Scales\n\nUse Fixed Scales When:\n✅ You want to compare absolute frequencies across zones\n✅ Showing the magnitude difference between zones is important\n✅ Creating visualizations for readers unfamiliar with faceting\n✅ Emphasizing that high-freq terms dominate the corpus\nExample scenario: Demonstrating that core vocabulary (high-freq) is much more prevalent than specialized terms (low-freq).\n\n\nUse Free Scales When:\n✅ You want to see patterns within each zone clearly\n✅ Low-frequency zones would be too flat with fixed scales\n✅ Analyzing temporal dynamics rather than absolute frequencies\n✅ Looking for similar patterns across different scales\nExample scenario: Identifying whether low-frequency emerging terms show similar temporal patterns to established high-frequency terms.\n⚠️ Important: Always clearly label when using free scales to avoid misleading readers!"
+  },
+  {
+    "objectID": "singleFunctions/facetPlot.html#use-cases",
+    "href": "singleFunctions/facetPlot.html#use-cases",
+    "title": "facetPlot()",
+    "section": "📈 Use Cases",
+    "text": "📈 Use Cases\n\n1. Zone Comparison Studies\nCompare how different frequency zones evolve over time.\n\n\n2. Pattern Discovery\nIdentify zone-specific temporal patterns not visible in combined plots.\n\n\n3. Publication Figures\nCreate clear, organized visualizations for papers showing zone structure.\n\n\n4. Presentation Material\nUse free scales to show patterns clearly to audiences.\n\n\n5. Data Exploration\nSystematically examine keywords across frequency strata.\n\n\n6. Validation\nVerify that zone classification captures meaningful differences.\n\n\n7. Hypothesis Testing\nTest whether predicted patterns appear in expected zones."
+  },
+  {
+    "objectID": "singleFunctions/facetPlot.html#tips-best-practices",
+    "href": "singleFunctions/facetPlot.html#tips-best-practices",
+    "title": "facetPlot()",
+    "section": "💡 Tips & Best Practices",
+    "text": "💡 Tips & Best Practices\n\nStart with frequency selection — See most important terms first\nTry both scale types — Compare fixed vs. free to understand your data\nUse appropriate n — 2-4 keywords per zone usually optimal\nSave large versions — Faceted plots need more space than single plots\nLabel clearly — Especially important when using free scales\nMatch theme to context — Light for papers, dark for talks\nConsider zone count — More zones = need more vertical space\nTest keyword selection — Try random selection to verify representativeness\nDocument choices — Note which keywords and why in methods\nCombine with other plots — Use alongside curveCtuPlot() for comprehensive view"
+  },
+  {
+    "objectID": "singleFunctions/facetPlot.html#see-also",
+    "href": "singleFunctions/facetPlot.html#see-also",
+    "title": "facetPlot()",
+    "section": "📚 See Also",
+    "text": "📚 See Also\n\ncurvePlot() — Plot all keywords together without faceting\ncurveCtuPlot() — Zone curves with highlighted examples (alternative approach)\nrowMassPlot() — Visualize frequency distribution by zone\nnormalization() — Normalize before plotting for fair comparison\nimportData() — Zone classification happens here"
+  },
+  {
+    "objectID": "singleFunctions/facetPlot.html#need-help",
+    "href": "singleFunctions/facetPlot.html#need-help",
+    "title": "facetPlot()",
+    "section": "💬 Need Help?",
+    "text": "💬 Need Help?\nFor questions about faceted visualizations: - Check the Use Cases page for complete workflow examples - Visit the Projects page to see real applications - Open an issue on GitHub - Contact the team via the About Us page"
   },
   {
     "objectID": "singleFunctions/normalization.html",
     "href": "singleFunctions/normalization.html",
     "title": "normalization()",
     "section": "",
-    "text": "Normalize Term-Document Matrix (TDM)\n\n\n\nnormalization &lt;- (data,\n                  normty = \"nc\",\n                  sc = 1000,\n                  nnlty = \"V\",\n                  p_asy = TRUE)\n\n\n\nThe normalization() function standardizes the term-document matrix (TDM) contained within the object returned by importData(), applying one of several normalization strategies.\nThese methods transform raw keyword frequencies to allow for more meaningful comparison across documents or time periods.\nDepending on the chosen method, normalization can be performed column-wise, row-wise, or using non-linear transformations that account for asymmetry and variance.\nAvailable normalization types:\n\n\"nc\" – column-wise normalization by corpus size (tokens per year).\n\n\"nchi\" – chi-square-like normalization based on row masses and expected frequencies.\n\n\"nM\" – normalization by maximum frequency per row.\n\n\"nmM\" – row-wise min–max normalization.\n\n\"nnl\" – non-linear normalization using asymmetry factors (variance- or mean-median–based).\n\n\n\n\n\n\n\n\n\n\n\n\n\nArgument\nType\nDescription\n\n\n\n\ndata\nList\nA list returned by importData(), containing the term-document matrix (tdm) and corpus information.\n\n\nnormty\nCharacter\nType of normalization to apply. One of \"nc\", \"nchi\", \"nM\", \"nmM\", or \"nnl\".\n\n\nsc\nNumeric\nScaling factor applied after normalization. Default: 1000 for \"nc\" and \"nM\", otherwise 1.\n\n\nnnlty\nCharacter\nIf normty = \"nnl\", defines the asymmetry measure: \"V\" (variance-based) or \"M\" (mean–median–based). Default: \"V\".\n\n\np_asy\nLogical\nIf TRUE (default) and normty = \"nnl\", includes the numeric vector p_asy with the asymmetry coefficients used for the transformation.\n\n\n\n\n\n\n\nReturns a list identical in structure to the input data, with the following updates:\n\n\n\n\n\n\n\nElement\nDescription\n\n\n\n\ntdm\nNormalized term-document matrix.\n\n\nnorm\nLogical flag set to TRUE to indicate that normalization has been applied.\n\n\nnormty\nCharacter. The normalization type used.\n\n\np_asy\n(Optional) Numeric vector of asymmetry parameters, included only when normty = \"nnl\" and p_asy = TRUE."
+    "text": "Normalize Term-Document Matrix for Temporal Analysis\nThe normalization() function standardizes raw keyword frequencies to enable meaningful comparisons across time periods with varying corpus sizes. It applies one of five normalization strategies, each suited to different analytical goals."
   },
   {
     "objectID": "singleFunctions/normalization.html#function-definition",
     "href": "singleFunctions/normalization.html#function-definition",
     "title": "normalization()",
-    "section": "",
-    "text": "normalization &lt;- (data,\n                  normty = \"nc\",\n                  sc = 1000,\n                  nnlty = \"V\",\n                  p_asy = TRUE)"
+    "section": "🔹 Function Definition",
+    "text": "🔹 Function Definition\nnormalization(\n  data,\n  normty = \"nc\",\n  sc = 1000,\n  nnlty = \"V\",\n  p_asy = TRUE\n)"
   },
   {
-    "objectID": "singleFunctions/normalization.html#aim",
-    "href": "singleFunctions/normalization.html#aim",
+    "objectID": "singleFunctions/normalization.html#purpose",
+    "href": "singleFunctions/normalization.html#purpose",
     "title": "normalization()",
-    "section": "",
-    "text": "The normalization() function standardizes the term-document matrix (TDM) contained within the object returned by importData(), applying one of several normalization strategies.\nThese methods transform raw keyword frequencies to allow for more meaningful comparison across documents or time periods.\nDepending on the chosen method, normalization can be performed column-wise, row-wise, or using non-linear transformations that account for asymmetry and variance.\nAvailable normalization types:\n\n\"nc\" – column-wise normalization by corpus size (tokens per year).\n\n\"nchi\" – chi-square-like normalization based on row masses and expected frequencies.\n\n\"nM\" – normalization by maximum frequency per row.\n\n\"nmM\" – row-wise min–max normalization.\n\n\"nnl\" – non-linear normalization using asymmetry factors (variance- or mean-median–based)."
+    "section": "🎯 Purpose",
+    "text": "🎯 Purpose\nRaw frequency counts are influenced by corpus size variations across time periods. A term appearing 100 times in a corpus of 10,000 words is much more significant than the same count in a corpus of 1,000,000 words.\nThe normalization() function addresses this by:\n\nAdjusting for corpus size — Accounts for different document/token counts per year\nEnabling fair comparisons — Makes frequencies comparable across time periods\nHighlighting relative importance — Emphasizes terms’ relative prominence\nPreparing for modeling — Creates standardized data for temporal smoothing and clustering\n\nThis function is typically applied after importData() and before temporal modeling and visualization."
   },
   {
     "objectID": "singleFunctions/normalization.html#arguments",
     "href": "singleFunctions/normalization.html#arguments",
     "title": "normalization()",
-    "section": "",
-    "text": "Argument\nType\nDescription\n\n\n\n\ndata\nList\nA list returned by importData(), containing the term-document matrix (tdm) and corpus information.\n\n\nnormty\nCharacter\nType of normalization to apply. One of \"nc\", \"nchi\", \"nM\", \"nmM\", or \"nnl\".\n\n\nsc\nNumeric\nScaling factor applied after normalization. Default: 1000 for \"nc\" and \"nM\", otherwise 1.\n\n\nnnlty\nCharacter\nIf normty = \"nnl\", defines the asymmetry measure: \"V\" (variance-based) or \"M\" (mean–median–based). Default: \"V\".\n\n\np_asy\nLogical\nIf TRUE (default) and normty = \"nnl\", includes the numeric vector p_asy with the asymmetry coefficients used for the transformation."
+    "section": "⚙️ Arguments",
+    "text": "⚙️ Arguments\n\n\n\n\n\n\n\n\n\nArgument\nType\nDefault\nDescription\n\n\n\n\ndata\nList\nrequired\nA list object returned by importData(), containing the TDM and corpus metadata.\n\n\nnormty\nCharacter\n\"nc\"\nNormalization method to apply. Options:• \"nc\": Column normalization by corpus size• \"nchi\": Chi-square-like normalization• \"nM\": Maximum frequency normalization• \"nmM\": Min-max normalization• \"nnl\": Non-linear normalization\n\n\nsc\nNumeric\n1000\nScaling factor applied after normalization. Default is 1000 for \"nc\" and \"nM\", otherwise 1.\n\n\nnnlty\nCharacter\n\"V\"\nAsymmetry measure for non-linear normalization (only used when normty = \"nnl\"):• \"V\": Variance-based asymmetry• \"M\": Mean-median-based asymmetry\n\n\np_asy\nLogical\nTRUE\nIf TRUE and normty = \"nnl\", includes asymmetry coefficients in the output."
+  },
+  {
+    "objectID": "singleFunctions/normalization.html#normalization-methods",
+    "href": "singleFunctions/normalization.html#normalization-methods",
+    "title": "normalization()",
+    "section": "📊 Normalization Methods",
+    "text": "📊 Normalization Methods\n\n1. Column Normalization (\"nc\")\nFormula: Normalized frequency = (raw frequency / total tokens in year) × scaling factor\nUse when: - You want to account for varying corpus sizes across time periods - Comparing frequencies across years with different document counts - Standard normalization for most temporal analyses\nExample:\ncorpus_norm &lt;- normalization(corpus_data, normty = \"nc\", sc = 1000)\nThis converts raw frequencies to “per 1000 tokens” rates.\n\n\n\n2. Chi-square Normalization (\"nchi\")\nFormula: Based on chi-square decomposition using row masses and expected frequencies\nUse when: - You want to emphasize deviations from expected frequencies - Performing correspondence analysis-style normalization - Highlighting terms that appear more/less than expected\nExample:\ncorpus_norm &lt;- normalization(corpus_data, normty = \"nchi\")\nThis method is rooted in correspondence analysis theory and emphasizes relative contributions.\n\n\n\n3. Maximum Frequency Normalization (\"nM\")\nFormula: Normalized frequency = (raw frequency / maximum frequency in row) × scaling factor\nUse when: - You want to focus on relative peaks within each term’s trajectory - Comparing temporal patterns regardless of absolute frequency - All terms scaled to same maximum (useful for clustering)\nExample:\ncorpus_norm &lt;- normalization(corpus_data, normty = \"nM\", sc = 1000)\nEach term’s maximum frequency becomes the scaling reference point.\n\n\n\n4. Min-Max Normalization (\"nmM\")\nFormula: Normalized frequency = (raw frequency - min) / (max - min)\nUse when: - You need all values scaled to [0, 1] range - Comparing terms with vastly different frequency ranges - Preparing data for specific clustering algorithms\nExample:\ncorpus_norm &lt;- normalization(corpus_data, normty = \"nmM\")\nAll normalized values fall between 0 (minimum) and 1 (maximum) for each term.\n\n\n\n5. Non-linear Normalization (\"nnl\")\nFormula: Incorporates asymmetry coefficients based on distribution shape\nUse when: - Term frequencies show strong skewness or asymmetry - You want to account for variance or mean-median differences - Advanced modeling requires distribution-aware normalization\nAsymmetry types: - \"V\": Variance-based (accounts for spread) - \"M\": Mean-median-based (accounts for skewness)\nExample:\n# Variance-based\ncorpus_norm &lt;- normalization(corpus_data, normty = \"nnl\", nnlty = \"V\")\n\n# Mean-median-based\ncorpus_norm &lt;- normalization(corpus_data, normty = \"nnl\", nnlty = \"M\", p_asy = TRUE)"
   },
   {
     "objectID": "singleFunctions/normalization.html#output",
     "href": "singleFunctions/normalization.html#output",
     "title": "normalization()",
-    "section": "",
-    "text": "Returns a list identical in structure to the input data, with the following updates:\n\n\n\n\n\n\n\nElement\nDescription\n\n\n\n\ntdm\nNormalized term-document matrix.\n\n\nnorm\nLogical flag set to TRUE to indicate that normalization has been applied.\n\n\nnormty\nCharacter. The normalization type used.\n\n\np_asy\n(Optional) Numeric vector of asymmetry parameters, included only when normty = \"nnl\" and p_asy = TRUE."
+    "section": "📦 Output",
+    "text": "📦 Output\nReturns a list with the same structure as input, with these updates:\n\n\n\n\n\n\n\n\nElement\nType\nDescription\n\n\n\n\ntdm\ntibble\nTerm-document matrix with normalized frequencies\n\n\ncorpus_info\ntibble\nUnchanged corpus metadata\n\n\nnorm\nlogical\nSet to TRUE indicating normalization has been applied\n\n\nnormty\ncharacter\nThe normalization method used\n\n\nyear_cols\nnumeric\nUnchanged column indices for yearly data\n\n\nzone\ncharacter\nUnchanged frequency zones\n\n\ncolors\ncharacter\nUnchanged color palette\n\n\np_asy\nnumeric\n(Optional) Asymmetry coefficients (only for \"nnl\" method with p_asy = TRUE)"
+  },
+  {
+    "objectID": "singleFunctions/normalization.html#usage-examples",
+    "href": "singleFunctions/normalization.html#usage-examples",
+    "title": "normalization()",
+    "section": "💡 Usage Examples",
+    "text": "💡 Usage Examples\n\nBasic Column Normalization\nlibrary(cccc)\n\n# Import data\ncorpus &lt;- importData(\"tdm.csv\", \"corpus_info.csv\")\n\n# Apply standard column normalization (per 1000 tokens)\ncorpus_norm &lt;- normalization(corpus, normty = \"nc\", sc = 1000)\n\n# Check normalization status\ncorpus_norm$norm  # Should be TRUE\ncorpus_norm$normty  # Should be \"nc\"\n\n\nComparing Different Methods\n# Column normalization\ncorpus_nc &lt;- normalization(corpus, normty = \"nc\")\n\n# Chi-square normalization\ncorpus_nchi &lt;- normalization(corpus, normty = \"nchi\")\n\n# Max normalization\ncorpus_nM &lt;- normalization(corpus, normty = \"nM\")\n\n# Compare visualizations\ncurvePlot(corpus_nc, keywords = c(\"algorithm\", \"data\"))\ncurvePlot(corpus_nchi, keywords = c(\"algorithm\", \"data\"))\n\n\nNon-linear Normalization with Asymmetry\n# Apply non-linear normalization with variance-based asymmetry\ncorpus_nnl &lt;- normalization(\n  corpus, \n  normty = \"nnl\", \n  nnlty = \"V\", \n  p_asy = TRUE\n)\n\n# View asymmetry coefficients\nhead(corpus_nnl$p_asy)\n\n\nCustom Scaling Factor\n# Normalize to \"per 10,000 tokens\" instead of per 1000\ncorpus_norm &lt;- normalization(corpus, normty = \"nc\", sc = 10000)"
+  },
+  {
+    "objectID": "singleFunctions/normalization.html#choosing-the-right-method",
+    "href": "singleFunctions/normalization.html#choosing-the-right-method",
+    "title": "normalization()",
+    "section": "📊 Choosing the Right Method",
+    "text": "📊 Choosing the Right Method\n\n\n\n\n\n\n\n\n\nMethod\nBest For\nPros\nCons\n\n\n\n\nnc\nGeneral temporal analysis\nSimple, interpretable\nMay not handle extreme skewness well\n\n\nnchi\nDeviation-focused analysis\nEmphasizes unexpected patterns\nLess intuitive interpretation\n\n\nnM\nPattern comparison\nGood for clustering\nLoses absolute frequency information\n\n\nnmM\nAlgorithm preparation\nBounded [0,1] range\nSensitive to outliers\n\n\nnnl\nAsymmetric distributions\nAccounts for skewness\nMore complex, requires understanding\n\n\n\nRecommendation: Start with \"nc\" for most analyses. Use \"nchi\" for correspondence-style analysis, \"nM\" for clustering, and \"nnl\" for distributions with strong asymmetry."
+  },
+  {
+    "objectID": "singleFunctions/normalization.html#typical-workflow",
+    "href": "singleFunctions/normalization.html#typical-workflow",
+    "title": "normalization()",
+    "section": "🔗 Typical Workflow",
+    "text": "🔗 Typical Workflow\n# 1. Import data\ncorpus &lt;- importData(\"tdm.csv\", \"corpus_info.csv\")\n\n# 2. Explore raw frequencies\nrowMassPlot(corpus)\ncolMassPlot(corpus)\n\n# 3. Normalize\ncorpus_norm &lt;- normalization(corpus, normty = \"nc\", sc = 1000)\n\n# 4. Visualize normalized trajectories\ncurvePlot(corpus_norm, keywords = c(\"algorithm\", \"network\", \"data\"))\nfacetPlot(corpus_norm, zone = \"all\")\n\n# 5. Proceed with smoothing\nsmooth_params &lt;- smoothingSelection(corpus_norm)"
+  },
+  {
+    "objectID": "singleFunctions/normalization.html#important-notes",
+    "href": "singleFunctions/normalization.html#important-notes",
+    "title": "normalization()",
+    "section": "⚠️ Important Notes",
+    "text": "⚠️ Important Notes\n\nRe-normalization\nOnce a dataset is normalized (norm = TRUE), applying normalization() again will normalize the already-normalized data. Always start from raw data if you need to try different normalization methods.\n\n\nZero Frequencies\nTerms with zero frequencies in all time periods will remain zero after normalization. Consider filtering these out before normalization if needed.\n\n\nInterpretation\nAfter normalization, frequency values no longer represent raw counts. Always specify the normalization method and scaling factor when reporting results."
+  },
+  {
+    "objectID": "singleFunctions/normalization.html#see-also",
+    "href": "singleFunctions/normalization.html#see-also",
+    "title": "normalization()",
+    "section": "📚 See Also",
+    "text": "📚 See Also\n\nimportData() — Import and prepare data (required before normalization)\ncurvePlot() — Visualize normalized temporal curves\nfacetPlot() — Compare normalized trajectories across zones\nsmoothingSelection() — Next step: select smoothing parameters"
   },
   {
     "objectID": "singleFunctions/plotSuboptimalFits.html",
     "href": "singleFunctions/plotSuboptimalFits.html",
     "title": "plotSuboptimalFits()",
     "section": "",
-    "text": "Plot Suboptimal Smoothed Curves for Selected Keywords\n\n\n\nplotSuboptimalFits &lt;- (data,\n                       opt_res,\n                       n_curves = 9,\n                       show_zone = FALSE,\n                       graph = FALSE)\n\n\n\nThe plotSuboptimalFits() function visualizes raw and smoothed temporal curves of keyword frequencies obtained from spline smoothing.\nIt selects a subset of keywords based on the Root Mean Square (RMS) residuals of the smoothed fits and displays both individual and combined plots to assess the variability of smoothing performance across terms.\nEach plot compares the raw frequency trend (dashed line) and its smoothed version (solid line), highlighting how well the smoothing captures the temporal dynamics of the keyword.\n\n\n\n\n\n\n\n\n\n\n\n\nArgument\nType\nDescription\n\n\n\n\ndata\nList\nA list returned by importData(), containing the term-document matrix and metadata.\n\n\nopt_res\nList\nThe optimal smoothing configuration returned by optimalSmoothing(), including spline degree and penalization type.\n\n\nn_curves\nInteger\nNumber of keywords to visualize, sampled across the RMS residual distribution. Default: 9.\n\n\nshow_zone\nLogical\nIf TRUE, adds the keyword’s frequency zone (if available) to the plot labels. Default: FALSE.\n\n\ngraph\nLogical\nIf TRUE, prints all individual and combined plots directly to the active R graphics device. Default: FALSE.\n\n\n\n\n\n\n\nReturns (invisibly) a list containing all generated plots.\n\n\n\n\n\n\n\nElement\nDescription\n\n\n\n\nsingleKeywordPlot\nA list of ggplot2 objects, one for each selected keyword, including raw and smoothed curves with full titles.\n\n\ncombinedKeywordPlot\nA combined patchwork layout displaying all selected keyword fits in a grid (default: 3 columns).\n\n\n\n\n\n\n\nThe function extracts the smoothed spline fits using the optimal configuration from optimalSmoothing().\n\nFor each keyword, it computes the residual RMS error and selects representative terms distributed across the RMS range.\n\nBoth individual and aggregated visualizations are produced, showing:\n\nThe raw term frequency curve (grey dashed line);\nThe smoothed spline fit (red solid line);\nOptional zone information (if show_zone = TRUE).\n\n\nThese plots allow users to evaluate suboptimal smoothing behavior and identify potential inconsistencies or overfitting in the temporal modeling process."
+    "text": "Visualize Smoothed Curves for Quality Assessment\nThe plotSuboptimalFits() function creates visual comparisons of raw and smoothed keyword frequency trajectories. It helps you assess how well your chosen smoothing parameters perform across different types of keywords in your corpus."
   },
   {
     "objectID": "singleFunctions/plotSuboptimalFits.html#function-definition",
     "href": "singleFunctions/plotSuboptimalFits.html#function-definition",
     "title": "plotSuboptimalFits()",
-    "section": "",
-    "text": "plotSuboptimalFits &lt;- (data,\n                       opt_res,\n                       n_curves = 9,\n                       show_zone = FALSE,\n                       graph = FALSE)"
+    "section": "🔹 Function Definition",
+    "text": "🔹 Function Definition\nplotSuboptimalFits(\n  data,\n  opt_res,\n  n_curves = 9,\n  show_zone = FALSE,\n  graph = FALSE\n)"
   },
   {
-    "objectID": "singleFunctions/plotSuboptimalFits.html#aim",
-    "href": "singleFunctions/plotSuboptimalFits.html#aim",
+    "objectID": "singleFunctions/plotSuboptimalFits.html#purpose",
+    "href": "singleFunctions/plotSuboptimalFits.html#purpose",
     "title": "plotSuboptimalFits()",
-    "section": "",
-    "text": "The plotSuboptimalFits() function visualizes raw and smoothed temporal curves of keyword frequencies obtained from spline smoothing.\nIt selects a subset of keywords based on the Root Mean Square (RMS) residuals of the smoothed fits and displays both individual and combined plots to assess the variability of smoothing performance across terms.\nEach plot compares the raw frequency trend (dashed line) and its smoothed version (solid line), highlighting how well the smoothing captures the temporal dynamics of the keyword."
+    "section": "🎯 Purpose",
+    "text": "🎯 Purpose\nAfter selecting optimal smoothing parameters with optimalSmoothing(), it’s crucial to visually validate that the smoothing works well across your entire corpus. This function helps you:\n\nAssess smoothing quality — See how well smoothed curves capture underlying trends\nDetect overfitting/undersmoothing — Identify cases where smoothing is too aggressive or too weak\nEvaluate representativeness — Check performance across different keyword types\nCompare raw vs. smoothed — Understand what information is retained vs. filtered\nIdentify problematic cases — Find keywords that may need special treatment\nBuild confidence — Validate that parameters work well before applying to full corpus\nCreate publication figures — Generate high-quality visualizations of smoothing results\n\nThe function intelligently samples keywords across the residual distribution to show a representative range of smoothing performance."
+  },
+  {
+    "objectID": "singleFunctions/plotSuboptimalFits.html#how-it-works",
+    "href": "singleFunctions/plotSuboptimalFits.html#how-it-works",
+    "title": "plotSuboptimalFits()",
+    "section": "🧮 How It Works",
+    "text": "🧮 How It Works\n\nRMS Residual Sampling\nThe function computes Root Mean Square (RMS) residuals for all keywords:\nRMS = √(Σ(observed - smoothed)² / n)\nThen selects n_curves keywords distributed across the RMS range: - Low RMS: Keywords where smoothing fits very well - Medium RMS: Typical smoothing performance - High RMS: Keywords with more complex patterns or poor fits\nThis ensures you see the full spectrum of smoothing behavior, not just the best cases."
   },
   {
     "objectID": "singleFunctions/plotSuboptimalFits.html#arguments",
     "href": "singleFunctions/plotSuboptimalFits.html#arguments",
     "title": "plotSuboptimalFits()",
-    "section": "",
-    "text": "Argument\nType\nDescription\n\n\n\n\ndata\nList\nA list returned by importData(), containing the term-document matrix and metadata.\n\n\nopt_res\nList\nThe optimal smoothing configuration returned by optimalSmoothing(), including spline degree and penalization type.\n\n\nn_curves\nInteger\nNumber of keywords to visualize, sampled across the RMS residual distribution. Default: 9.\n\n\nshow_zone\nLogical\nIf TRUE, adds the keyword’s frequency zone (if available) to the plot labels. Default: FALSE.\n\n\ngraph\nLogical\nIf TRUE, prints all individual and combined plots directly to the active R graphics device. Default: FALSE."
+    "section": "⚙️ Arguments",
+    "text": "⚙️ Arguments\n\n\n\n\n\n\n\n\n\nArgument\nType\nDefault\nDescription\n\n\n\n\ndata\nList\nrequired\nA list object returned by importData() or normalization(), containing the TDM and corpus metadata.\n\n\nopt_res\nList\nrequired\nThe optimal smoothing configuration returned by optimalSmoothing(), including spline degree (m_opt), penalty type (penalty_opt), and lambda (lambda_opt).\n\n\nn_curves\nInteger\n9\nNumber of keywords to visualize. Must be a perfect square for optimal grid layout (e.g., 4, 9, 16, 25).\n\n\nshow_zone\nLogical\nFALSE\nIf TRUE, includes the keyword’s frequency zone in plot titles (e.g., “algorithm [Zone 4]”).\n\n\ngraph\nLogical\nFALSE\nIf TRUE, displays plots immediately in the R graphics device. If FALSE (default), plots are returned invisibly and can be accessed from the output list."
   },
   {
     "objectID": "singleFunctions/plotSuboptimalFits.html#output",
     "href": "singleFunctions/plotSuboptimalFits.html#output",
     "title": "plotSuboptimalFits()",
-    "section": "",
-    "text": "Returns (invisibly) a list containing all generated plots.\n\n\n\n\n\n\n\nElement\nDescription\n\n\n\n\nsingleKeywordPlot\nA list of ggplot2 objects, one for each selected keyword, including raw and smoothed curves with full titles.\n\n\ncombinedKeywordPlot\nA combined patchwork layout displaying all selected keyword fits in a grid (default: 3 columns).\n\n\n\n\n\n\n\nThe function extracts the smoothed spline fits using the optimal configuration from optimalSmoothing().\n\nFor each keyword, it computes the residual RMS error and selects representative terms distributed across the RMS range.\n\nBoth individual and aggregated visualizations are produced, showing:\n\nThe raw term frequency curve (grey dashed line);\nThe smoothed spline fit (red solid line);\nOptional zone information (if show_zone = TRUE).\n\n\nThese plots allow users to evaluate suboptimal smoothing behavior and identify potential inconsistencies or overfitting in the temporal modeling process."
+    "section": "📦 Output",
+    "text": "📦 Output\nReturns (invisibly) a list containing visualization objects:\n\n\n\n\n\n\n\n\nElement\nType\nDescription\n\n\n\n\nsingleKeywordPlot\nlist\nA list of individual ggplot2 objects, one for each selected keyword. Each plot shows raw (dashed) and smoothed (solid) curves with keyword name in title.\n\n\ncombinedKeywordPlot\npatchwork\nA combined grid layout displaying all selected keyword plots together. Uses patchwork package for arrangement.\n\n\n\nPlot characteristics: - Grey dashed line: Raw frequency trajectory - Red solid line: Smoothed spline fit - X-axis: Time periods (years) - Y-axis: Frequency (raw or normalized, depending on input data) - Title: Keyword name (and zone if show_zone = TRUE)"
+  },
+  {
+    "objectID": "singleFunctions/plotSuboptimalFits.html#usage-examples",
+    "href": "singleFunctions/plotSuboptimalFits.html#usage-examples",
+    "title": "plotSuboptimalFits()",
+    "section": "💡 Usage Examples",
+    "text": "💡 Usage Examples\n\nBasic Usage\nlibrary(cccc)\n\n# Complete workflow\ncorpus &lt;- importData(\"tdm.csv\", \"corpus_info.csv\")\ncorpus_norm &lt;- normalization(corpus, normty = \"nc\")\n\n# Find optimal parameters\nsmooth_m2 &lt;- smoothingSelection(corpus_norm, penalty_type = \"m-2\", plot = FALSE)\nsmooth_2 &lt;- smoothingSelection(corpus_norm, penalty_type = \"2\", plot = FALSE)\noptimal &lt;- optimalSmoothing(list(\"m-2\" = smooth_m2, \"2\" = smooth_2))\n\n# Visualize smoothing quality\nfits &lt;- plotSuboptimalFits(corpus_norm, optimal)\n\n# Display combined plot\nfits$combinedKeywordPlot\n\n\nShow Individual Plots\n# Create plots\nfits &lt;- plotSuboptimalFits(corpus_norm, optimal, n_curves = 9)\n\n# View first individual plot\nfits$singleKeywordPlot[[1]]\n\n# View specific keyword plot\nfits$singleKeywordPlot[[5]]\n\n# Save individual plots\nlibrary(ggplot2)\nggsave(\"keyword1_fit.png\", fits$singleKeywordPlot[[1]], width = 8, height = 5)\n\n\nInclude Zone Information\n# Add frequency zone to titles\nfits &lt;- plotSuboptimalFits(\n  corpus_norm, \n  optimal, \n  n_curves = 9,\n  show_zone = TRUE\n)\n\n# Now titles show: \"algorithm [Zone 4]\"\nfits$combinedKeywordPlot\n\n\nMore/Fewer Keywords\n# Show 4 keywords (2×2 grid)\nfits_small &lt;- plotSuboptimalFits(corpus_norm, optimal, n_curves = 4)\n\n# Show 16 keywords (4×4 grid)\nfits_large &lt;- plotSuboptimalFits(corpus_norm, optimal, n_curves = 16)\n\n# Show 25 keywords (5×5 grid)\nfits_xlarge &lt;- plotSuboptimalFits(corpus_norm, optimal, n_curves = 25)"
+  },
+  {
+    "objectID": "singleFunctions/plotSuboptimalFits.html#interpreting-the-plots",
+    "href": "singleFunctions/plotSuboptimalFits.html#interpreting-the-plots",
+    "title": "plotSuboptimalFits()",
+    "section": "🔍 Interpreting the Plots",
+    "text": "🔍 Interpreting the Plots\n\nWhat to Look For\n\n✅ Good Smoothing\nRaw:     • • •  •  •\n           ╱╲  ╱╲\nSmooth: ─────────────  (captures trend, reduces noise)\n\nSmoothed curve follows general trend\nReduces noise without losing important features\nNo systematic bias (doesn’t consistently over/underestimate)\n\n\n\n⚠️ Oversmoothing\nRaw:     • • •  •  •\n           ╱╲╱╲╱╲\nSmooth: ───────────── (too flat)\n\nSmoothed curve misses important peaks or valleys\nTrajectory appears unnaturally flat\nReal patterns are suppressed\n\n\n\n⚠️ Undersmoothing\nRaw:     • • •  •  •\n           ╱╲╱╲╱╲\nSmooth:   ╱╲╱╲╱╲  (too wiggly)\n\nSmoothed curve follows noise too closely\nTrajectory has spurious fluctuations\nFails to reveal underlying trend\n\n\n\n⚠️ Systematic Bias\nRaw:     • • •  •  •\n         ╱╲╱╲╱╲\nSmooth: ─────────── (consistently below/above)\n\nSmoothed curve consistently over- or underestimates\nMay indicate inappropriate penalty or normalization"
+  },
+  {
+    "objectID": "singleFunctions/plotSuboptimalFits.html#understanding-the-selection",
+    "href": "singleFunctions/plotSuboptimalFits.html#understanding-the-selection",
+    "title": "plotSuboptimalFits()",
+    "section": "📊 Understanding the Selection",
+    "text": "📊 Understanding the Selection\n\nRMS Distribution Sampling\nIf you have 1000 keywords and request n_curves = 9, the function:\n\nComputes RMS for all 1000 keywords\nSorts keywords by RMS (low to high)\nSamples 9 keywords evenly across the distribution:\n\nKeywords ~1, 125, 250, 375, 500, 625, 750, 875, 1000\n\n\nThis gives you: - Low RMS keywords: Best-fit cases (smooth, predictable) - Medium RMS keywords: Typical cases (moderate complexity) - High RMS keywords: Challenging cases (noisy, volatile)\n\n\nWhy This Matters\nSeeing only low-RMS keywords would give false confidence. Seeing only high-RMS keywords would be unnecessarily discouraging. The representative sample shows you the realistic range of smoothing performance."
+  },
+  {
+    "objectID": "singleFunctions/plotSuboptimalFits.html#use-cases",
+    "href": "singleFunctions/plotSuboptimalFits.html#use-cases",
+    "title": "plotSuboptimalFits()",
+    "section": "📈 Use Cases",
+    "text": "📈 Use Cases\n\n1. Quality Assurance\nBefore applying smoothing to full corpus, verify it works well.\n\n\n2. Parameter Validation\nConfirm that optimalSmoothing() choices are actually optimal visually.\n\n\n3. Method Comparison\nCompare smoothing with different parameters side-by-side.\n\n\n4. Publication Figures\nCreate figures showing smoothing effectiveness for methods sections.\n\n\n5. Identifying Outliers\nFind keywords with unusual temporal patterns that need special attention.\n\n\n6. Training Examples\nShow collaborators/reviewers how smoothing works on your data."
+  },
+  {
+    "objectID": "singleFunctions/plotSuboptimalFits.html#tips-best-practices",
+    "href": "singleFunctions/plotSuboptimalFits.html#tips-best-practices",
+    "title": "plotSuboptimalFits()",
+    "section": "💡 Tips & Best Practices",
+    "text": "💡 Tips & Best Practices\n\nAlways run this function — Don’t skip visual validation\nUse perfect squares for n_curves (4, 9, 16, 25) for clean grid layouts\nStart with 9 — Good balance between coverage and readability\nCheck high-RMS cases — If they look terrible, reconsider parameters\nSave the plots — Include in supplementary materials or methods sections\nShow to colleagues — Get feedback on whether smoothing looks reasonable\nDon’t expect perfection — Some keywords will always be noisy\nCompare normalizations — Try different normalization methods if smoothing looks poor"
+  },
+  {
+    "objectID": "singleFunctions/plotSuboptimalFits.html#see-also",
+    "href": "singleFunctions/plotSuboptimalFits.html#see-also",
+    "title": "plotSuboptimalFits()",
+    "section": "📚 See Also",
+    "text": "📚 See Also\n\noptimalSmoothing() — Select parameters (prerequisite for this function)\nsmoothingSelection() — Find optimal λ for penalties\ncurvePlot() — Visualize specific keyword trajectories\nfacetPlot() — Create faceted visualizations by zone"
   },
   {
     "objectID": "singleFunctions/smoothingSelection.html",
     "href": "singleFunctions/smoothingSelection.html",
     "title": "smoothingSelection()",
     "section": "",
-    "text": "Selection of Optimal Smoothing Parameters for Chronological Keyword Curves\n\n\n\nsmoothingSelection &lt;- (data,\n                       lambda_seq = NULL,\n                       degrees = NULL,\n                       penalty_type = \"m-2\",\n                       normty = NULL,\n                       plot = TRUE,\n                       verbose = TRUE)\n\n\n\nThe smoothingSelection() function identifies optimal smoothing parameters for chronological keyword frequency curves by fitting penalized B-spline smoothing splines.\nIt systematically evaluates combinations of spline degrees (m) and smoothing parameters (λ), under different penalty types, to find the configuration that best balances smoothness and fidelity to the data.\nFor each configuration, the function computes diagnostic criteria including:\n\ndf – Degrees of Freedom\n\nsse – Sum of Squared Errors\n\ngcv – Generalized Cross-Validation\n\nocv – Ordinary Cross-Validation\n\nIt returns full diagnostic results, the best parameter combinations for each degree, and optional visual plots for interpretation.\n\n\n\n\n\n\n\n\n\n\n\n\nArgument\nType\nDescription\n\n\n\n\ndata\nList\nA list returned by importData(), containing the term-document matrix, corpus information, and year columns.\n\n\nlambda_seq\nNumeric vector\nSequence of log10(λ) values to evaluate. Default: seq(-6, 9, 0.25).\n\n\ndegrees\nInteger vector\nRange of B-spline degrees (m) to test. Default: 1:8.\n\n\npenalty_type\nCharacter\nType of penalization applied: • \"m-2\" – penalize the (m−2)-th derivative (default) • \"2\" – penalize the second derivative (if m &gt; 3) • \"1\" – penalize the first derivative (if m &gt; 2) • \"0\" – no penalization.\n\n\nnormty\nCharacter (optional)\nLabel for the normalization method applied to the TDM (used for reporting).\n\n\nplot\nLogical\nIf TRUE (default), produces diagnostic plots for df, sse, gcv, and ocv.\n\n\nverbose\nLogical\nIf TRUE (default), prints progress messages for each spline degree.\n\n\n\n\n\n\n\nReturns a list containing detailed smoothing diagnostics, optimal parameter selections, and optional plots.\n\n\n\n\n\n\n\nElement\nDescription\n\n\n\n\nresults\nFull grid of evaluated (m, λ) combinations with diagnostics (df, sse, gcv, ocv).\n\n\nsummary_optimal\nSummary table of optimal GCV and OCV values for each spline degree.\n\n\noptimal_gcv\nSubset of results containing λ values that minimize GCV for each degree.\n\n\noptimal_ocv\nSubset of results containing λ values that minimize OCV for each degree.\n\n\nplots\n(Optional) A list of ggplot2 objects showing the evolution of df, sse, gcv, and ocv across λ.\n\n\nsummary_panel\nGraphical summary (grob) combining optimal smoothing information.\n\n\ndegree\nNumeric value of the current spline degree m.\n\n\npenalty_type\nCharacter string specifying the penalization type used.\n\n\ncall\nThe matched function call for reproducibility."
+    "text": "Select Optimal Smoothing Parameters for Temporal Curves\nThe smoothingSelection() function identifies the best smoothing parameters for modeling keyword frequency trajectories over time. It systematically evaluates different combinations of spline degrees and smoothing penalties to find the optimal balance between smoothness and fidelity to the data."
   },
   {
     "objectID": "singleFunctions/smoothingSelection.html#function-definition",
     "href": "singleFunctions/smoothingSelection.html#function-definition",
     "title": "smoothingSelection()",
-    "section": "",
-    "text": "smoothingSelection &lt;- (data,\n                       lambda_seq = NULL,\n                       degrees = NULL,\n                       penalty_type = \"m-2\",\n                       normty = NULL,\n                       plot = TRUE,\n                       verbose = TRUE)"
+    "section": "🔹 Function Definition",
+    "text": "🔹 Function Definition\nsmoothingSelection(\n  data,\n  lambda_seq = NULL,\n  degrees = NULL,\n  penalty_type = \"m-2\",\n  normty = NULL,\n  plot = TRUE,\n  verbose = TRUE\n)"
   },
   {
-    "objectID": "singleFunctions/smoothingSelection.html#aim",
-    "href": "singleFunctions/smoothingSelection.html#aim",
+    "objectID": "singleFunctions/smoothingSelection.html#purpose",
+    "href": "singleFunctions/smoothingSelection.html#purpose",
     "title": "smoothingSelection()",
-    "section": "",
-    "text": "The smoothingSelection() function identifies optimal smoothing parameters for chronological keyword frequency curves by fitting penalized B-spline smoothing splines.\nIt systematically evaluates combinations of spline degrees (m) and smoothing parameters (λ), under different penalty types, to find the configuration that best balances smoothness and fidelity to the data.\nFor each configuration, the function computes diagnostic criteria including:\n\ndf – Degrees of Freedom\n\nsse – Sum of Squared Errors\n\ngcv – Generalized Cross-Validation\n\nocv – Ordinary Cross-Validation\n\nIt returns full diagnostic results, the best parameter combinations for each degree, and optional visual plots for interpretation."
+    "section": "🎯 Purpose",
+    "text": "🎯 Purpose\nRaw keyword frequency curves are often noisy and irregular, making it difficult to identify underlying temporal trends. Smoothing helps reveal the true signal by reducing noise while preserving meaningful patterns.\nThe smoothingSelection() function helps you:\n\nFind optimal smoothing level — Determine how much smoothing is appropriate for your data\nSelect spline complexity — Choose the right degree of B-spline for modeling\nBalance fit vs. smoothness — Avoid both overfitting (too wiggly) and oversmoothing (too flat)\nCompare penalty strategies — Evaluate different derivative-based penalization approaches\nMake informed decisions — Use diagnostic criteria (GCV, OCV) for objective parameter selection\nVisualize trade-offs — See how different parameters affect model quality\n\nThis function uses penalized B-spline regression with cross-validation to find parameters that generalize well to unseen data."
+  },
+  {
+    "objectID": "singleFunctions/smoothingSelection.html#statistical-background",
+    "href": "singleFunctions/smoothingSelection.html#statistical-background",
+    "title": "smoothingSelection()",
+    "section": "🧮 Statistical Background",
+    "text": "🧮 Statistical Background\n\nB-splines\nB-splines (basis splines) are piecewise polynomial functions that provide flexible curve fitting: - Degree (m): Controls the polynomial order (linear, quadratic, cubic, etc.) - Higher degrees = smoother, more flexible curves - Lower degrees = simpler, more constrained curves\n\n\nSmoothing Parameter (λ)\nControls the trade-off between: - Fidelity to data (small λ): Curve follows data points closely but may be noisy - Smoothness (large λ): Curve is smooth but may miss important features\n\n\nPenalty Types\n\n“m-2”: Penalizes the (m-2)th derivative (default, adaptive to spline degree)\n“2”: Penalizes the second derivative (curvature penalty)\n“3”: Penalizes the third derivative (wiggliness penalty)\n\n\n\nDiagnostic Criteria\nGCV (Generalized Cross-Validation): - Estimates prediction error without actually splitting data - Lower GCV = better model performance - Preferred when computational efficiency matters\nOCV (Ordinary Cross-Validation): - Leave-one-out cross-validation - More computationally intensive but more accurate - Lower OCV = better generalization"
   },
   {
     "objectID": "singleFunctions/smoothingSelection.html#arguments",
     "href": "singleFunctions/smoothingSelection.html#arguments",
     "title": "smoothingSelection()",
-    "section": "",
-    "text": "Argument\nType\nDescription\n\n\n\n\ndata\nList\nA list returned by importData(), containing the term-document matrix, corpus information, and year columns.\n\n\nlambda_seq\nNumeric vector\nSequence of log10(λ) values to evaluate. Default: seq(-6, 9, 0.25).\n\n\ndegrees\nInteger vector\nRange of B-spline degrees (m) to test. Default: 1:8.\n\n\npenalty_type\nCharacter\nType of penalization applied: • \"m-2\" – penalize the (m−2)-th derivative (default) • \"2\" – penalize the second derivative (if m &gt; 3) • \"1\" – penalize the first derivative (if m &gt; 2) • \"0\" – no penalization.\n\n\nnormty\nCharacter (optional)\nLabel for the normalization method applied to the TDM (used for reporting).\n\n\nplot\nLogical\nIf TRUE (default), produces diagnostic plots for df, sse, gcv, and ocv.\n\n\nverbose\nLogical\nIf TRUE (default), prints progress messages for each spline degree."
+    "section": "⚙️ Arguments",
+    "text": "⚙️ Arguments\n\n\n\n\n\n\n\n\n\nArgument\nType\nDefault\nDescription\n\n\n\n\ndata\nList\nrequired\nA list object returned by importData() or normalization(), containing the TDM and corpus metadata.\n\n\nlambda_seq\nNumeric vector\nseq(-6, 9, 0.25)\nSequence of log₁₀(λ) values to evaluate. Range from 10⁻⁶ to 10⁹. Finer sequences provide more precision but take longer.\n\n\ndegrees\nInteger vector\n1:8\nRange of B-spline degrees (m) to test. Common choices: 3 (cubic), 4 (quartic), 5 (quintic).\n\n\npenalty_type\nCharacter\n\"m-2\"\nPenalty applied to derivatives:• \"m-2\": Adaptive penalty (default)• \"2\": Second derivative (curvature)• \"3\": Third derivative (wiggliness)\n\n\nnormty\nCharacter\nNULL\nLabel for normalization method used (for documentation purposes). Automatically detected if data was normalized.\n\n\nplot\nLogical\nTRUE\nIf TRUE, produces diagnostic plots showing df, SSE, GCV, and OCV across λ values.\n\n\nverbose\nLogical\nTRUE\nIf TRUE, prints progress messages for each spline degree being evaluated."
   },
   {
     "objectID": "singleFunctions/smoothingSelection.html#output",
     "href": "singleFunctions/smoothingSelection.html#output",
     "title": "smoothingSelection()",
-    "section": "",
-    "text": "Returns a list containing detailed smoothing diagnostics, optimal parameter selections, and optional plots.\n\n\n\n\n\n\n\nElement\nDescription\n\n\n\n\nresults\nFull grid of evaluated (m, λ) combinations with diagnostics (df, sse, gcv, ocv).\n\n\nsummary_optimal\nSummary table of optimal GCV and OCV values for each spline degree.\n\n\noptimal_gcv\nSubset of results containing λ values that minimize GCV for each degree.\n\n\noptimal_ocv\nSubset of results containing λ values that minimize OCV for each degree.\n\n\nplots\n(Optional) A list of ggplot2 objects showing the evolution of df, sse, gcv, and ocv across λ.\n\n\nsummary_panel\nGraphical summary (grob) combining optimal smoothing information.\n\n\ndegree\nNumeric value of the current spline degree m.\n\n\npenalty_type\nCharacter string specifying the penalization type used.\n\n\ncall\nThe matched function call for reproducibility."
+    "section": "📦 Output",
+    "text": "📦 Output\nReturns a list with comprehensive smoothing diagnostics:\n\n\n\n\n\n\n\n\nElement\nType\nDescription\n\n\n\n\nresults\ndata.frame\nComplete grid of all (m, λ) combinations with diagnostic measures (df, sse, gcv, ocv).\n\n\nsummary_optimal\ndata.frame\nSummary table showing optimal GCV and OCV values for each tested spline degree.\n\n\noptimal_gcv\ndata.frame\nSubset of results containing λ values that minimize GCV for each degree.\n\n\noptimal_ocv\ndata.frame\nSubset of results containing λ values that minimize OCV for each degree.\n\n\nplots\nlist\nList of ggplot2 objects showing evolution of df, sse, gcv, and ocv across λ (if plot = TRUE).\n\n\nsummary_panel\ngrob\nCombined graphical summary of optimal smoothing parameters.\n\n\ndegree\nnumeric\nCurrent spline degree m.\n\n\npenalty_type\ncharacter\nPenalization type used.\n\n\ncall\ncall\nFunction call for reproducibility."
+  },
+  {
+    "objectID": "singleFunctions/smoothingSelection.html#usage-examples",
+    "href": "singleFunctions/smoothingSelection.html#usage-examples",
+    "title": "smoothingSelection()",
+    "section": "💡 Usage Examples",
+    "text": "💡 Usage Examples\n\nBasic Usage\nlibrary(cccc)\n\n# Import and normalize data\ncorpus &lt;- importData(\"tdm.csv\", \"corpus_info.csv\")\ncorpus_norm &lt;- normalization(corpus, normty = \"nc\")\n\n# Find optimal smoothing parameters (default settings)\nsmooth_params &lt;- smoothingSelection(corpus_norm)\n\n# View optimal parameters\nsmooth_params$summary_optimal\n\n\nCustom Lambda Sequence\n# Use finer lambda sequence for more precision\nsmooth_params &lt;- smoothingSelection(\n  corpus_norm,\n  lambda_seq = seq(-6, 9, 0.1)  # Finer steps\n)\n\n\nSpecific Degree Range\n# Test only cubic and quartic splines\nsmooth_params &lt;- smoothingSelection(\n  corpus_norm,\n  degrees = 3:4\n)\n\n\nDifferent Penalty Type\n# Use second derivative penalty\nsmooth_params &lt;- smoothingSelection(\n  corpus_norm,\n  penalty_type = \"2\"\n)"
+  },
+  {
+    "objectID": "singleFunctions/smoothingSelection.html#interpreting-the-output",
+    "href": "singleFunctions/smoothingSelection.html#interpreting-the-output",
+    "title": "smoothingSelection()",
+    "section": "📊 Interpreting the Output",
+    "text": "📊 Interpreting the Output\n\n1. Summary Optimal Table\nsmooth_params$summary_optimal\nShows for each degree: - degree: Spline degree (m) - optimal_lambda_gcv: λ that minimizes GCV - min_gcv: Minimum GCV value - optimal_lambda_ocv: λ that minimizes OCV - min_ocv: Minimum OCV value\nHow to use: Choose the degree with the lowest GCV or OCV value.\n\n\n2. Diagnostic Plots\nFour plots are generated (if plot = TRUE):\n\nDegrees of Freedom (df) Plot\nShows effective model complexity across λ values. - Low df: Highly smoothed (simple model) - High df: Less smoothed (complex model)\n\n\nSum of Squared Errors (SSE) Plot\nShows fit to the data. - Low SSE: Better fit to observed data - High SSE: Poorer fit (oversmoothed)\n\n\nGCV Plot\nShows estimated prediction error. - Minimum: Optimal balance point - U-shaped curve: Too much/too little smoothing both increase error\n\n\nOCV Plot\nShows true cross-validation error. - Similar interpretation to GCV - More reliable but computationally intensive\n\n\n\n3. Typical Pattern\n        GCV/OCV\n         |\n    high |    \\\n         |     \\___/  ← optimal\n         |         \\\n     low |__________\\___\n         small λ  →  large λ\n         (rough)    (smooth)"
+  },
+  {
+    "objectID": "singleFunctions/smoothingSelection.html#choosing-parameters",
+    "href": "singleFunctions/smoothingSelection.html#choosing-parameters",
+    "title": "smoothingSelection()",
+    "section": "🎯 Choosing Parameters",
+    "text": "🎯 Choosing Parameters\n\nStep 1: Compare Degrees\n# Look at summary table\nsmooth_params$summary_optimal\n\n# Find degree with minimum GCV\nbest_degree &lt;- which.min(smooth_params$summary_optimal$min_gcv)\n\n\nStep 2: Extract Optimal Lambda\n# Get optimal lambda for best degree\noptimal_params &lt;- smooth_params$optimal_gcv %&gt;%\n  filter(degree == best_degree)\n\n\nStep 3: Validate with Plots\n\nCheck that GCV curve has clear minimum (U-shape)\nVerify df values are reasonable (not too high or too low)\nCompare GCV and OCV to ensure consistency"
+  },
+  {
+    "objectID": "singleFunctions/smoothingSelection.html#use-cases",
+    "href": "singleFunctions/smoothingSelection.html#use-cases",
+    "title": "smoothingSelection()",
+    "section": "📈 Use Cases",
+    "text": "📈 Use Cases\n\n1. Initial Analysis\nFirst time analyzing a corpus—need to find appropriate smoothing level.\n\n\n2. Method Comparison\nTesting different penalty strategies to see which suits your data.\n\n\n3. Parameter Sensitivity\nUnderstanding how robust your results are to smoothing choices.\n\n\n4. Publication Preparation\nDocumenting systematic parameter selection for research papers.\n\n\n5. Multi-Corpus Studies\nFinding consistent parameters across different corpora."
+  },
+  {
+    "objectID": "singleFunctions/smoothingSelection.html#tips-best-practices",
+    "href": "singleFunctions/smoothingSelection.html#tips-best-practices",
+    "title": "smoothingSelection()",
+    "section": "💡 Tips & Best Practices",
+    "text": "💡 Tips & Best Practices\n\nStart with defaults — They work well for most corpora\nAlways check plots — Visual inspection catches issues that numbers don’t\nCompare GCV and OCV — Consistency indicates reliable results\nDon’t oversearch — Finer lambda sequences rarely improve results significantly\nConsider computation time — Balance precision with practical constraints\nDocument your choice — Save summary_optimal table for methods section\nPrefer simpler models — If two degrees are similar, choose the lower one\nUse normalized data — Always normalize before smoothing selection"
+  },
+  {
+    "objectID": "singleFunctions/smoothingSelection.html#see-also",
+    "href": "singleFunctions/smoothingSelection.html#see-also",
+    "title": "smoothingSelection()",
+    "section": "📚 See Also",
+    "text": "📚 See Also\n\nnormalization() — Apply before smoothing selection\noptimalSmoothing() — Next step: select final degree and penalty\nplotSuboptimalFits() — Visualize different smoothing options\ncurvePlot() — Visualize raw trajectories"
   }
 ]

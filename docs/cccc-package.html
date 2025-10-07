@@ -97,6 +97,10 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Functions</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="./download.html"> 
+<span class="menu-text">Download</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="./use-cases.html"> 
 <span class="menu-text">Use Cases</span></a>
   </li>  
@@ -135,9 +139,16 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#about" id="toc-about" class="nav-link active" data-scroll-target="#about">About</a></li>
-  <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">🎯 Objectives</a></li>
-  <li><a href="#research-context" id="toc-research-context" class="nav-link" data-scroll-target="#research-context">🔍 Research Context</a></li>
+  <li><a href="#the-vision" id="toc-the-vision" class="nav-link active" data-scroll-target="#the-vision">The Vision</a></li>
+  <li><a href="#methodological-foundation" id="toc-methodological-foundation" class="nav-link" data-scroll-target="#methodological-foundation">Methodological Foundation</a></li>
+  <li><a href="#core-capabilities" id="toc-core-capabilities" class="nav-link" data-scroll-target="#core-capabilities">Core Capabilities</a>
+  <ul class="collapse">
+  <li><a href="#data-import-preprocessing" id="toc-data-import-preprocessing" class="nav-link" data-scroll-target="#data-import-preprocessing">1. <strong>Data Import &amp; Preprocessing</strong></a></li>
+  <li><a href="#temporal-modeling" id="toc-temporal-modeling" class="nav-link" data-scroll-target="#temporal-modeling">2. <strong>Temporal Modeling</strong></a></li>
+  <li><a href="#clustering-analysis" id="toc-clustering-analysis" class="nav-link" data-scroll-target="#clustering-analysis">3. <strong>Clustering &amp; Analysis</strong></a></li>
+  <li><a href="#visualization" id="toc-visualization" class="nav-link" data-scroll-target="#visualization">4. <strong>Visualization</strong></a></li>
+  </ul></li>
+  <li><a href="#research-applications" id="toc-research-applications" class="nav-link" data-scroll-target="#research-applications">Research Applications</a></li>
   <li><a href="#key-features" id="toc-key-features" class="nav-link" data-scroll-target="#key-features">⚙️ Key Features</a></li>
   </ul>
 </nav>
@@ -164,59 +175,75 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="about" class="level2">
-<h2 class="anchored" data-anchor-id="about">About</h2>
-<p><strong>cccc (Chronological Corpora Curve Clustering)</strong> is an R package developed to analyze the <strong>temporal evolution of concepts</strong> and <strong>semantic trajectories</strong> within scientific corpora.<br>
-It provides a comprehensive workflow to <strong>import</strong>, <strong>normalize</strong>, <strong>model</strong>, and <strong>cluster</strong> keyword frequency curves across time, revealing how terms emerge, evolve, and decline within a knowledge domain.</p>
-<p>Rooted in the paradigm of <em>temporal scientometrics</em> and <em>textual dynamics modeling</em>, <code>cccc</code> offers a data-driven framework to study <strong>conceptual change</strong>, <strong>topic diffusion</strong>, and <strong>knowledge transformation</strong> across years or decades.<br>
-It bridges quantitative linguistics, statistical modeling, and corpus-based research, providing interpretable tools for mapping <strong>how science evolves through its language</strong>.</p>
-<hr>
+<p><strong>cccc (Chronological Corpora Curve Clustering)</strong> is an innovative R package designed to analyze the <strong>temporal evolution of concepts</strong> and <strong>semantic trajectories</strong> within scientific corpora. Developed as part of the <a href="https://rind.units.it/home/"><strong>RIND Project</strong></a>, it provides researchers with powerful tools to understand how scientific language and knowledge evolve over time.</p>
+<section id="the-vision" class="level2">
+<h2 class="anchored" data-anchor-id="the-vision">The Vision</h2>
+<p>In the digital age, scientific knowledge grows exponentially, with millions of publications shaping and reshaping our understanding of the world. The cccc package was created to answer fundamental questions about this knowledge evolution:</p>
+<ul>
+<li><strong>How do scientific concepts emerge and evolve?</strong></li>
+<li><strong>Which terms gain or lose prominence over time?</strong></li>
+<li><strong>What patterns characterize the life-cycle of ideas?</strong></li>
+<li><strong>How can we map the semantic trajectories of entire research domains?</strong></li>
+</ul>
+<p>By transforming chronological corpora into living systems of evolving meanings, cccc captures how knowledge takes shape, spreads, and transforms across time periods.</p>
 </section>
-<section id="objectives" class="level2">
-<h2 class="anchored" data-anchor-id="objectives">🎯 Objectives</h2>
-<p>The package implements a full analytical pipeline structured around four key objectives:</p>
-<ol type="1">
-<li><strong>Data Import and Preprocessing</strong>
+<section id="methodological-foundation" class="level2">
+<h2 class="anchored" data-anchor-id="methodological-foundation">Methodological Foundation</h2>
+<p>The package is rooted in the paradigm of <strong>temporal scientometrics</strong> and <strong>textual dynamics modeling</strong>. It bridges:</p>
 <ul>
-<li>Import term–document matrices and corpus metadata from CSV or Excel files.<br>
+<li>📊 <strong>Quantitative Linguistics</strong> — Statistical analysis of language patterns</li>
+<li>🔬 <strong>Computational Methods</strong> — Advanced modeling and clustering algorithms<br>
 </li>
-<li>Clean and harmonize lexical units.<br>
-</li>
-<li>Automatically compute total frequencies and assign terms to <strong>frequency zones</strong> (linguistic or statistical).</li>
-</ul></li>
-<li><strong>Temporal Modeling and Smoothing</strong>
-<ul>
-<li>Model word life-cycles using <strong>B-spline smoothing</strong> and <strong>penalized regression splines</strong>.<br>
-</li>
-<li>Select optimal smoothing parameters through <strong>cross-validation</strong> and <strong>generalized cross-validation (GCV)</strong>.<br>
-</li>
-<li>Visualize raw and smoothed trajectories to assess temporal stability or volatility of terms.</li>
-</ul></li>
-<li><strong>Clustering and Knowledge Dynamics</strong>
-<ul>
-<li>Cluster term trajectories according to their temporal profiles.<br>
-</li>
-<li>Identify groups of words sharing similar growth, stability, or decline patterns.<br>
-</li>
-<li>Quantify <strong>conceptual convergence/divergence</strong> across periods and topics.</li>
-</ul></li>
-<li><strong>Visualization and Interpretation</strong>
-<ul>
-<li>Generate detailed graphical representations of term dynamics, zones, and clusters.<br>
-</li>
-<li>Highlight representative keywords and temporal peaks.<br>
-</li>
-<li>Provide interactive and faceted visual summaries for interpretability and dissemination.</li>
-</ul></li>
-</ol>
-<hr>
+<li>📚 <strong>Corpus-Based Research</strong> — Large-scale textual data analysis</li>
+<li>🧠 <strong>Digital Humanities</strong> — Interpretable tools for knowledge mapping</li>
+</ul>
+<p>This multidisciplinary approach enables researchers to study <strong>conceptual change</strong>, <strong>topic diffusion</strong>, and <strong>knowledge transformation</strong> in ways that were previously impossible.</p>
 </section>
-<section id="research-context" class="level2">
-<h2 class="anchored" data-anchor-id="research-context">🔍 Research Context</h2>
-<p>The <code>cccc</code> R package is part of the <a href="https://rind.units.it/home/"><strong>RIND Project</strong></a>, aimed at developing new methodological tools for research knowledge evolution analysis. RIND is a multidisciplinary research initiative combining <strong>computational linguistics</strong>, <strong>statistical modeling</strong>, and <strong>digital humanities</strong>.</p>
-<p>The methodological framework developed in <code>cccc</code> extends beyond literary studies:<br>
-it is designed for <strong>scientometric</strong>, <strong>sociolinguistic</strong>, and <strong>bibliometric</strong> analyses,<br>
-enabling researchers to detect <strong>emerging themes</strong>, <strong>shifting paradigms</strong>, and <strong>the evolution of scientific discourse</strong> over time.</p>
+<section id="core-capabilities" class="level2">
+<h2 class="anchored" data-anchor-id="core-capabilities">Core Capabilities</h2>
+<p>The cccc package implements a comprehensive analytical pipeline:</p>
+<section id="data-import-preprocessing" class="level3">
+<h3 class="anchored" data-anchor-id="data-import-preprocessing">1. <strong>Data Import &amp; Preprocessing</strong></h3>
+<ul>
+<li>Import term-document matrices from CSV or Excel files</li>
+<li>Clean and harmonize lexical units</li>
+<li>Automatically compute frequencies and assign terms to linguistic zones</li>
+</ul>
+</section>
+<section id="temporal-modeling" class="level3">
+<h3 class="anchored" data-anchor-id="temporal-modeling">2. <strong>Temporal Modeling</strong></h3>
+<ul>
+<li>Model word life-cycles using <strong>B-spline smoothing</strong> and <strong>penalized regression splines</strong></li>
+<li>Optimize smoothing parameters through <strong>cross-validation</strong> and <strong>GCV</strong></li>
+<li>Visualize raw and smoothed trajectories to assess temporal patterns</li>
+</ul>
+</section>
+<section id="clustering-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="clustering-analysis">3. <strong>Clustering &amp; Analysis</strong></h3>
+<ul>
+<li>Cluster term trajectories based on temporal profiles</li>
+<li>Identify groups sharing similar growth, stability, or decline patterns</li>
+<li>Quantify <strong>conceptual convergence/divergence</strong> across periods</li>
+</ul>
+</section>
+<section id="visualization" class="level3">
+<h3 class="anchored" data-anchor-id="visualization">4. <strong>Visualization</strong></h3>
+<ul>
+<li>Generate publication-ready graphics of term dynamics</li>
+<li>Create interactive and faceted visual summaries</li>
+<li>Highlight representative keywords and temporal peaks</li>
+</ul>
+</section>
+</section>
+<section id="research-applications" class="level2">
+<h2 class="anchored" data-anchor-id="research-applications">Research Applications</h2>
+<p>While initially developed for literary studies, cccc extends to:</p>
+<ul>
+<li><strong>Scientometric Analysis</strong> — Track emerging research themes</li>
+<li><strong>Bibliometric Studies</strong> — Analyze citation and terminology trends</li>
+<li><strong>Sociolinguistic Research</strong> — Study language change in social contexts</li>
+<li><strong>Digital Humanities</strong> — Explore conceptual evolution in historical texts</li>
+</ul>
 <hr>
 </section>
 <section id="key-features" class="level2">
@@ -232,7 +259,83 @@ enabling researchers to detect <strong>emerging themes</strong>, <strong>shiftin
 </li>
 <li>Publication-ready visualizations of conceptual dynamics.</li>
 </ul>
-<hr>
+<!-- Part of RIND -->
+<section style="padding: 4rem 2rem; background: linear-gradient(180deg, #f9fbfd 0%, #e8f0f8 100%); border-top: 1px solid #ddd;">
+  <div style="max-width: 900px; margin: 0 auto; text-align: center;">
+    <h2 style="color:#002b5c; font-weight:600; font-size: 2em; margin-bottom: 1.5rem;" class="anchored">
+      Part of the RIND Project
+    </h2>
+    <p style="font-size: 1.15em; color:#444; line-height: 1.8; margin-bottom: 2em;">
+      cccc is developed as part of the <strong>RIND Project</strong> (Research on the INnovation Dynamics), 
+      a multidisciplinary initiative combining computational linguistics, statistical modeling, and digital 
+      humanities to create innovative tools for analyzing research knowledge evolution.
+    </p>
+    <a href="https://rind.units.it/home/" target="_blank" style="
+         display: inline-block;
+         padding: 0.75rem 2rem;
+         background: #002b5c;
+         color: white;
+         text-decoration: none;
+         border-radius: 6px;
+         font-weight: 600;
+         font-size: 1.05em;
+         transition: background 0.3s;
+       " onmouseover="this.style.background='#004080'" onmouseout="this.style.background='#002b5c'">
+      Learn More About RIND →
+    </a>
+  </div>
+</section>
+
+<!-- Call to Action -->
+<section style="padding: 4rem 2rem; background: #002b5c; color: white; text-align: center;">
+  <h4 style="font-weight:600; font-size: 2em; margin-bottom: 1.5rem;" class="anchored">
+    Ready to Explore Temporal Patterns in Your Corpus?
+  </h4>
+  <p style="font-size: 1.2em; margin-bottom: 2em; opacity: 0.9;">
+    Start analyzing how concepts evolve over time with cccc
+  </p>
+  <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+    <a href="cccc-package.html" style="
+         padding: 0.875rem 2rem;
+         background: white;
+         color: #002b5c;
+         text-decoration: none;
+         border-radius: 6px;
+         font-weight: 600;
+         font-size: 1.05em;
+         display: inline-block;
+       ">
+      View Full Documentation
+    </a>
+    <a href="functions.html" style="
+         padding: 0.875rem 2rem;
+         background: transparent;
+         color: white;
+         text-decoration: none;
+         border-radius: 6px;
+         font-weight: 600;
+         font-size: 1.05em;
+         border: 2px solid white;
+         display: inline-block;
+       ">
+      Browse Functions
+    </a>
+    <a href="use-cases.html" style="
+         padding: 0.875rem 2rem;
+         background: transparent;
+         color: white;
+         text-decoration: none;
+         border-radius: 6px;
+         font-weight: 600;
+         font-size: 1.05em;
+         border: 2px solid white;
+         display: inline-block;
+       ">
+      See Examples
+    </a>
+  </div>
+</section>
+
 <blockquote class="blockquote">
 <p><em>cccc turns chronological corpora into living systems of evolving meanings,<br>
 capturing how knowledge takes shape, spreads, and transforms over time.</em></p>

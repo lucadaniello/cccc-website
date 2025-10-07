@@ -1,62 +1,286 @@
 ---
-title: ""
+title: "normalization()"
 format:
   html:
-    toc: false
+    toc: true
+    toc-depth: 3
 page-layout: full
 ---
+**Normalize Term-Document Matrix for Temporal Analysis**
 
-# normalization()
-
-Normalize Term-Document Matrix (TDM)
+The `normalization()` function standardizes raw keyword frequencies to enable meaningful comparisons across time periods with varying corpus sizes. It applies one of five normalization strategies, each suited to different analytical goals.
 
 ---
 
 ## 🔹 Function Definition
 
 ```r
-normalization <- (data,
-                  normty = "nc",
-                  sc = 1000,
-                  nnlty = "V",
-                  p_asy = TRUE)
+normalization(
+  data,
+  normty = "nc",
+  sc = 1000,
+  nnlty = "V",
+  p_asy = TRUE
+)
 ```
 
-## 🎯 Aim
+---
 
-The `normalization()` function standardizes the **term-document matrix (TDM)** contained within the object returned by `importData()`, applying one of several normalization strategies.  
-These methods transform raw keyword frequencies to allow for **more meaningful comparison** across documents or time periods.  
-Depending on the chosen method, normalization can be performed **column-wise**, **row-wise**, or using **non-linear transformations** that account for asymmetry and variance.
+## 🎯 Purpose
 
-Available normalization types:
+Raw frequency counts are influenced by corpus size variations across time periods. A term appearing 100 times in a corpus of 10,000 words is much more significant than the same count in a corpus of 1,000,000 words.
 
-- `"nc"` – column-wise normalization by corpus size (tokens per year).  
-- `"nchi"` – chi-square-like normalization based on row masses and expected frequencies.  
-- `"nM"` – normalization by maximum frequency per row.  
-- `"nmM"` – row-wise min–max normalization.  
-- `"nnl"` – non-linear normalization using asymmetry factors (variance- or mean-median–based).
+The `normalization()` function addresses this by:
+
+1. **Adjusting for corpus size** — Accounts for different document/token counts per year
+2. **Enabling fair comparisons** — Makes frequencies comparable across time periods
+3. **Highlighting relative importance** — Emphasizes terms' relative prominence
+4. **Preparing for modeling** — Creates standardized data for temporal smoothing and clustering
+
+This function is typically applied **after** `importData()` and **before** temporal modeling and visualization.
 
 ---
 
 ## ⚙️ Arguments
 
-| Argument | Type | Description |
-|-----------|------|-------------|
-| **data** | List | A list returned by `importData()`, containing the term-document matrix (`tdm`) and corpus information. |
-| **normty** | Character | Type of normalization to apply. One of `"nc"`, `"nchi"`, `"nM"`, `"nmM"`, or `"nnl"`. |
-| **sc** | Numeric | Scaling factor applied after normalization. Default: `1000` for `"nc"` and `"nM"`, otherwise `1`. |
-| **nnlty** | Character | If `normty = "nnl"`, defines the asymmetry measure: `"V"` (variance-based) or `"M"` (mean–median–based). Default: `"V"`. |
-| **p_asy** | Logical | If `TRUE` (default) and `normty = "nnl"`, includes the numeric vector `p_asy` with the asymmetry coefficients used for the transformation. |
+| Argument | Type | Default | Description |
+|----------|------|---------|-------------|
+| **data** | List | *required* | A list object returned by `importData()`, containing the TDM and corpus metadata. |
+| **normty** | Character | `"nc"` | Normalization method to apply. Options:<br>• `"nc"`: Column normalization by corpus size<br>• `"nchi"`: Chi-square-like normalization<br>• `"nM"`: Maximum frequency normalization<br>• `"nmM"`: Min-max normalization<br>• `"nnl"`: Non-linear normalization |
+| **sc** | Numeric | `1000` | Scaling factor applied after normalization. Default is 1000 for `"nc"` and `"nM"`, otherwise 1. |
+| **nnlty** | Character | `"V"` | Asymmetry measure for non-linear normalization (only used when `normty = "nnl"`):<br>• `"V"`: Variance-based asymmetry<br>• `"M"`: Mean-median-based asymmetry |
+| **p_asy** | Logical | `TRUE` | If `TRUE` and `normty = "nnl"`, includes asymmetry coefficients in the output. |
+
+---
+
+## 📊 Normalization Methods
+
+### 1. Column Normalization (`"nc"`)
+
+**Formula**: Normalized frequency = (raw frequency / total tokens in year) × scaling factor
+
+**Use when:**
+- You want to account for varying corpus sizes across time periods
+- Comparing frequencies across years with different document counts
+- Standard normalization for most temporal analyses
+
+**Example:**
+```r
+corpus_norm <- normalization(corpus_data, normty = "nc", sc = 1000)
+```
+
+This converts raw frequencies to "per 1000 tokens" rates.
+
+---
+
+### 2. Chi-square Normalization (`"nchi"`)
+
+**Formula**: Based on chi-square decomposition using row masses and expected frequencies
+
+**Use when:**
+- You want to emphasize deviations from expected frequencies
+- Performing correspondence analysis-style normalization
+- Highlighting terms that appear more/less than expected
+
+**Example:**
+```r
+corpus_norm <- normalization(corpus_data, normty = "nchi")
+```
+
+This method is rooted in correspondence analysis theory and emphasizes relative contributions.
+
+---
+
+### 3. Maximum Frequency Normalization (`"nM"`)
+
+**Formula**: Normalized frequency = (raw frequency / maximum frequency in row) × scaling factor
+
+**Use when:**
+- You want to focus on relative peaks within each term's trajectory
+- Comparing temporal patterns regardless of absolute frequency
+- All terms scaled to same maximum (useful for clustering)
+
+**Example:**
+```r
+corpus_norm <- normalization(corpus_data, normty = "nM", sc = 1000)
+```
+
+Each term's maximum frequency becomes the scaling reference point.
+
+---
+
+### 4. Min-Max Normalization (`"nmM"`)
+
+**Formula**: Normalized frequency = (raw frequency - min) / (max - min)
+
+**Use when:**
+- You need all values scaled to [0, 1] range
+- Comparing terms with vastly different frequency ranges
+- Preparing data for specific clustering algorithms
+
+**Example:**
+```r
+corpus_norm <- normalization(corpus_data, normty = "nmM")
+```
+
+All normalized values fall between 0 (minimum) and 1 (maximum) for each term.
+
+---
+
+### 5. Non-linear Normalization (`"nnl"`)
+
+**Formula**: Incorporates asymmetry coefficients based on distribution shape
+
+**Use when:**
+- Term frequencies show strong skewness or asymmetry
+- You want to account for variance or mean-median differences
+- Advanced modeling requires distribution-aware normalization
+
+**Asymmetry types:**
+- `"V"`: Variance-based (accounts for spread)
+- `"M"`: Mean-median-based (accounts for skewness)
+
+**Example:**
+```r
+# Variance-based
+corpus_norm <- normalization(corpus_data, normty = "nnl", nnlty = "V")
+
+# Mean-median-based
+corpus_norm <- normalization(corpus_data, normty = "nnl", nnlty = "M", p_asy = TRUE)
+```
 
 ---
 
 ## 📦 Output
 
-Returns a **list** identical in structure to the input `data`, with the following updates:
+Returns a **list** with the same structure as input, with these updates:
 
-| Element | Description |
-|----------|-------------|
-| **tdm** | Normalized term-document matrix. |
-| **norm** | Logical flag set to `TRUE` to indicate that normalization has been applied. |
-| **normty** | Character. The normalization type used. |
-| **p_asy** | (Optional) Numeric vector of asymmetry parameters, included only when `normty = "nnl"` and `p_asy = TRUE`. |
+| Element | Type | Description |
+|---------|------|-------------|
+| **tdm** | tibble | Term-document matrix with normalized frequencies |
+| **corpus_info** | tibble | Unchanged corpus metadata |
+| **norm** | logical | Set to `TRUE` indicating normalization has been applied |
+| **normty** | character | The normalization method used |
+| **year_cols** | numeric | Unchanged column indices for yearly data |
+| **zone** | character | Unchanged frequency zones |
+| **colors** | character | Unchanged color palette |
+| **p_asy** | numeric | (Optional) Asymmetry coefficients (only for `"nnl"` method with `p_asy = TRUE`) |
+
+---
+
+## 💡 Usage Examples
+
+### Basic Column Normalization
+
+```r
+library(cccc)
+
+# Import data
+corpus <- importData("tdm.csv", "corpus_info.csv")
+
+# Apply standard column normalization (per 1000 tokens)
+corpus_norm <- normalization(corpus, normty = "nc", sc = 1000)
+
+# Check normalization status
+corpus_norm$norm  # Should be TRUE
+corpus_norm$normty  # Should be "nc"
+```
+
+### Comparing Different Methods
+
+```r
+# Column normalization
+corpus_nc <- normalization(corpus, normty = "nc")
+
+# Chi-square normalization
+corpus_nchi <- normalization(corpus, normty = "nchi")
+
+# Max normalization
+corpus_nM <- normalization(corpus, normty = "nM")
+
+# Compare visualizations
+curvePlot(corpus_nc, keywords = c("algorithm", "data"))
+curvePlot(corpus_nchi, keywords = c("algorithm", "data"))
+```
+
+### Non-linear Normalization with Asymmetry
+
+```r
+# Apply non-linear normalization with variance-based asymmetry
+corpus_nnl <- normalization(
+  corpus, 
+  normty = "nnl", 
+  nnlty = "V", 
+  p_asy = TRUE
+)
+
+# View asymmetry coefficients
+head(corpus_nnl$p_asy)
+```
+
+### Custom Scaling Factor
+
+```r
+# Normalize to "per 10,000 tokens" instead of per 1000
+corpus_norm <- normalization(corpus, normty = "nc", sc = 10000)
+```
+
+---
+
+## 📊 Choosing the Right Method
+
+| Method | Best For | Pros | Cons |
+|--------|----------|------|------|
+| **nc** | General temporal analysis | Simple, interpretable | May not handle extreme skewness well |
+| **nchi** | Deviation-focused analysis | Emphasizes unexpected patterns | Less intuitive interpretation |
+| **nM** | Pattern comparison | Good for clustering | Loses absolute frequency information |
+| **nmM** | Algorithm preparation | Bounded [0,1] range | Sensitive to outliers |
+| **nnl** | Asymmetric distributions | Accounts for skewness | More complex, requires understanding |
+
+**Recommendation**: Start with `"nc"` for most analyses. Use `"nchi"` for correspondence-style analysis, `"nM"` for clustering, and `"nnl"` for distributions with strong asymmetry.
+
+---
+
+## 🔗 Typical Workflow
+
+```r
+# 1. Import data
+corpus <- importData("tdm.csv", "corpus_info.csv")
+
+# 2. Explore raw frequencies
+rowMassPlot(corpus)
+colMassPlot(corpus)
+
+# 3. Normalize
+corpus_norm <- normalization(corpus, normty = "nc", sc = 1000)
+
+# 4. Visualize normalized trajectories
+curvePlot(corpus_norm, keywords = c("algorithm", "network", "data"))
+facetPlot(corpus_norm, zone = "all")
+
+# 5. Proceed with smoothing
+smooth_params <- smoothingSelection(corpus_norm)
+```
+
+---
+
+## ⚠️ Important Notes
+
+### Re-normalization
+Once a dataset is normalized (`norm = TRUE`), applying `normalization()` again will normalize the already-normalized data. Always start from raw data if you need to try different normalization methods.
+
+### Zero Frequencies
+Terms with zero frequencies in all time periods will remain zero after normalization. Consider filtering these out before normalization if needed.
+
+### Interpretation
+After normalization, frequency values no longer represent raw counts. Always specify the normalization method and scaling factor when reporting results.
+
+---
+
+## 📚 See Also
+
+- [`importData()`](importData.html) — Import and prepare data (required before normalization)
+- [`curvePlot()`](curvePlot.html) — Visualize normalized temporal curves
+- [`facetPlot()`](facetPlot.html) — Compare normalized trajectories across zones
+- [`smoothingSelection()`](smoothingSelection.html) — Next step: select smoothing parameters
+

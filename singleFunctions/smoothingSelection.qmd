@@ -1,71 +1,284 @@
 ---
-title: ""
+title: "smoothingSelection()"
 format:
   html:
-    toc: false
+    toc: true
+    toc-depth: 3
 page-layout: full
 ---
-  
-# smoothingSelection()
-  
-Selection of Optimal Smoothing Parameters for Chronological Keyword Curves
+**Select Optimal Smoothing Parameters for Temporal Curves**
+
+The `smoothingSelection()` function identifies the best smoothing parameters for modeling keyword frequency trajectories over time. It systematically evaluates different combinations of spline degrees and smoothing penalties to find the optimal balance between smoothness and fidelity to the data.
 
 ---
 
 ## 🔹 Function Definition
 
 ```r
-smoothingSelection <- (data,
-                       lambda_seq = NULL,
-                       degrees = NULL,
-                       penalty_type = "m-2",
-                       normty = NULL,
-                       plot = TRUE,
-                       verbose = TRUE)
+smoothingSelection(
+  data,
+  lambda_seq = NULL,
+  degrees = NULL,
+  penalty_type = "m-2",
+  normty = NULL,
+  plot = TRUE,
+  verbose = TRUE
+)
 ```
 
-## 🎯 Aim
+---
 
-The `smoothingSelection()` function identifies **optimal smoothing parameters** for chronological keyword frequency curves by fitting penalized **B-spline smoothing splines**.  
-It systematically evaluates combinations of spline degrees (`m`) and smoothing parameters (`λ`), under different penalty types, to find the configuration that best balances **smoothness and fidelity** to the data.
+## 🎯 Purpose
 
-For each configuration, the function computes diagnostic criteria including:
+Raw keyword frequency curves are often noisy and irregular, making it difficult to identify underlying temporal trends. Smoothing helps reveal the true signal by reducing noise while preserving meaningful patterns.
 
-- **df** – Degrees of Freedom  
-- **sse** – Sum of Squared Errors  
-- **gcv** – Generalized Cross-Validation  
-- **ocv** – Ordinary Cross-Validation  
+The `smoothingSelection()` function helps you:
 
-It returns full diagnostic results, the best parameter combinations for each degree, and optional **visual plots** for interpretation.
+1. **Find optimal smoothing level** — Determine how much smoothing is appropriate for your data
+2. **Select spline complexity** — Choose the right degree of B-spline for modeling
+3. **Balance fit vs. smoothness** — Avoid both overfitting (too wiggly) and oversmoothing (too flat)
+4. **Compare penalty strategies** — Evaluate different derivative-based penalization approaches
+5. **Make informed decisions** — Use diagnostic criteria (GCV, OCV) for objective parameter selection
+6. **Visualize trade-offs** — See how different parameters affect model quality
+
+This function uses **penalized B-spline regression** with cross-validation to find parameters that generalize well to unseen data.
+
+---
+
+## 🧮 Statistical Background
+
+### B-splines
+B-splines (basis splines) are piecewise polynomial functions that provide flexible curve fitting:
+- **Degree (m)**: Controls the polynomial order (linear, quadratic, cubic, etc.)
+- Higher degrees = smoother, more flexible curves
+- Lower degrees = simpler, more constrained curves
+
+### Smoothing Parameter (λ)
+Controls the trade-off between:
+- **Fidelity to data** (small λ): Curve follows data points closely but may be noisy
+- **Smoothness** (large λ): Curve is smooth but may miss important features
+
+### Penalty Types
+- **"m-2"**: Penalizes the (m-2)th derivative (default, adaptive to spline degree)
+- **"2"**: Penalizes the second derivative (curvature penalty)
+- **"3"**: Penalizes the third derivative (wiggliness penalty)
+
+### Diagnostic Criteria
+
+**GCV (Generalized Cross-Validation):**
+- Estimates prediction error without actually splitting data
+- Lower GCV = better model performance
+- Preferred when computational efficiency matters
+
+**OCV (Ordinary Cross-Validation):**
+- Leave-one-out cross-validation
+- More computationally intensive but more accurate
+- Lower OCV = better generalization
 
 ---
 
 ## ⚙️ Arguments
 
-| Argument | Type | Description |
-|-----------|------|-------------|
-| **data** | List | A list returned by `importData()`, containing the term-document matrix, corpus information, and year columns. |
-| **lambda_seq** | Numeric vector | Sequence of log10(λ) values to evaluate. Default: `seq(-6, 9, 0.25)`. |
-| **degrees** | Integer vector | Range of B-spline degrees (`m`) to test. Default: `1:8`. |
-| **penalty_type** | Character | Type of penalization applied: <br>• `"m-2"` – penalize the (m−2)-th derivative (default) <br>• `"2"` – penalize the second derivative (if m > 3) <br>• `"1"` – penalize the first derivative (if m > 2) <br>• `"0"` – no penalization. |
-| **normty** | Character (optional) | Label for the normalization method applied to the TDM (used for reporting). |
-| **plot** | Logical | If `TRUE` (default), produces diagnostic plots for `df`, `sse`, `gcv`, and `ocv`. |
-| **verbose** | Logical | If `TRUE` (default), prints progress messages for each spline degree. |
+| Argument | Type | Default | Description |
+|----------|------|---------|-------------|
+| **data** | List | *required* | A list object returned by `importData()` or `normalization()`, containing the TDM and corpus metadata. |
+| **lambda_seq** | Numeric vector | `seq(-6, 9, 0.25)` | Sequence of log₁₀(λ) values to evaluate. Range from 10⁻⁶ to 10⁹. Finer sequences provide more precision but take longer. |
+| **degrees** | Integer vector | `1:8` | Range of B-spline degrees (m) to test. Common choices: 3 (cubic), 4 (quartic), 5 (quintic). |
+| **penalty_type** | Character | `"m-2"` | Penalty applied to derivatives:<br>• `"m-2"`: Adaptive penalty (default)<br>• `"2"`: Second derivative (curvature)<br>• `"3"`: Third derivative (wiggliness) |
+| **normty** | Character | `NULL` | Label for normalization method used (for documentation purposes). Automatically detected if data was normalized. |
+| **plot** | Logical | `TRUE` | If `TRUE`, produces diagnostic plots showing df, SSE, GCV, and OCV across λ values. |
+| **verbose** | Logical | `TRUE` | If `TRUE`, prints progress messages for each spline degree being evaluated. |
 
 ---
 
 ## 📦 Output
 
-Returns a **list** containing detailed smoothing diagnostics, optimal parameter selections, and optional plots.
+Returns a **list** with comprehensive smoothing diagnostics:
 
-| Element | Description |
-|----------|-------------|
-| **results** | Full grid of evaluated (`m`, `λ`) combinations with diagnostics (`df`, `sse`, `gcv`, `ocv`). |
-| **summary_optimal** | Summary table of optimal `GCV` and `OCV` values for each spline degree. |
-| **optimal_gcv** | Subset of `results` containing λ values that minimize GCV for each degree. |
-| **optimal_ocv** | Subset of `results` containing λ values that minimize OCV for each degree. |
-| **plots** | (Optional) A list of `ggplot2` objects showing the evolution of `df`, `sse`, `gcv`, and `ocv` across λ. |
-| **summary_panel** | Graphical summary (grob) combining optimal smoothing information. |
-| **degree** | Numeric value of the current spline degree `m`. |
-| **penalty_type** | Character string specifying the penalization type used. |
-| **call** | The matched function call for reproducibility. |
+| Element | Type | Description |
+|---------|------|-------------|
+| **results** | data.frame | Complete grid of all (m, λ) combinations with diagnostic measures (df, sse, gcv, ocv). |
+| **summary_optimal** | data.frame | Summary table showing optimal GCV and OCV values for each tested spline degree. |
+| **optimal_gcv** | data.frame | Subset of results containing λ values that minimize GCV for each degree. |
+| **optimal_ocv** | data.frame | Subset of results containing λ values that minimize OCV for each degree. |
+| **plots** | list | List of `ggplot2` objects showing evolution of df, sse, gcv, and ocv across λ (if `plot = TRUE`). |
+| **summary_panel** | grob | Combined graphical summary of optimal smoothing parameters. |
+| **degree** | numeric | Current spline degree m. |
+| **penalty_type** | character | Penalization type used. |
+| **call** | call | Function call for reproducibility. |
+
+---
+
+## 💡 Usage Examples
+
+### Basic Usage
+
+```r
+library(cccc)
+
+# Import and normalize data
+corpus <- importData("tdm.csv", "corpus_info.csv")
+corpus_norm <- normalization(corpus, normty = "nc")
+
+# Find optimal smoothing parameters (default settings)
+smooth_params <- smoothingSelection(corpus_norm)
+
+# View optimal parameters
+smooth_params$summary_optimal
+```
+
+### Custom Lambda Sequence
+
+```r
+# Use finer lambda sequence for more precision
+smooth_params <- smoothingSelection(
+  corpus_norm,
+  lambda_seq = seq(-6, 9, 0.1)  # Finer steps
+)
+```
+
+### Specific Degree Range
+
+```r
+# Test only cubic and quartic splines
+smooth_params <- smoothingSelection(
+  corpus_norm,
+  degrees = 3:4
+)
+```
+
+### Different Penalty Type
+
+```r
+# Use second derivative penalty
+smooth_params <- smoothingSelection(
+  corpus_norm,
+  penalty_type = "2"
+)
+```
+
+---
+
+## 📊 Interpreting the Output
+
+### 1. Summary Optimal Table
+
+```r
+smooth_params$summary_optimal
+```
+
+Shows for each degree:
+- **degree**: Spline degree (m)
+- **optimal_lambda_gcv**: λ that minimizes GCV
+- **min_gcv**: Minimum GCV value
+- **optimal_lambda_ocv**: λ that minimizes OCV
+- **min_ocv**: Minimum OCV value
+
+**How to use:** Choose the degree with the lowest GCV or OCV value.
+
+### 2. Diagnostic Plots
+
+Four plots are generated (if `plot = TRUE`):
+
+#### **Degrees of Freedom (df) Plot**
+Shows effective model complexity across λ values.
+- **Low df**: Highly smoothed (simple model)
+- **High df**: Less smoothed (complex model)
+
+#### **Sum of Squared Errors (SSE) Plot**
+Shows fit to the data.
+- **Low SSE**: Better fit to observed data
+- **High SSE**: Poorer fit (oversmoothed)
+
+#### **GCV Plot**
+Shows estimated prediction error.
+- **Minimum**: Optimal balance point
+- **U-shaped curve**: Too much/too little smoothing both increase error
+
+#### **OCV Plot**
+Shows true cross-validation error.
+- Similar interpretation to GCV
+- More reliable but computationally intensive
+
+### 3. Typical Pattern
+
+```
+        GCV/OCV
+         |
+    high |    \
+         |     \___/  ← optimal
+         |         \
+     low |__________\___
+         small λ  →  large λ
+         (rough)    (smooth)
+```
+
+---
+
+## 🎯 Choosing Parameters
+
+### Step 1: Compare Degrees
+
+```r
+# Look at summary table
+smooth_params$summary_optimal
+
+# Find degree with minimum GCV
+best_degree <- which.min(smooth_params$summary_optimal$min_gcv)
+```
+
+### Step 2: Extract Optimal Lambda
+
+```r
+# Get optimal lambda for best degree
+optimal_params <- smooth_params$optimal_gcv %>%
+  filter(degree == best_degree)
+```
+
+### Step 3: Validate with Plots
+
+- Check that GCV curve has clear minimum (U-shape)
+- Verify df values are reasonable (not too high or too low)
+- Compare GCV and OCV to ensure consistency
+
+---
+
+## 📈 Use Cases
+
+### 1. **Initial Analysis**
+First time analyzing a corpus—need to find appropriate smoothing level.
+
+### 2. **Method Comparison**
+Testing different penalty strategies to see which suits your data.
+
+### 3. **Parameter Sensitivity**
+Understanding how robust your results are to smoothing choices.
+
+### 4. **Publication Preparation**
+Documenting systematic parameter selection for research papers.
+
+### 5. **Multi-Corpus Studies**
+Finding consistent parameters across different corpora.
+
+---
+
+## 💡 Tips & Best Practices
+
+1. **Start with defaults** — They work well for most corpora
+2. **Always check plots** — Visual inspection catches issues that numbers don't
+3. **Compare GCV and OCV** — Consistency indicates reliable results
+4. **Don't oversearch** — Finer lambda sequences rarely improve results significantly
+5. **Consider computation time** — Balance precision with practical constraints
+6. **Document your choice** — Save summary_optimal table for methods section
+7. **Prefer simpler models** — If two degrees are similar, choose the lower one
+8. **Use normalized data** — Always normalize before smoothing selection
+
+---
+
+## 📚 See Also
+
+- [`normalization()`](normalization.html) — Apply before smoothing selection
+- [`optimalSmoothing()`](optimalSmoothing.html) — Next step: select final degree and penalty
+- [`plotSuboptimalFits()`](plotSuboptimalFits.html) — Visualize different smoothing options
+- [`curvePlot()`](curvePlot.html) — Visualize raw trajectories
+
