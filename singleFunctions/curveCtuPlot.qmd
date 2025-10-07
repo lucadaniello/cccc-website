@@ -1,0 +1,58 @@
+---
+title: ""
+format:
+  html:
+    toc: false
+page-layout: full
+---
+
+# curveCtuPlot()
+
+Plot of Temporal Curves for Frequency Zones and Example Keywords
+
+---
+
+## 🔹 Function Definition
+
+```r
+curveCtuPlot <- (data,
+                 ctu_noun = NULL,
+                 r = 1,
+                 themety = "light",
+                 size_class = NULL,
+                 x_lab = "year")
+```
+
+## 🎯 Aim
+
+The `curveCtuPlot()` function generates a **temporal line plot of keyword frequencies**, distinguishing between **predefined frequency zones** (e.g., *high*, *medium*, *low*) and highlighting **three example keywords**, each belonging to a different zone.  
+It supports both normalized and raw frequencies, with separate color scales for zones and example keywords.  
+Each zone is labeled with its frequency interval, and the selected example keywords are displayed with distinct colors and a dedicated legend.
+
+---
+
+## ⚙️ Arguments
+
+| Argument | Type | Description |
+|-----------|------|-------------|
+| **data** | List | A list containing the output of `importData()`. |
+| **ctu_noun** | Character vector (length = 3) | Specifies three example keywords to highlight in the plot. Each must belong to a different frequency zone (*high*, *medium*, *low*). |
+| **r** | Integer | Thinning rate for x-axis labels; displays one label every `r` years. Default: `1`. |
+| **themety** | Character | Theme type: `"light"` (default) or `"dark"`. Affects plot colors and background. |
+| **size_class** | Numeric vector (length = 3) | Defines line widths for the three zones. If `NULL`, default values are assigned depending on the theme. |
+| **x_lab** | Character | Label for the x-axis. Default: `"year"`. |
+
+---
+
+## 📦 Output
+
+Returns a **`ggplot2` object** displaying keyword frequency trajectories over time.
+
+| Element | Description |
+|----------|-------------|
+| **x-axis** | Represents time (years). |
+| **y-axis** | Represents keyword frequency (raw or normalized). |
+| **Colors** | Two scales: one for frequency zones, one for the example keywords. |
+| **Line width** | Reflects the relative frequency zone (high, medium, low). |
+| **Legends** | Two legends: one for frequency zones with intervals, one for highlighted example keywords. |
+| **Theme** | Adjustable (“light” or “dark”) for improved readability. |

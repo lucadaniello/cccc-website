@@ -1,0 +1,57 @@
+---
+title: ""
+format:
+  html:
+    toc: false
+page-layout: full
+---
+
+# curvePlot()
+
+Plot Temporal Curves of Keyword Frequencies
+---
+
+## 🔹 Function Definition
+
+```r
+curvePlot <- (data,
+              r = 1,
+              themety = "light",
+              size_class = NULL,
+              x_leg = 0.85,
+              x_lab = "years")
+```
+
+## 🎯 Aim
+
+The `curvePlot()` function visualizes the **temporal evolution of keyword frequencies** within a corpus.  
+It uses the term-document matrix (TDM) in long format to generate **curves grouped by frequency zones**, allowing users to analyze how terms evolve over time.  
+The plot supports both **light** and **dark themes**, customizable line thickness, and adjustable x-axis labels for improved readability.
+
+---
+
+## ⚙️ Arguments
+
+| Argument | Type | Description |
+|-----------|------|-------------|
+| **data** | List | A list containing the output of `importData()`. |
+| **r** | Numeric (scalar) | Interval for thinning x-axis year labels. Default: `1`. |
+| **themety** | Character | Theme type. Either `"light"` (default) or `"dark"`. |
+| **size_class** | Numeric vector | Line sizes by frequency zone. If `NULL`, default values are assigned based on the selected theme. |
+| **x_leg** | Numeric | Horizontal position of the legend. Default: `0.85`. |
+| **x_lab** | Character | X-axis label. Default: `"years"`. |
+
+---
+
+## 📦 Output
+
+Returns a **`ggplot2` object** displaying temporal curves of keyword frequencies.
+
+| Element | Description |
+|----------|-------------|
+| **x-axis** | Represents time (years). |
+| **y-axis** | Represents keyword frequency (normalized or raw). |
+| **Colors** | Correspond to frequency zones (e.g., “VH”, “H”, “L”, “VL”). |
+| **Line size** | Reflects the relative importance of frequency zones. |
+| **Theme** | Can be switched between light and dark for readability. |
+| **Legend** | Shown at the bottom, indicating frequency zones and line styles. |

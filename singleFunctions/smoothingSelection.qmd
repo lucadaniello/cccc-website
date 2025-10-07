@@ -1,0 +1,71 @@
+---
+title: ""
+format:
+  html:
+    toc: false
+page-layout: full
+---
+  
+# smoothingSelection()
+  
+Selection of Optimal Smoothing Parameters for Chronological Keyword Curves
+
+---
+
+## 🔹 Function Definition
+
+```r
+smoothingSelection <- (data,
+                       lambda_seq = NULL,
+                       degrees = NULL,
+                       penalty_type = "m-2",
+                       normty = NULL,
+                       plot = TRUE,
+                       verbose = TRUE)
+```
+
+## 🎯 Aim
+
+The `smoothingSelection()` function identifies **optimal smoothing parameters** for chronological keyword frequency curves by fitting penalized **B-spline smoothing splines**.  
+It systematically evaluates combinations of spline degrees (`m`) and smoothing parameters (`λ`), under different penalty types, to find the configuration that best balances **smoothness and fidelity** to the data.
+
+For each configuration, the function computes diagnostic criteria including:
+
+- **df** – Degrees of Freedom  
+- **sse** – Sum of Squared Errors  
+- **gcv** – Generalized Cross-Validation  
+- **ocv** – Ordinary Cross-Validation  
+
+It returns full diagnostic results, the best parameter combinations for each degree, and optional **visual plots** for interpretation.
+
+---
+
+## ⚙️ Arguments
+
+| Argument | Type | Description |
+|-----------|------|-------------|
+| **data** | List | A list returned by `importData()`, containing the term-document matrix, corpus information, and year columns. |
+| **lambda_seq** | Numeric vector | Sequence of log10(λ) values to evaluate. Default: `seq(-6, 9, 0.25)`. |
+| **degrees** | Integer vector | Range of B-spline degrees (`m`) to test. Default: `1:8`. |
+| **penalty_type** | Character | Type of penalization applied: <br>• `"m-2"` – penalize the (m−2)-th derivative (default) <br>• `"2"` – penalize the second derivative (if m > 3) <br>• `"1"` – penalize the first derivative (if m > 2) <br>• `"0"` – no penalization. |
+| **normty** | Character (optional) | Label for the normalization method applied to the TDM (used for reporting). |
+| **plot** | Logical | If `TRUE` (default), produces diagnostic plots for `df`, `sse`, `gcv`, and `ocv`. |
+| **verbose** | Logical | If `TRUE` (default), prints progress messages for each spline degree. |
+
+---
+
+## 📦 Output
+
+Returns a **list** containing detailed smoothing diagnostics, optimal parameter selections, and optional plots.
+
+| Element | Description |
+|----------|-------------|
+| **results** | Full grid of evaluated (`m`, `λ`) combinations with diagnostics (`df`, `sse`, `gcv`, `ocv`). |
+| **summary_optimal** | Summary table of optimal `GCV` and `OCV` values for each spline degree. |
+| **optimal_gcv** | Subset of `results` containing λ values that minimize GCV for each degree. |
+| **optimal_ocv** | Subset of `results` containing λ values that minimize OCV for each degree. |
+| **plots** | (Optional) A list of `ggplot2` objects showing the evolution of `df`, `sse`, `gcv`, and `ocv` across λ. |
+| **summary_panel** | Graphical summary (grob) combining optimal smoothing information. |
+| **degree** | Numeric value of the current spline degree `m`. |
+| **penalty_type** | Character string specifying the penalization type used. |
+| **call** | The matched function call for reproducibility. |

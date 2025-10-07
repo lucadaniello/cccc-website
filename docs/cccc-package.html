@@ -79,7 +79,7 @@ ul.task-list li input[type="checkbox"] {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./images/cccc_logo.png" alt="" class="navbar-logo">
+    <img src="./images/cccc_logo.png" alt="Alt text" class="navbar-logo">
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -135,10 +135,10 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#about" id="toc-about" class="nav-link active" data-scroll-target="#about">About</a>
-  <ul class="collapse">
-  <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">Objectives</a></li>
-  </ul></li>
+  <li><a href="#about" id="toc-about" class="nav-link active" data-scroll-target="#about">About</a></li>
+  <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">🎯 Objectives</a></li>
+  <li><a href="#research-context" id="toc-research-context" class="nav-link" data-scroll-target="#research-context">🔍 Research Context</a></li>
+  <li><a href="#key-features" id="toc-key-features" class="nav-link" data-scroll-target="#key-features">⚙️ Key Features</a></li>
   </ul>
 </nav>
     </div>
@@ -164,22 +164,81 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="about" class="level1">
-<h1>About</h1>
-<p><strong>cccc</strong> (<em>Chronological Corpora Curve Clustering</em>) is an R package designed to model, smooth, and cluster term trajectories over time.<br>
-It supports the exploration of concept dynamics in scientific corpora through chronological curve analysis.</p>
-<section id="objectives" class="level3">
-<h3 class="anchored" data-anchor-id="objectives">Objectives</h3>
-<ul>
-<li>Import and normalize temporal term-document matrices.</li>
-<li>Model word life-cycles using smoothing splines.</li>
-<li>Cluster temporal trajectories and visualize their evolution.</li>
-<li>Quantify conceptual shifts and knowledge dynamics.</li>
-</ul>
-<p>The package is part of the <a href="https://rind.units.it/home/"><strong>RIND Project</strong></a>, aimed at developing new methodological tools for research knowledge evolution analysis.</p>
-
-
+<section id="about" class="level2">
+<h2 class="anchored" data-anchor-id="about">About</h2>
+<p><strong>cccc (Chronological Corpora Curve Clustering)</strong> is an R package developed to analyze the <strong>temporal evolution of concepts</strong> and <strong>semantic trajectories</strong> within scientific corpora.<br>
+It provides a comprehensive workflow to <strong>import</strong>, <strong>normalize</strong>, <strong>model</strong>, and <strong>cluster</strong> keyword frequency curves across time, revealing how terms emerge, evolve, and decline within a knowledge domain.</p>
+<p>Rooted in the paradigm of <em>temporal scientometrics</em> and <em>textual dynamics modeling</em>, <code>cccc</code> offers a data-driven framework to study <strong>conceptual change</strong>, <strong>topic diffusion</strong>, and <strong>knowledge transformation</strong> across years or decades.<br>
+It bridges quantitative linguistics, statistical modeling, and corpus-based research, providing interpretable tools for mapping <strong>how science evolves through its language</strong>.</p>
+<hr>
 </section>
+<section id="objectives" class="level2">
+<h2 class="anchored" data-anchor-id="objectives">🎯 Objectives</h2>
+<p>The package implements a full analytical pipeline structured around four key objectives:</p>
+<ol type="1">
+<li><strong>Data Import and Preprocessing</strong>
+<ul>
+<li>Import term–document matrices and corpus metadata from CSV or Excel files.<br>
+</li>
+<li>Clean and harmonize lexical units.<br>
+</li>
+<li>Automatically compute total frequencies and assign terms to <strong>frequency zones</strong> (linguistic or statistical).</li>
+</ul></li>
+<li><strong>Temporal Modeling and Smoothing</strong>
+<ul>
+<li>Model word life-cycles using <strong>B-spline smoothing</strong> and <strong>penalized regression splines</strong>.<br>
+</li>
+<li>Select optimal smoothing parameters through <strong>cross-validation</strong> and <strong>generalized cross-validation (GCV)</strong>.<br>
+</li>
+<li>Visualize raw and smoothed trajectories to assess temporal stability or volatility of terms.</li>
+</ul></li>
+<li><strong>Clustering and Knowledge Dynamics</strong>
+<ul>
+<li>Cluster term trajectories according to their temporal profiles.<br>
+</li>
+<li>Identify groups of words sharing similar growth, stability, or decline patterns.<br>
+</li>
+<li>Quantify <strong>conceptual convergence/divergence</strong> across periods and topics.</li>
+</ul></li>
+<li><strong>Visualization and Interpretation</strong>
+<ul>
+<li>Generate detailed graphical representations of term dynamics, zones, and clusters.<br>
+</li>
+<li>Highlight representative keywords and temporal peaks.<br>
+</li>
+<li>Provide interactive and faceted visual summaries for interpretability and dissemination.</li>
+</ul></li>
+</ol>
+<hr>
+</section>
+<section id="research-context" class="level2">
+<h2 class="anchored" data-anchor-id="research-context">🔍 Research Context</h2>
+<p>The <code>cccc</code> R package is part of the <a href="https://rind.units.it/home/"><strong>RIND Project</strong></a>, aimed at developing new methodological tools for research knowledge evolution analysis. RIND is a multidisciplinary research initiative combining <strong>computational linguistics</strong>, <strong>statistical modeling</strong>, and <strong>digital humanities</strong>.</p>
+<p>The methodological framework developed in <code>cccc</code> extends beyond literary studies:<br>
+it is designed for <strong>scientometric</strong>, <strong>sociolinguistic</strong>, and <strong>bibliometric</strong> analyses,<br>
+enabling researchers to detect <strong>emerging themes</strong>, <strong>shifting paradigms</strong>, and <strong>the evolution of scientific discourse</strong> over time.</p>
+<hr>
+</section>
+<section id="key-features" class="level2">
+<h2 class="anchored" data-anchor-id="key-features">⚙️ Key Features</h2>
+<ul>
+<li>Unified interface for importing and managing temporal corpora.<br>
+</li>
+<li>Flexible normalization schemes (<code>nc</code>, <code>nchi</code>, <code>nM</code>, <code>nmM</code>, <code>nnl</code>).<br>
+</li>
+<li>Automated smoothing parameter optimization and visualization tools.<br>
+</li>
+<li>Clustering of term trajectories with multiple quality indices.<br>
+</li>
+<li>Publication-ready visualizations of conceptual dynamics.</li>
+</ul>
+<hr>
+<blockquote class="blockquote">
+<p><em>cccc turns chronological corpora into living systems of evolving meanings,<br>
+capturing how knowledge takes shape, spreads, and transforms over time.</em></p>
+</blockquote>
+
+
 </section>
 
 </main> <!-- /main -->

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>colmassplot</title>
+<title>plotsuboptimalfits</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -57,22 +57,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-09537c9ecba8558085948e1b802a414a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-09537c9ecba8558085948e1b802a414a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -102,7 +102,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed">
@@ -112,8 +112,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./images/cccc_logo.png" alt="" class="navbar-logo">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../images/cccc_logo.png" alt="Alt text" class="navbar-logo">
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -123,27 +123,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./cccc-package.html"> 
+    <a class="nav-link" href="../cccc-package.html"> 
 <span class="menu-text">cccc R Package</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./functions.html"> 
+    <a class="nav-link" href="../functions.html"> 
 <span class="menu-text">Functions</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./use-cases.html"> 
+    <a class="nav-link" href="../use-cases.html"> 
 <span class="menu-text">Use Cases</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./projects.html"> 
+    <a class="nav-link" href="../projects.html"> 
 <span class="menu-text">Projects</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./references.html"> 
+    <a class="nav-link" href="../references.html"> 
 <span class="menu-text">References</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about-us.html"> 
+    <a class="nav-link" href="../about-us.html"> 
 <span class="menu-text">About Us</span></a>
   </li>  
 </ul>
@@ -171,30 +171,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="colmassplot" class="level1">
-<h1>colMassPlot()</h1>
-<p>Plot Temporal Dimensions of a Corpus</p>
+<section id="plotsuboptimalfits" class="level1">
+<h1>plotSuboptimalFits()</h1>
+<p>Plot Suboptimal Smoothed Curves for Selected Keywords</p>
 <hr>
 <section id="function-definition" class="level2">
 <h2 class="anchored" data-anchor-id="function-definition">🔹 Function Definition</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>colMassPlot <span class="ot">&lt;-</span> (data,</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">sc =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">1</span>),</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">r =</span> <span class="dv">1</span>,</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">textty =</span> <span class="st">"text"</span>,</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">themety =</span> <span class="st">"light"</span>,</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>                        <span class="at">size_b =</span> <span class="fl">2.5</span>,</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>                        <span class="at">x_lab =</span> <span class="st">"years"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>plotSuboptimalFits <span class="ot">&lt;-</span> (data,</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>                       opt_res,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">n_curves =</span> <span class="dv">9</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">show_zone =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>                       <span class="at">graph =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="aim" class="level2">
 <h2 class="anchored" data-anchor-id="aim">🎯 Aim</h2>
-<p>The <code>colMassPlot()</code> function creates a <strong>multi-line plot</strong> displaying the temporal evolution of four corpus-level metrics:</p>
-<ul>
-<li>Number of documents (<code>nDoc</code>)</li>
-<li>Number of tokens (<code>dimCorpus</code>)</li>
-<li>Sum of keyword frequencies (<code>Csum</code>)</li>
-<li>Maximum keyword frequency (<code>Mcf</code>)</li>
-</ul>
-<p>All measures are <strong>rescaled by user-defined factors</strong> to improve visual comparability across different dimensions of the corpus.</p>
+<p>The <code>plotSuboptimalFits()</code> function visualizes <strong>raw and smoothed temporal curves</strong> of keyword frequencies obtained from spline smoothing.<br>
+It selects a subset of keywords based on the <strong>Root Mean Square (RMS)</strong> residuals of the smoothed fits and displays both individual and combined plots to assess the variability of smoothing performance across terms.</p>
+<p>Each plot compares the <strong>raw frequency trend</strong> (dashed line) and its <strong>smoothed version</strong> (solid line), highlighting how well the smoothing captures the temporal dynamics of the keyword.</p>
 <hr>
 </section>
 <section id="arguments" class="level2">
@@ -216,37 +209,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="odd">
 <td><strong>data</strong></td>
 <td>List</td>
-<td>A list containing the output of <code>importData()</code>.</td>
+<td>A list returned by <code>importData()</code>, containing the term-document matrix and metadata.</td>
 </tr>
 <tr class="even">
-<td><strong>sc</strong></td>
-<td>Numeric vector (length = 4)</td>
-<td>Scaling factors for <code>nDoc</code>, <code>dimCorpus</code>, <code>Csum</code>, and <code>Mcf</code>. Default: <code>c(1, 10, 10, 1)</code>.</td>
+<td><strong>opt_res</strong></td>
+<td>List</td>
+<td>The optimal smoothing configuration returned by <code>optimalSmoothing()</code>, including spline degree and penalization type.</td>
 </tr>
 <tr class="odd">
-<td><strong>r</strong></td>
+<td><strong>n_curves</strong></td>
 <td>Integer</td>
-<td>Interval for thinning x-axis labels. Default: <code>1</code> (shows all years).</td>
+<td>Number of keywords to visualize, sampled across the RMS residual distribution. Default: <code>9</code>.</td>
 </tr>
 <tr class="even">
-<td><strong>textty</strong></td>
-<td>Character</td>
-<td>Unit of analysis for legend labels (e.g., <code>"text"</code>, <code>"place"</code>, <code>"paper"</code>).</td>
+<td><strong>show_zone</strong></td>
+<td>Logical</td>
+<td>If <code>TRUE</code>, adds the keyword’s frequency zone (if available) to the plot labels. Default: <code>FALSE</code>.</td>
 </tr>
 <tr class="odd">
-<td><strong>themety</strong></td>
-<td>Character</td>
-<td>Plot theme type. Either <code>"light"</code> (default) or <code>"dark"</code>.</td>
-</tr>
-<tr class="even">
-<td><strong>size_b</strong></td>
-<td>Numeric</td>
-<td>Base size for bar lines. Default: <code>2.5</code>.</td>
-</tr>
-<tr class="odd">
-<td><strong>x_lab</strong></td>
-<td>Character</td>
-<td>X-axis label. Default: <code>"year"</code>.</td>
+<td><strong>graph</strong></td>
+<td>Logical</td>
+<td>If <code>TRUE</code>, prints all individual and combined plots directly to the active R graphics device. Default: <code>FALSE</code>.</td>
 </tr>
 </tbody>
 </table>
@@ -254,7 +237,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="output" class="level2">
 <h2 class="anchored" data-anchor-id="output">📦 Output</h2>
-<p>Returns a <strong><code>ggplot2</code> object</strong> representing the temporal evolution of corpus structure.</p>
+<p>Returns (invisibly) a <strong>list</strong> containing all generated plots.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 43%">
@@ -268,29 +251,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>x-axis</strong></td>
-<td>Years.</td>
+<td><strong>singleKeywordPlot</strong></td>
+<td>A list of <code>ggplot2</code> objects, one for each selected keyword, including raw and smoothed curves with full titles.</td>
 </tr>
 <tr class="even">
-<td><strong>y-axis</strong></td>
-<td>Rescaled measures representing corpus size and term frequencies.</td>
-</tr>
-<tr class="odd">
-<td><strong>Lines</strong></td>
-<td>Show the evolution of <code>nDoc</code>, <code>dimCorpus</code>, <code>Csum</code>, and <code>Mcf</code> over time.</td>
-</tr>
-<tr class="even">
-<td><strong>Colors</strong></td>
-<td>Distinguish between the four corpus metrics.</td>
-</tr>
-<tr class="odd">
-<td><strong>Legend</strong></td>
-<td>Provides details about scaling factors and corresponding measures.</td>
+<td><strong>combinedKeywordPlot</strong></td>
+<td>A combined <code>patchwork</code> layout displaying all selected keyword fits in a grid (default: 3 columns).</td>
 </tr>
 </tbody>
 </table>
+<hr>
+<section id="details" class="level3">
+<h3 class="anchored" data-anchor-id="details">🧩 Details</h3>
+<ul>
+<li>The function extracts the smoothed spline fits using the optimal configuration from <code>optimalSmoothing()</code>.<br>
+</li>
+<li>For each keyword, it computes the <strong>residual RMS</strong> error and selects representative terms distributed across the RMS range.<br>
+</li>
+<li>Both <strong>individual</strong> and <strong>aggregated</strong> visualizations are produced, showing:
+<ul>
+<li>The raw term frequency curve (grey dashed line);</li>
+<li>The smoothed spline fit (red solid line);</li>
+<li>Optional zone information (if <code>show_zone = TRUE</code>).</li>
+</ul></li>
+</ul>
+<p>These plots allow users to evaluate suboptimal smoothing behavior and identify potential inconsistencies or overfitting in the temporal modeling process.</p>
 
 
+</section>
 </section>
 </section>
 

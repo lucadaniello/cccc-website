@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>normalization</title>
+<title>importdata</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -57,22 +57,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-09537c9ecba8558085948e1b802a414a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-09537c9ecba8558085948e1b802a414a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -102,7 +102,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed">
@@ -112,8 +112,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./images/cccc_logo.png" alt="" class="navbar-logo">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../images/cccc_logo.png" alt="Alt text" class="navbar-logo">
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -123,27 +123,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./cccc-package.html"> 
+    <a class="nav-link" href="../cccc-package.html"> 
 <span class="menu-text">cccc R Package</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./functions.html"> 
+    <a class="nav-link" href="../functions.html"> 
 <span class="menu-text">Functions</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./use-cases.html"> 
+    <a class="nav-link" href="../use-cases.html"> 
 <span class="menu-text">Use Cases</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./projects.html"> 
+    <a class="nav-link" href="../projects.html"> 
 <span class="menu-text">Projects</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./references.html"> 
+    <a class="nav-link" href="../references.html"> 
 <span class="menu-text">References</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about-us.html"> 
+    <a class="nav-link" href="../about-us.html"> 
 <span class="menu-text">About Us</span></a>
   </li>  
 </ul>
@@ -171,17 +171,118 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="normalization" class="level1">
-<h1>normalization()</h1>
-<p>Normalize Term-Document Matrix (TDM)</p>
+<section id="importdata" class="level1">
+<h1>importData()</h1>
+<p>Imports and validates corpus data and metadata into a standardized structure.</p>
 <hr>
 <section id="function-definition" class="level2">
 <h2 class="anchored" data-anchor-id="function-definition">🔹 Function Definition</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>normalization <span class="ot">&lt;-</span> (data,</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">normty =</span> <span class="st">"nc"</span>,</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">sc =</span> <span class="dv">1000</span>,</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">nnlty =</span> <span class="st">"V"</span>,</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">p_asy =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>importData <span class="ot">&lt;-</span> (</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  tdm_file,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  corpus_file,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">sep_tdm =</span> <span class="st">";"</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">sep_corpus_info =</span> <span class="st">";"</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">zone =</span> <span class="st">"stat"</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="cn">TRUE</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="aim" class="level2">
+<h2 class="anchored" data-anchor-id="aim">🎯 Aim</h2>
+<p>The <code>importData()</code> function reads and processes a Term Document Matrix (TDM) and corpus information from CSV or Excel files.<br>
+It standardizes formats, renames columns, cleans keywords, computes total frequency per term, and classifies each term into frequency zones.</p>
+<hr>
+</section>
+<section id="arguments" class="level2">
+<h2 class="anchored" data-anchor-id="arguments">⚙️ Arguments</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 36%">
+<col style="width: 20%">
+<col style="width: 43%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>tdm_file</strong></td>
+<td>Character</td>
+<td>Path to the term-document matrix file (CSV or Excel). The first column must contain the list of terms, while all other columns represent years.</td>
+</tr>
+<tr class="even">
+<td><strong>corpus_file</strong></td>
+<td>Character</td>
+<td>Path to the corpus information file (CSV or Excel). Must include columns for years, tokens, and documents per year.</td>
+</tr>
+<tr class="odd">
+<td><strong>sep_tdm</strong></td>
+<td>Character / NULL</td>
+<td>Separator for the TDM CSV file (ignored if Excel). Default: <code>";"</code>.</td>
+</tr>
+<tr class="even">
+<td><strong>sep_corpus_info</strong></td>
+<td>Character / NULL</td>
+<td>Separator for the corpus information CSV file (ignored if Excel). Default: <code>";"</code>.</td>
+</tr>
+<tr class="odd">
+<td><strong>zone</strong></td>
+<td>Character</td>
+<td>Zone classification strategy: <code>"stat"</code> (statistical quartiles) or <code>"ling"</code> (linguistic frequency-based). Default: <code>"stat"</code>.</td>
+</tr>
+<tr class="even">
+<td><strong>verbose</strong></td>
+<td>Logical</td>
+<td>If <code>TRUE</code>, prints progress messages. Default: <code>TRUE</code>.</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="output" class="level2">
+<h2 class="anchored" data-anchor-id="output">📦 Output</h2>
+<p>Returns a <strong>list</strong> with the following elements:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 43%">
+<col style="width: 56%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Element</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>tdm</strong></td>
+<td>A tibble representing the cleaned and processed term-document matrix, including <code>keyword</code>, <code>tot_freq</code>, <code>int_freq</code>, <code>zone</code>, and yearly frequency columns.</td>
+</tr>
+<tr class="even">
+<td><strong>corpus_info</strong></td>
+<td>A tibble containing corpus-level yearly metadata (<code>years</code>, <code>dimCorpus</code>, <code>nDoc</code>, and optional <code>metadata</code>).</td>
+</tr>
+<tr class="odd">
+<td><strong>norm</strong></td>
+<td>Logical. Indicates whether the TDM has been normalized (default: <code>FALSE</code>).</td>
+</tr>
+<tr class="even">
+<td><strong>year_cols</strong></td>
+<td>Numeric vector indicating which columns in the TDM correspond to yearly frequencies.</td>
+</tr>
+<tr class="odd">
+<td><strong>zone</strong></td>
+<td>Character vector of unique frequency zones.</td>
+</tr>
+<tr class="even">
+<td><strong>colors</strong></td>
+<td>Character vector of default colors associated with zones.</td>
+</tr>
+</tbody>
+</table>
 
 
 </section>

@@ -1,0 +1,62 @@
+---
+title: ""
+format:
+  html:
+    toc: false
+page-layout: full
+---
+
+# normalization()
+
+Normalize Term-Document Matrix (TDM)
+
+---
+
+## 🔹 Function Definition
+
+```r
+normalization <- (data,
+                  normty = "nc",
+                  sc = 1000,
+                  nnlty = "V",
+                  p_asy = TRUE)
+```
+
+## 🎯 Aim
+
+The `normalization()` function standardizes the **term-document matrix (TDM)** contained within the object returned by `importData()`, applying one of several normalization strategies.  
+These methods transform raw keyword frequencies to allow for **more meaningful comparison** across documents or time periods.  
+Depending on the chosen method, normalization can be performed **column-wise**, **row-wise**, or using **non-linear transformations** that account for asymmetry and variance.
+
+Available normalization types:
+
+- `"nc"` – column-wise normalization by corpus size (tokens per year).  
+- `"nchi"` – chi-square-like normalization based on row masses and expected frequencies.  
+- `"nM"` – normalization by maximum frequency per row.  
+- `"nmM"` – row-wise min–max normalization.  
+- `"nnl"` – non-linear normalization using asymmetry factors (variance- or mean-median–based).
+
+---
+
+## ⚙️ Arguments
+
+| Argument | Type | Description |
+|-----------|------|-------------|
+| **data** | List | A list returned by `importData()`, containing the term-document matrix (`tdm`) and corpus information. |
+| **normty** | Character | Type of normalization to apply. One of `"nc"`, `"nchi"`, `"nM"`, `"nmM"`, or `"nnl"`. |
+| **sc** | Numeric | Scaling factor applied after normalization. Default: `1000` for `"nc"` and `"nM"`, otherwise `1`. |
+| **nnlty** | Character | If `normty = "nnl"`, defines the asymmetry measure: `"V"` (variance-based) or `"M"` (mean–median–based). Default: `"V"`. |
+| **p_asy** | Logical | If `TRUE` (default) and `normty = "nnl"`, includes the numeric vector `p_asy` with the asymmetry coefficients used for the transformation. |
+
+---
+
+## 📦 Output
+
+Returns a **list** identical in structure to the input `data`, with the following updates:
+
+| Element | Description |
+|----------|-------------|
+| **tdm** | Normalized term-document matrix. |
+| **norm** | Logical flag set to `TRUE` to indicate that normalization has been applied. |
+| **normty** | Character. The normalization type used. |
+| **p_asy** | (Optional) Numeric vector of asymmetry parameters, included only when `normty = "nnl"` and `p_asy = TRUE`. |

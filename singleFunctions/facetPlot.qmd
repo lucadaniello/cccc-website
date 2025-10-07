@@ -1,0 +1,61 @@
+---
+title: ""
+format:
+  html:
+    toc: false
+page-layout: full
+---
+
+# facetPlot()
+
+Faceted Plot of Keyword Frequency Curves
+
+---
+
+## 🔹 Function Definition
+
+```r
+facetPlot <- (data, keyword_selection = list(type="frequency", 
+              n=3, kw.list=NULL),
+              r = 4, scales = "fixed", 
+              leg = TRUE, 
+              themety = "light",
+              size_class = NULL, 
+              x_lab = "year")
+```
+
+## 🎯 Aim
+
+The `facetPlot()` function produces a **faceted visualization of keyword frequency trajectories** over time, grouped by frequency zones (e.g., *high*, *medium*, *low*).  
+It allows users to highlight a subset of keywords either by **highest frequency**, **random sampling**, or **custom selection**, displaying them in distinct colors within each zone.  
+Each facet corresponds to a frequency zone, enabling a clear comparative view of the temporal behavior of keywords across different frequency ranges.
+
+---
+
+## ⚙️ Arguments
+
+| Argument | Type | Description |
+|-----------|------|-------------|
+| **data** | List | A list returned by `importData()`, containing the term-document matrix in long format and corpus metadata. |
+| **keyword_selection** | List | Specifies how keywords are selected for highlighting. Must include: <br>• `type` — `"frequency"`, `"random"`, or `"list"` <br>• `n` — Number of keywords per zone (for `"frequency"` or `"random"`) <br>• `kw.list` — Character vector of custom keywords (for `"list"`). |
+| **r** | Integer | Interval for thinning x-axis year labels (e.g., show one label every `r` years). Default: `4`. |
+| **scales** | Character | Whether y-axis scales are `"fixed"` (default) or `"free"` across facets. |
+| **leg** | Logical | Whether to display the legend. Default: `TRUE`. |
+| **themety** | Character | Theme type. Either `"light"` (default) or `"dark"`. |
+| **size_class** | Numeric vector | Optional vector defining relative line thickness by zone. Defaults depend on the selected theme. |
+| **x_lab** | Character | Label for the x-axis. Default: `"year"`. |
+
+---
+
+## 📦 Output
+
+Returns a **`ggplot2` object** with faceted panels showing the temporal evolution of keyword frequencies.
+
+| Element | Description |
+|----------|-------------|
+| **Facets** | Each panel corresponds to a frequency zone (e.g., high, medium, low). |
+| **Highlighted keywords** | Selected keywords are shown in distinct colors for easy identification. |
+| **x-axis** | Represents time (years). Labels can be thinned using `r`. |
+| **y-axis** | Represents keyword frequency (raw or normalized). |
+| **Legend** | Optional; displays both zone and keyword colors. |
+| **Theme** | Adjustable between light and dark modes. |

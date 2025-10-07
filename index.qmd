@@ -31,7 +31,7 @@ page-layout: full
     <a href="cccc-package.html" 
        class="btn btn-primary btn-lg" 
        style="background-color:#002b5c; border:none; margin-top:1.8em;">
-       Explore the Package
+       <b>Explore the Package</b>
     </a>
   </div>
 

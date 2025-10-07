@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>curvectuplot</title>
+<title>smoothingselection</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -57,22 +57,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-09537c9ecba8558085948e1b802a414a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-09537c9ecba8558085948e1b802a414a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -102,7 +102,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed">
@@ -112,8 +112,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./images/cccc_logo.png" alt="" class="navbar-logo">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../images/cccc_logo.png" alt="Alt text" class="navbar-logo">
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -123,27 +123,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./cccc-package.html"> 
+    <a class="nav-link" href="../cccc-package.html"> 
 <span class="menu-text">cccc R Package</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./functions.html"> 
+    <a class="nav-link" href="../functions.html"> 
 <span class="menu-text">Functions</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./use-cases.html"> 
+    <a class="nav-link" href="../use-cases.html"> 
 <span class="menu-text">Use Cases</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./projects.html"> 
+    <a class="nav-link" href="../projects.html"> 
 <span class="menu-text">Projects</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./references.html"> 
+    <a class="nav-link" href="../references.html"> 
 <span class="menu-text">References</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about-us.html"> 
+    <a class="nav-link" href="../about-us.html"> 
 <span class="menu-text">About Us</span></a>
   </li>  
 </ul>
@@ -171,18 +171,145 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="curvectuplot" class="level1">
-<h1>curveCtuPlot()</h1>
-<p>Plot of Temporal Curves for Frequency Zones and Example Keywords</p>
+<section id="smoothingselection" class="level1">
+<h1>smoothingSelection()</h1>
+<p>Selection of Optimal Smoothing Parameters for Chronological Keyword Curves</p>
 <hr>
 <section id="function-definition" class="level2">
 <h2 class="anchored" data-anchor-id="function-definition">🔹 Function Definition</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>curveCtuPlot <span class="ot">&lt;-</span> (data,</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">ctu_noun =</span> <span class="cn">NULL</span>,</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">r =</span> <span class="dv">1</span>,</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">themety =</span> <span class="st">"light"</span>,</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">size_class =</span> <span class="cn">NULL</span>,</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">x_lab =</span> <span class="st">"year"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>smoothingSelection <span class="ot">&lt;-</span> (data,</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">lambda_seq =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">degrees =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">penalty_type =</span> <span class="st">"m-2"</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>                       <span class="at">normty =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>                       <span class="at">plot =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>                       <span class="at">verbose =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="aim" class="level2">
+<h2 class="anchored" data-anchor-id="aim">🎯 Aim</h2>
+<p>The <code>smoothingSelection()</code> function identifies <strong>optimal smoothing parameters</strong> for chronological keyword frequency curves by fitting penalized <strong>B-spline smoothing splines</strong>.<br>
+It systematically evaluates combinations of spline degrees (<code>m</code>) and smoothing parameters (<code>λ</code>), under different penalty types, to find the configuration that best balances <strong>smoothness and fidelity</strong> to the data.</p>
+<p>For each configuration, the function computes diagnostic criteria including:</p>
+<ul>
+<li><strong>df</strong> – Degrees of Freedom<br>
+</li>
+<li><strong>sse</strong> – Sum of Squared Errors<br>
+</li>
+<li><strong>gcv</strong> – Generalized Cross-Validation<br>
+</li>
+<li><strong>ocv</strong> – Ordinary Cross-Validation</li>
+</ul>
+<p>It returns full diagnostic results, the best parameter combinations for each degree, and optional <strong>visual plots</strong> for interpretation.</p>
+<hr>
+</section>
+<section id="arguments" class="level2">
+<h2 class="anchored" data-anchor-id="arguments">⚙️ Arguments</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 36%">
+<col style="width: 20%">
+<col style="width: 43%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>data</strong></td>
+<td>List</td>
+<td>A list returned by <code>importData()</code>, containing the term-document matrix, corpus information, and year columns.</td>
+</tr>
+<tr class="even">
+<td><strong>lambda_seq</strong></td>
+<td>Numeric vector</td>
+<td>Sequence of log10(λ) values to evaluate. Default: <code>seq(-6, 9, 0.25)</code>.</td>
+</tr>
+<tr class="odd">
+<td><strong>degrees</strong></td>
+<td>Integer vector</td>
+<td>Range of B-spline degrees (<code>m</code>) to test. Default: <code>1:8</code>.</td>
+</tr>
+<tr class="even">
+<td><strong>penalty_type</strong></td>
+<td>Character</td>
+<td>Type of penalization applied: <br>• <code>"m-2"</code> – penalize the (m−2)-th derivative (default) <br>• <code>"2"</code> – penalize the second derivative (if m &gt; 3) <br>• <code>"1"</code> – penalize the first derivative (if m &gt; 2) <br>• <code>"0"</code> – no penalization.</td>
+</tr>
+<tr class="odd">
+<td><strong>normty</strong></td>
+<td>Character (optional)</td>
+<td>Label for the normalization method applied to the TDM (used for reporting).</td>
+</tr>
+<tr class="even">
+<td><strong>plot</strong></td>
+<td>Logical</td>
+<td>If <code>TRUE</code> (default), produces diagnostic plots for <code>df</code>, <code>sse</code>, <code>gcv</code>, and <code>ocv</code>.</td>
+</tr>
+<tr class="odd">
+<td><strong>verbose</strong></td>
+<td>Logical</td>
+<td>If <code>TRUE</code> (default), prints progress messages for each spline degree.</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="output" class="level2">
+<h2 class="anchored" data-anchor-id="output">📦 Output</h2>
+<p>Returns a <strong>list</strong> containing detailed smoothing diagnostics, optimal parameter selections, and optional plots.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 43%">
+<col style="width: 56%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Element</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>results</strong></td>
+<td>Full grid of evaluated (<code>m</code>, <code>λ</code>) combinations with diagnostics (<code>df</code>, <code>sse</code>, <code>gcv</code>, <code>ocv</code>).</td>
+</tr>
+<tr class="even">
+<td><strong>summary_optimal</strong></td>
+<td>Summary table of optimal <code>GCV</code> and <code>OCV</code> values for each spline degree.</td>
+</tr>
+<tr class="odd">
+<td><strong>optimal_gcv</strong></td>
+<td>Subset of <code>results</code> containing λ values that minimize GCV for each degree.</td>
+</tr>
+<tr class="even">
+<td><strong>optimal_ocv</strong></td>
+<td>Subset of <code>results</code> containing λ values that minimize OCV for each degree.</td>
+</tr>
+<tr class="odd">
+<td><strong>plots</strong></td>
+<td>(Optional) A list of <code>ggplot2</code> objects showing the evolution of <code>df</code>, <code>sse</code>, <code>gcv</code>, and <code>ocv</code> across λ.</td>
+</tr>
+<tr class="even">
+<td><strong>summary_panel</strong></td>
+<td>Graphical summary (grob) combining optimal smoothing information.</td>
+</tr>
+<tr class="odd">
+<td><strong>degree</strong></td>
+<td>Numeric value of the current spline degree <code>m</code>.</td>
+</tr>
+<tr class="even">
+<td><strong>penalty_type</strong></td>
+<td>Character string specifying the penalization type used.</td>
+</tr>
+<tr class="odd">
+<td><strong>call</strong></td>
+<td>The matched function call for reproducibility.</td>
+</tr>
+</tbody>
+</table>
 
 
 </section>

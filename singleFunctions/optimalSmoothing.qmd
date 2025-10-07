@@ -1,0 +1,51 @@
+---
+title: ""
+format:
+  html:
+    toc: false
+page-layout: full
+---
+  
+# optimalSmoothing()
+  
+Selection of Optimal Spline Degree and Penalization Strategy
+
+---
+
+## 🔹 Function Definition
+
+```r
+optimalSmoothing <- (smoothing_results, plot = TRUE)
+```
+
+## 🎯 Aim
+
+The `optimalSmoothing()` function compares multiple **smoothing strategies**—each defined by a specific **penalization type**—to identify the optimal combination of **spline degree (`m`)** and **penalty** that minimizes the **Generalized Cross-Validation (GCV)** criterion.  
+It takes as input the results produced by multiple calls to `smoothingSelection()` (one per penalty type) and constructs a **comparison matrix** of GCV values across all spline degrees and penalties.
+
+Optionally, it can also generate **diagnostic plots** showing how `GCV`, `OCV`, `df`, and `SSE` vary across spline degrees and penalty types, supporting a visual evaluation of the optimal smoothing configuration.
+
+---
+
+## ⚙️ Arguments
+
+| Argument | Type | Description |
+|-----------|------|-------------|
+| **smoothing_results** | List | A named list of results from `smoothingSelection()`, with each entry corresponding to a penalty type (`"m-2"`, `"2"`, `"1"`, `"0"`). |
+| **plot** | Logical | If `TRUE` (default), returns comparative `ggplot2`-based visualizations of smoothing diagnostics across penalty types and spline degrees. |
+
+---
+
+## 📦 Output
+
+Returns a **list** containing the optimal smoothing configuration, diagnostic matrices, and (optionally) comparative plots.
+
+| Element | Description |
+|----------|-------------|
+| **optSmoothing** | Full set of results from the optimal penalization strategy, as returned by `smoothingSelection()`. |
+| **m_opt** | Integer. Optimal spline degree that minimizes the GCV across all penalty types. |
+| **penalty_opt** | Character. Optimal penalty type (`"m-2"`, `"2"`, `"1"`, or `"0"`). |
+| **lambda_opt** | Numeric. Optimal log10(λ) value corresponding to the selected degree and penalty. |
+| **gcv_matrix** | Numeric matrix of GCV values, where rows correspond to penalties and columns to spline degrees. |
+| **plots** | (Optional) List of `ggplot2` objects for `GCV`, `OCV`, `df`, and `SSE` comparisons across penalties and degrees. |
+| **call** | The matched function call, useful for reproducibility. |

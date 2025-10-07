@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>curveplot</title>
+<title>normalization</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -57,22 +57,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-09537c9ecba8558085948e1b802a414a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-09537c9ecba8558085948e1b802a414a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -102,7 +102,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed">
@@ -112,8 +112,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./images/cccc_logo.png" alt="" class="navbar-logo">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../images/cccc_logo.png" alt="Alt text" class="navbar-logo">
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -123,27 +123,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./cccc-package.html"> 
+    <a class="nav-link" href="../cccc-package.html"> 
 <span class="menu-text">cccc R Package</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./functions.html"> 
+    <a class="nav-link" href="../functions.html"> 
 <span class="menu-text">Functions</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./use-cases.html"> 
+    <a class="nav-link" href="../use-cases.html"> 
 <span class="menu-text">Use Cases</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./projects.html"> 
+    <a class="nav-link" href="../projects.html"> 
 <span class="menu-text">Projects</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./references.html"> 
+    <a class="nav-link" href="../references.html"> 
 <span class="menu-text">References</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about-us.html"> 
+    <a class="nav-link" href="../about-us.html"> 
 <span class="menu-text">About Us</span></a>
   </li>  
 </ul>
@@ -171,18 +171,115 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="curveplot" class="level1">
-<h1>curvePlot()</h1>
-<p>Plot Temporal Curves of Keyword Frequencies</p>
+<section id="normalization" class="level1">
+<h1>normalization()</h1>
+<p>Normalize Term-Document Matrix (TDM)</p>
 <hr>
 <section id="function-definition" class="level2">
 <h2 class="anchored" data-anchor-id="function-definition">🔹 Function Definition</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>curvePlot <span class="ot">&lt;-</span> (data,</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">r =</span> <span class="dv">1</span>,</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">themety =</span> <span class="st">"light"</span>,</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">size_class =</span> <span class="cn">NULL</span>,</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">x_leg =</span> <span class="fl">0.85</span>,</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">x_lab =</span> <span class="st">"years"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>normalization <span class="ot">&lt;-</span> (data,</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">normty =</span> <span class="st">"nc"</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">sc =</span> <span class="dv">1000</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">nnlty =</span> <span class="st">"V"</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">p_asy =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="aim" class="level2">
+<h2 class="anchored" data-anchor-id="aim">🎯 Aim</h2>
+<p>The <code>normalization()</code> function standardizes the <strong>term-document matrix (TDM)</strong> contained within the object returned by <code>importData()</code>, applying one of several normalization strategies.<br>
+These methods transform raw keyword frequencies to allow for <strong>more meaningful comparison</strong> across documents or time periods.<br>
+Depending on the chosen method, normalization can be performed <strong>column-wise</strong>, <strong>row-wise</strong>, or using <strong>non-linear transformations</strong> that account for asymmetry and variance.</p>
+<p>Available normalization types:</p>
+<ul>
+<li><code>"nc"</code> – column-wise normalization by corpus size (tokens per year).<br>
+</li>
+<li><code>"nchi"</code> – chi-square-like normalization based on row masses and expected frequencies.<br>
+</li>
+<li><code>"nM"</code> – normalization by maximum frequency per row.<br>
+</li>
+<li><code>"nmM"</code> – row-wise min–max normalization.<br>
+</li>
+<li><code>"nnl"</code> – non-linear normalization using asymmetry factors (variance- or mean-median–based).</li>
+</ul>
+<hr>
+</section>
+<section id="arguments" class="level2">
+<h2 class="anchored" data-anchor-id="arguments">⚙️ Arguments</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 36%">
+<col style="width: 20%">
+<col style="width: 43%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>data</strong></td>
+<td>List</td>
+<td>A list returned by <code>importData()</code>, containing the term-document matrix (<code>tdm</code>) and corpus information.</td>
+</tr>
+<tr class="even">
+<td><strong>normty</strong></td>
+<td>Character</td>
+<td>Type of normalization to apply. One of <code>"nc"</code>, <code>"nchi"</code>, <code>"nM"</code>, <code>"nmM"</code>, or <code>"nnl"</code>.</td>
+</tr>
+<tr class="odd">
+<td><strong>sc</strong></td>
+<td>Numeric</td>
+<td>Scaling factor applied after normalization. Default: <code>1000</code> for <code>"nc"</code> and <code>"nM"</code>, otherwise <code>1</code>.</td>
+</tr>
+<tr class="even">
+<td><strong>nnlty</strong></td>
+<td>Character</td>
+<td>If <code>normty = "nnl"</code>, defines the asymmetry measure: <code>"V"</code> (variance-based) or <code>"M"</code> (mean–median–based). Default: <code>"V"</code>.</td>
+</tr>
+<tr class="odd">
+<td><strong>p_asy</strong></td>
+<td>Logical</td>
+<td>If <code>TRUE</code> (default) and <code>normty = "nnl"</code>, includes the numeric vector <code>p_asy</code> with the asymmetry coefficients used for the transformation.</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="output" class="level2">
+<h2 class="anchored" data-anchor-id="output">📦 Output</h2>
+<p>Returns a <strong>list</strong> identical in structure to the input <code>data</code>, with the following updates:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 43%">
+<col style="width: 56%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Element</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>tdm</strong></td>
+<td>Normalized term-document matrix.</td>
+</tr>
+<tr class="even">
+<td><strong>norm</strong></td>
+<td>Logical flag set to <code>TRUE</code> to indicate that normalization has been applied.</td>
+</tr>
+<tr class="odd">
+<td><strong>normty</strong></td>
+<td>Character. The normalization type used.</td>
+</tr>
+<tr class="even">
+<td><strong>p_asy</strong></td>
+<td>(Optional) Numeric vector of asymmetry parameters, included only when <code>normty = "nnl"</code> and <code>p_asy = TRUE</code>.</td>
+</tr>
+</tbody>
+</table>
 
 
 </section>

@@ -5,13 +5,13 @@ page-layout: full
 ---
 
 ## The RIND Project  
-### *Reading the Italian Novel at a Distance (1830–1930)*
+### *Reading the Italian Novel at a Distance (1830-1930)*
 
-The **cccc** package has been developed within the **RIND Project – Research INtelligence Development**, coordinated by the University of Trieste.
+The **cccc** package has been developed within the **RIND Project - Research INtelligence Development**, coordinated by the University of Trieste.
 
 The **RIND project** is an interdisciplinary research initiative that combines methods and perspectives from **computational and corpus linguistics**, **quantitative literary studies**, **data science**, **statistics**, and **translation studies**.  
 
-Building on Franco Moretti’s seminal approach to *distant reading*, the project aims to conduct large-scale quantitative analyses on a corpus of approximately **1,000 Italian novels and short story collections**, including Italian translations from other languages, published between **1830 and 1930**.  
+Building on Franco Moretti’s seminal approach to *distant reading*, the project aims to conduct large-scale quantitative analyses on a corpus of approximately **1.000 Italian novels and short story collections**, including Italian translations from other languages, published between **1830 and 1930**.  
 The corpus is carefully balanced to account for the distribution of authors and translators, gender, publication date, text length, and the distinction between canonical and non-canonical literature.
 
 ---

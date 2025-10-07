@@ -6,7 +6,7 @@ page-layout: full
 
 # Example Analyses
 
-Here you can find examples of how to use **cccc** to analyze temporal corpora:
+Here you will find examples of how to use **cccc** to analyze temporal corpora (**page under construction!**).
 
-- [Example 1: Place Corpus](usecase_place.qmd)
-- [Example 2: Temporal Clustering of Research Topics](usecase_topics.qmd)
+<!-- - [Example 1: Place Corpus](usecase_place.qmd) -->
+<!-- - [Example 2: Temporal Clustering of Research Topics](usecase_topics.qmd) -->

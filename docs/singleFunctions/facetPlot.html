@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>rowmassplot</title>
+<title>facetplot</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -57,22 +57,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-09537c9ecba8558085948e1b802a414a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-09537c9ecba8558085948e1b802a414a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -102,7 +102,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed">
@@ -112,8 +112,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./images/cccc_logo.png" alt="" class="navbar-logo">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../images/cccc_logo.png" alt="Alt text" class="navbar-logo">
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -123,27 +123,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./cccc-package.html"> 
+    <a class="nav-link" href="../cccc-package.html"> 
 <span class="menu-text">cccc R Package</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./functions.html"> 
+    <a class="nav-link" href="../functions.html"> 
 <span class="menu-text">Functions</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./use-cases.html"> 
+    <a class="nav-link" href="../use-cases.html"> 
 <span class="menu-text">Use Cases</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./projects.html"> 
+    <a class="nav-link" href="../projects.html"> 
 <span class="menu-text">Projects</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./references.html"> 
+    <a class="nav-link" href="../references.html"> 
 <span class="menu-text">References</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about-us.html"> 
+    <a class="nav-link" href="../about-us.html"> 
 <span class="menu-text">About Us</span></a>
   </li>  
 </ul>
@@ -171,18 +171,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="rowmassplot" class="level1">
-<h1>rowMassPlot()</h1>
-<p>Creates a bar plot of keywords ordered by their total frequency and colored by their assigned frequency zone, combining both the zone and its frequency interval label.</p>
+<section id="facetplot" class="level1">
+<h1>facetPlot()</h1>
+<p>Faceted Plot of Keyword Frequency Curves</p>
 <hr>
 <section id="function-definition" class="level2">
 <h2 class="anchored" data-anchor-id="function-definition">🔹 Function Definition</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>rowMassPlot <span class="ot">&lt;-</span> (data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>facetPlot <span class="ot">&lt;-</span> (data, <span class="at">keyword_selection =</span> <span class="fu">list</span>(<span class="at">type=</span><span class="st">"frequency"</span>, </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">n=</span><span class="dv">3</span>, <span class="at">kw.list=</span><span class="cn">NULL</span>),</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">r =</span> <span class="dv">4</span>, <span class="at">scales =</span> <span class="st">"fixed"</span>, </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">leg =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">themety =</span> <span class="st">"light"</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">size_class =</span> <span class="cn">NULL</span>, </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">x_lab =</span> <span class="st">"year"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="aim" class="level2">
 <h2 class="anchored" data-anchor-id="aim">🎯 Aim</h2>
-<p>The <code>rowMassPlot()</code> function generates a bar plot showing the total frequency of each keyword, colored according to its frequency zone and labeled by its interval.<br>
-It provides a visual summary of the distribution of term frequencies across zones, based on the output of <code>importData()</code>.</p>
+<p>The <code>facetPlot()</code> function produces a <strong>faceted visualization of keyword frequency trajectories</strong> over time, grouped by frequency zones (e.g., <em>high</em>, <em>medium</em>, <em>low</em>).<br>
+It allows users to highlight a subset of keywords either by <strong>highest frequency</strong>, <strong>random sampling</strong>, or <strong>custom selection</strong>, displaying them in distinct colors within each zone.<br>
+Each facet corresponds to a frequency zone, enabling a clear comparative view of the temporal behavior of keywords across different frequency ranges.</p>
 <hr>
 </section>
 <section id="arguments" class="level2">
@@ -204,7 +211,42 @@ It provides a visual summary of the distribution of term frequencies across zone
 <tr class="odd">
 <td><strong>data</strong></td>
 <td>List</td>
-<td>A list containing the output of <code>importData()</code>, including the processed term-document matrix (<code>tdm</code>) and related metadata.</td>
+<td>A list returned by <code>importData()</code>, containing the term-document matrix in long format and corpus metadata.</td>
+</tr>
+<tr class="even">
+<td><strong>keyword_selection</strong></td>
+<td>List</td>
+<td>Specifies how keywords are selected for highlighting. Must include: <br>• <code>type</code> — <code>"frequency"</code>, <code>"random"</code>, or <code>"list"</code> <br>• <code>n</code> — Number of keywords per zone (for <code>"frequency"</code> or <code>"random"</code>) <br>• <code>kw.list</code> — Character vector of custom keywords (for <code>"list"</code>).</td>
+</tr>
+<tr class="odd">
+<td><strong>r</strong></td>
+<td>Integer</td>
+<td>Interval for thinning x-axis year labels (e.g., show one label every <code>r</code> years). Default: <code>4</code>.</td>
+</tr>
+<tr class="even">
+<td><strong>scales</strong></td>
+<td>Character</td>
+<td>Whether y-axis scales are <code>"fixed"</code> (default) or <code>"free"</code> across facets.</td>
+</tr>
+<tr class="odd">
+<td><strong>leg</strong></td>
+<td>Logical</td>
+<td>Whether to display the legend. Default: <code>TRUE</code>.</td>
+</tr>
+<tr class="even">
+<td><strong>themety</strong></td>
+<td>Character</td>
+<td>Theme type. Either <code>"light"</code> (default) or <code>"dark"</code>.</td>
+</tr>
+<tr class="odd">
+<td><strong>size_class</strong></td>
+<td>Numeric vector</td>
+<td>Optional vector defining relative line thickness by zone. Defaults depend on the selected theme.</td>
+</tr>
+<tr class="even">
+<td><strong>x_lab</strong></td>
+<td>Character</td>
+<td>Label for the x-axis. Default: <code>"year"</code>.</td>
 </tr>
 </tbody>
 </table>
@@ -212,7 +254,7 @@ It provides a visual summary of the distribution of term frequencies across zone
 </section>
 <section id="output" class="level2">
 <h2 class="anchored" data-anchor-id="output">📦 Output</h2>
-<p>Returns a <strong><code>ggplot2</code> object</strong> representing a bar plot of total keyword frequencies grouped and colored by frequency zone.</p>
+<p>Returns a <strong><code>ggplot2</code> object</strong> with faceted panels showing the temporal evolution of keyword frequencies.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 43%">
@@ -226,20 +268,28 @@ It provides a visual summary of the distribution of term frequencies across zone
 </thead>
 <tbody>
 <tr class="odd">
+<td><strong>Facets</strong></td>
+<td>Each panel corresponds to a frequency zone (e.g., high, medium, low).</td>
+</tr>
+<tr class="even">
+<td><strong>Highlighted keywords</strong></td>
+<td>Selected keywords are shown in distinct colors for easy identification.</td>
+</tr>
+<tr class="odd">
 <td><strong>x-axis</strong></td>
-<td>Keywords ordered by total frequency.</td>
+<td>Represents time (years). Labels can be thinned using <code>r</code>.</td>
 </tr>
 <tr class="even">
 <td><strong>y-axis</strong></td>
-<td>Total frequency of each keyword.</td>
+<td>Represents keyword frequency (raw or normalized).</td>
 </tr>
 <tr class="odd">
-<td><strong>Colors</strong></td>
-<td>Represent frequency zones and intervals (e.g., “VH [50–100]”, “L [5–10]”).</td>
+<td><strong>Legend</strong></td>
+<td>Optional; displays both zone and keyword colors.</td>
 </tr>
 <tr class="even">
-<td><strong>Legend</strong></td>
-<td>Displayed at the bottom, showing the zone–interval combinations.</td>
+<td><strong>Theme</strong></td>
+<td>Adjustable between light and dark modes.</td>
 </tr>
 </tbody>
 </table>
