@@ -111,7 +111,7 @@ While initially developed for literary studies, cccc extends to:
     Start analyzing how concepts evolve over time with cccc
   </p>
   <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-    <a href="cccc-package.html" 
+    <a href="functions.html" 
        style="
          padding: 0.875rem 2rem;
          background: white;
@@ -122,23 +122,9 @@ While initially developed for literary studies, cccc extends to:
          font-size: 1.05em;
          display: inline-block;
        ">
-      View Full Documentation
-    </a>
-    <a href="functions.html" 
-       style="
-         padding: 0.875rem 2rem;
-         background: transparent;
-         color: white;
-         text-decoration: none;
-         border-radius: 6px;
-         font-weight: 600;
-         font-size: 1.05em;
-         border: 2px solid white;
-         display: inline-block;
-       ">
       Browse Functions
     </a>
-    <a href="use-cases.html" 
+    <a href="download.html" 
        style="
          padding: 0.875rem 2rem;
          background: transparent;
@@ -150,12 +136,9 @@ While initially developed for literary studies, cccc extends to:
          border: 2px solid white;
          display: inline-block;
        ">
-      See Examples
+      How to install
     </a>
   </div>
 </section>
 
 ```
-
-> *cccc turns chronological corpora into living systems of evolving meanings,  
-capturing how knowledge takes shape, spreads, and transforms over time.*

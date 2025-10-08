@@ -12,7 +12,7 @@ The cccc package is developed and maintained by a team of researchers specializi
   <div>
     <h3 style="margin-bottom: 0.2em;">Matilde Trevisani</h3>
     <p style="margin: 0; font-style: italic;">University of Trieste</p>
-    <p style="margin: 0; font-size: 0.9em; color: #666;">Principal Investigator & Lead Developer</p>
+    <p style="margin: 0; font-size: 0.9em; color: #666;">Associate Professor in Statistics</p>
     <p style="margin: 0;"><a href="mailto:MATILDE.TREVISANI@deams.units.it">MATILDE.TREVISANI@deams.units.it</a></p>
   </div>
 </div>
@@ -22,7 +22,7 @@ The cccc package is developed and maintained by a team of researchers specializi
   <div>
     <h3 style="margin-bottom: 0.2em;">Arjuna Tuzzi</h3>
     <p style="margin: 0; font-style: italic;">University of Padova</p>
-    <p style="margin: 0; font-size: 0.9em; color: #666;">Computational Linguistics & Methodology</p>
+    <p style="margin: 0; font-size: 0.9em; color: #666;">Full Professor in Statistics for Social Sciences</p>
     <p style="margin: 0;"><a href="mailto:arjuna.tuzzi@unipd.it">arjuna.tuzzi@unipd.it</a></p>
   </div>
 </div>
@@ -32,7 +32,7 @@ The cccc package is developed and maintained by a team of researchers specializi
   <div>
     <h3 style="margin-bottom: 0.2em;">Luca D'Aniello</h3>
     <p style="margin: 0; font-style: italic;">University of Naples Federico II</p>
-    <p style="margin: 0; font-size: 0.9em; color: #666;">Statistical Modeling & Data Analysis</p>
+    <p style="margin: 0; font-size: 0.9em; color: #666;">Research Fellow in Statistics in Social Sciences</p>
     <p style="margin: 0;"><a href="mailto:luca.daniello@unina.it">luca.daniello@unina.it</a></p>
   </div>
 </div>
